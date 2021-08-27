@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <ImageView
+      android:id="@+id/imageView2"
+      android:layout_width="461dp"
+      android:layout_height="71dp"
+      android:layout_marginBottom="121dp"
+      app:layout_constraintBottom_toTopOf="@+id/imageView4"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.06"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <ImageView
+      android:id="@+id/imageView4"
+      android:layout_width="188dp"
+      android:layout_height="52dp"
+      android:layout_marginStart="111dp"
+      android:layout_marginLeft="111dp"
+      android:layout_marginEnd="112dp"
+      android:layout_marginRight="112dp"
+      android:layout_marginBottom="32dp"
+      app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageView2"
+      />
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/textInputLayout"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="7dp"
+      android:layout_marginRight="40dp"
+      android:layout_marginBottom="10dp"
+      android:hint="아이디"
+      app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_id"
+        android:layout_width="match_parent"
+        android:layout_height="61dp" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/textInputLayout2"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="0dp"
+      android:layout_height="61dp"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:layout_marginBottom="20dp"
+
+      android:hint="비밀번호"
+      app:layout_constraintBottom_toTopOf="@+id/textView"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+      app:passwordToggleEnabled="true">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="50dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="50dp"
+      android:text="________________________________________________"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+  <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="100dp"
+      android:layout_marginLeft="100dp"
+      android:layout_marginTop="24dp"
+      android:layout_marginBottom="70dp"
+      android:text="아직 회원이 아니신가요?"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toTopOf="@+id/button3"
+      app:layout_constraintEnd_toStartOf="@+id/button2"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+  <Button
+      android:id="@+id/button2"
+      style="?android:attr/borderlessButtonStyle"
+      android:layout_width="107dp"
+      android:layout_height="49dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="80dp"
+      android:layout_marginRight="80dp"
+      android:textColor="#000000"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toTopOf="@+id/button3"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/textView2"
+      app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+  <Button
+      android:id="@+id/button3"
+      android:layout_width="343dp"
+      android:layout_height="64dp"
+      android:layout_marginStart="36dp"
+      android:layout_marginTop="58dp"
+      android:layout_marginEnd="36dp"
+      android:layout_marginBottom="101dp"
+      android:text="로그인"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      app:backgroundTint="#FFDB58"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
