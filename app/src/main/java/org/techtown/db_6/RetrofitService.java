@@ -1,5 +1,7 @@
 package org.techtown.db_6;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -26,6 +28,9 @@ public interface RetrofitService {
 
     @GET("user/{id}")
     Call<UserProfile> getPosts(@Path("id") String id);
+
+    @GET("cardID/{id}")
+    Call<List<UserCard>> getAll(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("card/{cardNum}")

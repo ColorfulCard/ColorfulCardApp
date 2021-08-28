@@ -23,6 +23,7 @@ public class UserProfile {
     public UserProfile(String id, String pwd, String name) {
     }
 
+
     public String getPwd() {
         return pwd;
     }
