@@ -2,6 +2,7 @@ package org.techtown.db_6;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,8 +17,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserCardList extends AppCompatActivity {
 
+    Intent intent;
+    User user; //사용자 클래스
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
+        System.out.println("사용자 이름: "+user.getName());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_card_list);
 
@@ -31,28 +40,32 @@ public class UserCardList extends AppCompatActivity {
             RetrofitService service1 = retrofit.create(RetrofitService.class);
             Log.d("tag", "1\n");
 
-            Call<List<UserCard>> call = service1.getAll("swlove");
+            Call<List<UserCard>> call = service1.getUserCardList(user.getId());
 
             Log.d("tag", "2\n");
             call.enqueue(new Callback<List<UserCard>>() {
 
                 @Override
                 public void onResponse(Call<List<UserCard>> call, Response<List<UserCard>> response) {
-                    Log.d("tag", "3\n");
+                    Log.d("tag", "respose성공\n");
                     if (response.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
                         List<UserCard> result = response.body();
                         for(int i = 0; i<result.size(); i++)
                         {
-                            Log.d("tag","\n"+result.get(i).toString());
-
+                            UserCard card = result.get(i);
+                            Log.d("tag","\n"+card.toString()+" "+i);
+                            user.addCard(card);
                         }
 
                     } else {
                         Log.d("tag", "실패");
                     }
 
-
+                    for(UserCard card: user.getCards())
+                    {
+                        System.out.println(card);
+                    }
                 }
 
                 @Override

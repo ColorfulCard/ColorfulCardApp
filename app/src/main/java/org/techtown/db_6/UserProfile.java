@@ -7,7 +7,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-
+//서버에 사용자 프로필 post&get 할 때 쓰이는 클래스 (로그인,회원가입)
 public class UserProfile {
 
     @SerializedName("id")
@@ -23,12 +23,14 @@ public class UserProfile {
     public UserProfile(String id, String pwd, String name) {
     }
 
-
     public String getPwd() {
         return pwd;
     }
     public String getId() {
         return id;
+    }
+    public String getName() {
+        return name;
     }
 
     Boolean isValidID(){

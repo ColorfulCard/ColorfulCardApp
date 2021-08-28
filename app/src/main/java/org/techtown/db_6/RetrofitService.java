@@ -20,17 +20,17 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("user/{id}")
-    Call<UserProfile> setPostField(
+    Call<UserProfile> postUserProfile(
             @Path("id") String id,
             @Field("pwd") String pwd,
             @Field("name") String name
     );
 
     @GET("user/{id}")
-    Call<UserProfile> getPosts(@Path("id") String id);
+    Call<UserProfile> getUserProfile(@Path("id") String id);
 
     @GET("cardID/{id}")
-    Call<List<UserCard>> getAll(@Path("id") String id);
+    Call<List<UserCard>> getUserCardList(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("card/{cardNum}")
@@ -41,9 +41,6 @@ public interface RetrofitService {
             @Field("mealCard") boolean mealCard
     );
 
-
-    // @GET("userCount/{id}")
-    //  Call<Integer> getUserCount(@Path("id") String id);
 
 
 

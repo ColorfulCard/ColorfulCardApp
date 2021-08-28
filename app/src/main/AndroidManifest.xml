@@ -13,18 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Db6"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserCardList">
-
-
-        </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".RegiCardActivity">
+        <activity android:name=".UserCardList"></activity>
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RegiCardActivity"></activity>
         <activity android:name=".Join"></activity>
         <activity android:name=".Join2" />
     </application>
