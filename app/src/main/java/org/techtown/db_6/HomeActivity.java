@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     Intent intent;
     User user; //사용자 클래스
     MainHandler handler; //별것도아닌게 그지같은 스레드자식들
-
+    //어째서 푸시가안되나 다시 해볼려고 주석달아본다
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
