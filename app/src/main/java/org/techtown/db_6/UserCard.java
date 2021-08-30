@@ -2,8 +2,12 @@ package org.techtown.db_6;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 //카드 서버에 post&get 할때 사용되는 클래스
-public class UserCard {
+public class UserCard implements Serializable {
+
+    private static final long serialVersionUID = 2L;
 
     @SerializedName("id")
     private String id;
@@ -32,7 +36,6 @@ public class UserCard {
     public String getCardName() {
         return cardName;
     }
-
     public String getCardNum() {
         return cardNum;
     }
