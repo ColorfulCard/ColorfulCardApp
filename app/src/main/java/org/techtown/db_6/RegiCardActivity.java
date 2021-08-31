@@ -3,6 +3,7 @@ package org.techtown.db_6;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,16 +19,23 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegiCardActivity extends AppCompatActivity {
-
+    Intent intent;
+    User user;
 
     private EditText et_cardName, editTextNumberDecimal, editTextNumberDecimal2, editTextNumberDecimal3, editTextNumberDecimal4;
     private CheckBox chMeal, chBusic;
     private Button button;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_card);
+
 
         et_cardName = findViewById(R.id.et_cardName);
         editTextNumberDecimal =  findViewById(R.id.editTextNumberDecimal);
@@ -93,8 +101,10 @@ public class RegiCardActivity extends AppCompatActivity {
                         public void onResponse(Call<UserCard> call, Response<UserCard> response) {
                             if (response.isSuccessful()) {
                                 UserCard result = response.body();
+                                Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
+                                intent.putExtra("user",user);
+                                startActivity(intent);
 
-                                Toast.makeText(getApplicationContext(), "성공하였습니다", Toast.LENGTH_SHORT).show();
                                 Log.d("tag",result.toString());
 
                             } else {

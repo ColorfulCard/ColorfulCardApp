@@ -21,6 +21,7 @@ public class UserCardList2 extends AppCompatActivity {
     private ArrayList<DataItem> dataList;
     private Button button;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -29,7 +30,7 @@ public class UserCardList2 extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_card_list);
-
+        ImageButton imageButton = findViewById(R.id.imageButton);
 
         this.initializeData();
 
@@ -45,7 +46,16 @@ public class UserCardList2 extends AppCompatActivity {
 
         recyclerView.setAdapter(new MyAdapter(dataList)); // Adapter 등록
 
+        imageButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
 
+                Intent intent = new Intent(UserCardList2.this, RegiCardActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
+                intent.putExtra("user",user);
+                startActivity(intent);
+            }
+
+        });
 
     }
 
