@@ -1,5 +1,6 @@
 package org.techtown.db_6;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,19 +15,24 @@ import java.util.ArrayList;
 
 public class UserCardList2 extends AppCompatActivity {
 
+    Intent intent;
+    User user; //사용자 클래스
+
     private ArrayList<DataItem> dataList;
     private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_card_list);
 
-        ImageButton imageButton;
 
         this.initializeData();
 
-        ImageButton imageButton2 = findViewById(R.id.imageButton);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(this, R.drawable.line_divider));
@@ -39,15 +45,6 @@ public class UserCardList2 extends AppCompatActivity {
 
         recyclerView.setAdapter(new MyAdapter(dataList)); // Adapter 등록
 
-        imageButton2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-
-                Toast.makeText(getApplicationContext(),"ok",Toast.LENGTH_LONG).show();
-
-            }
-
-        });
 
 
     }
@@ -56,9 +53,32 @@ public class UserCardList2 extends AppCompatActivity {
     {
         dataList = new ArrayList<>();
 
-        dataList.add(new DataItem("카드이름", "잔액", button ,Code.ViewType.Notmeal));
+        System.out.println("사용자 카드"+ user.getCards());
+        ArrayList<String[]> allBalances = user.getCardBalances();
+        String[] balances= allBalances.get(0);
+        for(int i=0;i<balances.length;i++)
+        {
+            System.out.print(balances[i]+ " ");
+        }
+
+        int i=0;
+
+        for( UserCard card : user.getCards() ){
+
+            if(card.isMealCard()==true)  //급식카드
+            {
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[7], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
+
+            }else //부식카드
+            {
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[7], button, Code.ViewType.Notmeal, user.getCardBalances().get(i)));
+            }
+            i++;
+        }
+
+      //  dataList.add(new DataItem("카드이름", "잔액", button ,Code.ViewType.Notmeal));
         // dataList.add(new DataItem(" ", null,button2,  Code.ViewType.PLUS));
-        dataList.add(new DataItem("안녕하세요", "사용자2",button,  Code.ViewType.mealCard));
+
 
     }
 

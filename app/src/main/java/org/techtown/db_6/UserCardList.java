@@ -27,15 +27,6 @@ public class UserCardList extends AppCompatActivity {
 
         intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
-        System.out.println("사용자 카드"+ user.getCards());
-        ArrayList<String[]> allBalances = user.getCardBalances();
-        String[] balances= allBalances.get(0);
-        for(int i=0;i<balances.length;i++)
-        {
-            System.out.print(balances[i]+ " ");
-        }
-
-        System.out.println("사용자 이름: "+user.getName());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_card_list);

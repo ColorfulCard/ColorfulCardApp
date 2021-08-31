@@ -8,16 +8,16 @@ public class DataItem {
     private String name;
     private int viewType;
     private Button button;
+    private String[] balances;
 
-    public DataItem(String name, String balance, Button button ,int viewType ) {
+    public DataItem(String name, String balance, Button button ,int viewType , String[] balances) {
         this.name = name;
         this.balance = balance;
         this.button = button;
         this.viewType = viewType;
+        this.balances= balances;
 
     }
-
-
 
     public String getBalance() {
         return balance;
@@ -32,4 +32,6 @@ public class DataItem {
     }
 
     public Button getButton() {return button;}
+
+    public String[] getBalances(){return balances;}
 }

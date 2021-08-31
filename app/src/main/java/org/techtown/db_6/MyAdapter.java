@@ -58,7 +58,13 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((NotmealViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-                    Log.d("tag","ok");
+                    String[] balances = myDataList.get(position).getBalances();
+
+                    for(int i=0;i<8;i++)
+                    {
+                        Log.d("tag",position+"번째 카드" +i+" 잔액들: "+ balances[i]);
+                    }
+                    Log.d("tag","click");
                 }
 
             });
@@ -76,7 +82,13 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((mealCardViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-                    Log.d("tag","ok22");
+
+                    String[] balances = myDataList.get(position).getBalances();
+                    for(int i=0;i<7;i++)
+                    {
+                        Log.d("tag",position+"번째 카드 잔액들: "+ balances[i]+" ");
+                    }
+                    Log.d("tag","click");
                 }
 
             });
