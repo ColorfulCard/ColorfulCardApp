@@ -84,7 +84,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
                     Log.d("tag",balances[0]+" "+balances[1]+" "+balances[2]+" "+balances[3]+" "+balances[4]+" "+balances[5]+" "+balances[6]);
                 }
-
+//
             });
         }
     }
