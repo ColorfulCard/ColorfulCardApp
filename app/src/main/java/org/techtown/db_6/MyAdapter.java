@@ -60,10 +60,6 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 public void onClick(View view){
                     String[] balances = myDataList.get(position).getBalances();
 
-                    for(int i=0;i<8;i++)
-                    {
-                        Log.d("tag",position+"번째 카드" +i+" 잔액들: "+ balances[i]);
-                    }
                     Log.d("tag","click");
                 }
 
@@ -84,11 +80,8 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 public void onClick(View view){
 
                     String[] balances = myDataList.get(position).getBalances();
-                    for(int i=0;i<7;i++)
-                    {
-                        Log.d("tag",position+"번째 카드 잔액들: "+ balances[i]+" ");
-                    }
-                    Log.d("tag","click");
+
+                    Log.d("tag",balances[0]+" "+balances[1]+" "+balances[2]+" "+balances[3]+" "+balances[4]+" "+balances[5]+" "+balances[6]);
                 }
 
             });

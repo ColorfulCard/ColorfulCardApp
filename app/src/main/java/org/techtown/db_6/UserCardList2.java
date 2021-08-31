@@ -67,18 +67,14 @@ public class UserCardList2 extends AppCompatActivity {
 
             if(card.isMealCard()==true)  //급식카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[7], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
 
             }else //부식카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[7], button, Code.ViewType.Notmeal, user.getCardBalances().get(i)));
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.Notmeal, user.getCardBalances().get(i)));
             }
             i++;
         }
-
-      //  dataList.add(new DataItem("카드이름", "잔액", button ,Code.ViewType.Notmeal));
-        // dataList.add(new DataItem(" ", null,button2,  Code.ViewType.PLUS));
-
 
     }
 

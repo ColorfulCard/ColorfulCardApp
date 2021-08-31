@@ -31,15 +31,13 @@ public class User implements Serializable {
     {
         return this.cards;
     }
-    public void setCardBalances(String balances[], String totalBalance)
+    public void setCardBalances(String balances[])
     {
-        String elements[]= new String[8];
-        for(int i=0;i<balances.length;i++)  //7번돌겠지 0~6
+        String elements[]= new String[balances.length];
+        for(int i=0;i< balances.length;i++)
         {
-            elements[i]= balances[i];
+            elements[i]= new String(balances[i]);
         }
-        elements[7]= totalBalance;
-
          allBalances.add(elements);
     }
     public ArrayList<String[]> getCardBalances()
@@ -55,7 +53,6 @@ public class User implements Serializable {
          [4] 금일 한도금액	0 원
          [5] 금일 사용금액	0 원
          [6] 금일 잔여금액	0 원
-         [7] 최종 잔여금액    22,140 원 (이월+ 당월)
        * */
 
 }

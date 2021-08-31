@@ -111,20 +111,16 @@ public class HomeActivity extends AppCompatActivity {
                 String cardNum = card.getCardNum();
                 BalanceCheck checker = new BalanceCheck (cardNum.substring(0,4) , cardNum.substring(4,8), cardNum.substring(8,12), cardNum.substring(12));
 
-                // BalanceCheck checker = new BalanceCheck("8010","0430","0078","6344");
-
                 try {
                     if(checker.tryBalanceCheck().equals("success"))
                     {
                         String[] balances =checker.getAllBalanceAttributes();
-                        String totalBalance = checker.getTotalBalance();
 
-                        user.setCardBalances(balances,totalBalance); //스레드 안에서 유저정보 업데이트함
+                        user.setCardBalances(balances); //스레드 안에서 유저정보 업데이트함
 
-                        for( String amount : balances ) {
+                    /*    for( String amount : balances ) {
                             Log.d("tag", amount+" ");
-                        }
-                        Log.d("tag",totalBalance);
+                        }*/
 
                     }
                     else

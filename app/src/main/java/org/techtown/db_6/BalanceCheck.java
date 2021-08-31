@@ -84,27 +84,28 @@ public class BalanceCheck {
     }
 
     /*   results[]
-       * 이월 잔여금액	14,920 원	-
-         당월 충전금액	0 원
-         당월 사용금액	7,700 원
-         당월 잔여금액	7,220 원
-         금일 한도금액	0 원
-         금일 사용금액	0 원
-         금일 잔여금액	0 원
+       *[0] 이월 잔여금액	14,920 원	-
+        [1] 당월 충전금액	0 원
+        [2] 당월 사용금액	7,700 원
+        [3] 당월 잔여금액	7,220 원    -> 찐 잔액
+        [4] 금일 한도금액	0 원
+        [5] 금일 사용금액	0 원
+        [6] 금일 잔여금액	0 원
        * */
 
     public String[] getAllBalanceAttributes ()
     {
         return this.results;
     }
-
-    public String getTotalBalance()
+/*
+    public String getCurrentBalance()
     {
-       int carryOverAmount = Integer.parseInt(results[0].replace(",",""));  //이월 잔여금액
+      int carryOverAmount = Integer.parseInt(results[0].replace(",",""));  //이월 잔여금액
        int currentMonthAmount =  Integer.parseInt(results[3].replace(",","")); //당월 잔여금액
        int totalAmount=carryOverAmount + currentMonthAmount;
 
        DecimalFormat formatter = new DecimalFormat("###,###");
        return formatter.format(totalAmount);
-    }
+
+    }*/
 }
