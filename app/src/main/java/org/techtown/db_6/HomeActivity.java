@@ -152,7 +152,7 @@ public class HomeActivity extends AppCompatActivity {
             switch(message.what)
             {
                 case MSG_SUCCESS:
-                    Intent intent = new Intent(HomeActivity.this,UserCardList.class);
+                    Intent intent = new Intent(HomeActivity.this,UserCardList2.class);
                     intent.putExtra("user",user);
                     startActivity(intent);
                     finish();

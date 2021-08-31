@@ -1,20 +1,26 @@
 package org.techtown.db_6;
 
+import android.widget.Button;
+
 public class DataItem {
 
-    private String content;
+    private String balance;
     private String name;
     private int viewType;
+    private Button button;
 
-    public DataItem(String content, String name , int viewType) {
-        this.content = content;
-        this.viewType = viewType;
+    public DataItem(String name, String balance, Button button ,int viewType ) {
         this.name = name;
+        this.balance = balance;
+        this.button = button;
+        this.viewType = viewType;
+
     }
 
 
-    public String getContent() {
-        return content;
+
+    public String getBalance() {
+        return balance;
     }
 
     public String getName() {
@@ -24,4 +30,6 @@ public class DataItem {
     public int getViewType() {
         return viewType;
     }
+
+    public Button getButton() {return button;}
 }

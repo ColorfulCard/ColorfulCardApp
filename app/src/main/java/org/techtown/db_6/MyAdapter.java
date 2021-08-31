@@ -1,9 +1,11 @@
 package org.techtown.db_6;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,15 +30,10 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(viewType == Code.ViewType.CENTER_CONTENT)
+        if(viewType == Code.ViewType.Notmeal)
         {
-            view = inflater.inflate(R.layout.center_content, parent, false);
-            return new CenterViewHolder(view);
-        }
-        else if(viewType == Code.ViewType.LEFT_CONTENT)
-        {
-            view = inflater.inflate(R.layout.left_content, parent, false);
-            return new LeftViewHolder(view);
+            view = inflater.inflate(R.layout.notmeal, parent, false);
+            return new NotmealViewHolder(view);
         }
         else if(viewType == Code.ViewType.PLUS)
         {
@@ -45,32 +42,44 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
         else
         {
-            view = inflater.inflate(R.layout.right_content, parent, false);
-            return new RightViewHolder(view);
+            view = inflater.inflate(R.layout.meal_card, parent, false);
+            return new mealCardViewHolder(view);
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
     {
-        if(viewHolder instanceof CenterViewHolder)
+
+        if(viewHolder instanceof NotmealViewHolder)
         {
-            ((CenterViewHolder) viewHolder).content.setText(myDataList.get(position).getContent());
-        }
-        else if(viewHolder instanceof LeftViewHolder)
-        {
-            ((LeftViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
-            ((LeftViewHolder) viewHolder).content.setText(myDataList.get(position).getContent());
+            ((NotmealViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
+            ((NotmealViewHolder) viewHolder).balance.setText(myDataList.get(position).getBalance());
+            ((NotmealViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Log.d("tag","ok");
+                }
+
+            });
         }
         else if(viewHolder instanceof PLUSViewHolder)
         {
             ((PLUSViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
-            ((PLUSViewHolder) viewHolder).content.setText(myDataList.get(position).getContent());
+            ((PLUSViewHolder) viewHolder).balance.setText(myDataList.get(position).getBalance());
+            // ((PLUSViewHolder) viewHolder).button.setText(myDataList.get(position).getButton());
         }
         else
         {
-            ((RightViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
-            ((RightViewHolder) viewHolder).content.setText(myDataList.get(position).getContent());
+            ((mealCardViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
+            ((mealCardViewHolder) viewHolder).content.setText(myDataList.get(position).getBalance());
+            ((mealCardViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Log.d("tag","ok22");
+                }
+
+            });
         }
     }
 
@@ -85,58 +94,55 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         return myDataList.get(position).getViewType();
     }
 
-    public class CenterViewHolder extends RecyclerView.ViewHolder{
-        TextView content;
 
-        CenterViewHolder(View itemView)
-        {
-            super(itemView);
-
-            content = itemView.findViewById(R.id.content);
-        }
-    }
-
-    public class LeftViewHolder extends RecyclerView.ViewHolder{
-        TextView content;
+    public class NotmealViewHolder extends RecyclerView.ViewHolder{
+        TextView balance;
         TextView name;
         ImageView image;
+        Button button;
 
-        LeftViewHolder(View itemView)
+        NotmealViewHolder(View itemView)
         {
             super(itemView);
 
-            content = itemView.findViewById(R.id.content);
+            balance = itemView.findViewById(R.id.content);
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.imageView);
+            button = itemView.findViewById(R.id.button);
+
         }
+
     }
 
     public class PLUSViewHolder extends RecyclerView.ViewHolder{
-        TextView content;
+        TextView balance;
         TextView name;
         ImageView image;
+        Button button;
 
         PLUSViewHolder(View itemView)
         {
             super(itemView);
-            content = itemView.findViewById(R.id.content);
+            balance = itemView.findViewById(R.id.content);
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.imageView);
+            button = itemView.findViewById(R.id.button);
         }
     }
 
-    public class RightViewHolder extends RecyclerView.ViewHolder{
+    public class mealCardViewHolder extends RecyclerView.ViewHolder{
         TextView content;
         TextView name;
         ImageView image;
-
-        RightViewHolder(View itemView)
+        Button button;
+        mealCardViewHolder(View itemView)
         {
             super(itemView);
 
             content = itemView.findViewById(R.id.content);
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.imageView);
+            button = itemView.findViewById(R.id.button);
         }
     }
 

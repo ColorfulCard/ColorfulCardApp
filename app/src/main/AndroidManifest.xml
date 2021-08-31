@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".UserCardList" />
+        <activity android:name=".UserCardList2" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
