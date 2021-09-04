@@ -3,6 +3,8 @@
     package="org.techtown.db_6">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Db6"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HomeActivity"></activity>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC9IMAw6wVHwQtRkmtKvQosWGpWz_55ftQ" />
+
+        <activity android:name=".MapActivity"> </activity>
+        <activity android:name=".HomeActivity" />
         <activity android:name=".UserCardList" />
-        <activity android:name=".UserCardList2" />
-        <activity android:name=".Login">
+        <activity android:name=".UserCardListActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegiCardActivity" />
-        <activity android:name=".Join" />
+        <activity android:name=".JoinActivity" />
         <activity android:name=".Join2" />
     </application>
 

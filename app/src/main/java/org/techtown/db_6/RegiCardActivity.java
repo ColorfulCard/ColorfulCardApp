@@ -60,9 +60,6 @@ public class RegiCardActivity extends AppCompatActivity {
                 TextNumberDecimal.append(editTextNumberDecimal3.getText().toString());
                 TextNumberDecimal.append(editTextNumberDecimal4.getText().toString());
 
-                Log.d("tag","\n"+TextNumberDecimal);
-                //값이 16자리 무사히 합쳐졌는지
-
                 boolean mealCard = true;
 
                 if(chMeal.isChecked()) {
@@ -73,13 +70,10 @@ public class RegiCardActivity extends AppCompatActivity {
 
                 }
 
-
                 if(cardName.equals("") || editTextNumberDecimal.equals("") || editTextNumberDecimal2.equals("") || editTextNumberDecimal3.equals("") || editTextNumberDecimal4.equals("")
                         || (chMeal.isChecked()== false&&chBusic.isChecked()== false) || (chMeal.isChecked()== true&&chBusic.isChecked()== true))
-                //연산순위가 ==가 &&보다 더 높음
-
                 {
-                    Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "모두 기입하였는지 확인하세요", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -90,11 +84,7 @@ public class RegiCardActivity extends AppCompatActivity {
 
 
                     RetrofitService service1 = retrofit.create(RetrofitService.class);
-                    Log.d("tag", "1\n");
-
-                    Call<UserCard> call = service1.postUserCard(TextNumberDecimal.toString(),"swlove2",cardName,mealCard);
-
-                    Log.d("tag", "2\n");
+                    Call<UserCard> call = service1.postUserCard(TextNumberDecimal.toString(),user.getId(),cardName,mealCard);
                     call.enqueue(new Callback<UserCard>() {
 
                         @Override
@@ -102,13 +92,19 @@ public class RegiCardActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 UserCard result = response.body();
                                 Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
+                                user.clearCardBalances();
                                 intent.putExtra("user",user);
                                 startActivity(intent);
-
-                                Log.d("tag",result.toString());
+                                finish();
 
                             } else {
-                                Log.d("tag", "실패");
+                                Log.d("tag", "get한 후 카드 하나만 받아오게 해서 난 실패임 spring수정하면됨");
+                                UserCard result = response.body();
+                                Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
+                                user.clearCardBalances();
+                                intent.putExtra("user",user);
+                                startActivity(intent);
+                                finish();
                             }
 
                         }

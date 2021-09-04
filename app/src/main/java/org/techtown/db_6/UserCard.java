@@ -52,5 +52,16 @@ public class UserCard implements Serializable {
                 ", mealCard='" + mealCard + '\'' +
                 '}';
     }
+   //안먹혀서 안씀
+    @Override
+    public boolean equals(Object object) {
+        UserCard card = (UserCard) object;
+        // num만 같으면 true를 리턴.
+        if (card.cardNum == this.cardNum) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

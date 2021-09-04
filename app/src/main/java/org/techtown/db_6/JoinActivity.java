@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class Join extends AppCompatActivity {
+public class JoinActivity extends AppCompatActivity {
 
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name;
     private Button button3 ,button7 ;
@@ -47,7 +47,7 @@ public class Join extends AppCompatActivity {
                 }
 
                 if (id.equals("")) { //아이디 입력안했을 때
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Join.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                     dialog = builder.setMessage("아이디를 입력하세요.").setPositiveButton("확인", null).create();
                     dialog.show();
                     return;
@@ -69,7 +69,7 @@ public class Join extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             UserProfile result = response.body();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(Join.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                             dialog = builder.setMessage("이미 존재하는 아이디입니다").setPositiveButton("확인", null).create();
                             dialog.show();
                             System.out.println("중복ID:" + result.getId());
@@ -85,7 +85,7 @@ public class Join extends AppCompatActivity {
                         Log.d("tag", "테이블에 존재하지 않는 ID라 등록가능" + t.getMessage());
                         if(t.getMessage().equals("End of input at line 1 column 1 path $"))
                         {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(Join.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                             dialog = builder.setMessage("사용할 수 있는 아이디입니다.").setPositiveButton("확인", null).create();
                             dialog.show();
                             edit_id.setEnabled(false); //아이디값 고정

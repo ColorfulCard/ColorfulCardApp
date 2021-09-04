@@ -41,7 +41,11 @@ public interface RetrofitService {
             @Field("mealCard") boolean mealCard
     );
 
+    @GET("storeType/{store_type}")
+    Call<List<MemberStore>> getStorebyType (@Path("store_type") String store_type);
 
+    @GET("storeName/{store_name}")
+    Call<List<MemberStore>> getStorebyName (@Path("store_name") String store_name);
 
 
 }

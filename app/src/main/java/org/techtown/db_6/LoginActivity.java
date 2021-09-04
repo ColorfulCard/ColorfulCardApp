@@ -3,6 +3,7 @@ package org.techtown.db_6;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private EditText edit_id,edit_pwd;
     private Button button3;
 
@@ -49,11 +50,7 @@ public class Login extends AppCompatActivity {
 
 
                     RetrofitService service1 = retrofit.create(RetrofitService.class);
-                    Log.d("tag", "1\n");
-
                     Call<UserProfile> call = service1.getUserProfile(id);
-
-                    Log.d("tag", "2\n");
                     call.enqueue(new Callback<UserProfile>() {
 
                         @Override
@@ -63,13 +60,12 @@ public class Login extends AppCompatActivity {
                                 if (result.getPwd().equals(pwd) == false)
                                     Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다", Toast.LENGTH_SHORT).show();
                                 else {
-
-
                                     Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Login.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
                                     User user = new User(result.getId(),result.getName()); //서버에서 물어다온 user id 로 생성함
                                     intent.putExtra("user",user);
                                     startActivity(intent);
+                                    finish();
                                 }
 
                             } else {
@@ -83,7 +79,7 @@ public class Login extends AppCompatActivity {
                         public void onFailure(Call<UserProfile> call, Throwable t) {
                             Log.d("tag", "실패2" + t.getMessage());
                             if(t.getMessage().equals("End of input at line 1 column 1 path $")) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 AlertDialog dialog = builder.setMessage("가입된 ID가 아닙니다.").setPositiveButton("확인", null).create();
                                 dialog.show();
                                 Toast.makeText(getApplicationContext(), "가입된 ID가 아닙니다", Toast.LENGTH_SHORT).show();
@@ -95,4 +91,21 @@ public class Login extends AppCompatActivity {
             });
         }
 
+
+    @Override
+    public void onBackPressed(){ //뒤로가기 버튼 누르면 종료
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("애플리케이션을 종료하시겠습니까?");
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                finishAffinity();
+                System.runFinalization();
+                System.exit(0);
+            }
+        });
+        builder.setNegativeButton("취소",null);
+        builder.show();
+    }
     }

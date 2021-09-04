@@ -2,10 +2,11 @@ package org.techtown.db_6;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class UserCardList2 extends AppCompatActivity {
+public class UserCardListActivity extends AppCompatActivity {
 
     Intent intent;
     User user; //사용자 클래스
@@ -31,28 +32,33 @@ public class UserCardList2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_card_list);
         ImageButton imageButton = findViewById(R.id.imageButton);
+        TextView textView3= findViewById(R.id.textView3);
 
-        this.initializeData();
+        if(user.getCards().isEmpty())
+            textView3.setText("등록된 카드가 없습니다.");
+        else{
+            this.initializeData();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.addItemDecoration(
-                new DividerItemDecoration(this, R.drawable.line_divider));
+            RecyclerView recyclerView = findViewById(R.id.recyclerview);
+            recyclerView.addItemDecoration(
+                    new DividerItemDecoration(this, R.drawable.line_divider));
 
-        LinearLayoutManager manager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+            LinearLayoutManager manager
+                    = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
 
+            recyclerView.setLayoutManager(manager); // LayoutManager 등록
+            recyclerView.setAdapter(new MyAdapter(dataList)); // Adapter 등록
 
-        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-
-        recyclerView.setAdapter(new MyAdapter(dataList)); // Adapter 등록
+        }
 
         imageButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
-                Intent intent = new Intent(UserCardList2.this, RegiCardActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
-                intent.putExtra("user",user);
+                Intent intent = new Intent(UserCardListActivity.this, RegiCardActivity.class);
+                intent.putExtra("userID",user.getId());
                 startActivity(intent);
+                finish();
             }
 
         });
@@ -75,6 +81,7 @@ public class UserCardList2 extends AppCompatActivity {
 
         for( UserCard card : user.getCards() ){
 
+            Log.d("tag",i+"번째 카드");
             if(card.isMealCard()==true)  //급식카드
             {
                 dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
@@ -88,5 +95,12 @@ public class UserCardList2 extends AppCompatActivity {
 
     }
 
+ //   @Override
+  //  public void onBackPressed(){ //뒤로가기 버튼 누르면 종료
 
+    //    Intent intent = new Intent(UserCardList2.this,HomeActivity.class);
+     //   intent.putExtra("user",user);
+      //  startActivity(intent);
+       // finish();
+  //  }
 }

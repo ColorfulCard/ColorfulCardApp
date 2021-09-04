@@ -33,12 +33,6 @@ public class UserProfile {
         return name;
     }
 
-    Boolean isValidID(){
-        if(id.equals(""))
-            return false;
-        else
-            return true;
-    }
 }
 
     

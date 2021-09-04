@@ -2,13 +2,14 @@ package org.techtown.db_6;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String id;
     private String name;
-    private ArrayList<UserCard> cards = new ArrayList<>();
+    private List<UserCard> cards = new ArrayList<>();
     private ArrayList<String[]> allBalances = new ArrayList<>();
 
     User(String id, String name){
@@ -23,14 +24,19 @@ public class User implements Serializable {
         return this.name;
     }
 
-    public void addCard(UserCard card)
+    public void setCard(List<UserCard> cards)
     {
-        cards.add(new UserCard(card.getId(),card.getCardName(), card.getCardNum(), card.isMealCard()));
+     /*   if(cards.contains(card)==true) //카드 포함하고있으면 추가안함
+            return;
+        cards.add(new UserCard(card.getId(),card.getCardName(), card.getCardNum(), card.isMealCard()));*/
+        this.cards=cards;
+
     }
-    public ArrayList<UserCard> getCards()
+    public List<UserCard> getCards()
     {
         return this.cards;
     }
+
     public void setCardBalances(String balances[])
     {
         String elements[]= new String[balances.length];
@@ -38,7 +44,11 @@ public class User implements Serializable {
         {
             elements[i]= new String(balances[i]);
         }
-         allBalances.add(elements);
+         allBalances.add(balances);
+    }
+    public void clearCardBalances()
+    {
+        allBalances.clear();
     }
     public ArrayList<String[]> getCardBalances()
     {
