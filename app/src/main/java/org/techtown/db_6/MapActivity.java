@@ -44,10 +44,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        for(MemberStore store : mealMemberStore)
+    /*    for(MemberStore store : mealMemberStore)
         {
             System.out.println("급식: " + store.getStore_type());
-        }
+        }*/
 
         for(MemberStore store : sideMealMemberStore)
         {
@@ -57,6 +57,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         for(MemberStore store : eduMemberStore)
         {
             System.out.println("교육: " + store.getStore_type());
+            System.out.println("교육: "+ store.getStore_address());
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);

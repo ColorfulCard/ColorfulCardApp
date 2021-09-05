@@ -36,12 +36,16 @@ public class MemberStore implements Parcelable {
     @SerializedName("longitude")
     private BigDecimal longitude; //경도
 
+    @SerializedName("store_address")
+    private String store_address;
+
     protected MemberStore(Parcel in) {
         store_num = in.readString();
         store_name = in.readString();
         store_type = in.readString();
         latitude= BigDecimal.valueOf(in.readDouble());
         longitude= BigDecimal.valueOf(in.readDouble());
+        store_address=in.readString();
     }
 
     public static final Creator<MemberStore> CREATOR = new Creator<MemberStore>() {
@@ -76,6 +80,7 @@ public class MemberStore implements Parcelable {
         return longitude.doubleValue();
     }
 
+    public String getStore_address(){return store_address;}
 
     @Override
     public String toString() {
@@ -85,6 +90,7 @@ public class MemberStore implements Parcelable {
                 ", store_type=" +store_type +
                 ", latitude=" + latitude +
                 ", longitude" + longitude+'\'' +
+                ", store_address="+store_address+
                 '}';
     }
 
@@ -100,5 +106,6 @@ public class MemberStore implements Parcelable {
         dest.writeString(store_type);
         dest.writeDouble(latitude.doubleValue());
         dest.writeDouble(longitude.doubleValue());
+        dest.writeString(store_address);
     }
 }
