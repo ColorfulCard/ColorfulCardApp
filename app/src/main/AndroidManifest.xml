@@ -24,7 +24,6 @@
 
         <activity android:name=".MapActivity"> </activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".UserCardList" />
         <activity android:name=".UserCardListActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -35,7 +34,7 @@
         </activity>
         <activity android:name=".RegiCardActivity" />
         <activity android:name=".JoinActivity" />
-        <activity android:name=".Join2" />
+        <activity android:name=".Join2Activity" />
     </application>
 
 </manifest>
