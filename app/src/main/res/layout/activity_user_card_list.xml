@@ -16,14 +16,16 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="107dp"
-        android:layout_height="88dp"
+        android:layout_width="129dp"
+        android:layout_height="84dp"
         android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/addbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-      />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
