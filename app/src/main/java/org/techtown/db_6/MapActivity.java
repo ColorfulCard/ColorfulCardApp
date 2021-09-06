@@ -93,13 +93,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         //지도객체와 onMapReadyCallback객체를 연결함
 
-        edu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -151,8 +144,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         this.googleMap.setOnMarkerClickListener(markerClickListener);
         this.googleMap.setOnMapClickListener(mapClickListener);
-
-
 
     }
 
@@ -211,7 +202,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             TextView name = (TextView)findViewById(R.id.st_name);
             TextView num =(TextView)findViewById(R.id.st_num);
             TextView address=(TextView)findViewById(R.id.st_address);
-            String[] arr=new String[2];
+            String[] arr= new String[2];
             arr=marker.getSnippet().toString().split("/");
             name.setText(marker.getTitle());
             num.setText(arr[0]);
