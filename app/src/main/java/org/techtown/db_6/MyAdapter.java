@@ -2,22 +2,17 @@ package org.techtown.db_6;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Intent intent;
@@ -139,7 +134,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             super(itemView);
 
             balance = itemView.findViewById(R.id.content);
-            name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.tv);
             image = itemView.findViewById(R.id.imageView);
             button = itemView.findViewById(R.id.button);
 
@@ -157,7 +152,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         {
             super(itemView);
             balance = itemView.findViewById(R.id.content);
-            name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.tv);
             image = itemView.findViewById(R.id.imageView);
             button = itemView.findViewById(R.id.button);
         }
@@ -173,7 +168,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         {
             super(itemView);
             content = itemView.findViewById(R.id.content);
-            name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.tv);
             image = itemView.findViewById(R.id.imageView);
             button = itemView.findViewById(R.id.button);
         }
