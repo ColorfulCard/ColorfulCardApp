@@ -153,7 +153,7 @@
         android:id="@+id/button"
         android:layout_width="290dp"
         android:layout_height="55dp"
-        android:backgroundTint="#6DABC1"
+        android:backgroundTint="@color/light_yellow"
         android:text="등록하기"
         android:textSize="22sp"
         android:textStyle="bold"

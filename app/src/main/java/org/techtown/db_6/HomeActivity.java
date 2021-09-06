@@ -144,9 +144,6 @@ public class HomeActivity extends AppCompatActivity {
                     if (checker.tryBalanceCheck(1).equals("success")) {
                         String[] balances = checker.getAllBalanceAttributes();
                         user.setCardBalances(balances); //스레드 안에서 유저정보 업데이트함
-                      /*    for( String amount : balances ) {
-                            Log.d("tag", amount+" ");
-                        }*/
 
                     } else {
                      //   message.what = MSG_FAIL;

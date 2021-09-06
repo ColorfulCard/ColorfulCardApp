@@ -105,16 +105,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     .icon(BitmapDescriptorFactory.defaultMarker(210));
             googleMap.addMarker(markerOptions).showInfoWindow();
 
-            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-
-                @Override
-                public boolean onMarkerClick(@NonNull @org.jetbrains.annotations.NotNull Marker marker) {
-                    Toast.makeText(MapActivity.this, "Oh my god!!", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-
-            });
-
         }
 
         for(MemberStore store: sideMealMemberStore) {
@@ -133,6 +123,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         }
 
+     /*   googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(@NonNull @org.jetbrains.annotations.NotNull Marker marker) {
+                Toast.makeText(MapActivity.this, "Oh my god!!", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+        });*/
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
