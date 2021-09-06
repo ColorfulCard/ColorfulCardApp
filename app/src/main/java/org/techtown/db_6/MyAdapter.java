@@ -1,6 +1,7 @@
 package org.techtown.db_6;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +9,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+import static androidx.core.content.ContextCompat.startActivity;
 
+public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    Intent intent;
     private ArrayList<DataItem> myDataList = null;
 
     MyAdapter(ArrayList<DataItem> dataList)
@@ -29,6 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         View view;
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 
         if(viewType == Code.ViewType.Notmeal)
         {
@@ -45,6 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             view = inflater.inflate(R.layout.meal_card, parent, false);
             return new mealCardViewHolder(view);
         }
+
     }
 
     @Override
@@ -60,7 +68,16 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 public void onClick(View view){
                     String[] balances = myDataList.get(position).getBalances();
 
-                    Log.d("tag",balances[0]+" "+balances[1]+" "+balances[2]+" "+balances[3]+" "+balances[4]+" "+balances[5]+" "+balances[6]);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    AlertDialog dialog = builder.setMessage(
+                            "이월 잔여금액: "+balances[0]
+                            +"\n당월 충전금액: "+ balances[1]
+                            +"\n당월 사용금액: "+ balances[2]
+                            +"\n당월 잔여금액: "+ balances[3]
+                            +"\n금일 한도금액: "+ balances[4]
+                            +"\n금일 사용금액: "+ balances[5]
+                            +"\n금일 잔여금액: "+ balances[6]).setPositiveButton("확인", null).create();
+                    dialog.show();
 
                 }
 
@@ -79,15 +96,25 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((mealCardViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-
                     String[] balances = myDataList.get(position).getBalances();
 
-                    Log.d("tag",balances[0]+" "+balances[1]+" "+balances[2]+" "+balances[3]+" "+balances[4]+" "+balances[5]+" "+balances[6]);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    AlertDialog dialog = builder.setMessage(
+                            "이월 잔여금액: "+balances[0]
+                                    +"\n당월 충전금액: "+ balances[1]
+                                    +"\n당월 사용금액: "+ balances[2]
+                                    +"\n당월 잔여금액: "+ balances[3]
+                                    +"\n금일 한도금액: "+ balances[4]
+                                    +"\n금일 사용금액: "+ balances[5]
+                                    +"\n금일 잔여금액: "+ balances[6]).setPositiveButton("확인", null).create();
+                    dialog.show();
+
                 }
 //
             });
         }
     }
+
 
     @Override
     public int getItemCount()
@@ -141,10 +168,10 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         TextView name;
         ImageView image;
         Button button;
+        TextView tv;
         mealCardViewHolder(View itemView)
         {
             super(itemView);
-
             content = itemView.findViewById(R.id.content);
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.imageView);
