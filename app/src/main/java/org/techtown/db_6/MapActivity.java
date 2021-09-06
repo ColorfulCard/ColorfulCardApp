@@ -118,7 +118,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
                     .title(store.getStore_name())
-                    .icon(BitmapDescriptorFactory.defaultMarker(55));;
+                    .icon(BitmapDescriptorFactory.defaultMarker(55));
             googleMap.addMarker(markerOptions).showInfoWindow();
 
         }

@@ -48,7 +48,6 @@ public class RegiCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_card);
 
-
         et_cardName = findViewById(R.id.et_cardName);
         cardNo1 =  findViewById(R.id.cardNo1);
         cardNo2 = findViewById(R.id.cardNo2);
@@ -197,7 +196,7 @@ public class RegiCardActivity extends AppCompatActivity {
         public void handleMessage(Message message) {
             switch (message.what) {
                 case MSG_SUCCESS_VAILCHECK:
-                    vaildCheckResult.setTextColor(0x00000000);
+                    vaildCheckResult.setTextColor(0xffffffff);
                     vaildCheckResult.setText("컬러풀카드가 인증되었습니다");
                     cardNo1.setEnabled(false); //카드번호값 고정
                     cardNo2.setEnabled(false);

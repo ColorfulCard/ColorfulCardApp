@@ -146,7 +146,7 @@ public class HomeActivity extends AppCompatActivity {
                         user.setCardBalances(balances); //스레드 안에서 유저정보 업데이트함
 
                     } else {
-                     //   message.what = MSG_FAIL;
+                      //  message.what = MSG_FAIL;
                       //  handler.sendMessage(message);
                     }
                 }
@@ -233,7 +233,6 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeActivity.this, UserCardListActivity.class);
                     intent.putExtra("user",user);
                     startActivity(intent);
-               //   finish();
                     break;
                 case MSG_SUCCESS_GETSTORE:
                     Intent intent2 = new Intent(HomeActivity.this,MapActivity.class);
@@ -251,7 +250,6 @@ public class HomeActivity extends AppCompatActivity {
                        }
                     }
                     startActivity(intent2);
-                //    finish();
                     break;
                 case MSG_FAIL:
                     AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);

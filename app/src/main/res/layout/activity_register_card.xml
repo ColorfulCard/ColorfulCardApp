@@ -151,8 +151,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="290dp"
-        android:layout_height="55dp"
+        android:layout_width="320dp"
+        android:layout_height="64dp"
         android:backgroundTint="@color/light_yellow"
         android:text="등록하기"
         android:textSize="22sp"
@@ -162,7 +162,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintVertical_bias="0.469" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -211,7 +211,7 @@
         android:layout_marginBottom="36dp"
         android:textSize="16dp"
         android:text="카드인증"
-        android:backgroundTint="@color/purple_200"
+        android:backgroundTint="#D6B2EC"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

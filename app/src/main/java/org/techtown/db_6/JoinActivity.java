@@ -3,6 +3,7 @@ package org.techtown.db_6;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,8 @@ public class JoinActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
@@ -126,10 +129,8 @@ public class JoinActivity extends AppCompatActivity {
 
                     RetrofitService service1 = retrofit.create(RetrofitService.class);
                     //인터페이스 객체구현
-                    Log.d("tag", "1\n");
                     Call<UserProfile> call = service1.postUserProfile(id, pwd, name);
                     //사용할 메소드 선언
-                    Log.d("tag", "2\n");
                     call.enqueue(new Callback<UserProfile>() {
 
                         @Override
@@ -139,7 +140,8 @@ public class JoinActivity extends AppCompatActivity {
                                 //메인스레드 작업가능
                                 Log.d("tag", "회원등록성공\n");
                                 Toast.makeText(getApplicationContext(), "회원등록에 성공하였습니다", Toast.LENGTH_SHORT).show();
-                                //넘기는거 해주기
+                                Intent intent = new Intent(JoinActivity.this,LoginActivity.class);
+                                startActivity(intent);
 
                             }
                             else
@@ -150,7 +152,7 @@ public class JoinActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<UserProfile> call, Throwable t) {
-                            Log.d("tag", "네트워크 연결문제로 회원등록 실패" + t.getMessage());
+                            Log.d("tag", "네트워크 문제로 회원등록 실패" + t.getMessage());
                             Toast.makeText(getApplicationContext(), "회원등록에 실패하였습니다", Toast.LENGTH_SHORT).show();
                         }
                     });
