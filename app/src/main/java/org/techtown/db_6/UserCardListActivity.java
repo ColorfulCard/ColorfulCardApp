@@ -35,7 +35,7 @@ public class UserCardListActivity extends AppCompatActivity {
         TextView textView3= findViewById(R.id.textView3);
 
         if(user.getCards().isEmpty())
-            textView3.setText("등록된 카드가 없습니다.");
+            textView3.setText("등록된 카드가 없습니다");
         else{
             this.initializeData();
 
@@ -95,12 +95,4 @@ public class UserCardListActivity extends AppCompatActivity {
 
     }
 
- //   @Override
-  //  public void onBackPressed(){ //뒤로가기 버튼 누르면 종료
-
-    //    Intent intent = new Intent(UserCardList2.this,HomeActivity.class);
-     //   intent.putExtra("user",user);
-      //  startActivity(intent);
-       // finish();
-  //  }
 }
