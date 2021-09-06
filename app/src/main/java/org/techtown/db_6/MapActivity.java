@@ -77,21 +77,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
                     .title(store.getStore_name())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    .icon(BitmapDescriptorFactory.defaultMarker(210));
             googleMap.addMarker(markerOptions).showInfoWindow();
         }
         for(MemberStore store: sideMealMemberStore) {
              MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
                     .title(store.getStore_name())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));;
+                    .icon(BitmapDescriptorFactory.defaultMarker(145));;
             googleMap.addMarker(markerOptions).showInfoWindow();
         }
         for(MemberStore store: eduMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
                     .title(store.getStore_name())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));;
+                    .icon(BitmapDescriptorFactory.defaultMarker(55));;
             googleMap.addMarker(markerOptions).showInfoWindow();
         }
 

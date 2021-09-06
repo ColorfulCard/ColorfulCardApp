@@ -25,8 +25,7 @@
         <activity android:name=".MapActivity"> </activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".UserCardListActivity" />
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".IntroActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
