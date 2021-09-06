@@ -22,19 +22,19 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC9IMAw6wVHwQtRkmtKvQosWGpWz_55ftQ" />
 
-        <activity android:name=".MapActivity"> </activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".UserCardListActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MapActivity" > </activity>
+        <activity android:name=".HomeActivity" android:exported="true"/>
+        <activity android:name=".UserCardListActivity" android:exported="true" />
+        <activity android:name=".LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegiCardActivity" />
-        <activity android:name=".JoinActivity" />
-        <activity android:name=".Join2Activity" />
+        <activity android:name=".RegiCardActivity" android:exported="true"/>
+        <activity android:name=".JoinActivity" android:exported="true"/>
+        <activity android:name=".Join2Activity" android:exported="true"/>
     </application>
 
 </manifest>
