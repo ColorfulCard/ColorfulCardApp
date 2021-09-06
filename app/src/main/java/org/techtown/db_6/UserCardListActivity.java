@@ -56,7 +56,7 @@ public class UserCardListActivity extends AppCompatActivity {
             public void onClick(View view){
 
                 Intent intent = new Intent(UserCardListActivity.this, RegiCardActivity.class);
-                intent.putExtra("userID",user.getId());
+                intent.putExtra("user",user);
                 startActivity(intent);
                 finish();
             }

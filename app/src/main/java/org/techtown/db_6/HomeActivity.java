@@ -141,7 +141,7 @@ public class HomeActivity extends AppCompatActivity {
                     String cardNum = card.getCardNum();
                     BalanceCheck checker = new BalanceCheck(cardNum.substring(0, 4), cardNum.substring(4, 8), cardNum.substring(8, 12), cardNum.substring(12));
 
-                    if (checker.tryBalanceCheck().equals("success")) {
+                    if (checker.tryBalanceCheck(1).equals("success")) {
                         String[] balances = checker.getAllBalanceAttributes();
                         user.setCardBalances(balances); //스레드 안에서 유저정보 업데이트함
                       /*    for( String amount : balances ) {

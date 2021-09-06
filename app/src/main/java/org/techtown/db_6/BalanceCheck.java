@@ -29,7 +29,7 @@ public class BalanceCheck {
         this.cardNo4=cardNo4;
     }
 
-    public String tryBalanceCheck() throws IOException
+    public String tryBalanceCheck(int version) throws IOException
     {
         Connection.Response checkPageResponse = Jsoup.connect(web01)
                 .timeout(50000)
@@ -61,7 +61,16 @@ public class BalanceCheck {
         Elements span = cardPageDocument.select("span.taho.bold.fs_16");
         System.out.println(span.toString()); //파싱 & select 잘되었는지 확인용
 
-        if(!span.toString().equals(""))
+        if(version==2)
+        {
+           if(!span.toString().equals(""))
+            return "success";
+           else
+               return "fail";
+        }
+
+
+        if(version==1 && !span.toString().equals(""))
         {
             String regExp="[>](.*?)[<]";
             Pattern pat = Pattern.compile(regExp);

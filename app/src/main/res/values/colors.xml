@@ -9,4 +9,7 @@
     <color name="light_yellow">#FFDB58</color>
     <color name="light_gray">#C1C1C1</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_gray">#ADABAB</color>
+
+
 </resources>

@@ -11,12 +11,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-public class Join2Activity extends AppCompatActivity {
+public class AgreeActivity extends AppCompatActivity {
     private Button startbutton1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join2);
+        setContentView(R.layout.activity_agree);
 
         CheckBox checkBox=findViewById(R.id.checkBox2);
         CheckBox checkBox2=findViewById(R.id.checkBox3);

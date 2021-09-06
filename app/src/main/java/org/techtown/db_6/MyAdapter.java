@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         if(viewType == Code.ViewType.Notmeal)
         {
-            view = inflater.inflate(R.layout.notmeal, parent, false);
+            view = inflater.inflate(R.layout.sidemeal_card, parent, false);
             return new NotmealViewHolder(view);
         }
         else if(viewType == Code.ViewType.PLUS)

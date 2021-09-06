@@ -23,7 +23,7 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(intent); //intent 시작
                 finish();
             }
-        },3000);
+        },1500);
     }
 
     @Override

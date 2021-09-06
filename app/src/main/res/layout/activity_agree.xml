@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Join2Activity">
+    tools:context=".AgreeActivity">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="479dp"
-        android:layout_height="75dp"
+        android:layout_width="411dp"
+        android:layout_height="76dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

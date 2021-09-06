@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Join2Activity.class);
+                Intent i = new Intent(getApplicationContext(), AgreeActivity.class);
                 startActivity(i);
             }
         });
@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.d("tag","button\n");
                 String id = edit_id.getText().toString();
                 String pwd = edit_pwd.getText().toString();
                 if(id.equals("") || pwd.equals("")) {

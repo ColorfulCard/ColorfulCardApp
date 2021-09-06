@@ -35,7 +35,7 @@
         </activity>
         <activity android:name=".RegiCardActivity" />
         <activity android:name=".JoinActivity" />
-        <activity android:name=".Join2Activity" />
+        <activity android:name=".AgreeActivity" />
     </application>
 
 </manifest>

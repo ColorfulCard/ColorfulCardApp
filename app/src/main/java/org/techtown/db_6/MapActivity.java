@@ -94,7 +94,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // 35.8691036023011, 128.59554606027856 중앙로 대백앞
         LatLng latLng = new LatLng(35.8691036023011, 128.59554606027856);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(10));
 //지도는 카메라가 아래를 내려다보는 듯한 내용이 모델링됨
 
         for (MemberStore store : mealMemberStore) {

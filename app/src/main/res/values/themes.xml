@@ -16,4 +16,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="editText" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorAccent">@color/dark_gray</item>
+    </style>
+    <style name="CustomRadioButton" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorAccent">@color/dark_gray</item>
+        <item name= "colorControlNormal">@color/light_gray</item>
+    </style>
 </resources>
