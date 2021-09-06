@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         Button button3 = findViewById(R.id.button3); //등록된 카드 버튼
         Button button4 = findViewById(R.id.button4); //가맹점 찾기 버튼
 
-        nameView.setText(user.getName()+"님");
+        nameView.setText(user.getName()+"님, 환영합니다");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
