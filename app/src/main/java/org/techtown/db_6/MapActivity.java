@@ -1,15 +1,20 @@
 package org.techtown.db_6;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,12 +23,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
 
     Intent intent;
@@ -40,9 +46,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mealMemberStore=intent.getParcelableArrayListExtra("mealMemberStores");
         sideMealMemberStore=intent.getParcelableArrayListExtra("sideMealMemberStores");
         eduMemberStore=intent.getParcelableArrayListExtra("eduMemberStores");
+//인텐트로 arraylist를 받아올 때 사용함
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+/*
+        TextView textView3= findViewById(R.id.textView3);
+
+            RecyclerView recyclerView = findViewById(R.id.recyclerview);
+            recyclerView.addItemDecoration(
+                    new DividerItemDecoration(this, R.drawable.line_divider));
+
+            LinearLayoutManager manager
+                    = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+
+            recyclerView.setLayoutManager(manager); // LayoutManager 등록
+            recyclerView.setAdapter(new MyAdapter(dataList)); // Adapter 등록
+
+*/
 
     /*    for(MemberStore store : mealMemberStore)
         {
@@ -61,25 +83,40 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+       //지도 객체 추출
         mapFragment.getMapAsync(this);
-
+        //지도객체와 onMapReadyCallback객체를 연결함
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        //map이 준비되면 호출되는 함수
         this.googleMap = googleMap;
         // 35.8691036023011, 128.59554606027856 중앙로 대백앞
         LatLng latLng = new LatLng(35.8691036023011, 128.59554606027856);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+//지도는 카메라가 아래를 내려다보는 듯한 내용이 모델링됨
 
-
-        for(MemberStore store: mealMemberStore) {
+        for (MemberStore store : mealMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
+            //마커에 대한 정보를 갖고 있는 객체
+            markerOptions.position(new LatLng(store.getLatitude(), store.getLongitude()))
                     .title(store.getStore_name())
                     .icon(BitmapDescriptorFactory.defaultMarker(210));
             googleMap.addMarker(markerOptions).showInfoWindow();
+
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+                @Override
+                public boolean onMarkerClick(@NonNull @org.jetbrains.annotations.NotNull Marker marker) {
+                    Toast.makeText(MapActivity.this, "Oh my god!!", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+            });
+
         }
+
         for(MemberStore store: sideMealMemberStore) {
              MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
@@ -93,7 +130,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     .title(store.getStore_name())
                     .icon(BitmapDescriptorFactory.defaultMarker(55));;
             googleMap.addMarker(markerOptions).showInfoWindow();
+
         }
+
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
@@ -101,6 +140,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             checkLocationPermissionWithRationale();
         }
     }
+
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -138,4 +178,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         }
     }
+
+
 }
