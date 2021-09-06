@@ -8,13 +8,13 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="461dp"
-        android:layout_height="71dp"
+        android:layout_width="479dp"
+        android:layout_height="75dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
+        app:srcCompat="@drawable/titleimage" />
 
     <TextView
         android:id="@+id/textView9"
@@ -29,24 +29,26 @@
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
         android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
-        android:text="________________________________________________"
-        android:textStyle="bold"
+        android:layout_marginRight="50dp"
+        android:background="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView9"/>
 
     <TextView
         android:id="@+id/textView10"
@@ -61,7 +63,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <CheckBox
         android:id="@+id/checkBox2"
@@ -119,14 +121,14 @@
         android:layout_marginRight="245dp"
         android:layout_marginBottom="70dp"
         android:text="알림 수신 동의(선택)"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/startbutton1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/startbutton1"
         android:layout_width="343dp"
         android:layout_height="64dp"
         android:layout_marginStart="36dp"
