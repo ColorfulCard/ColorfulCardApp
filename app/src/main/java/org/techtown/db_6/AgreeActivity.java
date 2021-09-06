@@ -92,10 +92,7 @@ public class AgreeActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 else{
-
                     Toast.makeText(getApplicationContext(),"필수약관동의에 체크해주세요",Toast.LENGTH_LONG).show();
-
-
                 }
 
             }
