@@ -317,7 +317,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             call.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "눌렸음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(tell));
                     startActivity(intent);
                 }
