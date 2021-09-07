@@ -44,7 +44,7 @@ public interface RetrofitService {
     @GET("storeType/{store_type}")
     Call<List<MemberStore>> getStorebyType (@Path("store_type") String store_type);
 
-    @GET("storeName/{store_name}")
+    @GET("storeName/{store_name}") //이름으로 검색해서 가져오는 것
     Call<List<MemberStore>> getStorebyName (@Path("store_name") String store_name);
 
 

@@ -11,10 +11,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,13 +46,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap googleMap;
     View card_view;
     Button btn1,btn2,btn3;
+    ImageButton call;
     ArrayList<Marker> mealMarker = new ArrayList<Marker>();
     ArrayList<Marker> sideMealMarker = new ArrayList<Marker>();
     ArrayList<Marker> eduMarker = new ArrayList<Marker>();
     Boolean btn1Flag =false;
     Boolean btn2Flag =false;
     Boolean btn3Flag =false;
-
+    SearchView sv_location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +71,39 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
         card_view=findViewById(R.id.card_view);
         btn1= (Button) findViewById(R.id.btn1);  //급식버튼
         btn2 = (Button) findViewById(R.id.btn2);  //부식버튼
         btn3 = (Button) findViewById(R.id.btn3);  //급식버튼
+        call=(ImageButton)findViewById(R.id.call);
+        sv_location=(SearchView)findViewById(R.id.sv_location);
+
+
+        sv_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sv_location.setIconified(false);
+                Intent intent =new Intent(MapActivity.this, SearchMemberStoreActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        sv_location.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) { //검색시 행동
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Intent intent =new Intent(MapActivity.this, SearchMemberStoreActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
+
 
         btn1.setOnClickListener(new View.OnClickListener() {  //급식클릭시
             @Override
@@ -161,6 +194,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         //지도 객체 추출
         mapFragment.getMapAsync(this);
@@ -168,7 +202,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     }
-
+    SearchView searchView;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -286,6 +320,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             num.setText(store.getStore_num());
             address.setText(store.getStore_address());
 
+            String st_num=store.getStore_num().toString();
+            st_num=st_num.replace("-","");
+            String tell;
+            tell="tel:"+st_num;
+
+            call.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(tell));
+                    startActivity(intent);
+                }
+            });
         //    System.out.println("/////////"+ marker.isVisible());
         //    marker.setVisible(false);
         //    System.out.println("/////////"+ marker.isVisible());
