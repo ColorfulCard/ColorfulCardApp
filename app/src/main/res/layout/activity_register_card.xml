@@ -48,40 +48,41 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/et_cardName"
         android:id="@+id/tv_cardName"
-        android:textStyle="bold"
-        android:textSize="21sp"
-        android:text="카드명"
-        android:layout_marginRight="303dp"
-        android:layout_marginEnd="303dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp"/>
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="303dp"
+        android:layout_marginRight="303dp"
+        android:text="카드명"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/et_cardName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="1.0" />
 
-
-    -
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="4dp"
         android:text="카드 번호"
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cardName" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_cardName"
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -106,7 +107,7 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:maxLength="4"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:theme="@style/editText"
             android:hint="****"/>
 
@@ -118,7 +119,7 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:maxLength="4"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:theme="@style/editText"
             android:hint="****"/>
 
@@ -130,7 +131,7 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:maxLength="4"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:theme="@style/editText"
             android:hint="****"/>
 
@@ -142,7 +143,7 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:maxLength="4"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:theme="@style/editText"
             android:hint="****"/>
 
@@ -166,8 +167,8 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="276dp"
-        android:layout_height="50dp"
+        android:layout_width="332dp"
+        android:layout_height="37dp"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
         android:layout_marginTop="20dp"
@@ -180,7 +181,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="급식카드"
-            android:textSize="16dp"
+            android:textSize="19dp"
+            android:textColor="#0A0703"
             android:theme="@style/CustomRadioButton" />
 
         <RadioButton
@@ -188,7 +190,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="부식카드"
-            android:textSize="16dp"
+            android:textSize="19dp"
+            android:textColor="#0A0703"
             android:theme="@style/CustomRadioButton" />
 
         <RadioButton
@@ -196,7 +199,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="교육카드"
-            android:textSize="16dp"
+            android:textSize="19dp"
+            android:textColor="#0A0703"
             android:theme="@style/CustomRadioButton" />
 
     </RadioGroup>
@@ -209,8 +213,9 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="36dp"
-        android:textSize="16dp"
+        android:textSize="18dp"
         android:text="카드인증"
+        android:textColor="#0A0703"
         android:backgroundTint="#D6B2EC"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
@@ -224,7 +229,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="36dp"
-        android:textSize="16dp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintStart_toEndOf="@+id/vaildCheckBT"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

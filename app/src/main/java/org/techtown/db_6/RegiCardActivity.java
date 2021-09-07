@@ -99,20 +99,20 @@ public class RegiCardActivity extends AppCompatActivity {
                 cardNo.append(cardNo3.getText().toString());
                 cardNo.append(cardNo4.getText().toString());
 
-                Boolean cardType=true;
-
+                String cardType="";
+                //급식:0      부식:1        교육:2
                 if(chMeal.isChecked()) {
-                    cardType = true;
+                    cardType = "0";
                 }
                 else if(chBusic.isChecked()){
-                    cardType = false;
+                    cardType = "1";
                 }
                 else if(chEdu.isChecked()) {
-                    cardType = false;
+                    cardType = "2";
                 }
 
 
-                if(cardName.equals("") || (chMeal.isChecked()== false&&chBusic.isChecked()== false&&chEdu.isChecked()== false))
+                if(cardName.equals("") || cardType.equals(""))
                 {
                     Toast.makeText(getApplicationContext(), "모두 기입하였는지 확인하세요", Toast.LENGTH_SHORT).show();
                 }
@@ -137,7 +137,6 @@ public class RegiCardActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<UserCard> call, Response<UserCard> response) {
                             if (response.isSuccessful()) {
-                                UserCard result = response.body();
                                 Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
                                 user.clearCardBalances();
                                 intent.putExtra("user",user);
@@ -145,8 +144,7 @@ public class RegiCardActivity extends AppCompatActivity {
                                 finish();
 
                             } else {
-                                Log.d("tag", "get한 후 카드 하나만 받아오게 해서 난 실패임 spring수정하면됨");
-                                UserCard result = response.body();
+                                Log.d("tag", "get 한 후 반환해올때 getByNum한 카드가 하나가 아니여서 발생하는 오류 동작에는 문제 없음");
                                 Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
                                 user.clearCardBalances();
                                 intent.putExtra("user",user);
@@ -196,8 +194,8 @@ public class RegiCardActivity extends AppCompatActivity {
         public void handleMessage(Message message) {
             switch (message.what) {
                 case MSG_SUCCESS_VAILCHECK:
-                    vaildCheckResult.setTextColor(0xffffffff);
-                    vaildCheckResult.setText("컬러풀카드가 인증되었습니다");
+                    vaildCheckResult.setText("컬러풀카드 인증되었습니다");
+                    //vaildCheckResult.setTextColor(000000);
                     cardNo1.setEnabled(false); //카드번호값 고정
                     cardNo2.setEnabled(false);
                     cardNo3.setEnabled(false);

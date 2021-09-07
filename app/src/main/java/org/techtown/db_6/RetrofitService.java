@@ -38,7 +38,7 @@ public interface RetrofitService {
             @Path("cardNum") String cardNum,
             @Field("id") String id,
             @Field("cardName") String cardName,
-            @Field("mealCard") boolean mealCard
+            @Field("cardType") String cardType
     );
 
     @GET("storeType/{store_type}")

@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
                     if(response.body().isEmpty()) //등록된 카드 없는 상태
                         Log.d("tag",response.body().toString());
                     else{
-                        Toast.makeText(getApplicationContext(), "등록 카드정보 불러오기 성공", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(getApplicationContext(), "등록 카드정보 불러오기 성공", Toast.LENGTH_SHORT).show();
                         List<UserCard> result = response.body();
                         user.setCard(result);
 

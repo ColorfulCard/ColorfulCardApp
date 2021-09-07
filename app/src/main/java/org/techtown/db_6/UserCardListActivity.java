@@ -69,26 +69,24 @@ public class UserCardListActivity extends AppCompatActivity {
     {
         dataList = new ArrayList<>();
 
-        System.out.println("사용자 카드"+ user.getCards());
         ArrayList<String[]> allBalances = user.getCardBalances();
-        String[] balances= allBalances.get(0);
-        for(int i=0;i<balances.length;i++)
-        {
-            System.out.print(balances[i]+ " ");
-        }
 
         int i=0;
 
         for( UserCard card : user.getCards() ){
 
             Log.d("tag",i+"번째 카드");
-            if(card.isMealCard()==true)  //급식카드
+            if(card.getCardType().equals("0"))  //급식카드
             {
                 dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
 
-            }else //부식카드
+            }else if(card.getCardType().equals("1")) //부식카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.Notmeal, user.getCardBalances().get(i)));
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.sideMealCard, user.getCardBalances().get(i)));
+            }
+            else //교육카드
+            {
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.eduCard, user.getCardBalances().get(i)));
             }
             i++;
         }

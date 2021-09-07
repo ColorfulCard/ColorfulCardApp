@@ -19,14 +19,14 @@ public class UserCard implements Serializable {
     @SerializedName("cardNum")
     private String cardNum;
 
-    @SerializedName("mealCard")
-    private boolean mealCard;
+    @SerializedName("cardType")
+    private String cardType;
 
-    public UserCard(String id, String cardName, String cardNum, boolean mealCard) {
+    public UserCard(String id, String cardName, String cardNum, String cardType) {
         this.id=id;
         this.cardName=cardName;
         this.cardNum=cardNum;
-        this.mealCard=mealCard;
+        this.cardType=cardType;
     }
 
     public String getId() {
@@ -39,8 +39,8 @@ public class UserCard implements Serializable {
     public String getCardNum() {
         return cardNum;
     }
-    public Boolean isMealCard(){
-        return mealCard;
+    public String getCardType(){
+        return cardType;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserCard implements Serializable {
                 "cardNum=" + cardNum +
                 ", id=" + id +
                 ", cardName='" +cardName + '\'' +
-                ", mealCard='" + mealCard + '\'' +
+                ", cardType='" + cardType + '\'' +
                 '}';
     }
    //안먹혀서 안씀
