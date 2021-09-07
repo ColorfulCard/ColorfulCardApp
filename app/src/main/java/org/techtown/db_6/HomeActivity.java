@@ -24,6 +24,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
+    private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
+
 
     final int MSG_SUCCESS_BALCHECK = 1;
     final int MSG_SUCCESS_GETSTORE = 2;
@@ -263,20 +265,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed(){ //뒤로가기 버튼 누르면 종료
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("애플리케이션을 종료하시겠습니까?");
-        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                finishAffinity();
-                System.runFinalization();
-                System.exit(0);
-            }
-        });
-        builder.setNegativeButton("취소",null);
-        builder.show();
+    public void onBackPressed() { //뒤로가기 버튼 누르면 종료
+        backKeyHandler.onBackPressed();
     }
 
 }

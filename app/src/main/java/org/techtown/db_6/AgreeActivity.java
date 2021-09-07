@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 public class AgreeActivity extends AppCompatActivity {
     private Button startbutton1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
