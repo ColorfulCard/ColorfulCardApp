@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,8 @@ public class UserCardListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_card_list);
         ImageButton imageButton = findViewById(R.id.imageButton);
         TextView textView3= findViewById(R.id.textView3);
+
+
 
         if(user.getCards().isEmpty())
             textView3.setText("등록된 카드가 없습니다");
@@ -63,6 +66,7 @@ public class UserCardListActivity extends AppCompatActivity {
 
         });
 
+
     }
 
     public void initializeData()
@@ -78,19 +82,21 @@ public class UserCardListActivity extends AppCompatActivity {
             Log.d("tag",i+"번째 카드");
             if(card.getCardType().equals("0"))  //급식카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i),""));
 
             }else if(card.getCardType().equals("1")) //부식카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.sideMealCard, user.getCardBalances().get(i)));
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.sideMealCard, user.getCardBalances().get(i),""));
             }
             else //교육카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.eduCard, user.getCardBalances().get(i)));
+                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.eduCard, user.getCardBalances().get(i),""));
             }
             i++;
         }
 
     }
 
+
 }
+

@@ -9,13 +9,15 @@ public class DataItem {
     private int viewType;
     private Button button;
     private String[] balances;
+    private String minus;
 
-    public DataItem(String name, String balance, Button button ,int viewType , String[] balances) {
+    public DataItem(String name, String balance, Button button ,int viewType , String[] balances, String minus) {
         this.name = name;
         this.balance = balance;
         this.button = button;
         this.viewType = viewType;
         this.balances= balances;
+        this.minus = minus;
 
     }
 
@@ -34,4 +36,6 @@ public class DataItem {
     public Button getButton() {return button;}
 
     public String[] getBalances(){return balances;}
+
+    public String getMinus() {return minus;}
 }
