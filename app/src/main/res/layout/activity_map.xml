@@ -25,9 +25,9 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:layout_marginLeft="10dp"
             android:backgroundTint="#2980B9"
             android:text="급식"
-            android:layout_marginLeft="10dp"
             android:textStyle="bold" />
 
         <Button

@@ -93,6 +93,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(false);
                     }
                     btn1.setBackgroundColor(Color.parseColor("#133A55"));   //눌렀을 떄 색깔
+                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
+                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
                 else //false면 전체 다 보여줌
                 {
@@ -103,6 +105,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(true);
                     }
                     btn1.setBackgroundColor(Color.parseColor("#2980B9"));  //풀었을 때 색깔
+                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
+                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
             }
         });
@@ -123,8 +127,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for(Marker marker : eduMarker){
                         marker.setVisible(false);
                     }
-
                     //눌렀을 때 색깔 위에랑 같은 코드
+                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
+                    btn2.setBackgroundColor(Color.parseColor("#0B4D40"));
+                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
                 else{
                      for(Marker marker : mealMarker) {
@@ -134,6 +140,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(true);
                     }
                     //풀었을 때 색깔 위에랑 같은 코드
+                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
+                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
+                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
             }
 
@@ -154,6 +163,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : sideMealMarker) {
                         marker.setVisible(false);
                     }
+                    //btn3눌렀을때
+                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
+                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
+                    btn3.setBackgroundColor(Color.parseColor("#D9A800"));
                 }else{
                     for (Marker marker : mealMarker) {
                         marker.setVisible(true);
@@ -161,6 +174,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : sideMealMarker) {
                         marker.setVisible(true);
                     }
+                    //btn3해제
+                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
+                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
+                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
+
                 }
             }
         });
