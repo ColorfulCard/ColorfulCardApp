@@ -103,6 +103,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+
+
         btn1.setOnClickListener(new View.OnClickListener() {  //급식클릭시
             @Override
             public void onClick(View v) {
@@ -218,7 +220,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     }
-
+    SearchView searchView;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
