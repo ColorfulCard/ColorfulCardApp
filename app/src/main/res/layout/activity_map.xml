@@ -14,47 +14,44 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity" />
 
-
-    <Button
-        android:id="@+id/btn1"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
-        android:backgroundTint="#2980B9"
-        android:text="급식카드"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
-        android:backgroundTint="#16A085"
-        android:text="부식카드"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:backgroundTint="#2980B9"
+            android:text="급식"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginStart="240dp"
-        android:layout_marginLeft="240dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
-        android:backgroundTint="#FFDB58"
-        android:text="착한가게"
-        android:textColor="#000000"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:backgroundTint="#16A085"
+            android:text="부식"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="#FFDB58"
+            android:text="교육"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+    </RadioGroup>
 
     <LinearLayout
         android:id="@+id/card_view"
