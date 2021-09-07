@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -47,5 +48,9 @@ public interface RetrofitService {
     @GET("storeName/{store_name}") //이름으로 검색해서 가져오는 것
     Call<List<MemberStore>> getStorebyName (@Path("store_name") String store_name);
 
+    @DELETE("card/{cardNum}")
+    Call<UserCard> deleteUserCard(
+            @Path("cardNum") String cardNum
+    );
 
 }
