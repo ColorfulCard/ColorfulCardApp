@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="224dp"
-        android:layout_height="126dp"
+        android:layout_width="219dp"
+        android:layout_height="111dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -23,8 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,22 +35,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:text="TextView"
+        android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@id/tv" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="102dp"
-        android:layout_height="39dp"
+        android:layout_width="100dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/light_yellow"
+        android:background="#9AD6E1"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
         android:text="잔액확인"
-        app:backgroundTint="@color/light_yellow"
+        android:textColor="@color/white"
+        android:textColorHint="#9DD8E3"
+        android:textSize="14sp"
+        app:backgroundTint="#9DD8E3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
