@@ -26,6 +26,7 @@ public class AgreeActivity extends AppCompatActivity {
 
 
         checkBox.setOnClickListener(new View.OnClickListener(){
+
             public void onClick(View v){
                 if(checkBox.isChecked()){
                     checkBox2.setChecked(true);
