@@ -21,6 +21,7 @@ public class SearchMemberStoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_search_memberstore);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
