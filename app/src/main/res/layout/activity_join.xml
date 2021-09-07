@@ -144,12 +144,13 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="320dp"
+        android:layout_width="280dp"
         android:layout_height="64dp"
         android:layout_marginStart="36dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="100dp"
         android:text="가입하기"
+        android:textColor="#4E4E4E"
         android:textSize="20sp"
         android:textStyle="bold"
         app:backgroundTint="#FFDB58"
