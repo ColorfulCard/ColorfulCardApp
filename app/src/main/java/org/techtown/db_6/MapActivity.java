@@ -46,14 +46,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap googleMap;
     View card_view;
     Button btn1,btn2,btn3;
-    ImageButton call;
+    ImageButton call,searchimage;
     ArrayList<Marker> mealMarker = new ArrayList<Marker>();
     ArrayList<Marker> sideMealMarker = new ArrayList<Marker>();
     ArrayList<Marker> eduMarker = new ArrayList<Marker>();
     Boolean btn1Flag =false;
     Boolean btn2Flag =false;
     Boolean btn3Flag =false;
-    SearchView sv_location;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,33 +76,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btn1= (Button) findViewById(R.id.btn1);  //급식버튼
         btn2 = (Button) findViewById(R.id.btn2);  //부식버튼
         btn3 = (Button) findViewById(R.id.btn3);  //급식버튼
+        searchimage = (ImageButton) findViewById(R.id.sv_location);
         call=(ImageButton)findViewById(R.id.call);
-        sv_location=(SearchView)findViewById(R.id.sv_location);
 
 
-        sv_location.setOnClickListener(new View.OnClickListener() {
+        searchimage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                sv_location.setIconified(false);
-                Intent intent =new Intent(MapActivity.this, SearchMemberStoreActivity.class);
-                startActivity(intent);
+                Intent i = new Intent(getApplicationContext(), SearchMemberStoreActivity.class);
+                startActivity(i);
             }
+
+
         });
-
-        sv_location.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) { //검색시 행동
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Intent intent =new Intent(MapActivity.this, SearchMemberStoreActivity.class);
-                startActivity(intent);
-                return false;
-            }
-        });
-
 
 
         btn1.setOnClickListener(new View.OnClickListener() {  //급식클릭시
@@ -220,7 +206,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     }
-    SearchView searchView;
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
