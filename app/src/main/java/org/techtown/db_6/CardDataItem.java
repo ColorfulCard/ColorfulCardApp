@@ -2,7 +2,7 @@ package org.techtown.db_6;
 
 import android.widget.Button;
 
-public class DataItem {
+public class CardDataItem {
 
     private String balance;
     private String name;
@@ -10,7 +10,7 @@ public class DataItem {
     private Button button;
     private String[] balances;
 
-    public DataItem(String name, String balance, Button button ,int viewType , String[] balances) {
+    public CardDataItem(String name, String balance, Button button , int viewType , String[] balances) {
         this.name = name;
         this.balance = balance;
         this.button = button;

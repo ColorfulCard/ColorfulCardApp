@@ -19,7 +19,7 @@ public class UserCardListActivity extends AppCompatActivity {
     Intent intent;
     User user; //사용자 클래스
 
-    private ArrayList<DataItem> dataList;
+    private ArrayList<CardDataItem> dataList;
     private Button button;
 
 
@@ -47,7 +47,7 @@ public class UserCardListActivity extends AppCompatActivity {
                     = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
 
             recyclerView.setLayoutManager(manager); // LayoutManager 등록
-            recyclerView.setAdapter(new MyAdapter(dataList)); // Adapter 등록
+            recyclerView.setAdapter(new CardListAdapter(dataList)); // Adapter 등록
 
         }
 
@@ -78,15 +78,15 @@ public class UserCardListActivity extends AppCompatActivity {
             Log.d("tag",i+"번째 카드");
             if(card.getCardType().equals("0"))  //급식카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
+                dataList.add(new CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i)));
 
             }else if(card.getCardType().equals("1")) //부식카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.sideMealCard, user.getCardBalances().get(i)));
+                dataList.add(new CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.sideMealCard, user.getCardBalances().get(i)));
             }
             else //교육카드
             {
-                dataList.add(new DataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.eduCard, user.getCardBalances().get(i)));
+                dataList.add(new CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.eduCard, user.getCardBalances().get(i)));
             }
             i++;
         }

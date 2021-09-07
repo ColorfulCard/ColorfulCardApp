@@ -6,5 +6,8 @@ public class Code {
         public static final int mealCard = 1;
         public static final int eduCard =2;
         public static final int PLUS = 3;
+
+
+        public static final int searchResult=4;
     }
 }
