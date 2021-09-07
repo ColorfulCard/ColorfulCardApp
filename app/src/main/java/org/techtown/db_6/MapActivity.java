@@ -83,8 +83,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         sv_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sv_location.setIconified(false);
                 Intent intent =new Intent(MapActivity.this, SearchMemberStoreActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        sv_location.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) { //검색시 행동
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Intent intent =new Intent(MapActivity.this, SearchMemberStoreActivity.class);
+                startActivity(intent);
+                return false;
             }
         });
 
