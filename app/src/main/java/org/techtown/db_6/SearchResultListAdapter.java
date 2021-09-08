@@ -2,19 +2,28 @@ package org.techtown.db_6;
 
 import android.content.Context;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+
+{
 
     private ArrayList<MapDataItem> mapDataList =null;
     SearchResultListAdapter(ArrayList<MapDataItem> dataList)
@@ -43,12 +52,34 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof SearchResultViewHolder)
         {
-            ((SearchResultViewHolder) holder).store_name.setText(mapDataList.get(position).getStore_name());
-            ((SearchResultViewHolder) holder).store_address.setText(mapDataList.get(position).getStore_address());
-            ((SearchResultViewHolder) holder).store_type.setText(mapDataList.get(position).getStore_type());
+           // ((SearchResultViewHolder) holder).store_name.setText(mapDataList.get(position).getStore_name());
+           // ((SearchResultViewHolder) holder).store_address.setText(mapDataList.get(position).getStore_address());
+            //((SearchResultViewHolder) holder).store_type.setText(mapDataList.get(position).getStore_type());
+            MemberStore store= mapDataList.get(position).getStore();
+            ((SearchResultViewHolder) holder).store_name.setText(store.getStore_name());
+            ((SearchResultViewHolder) holder).store_address.setText(store.getStore_address());
+            ((SearchResultViewHolder) holder).store_type.setText(store.getStore_type());
 
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent;
+                    intent = new Intent(v.getContext(),MapActivity.class);
+                    Log.d("tag",store.getStore_name());
+                    Log.d("tag",store.getStore_address());
+                    Log.d("tag",store.getStore_type());
+                    Log.d("tag",store.getLatitude().toString());
+                    Log.d("tag",store.getLongitude().toString());
+
+                    intent.putExtra("name","가나다");
+                    intent.putExtra("id","1");
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -59,7 +90,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
         return mapDataList.get(position).getViewType();
     }
 
-    public class SearchResultViewHolder extends RecyclerView.ViewHolder{
+    public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 
         TextView store_name;
         TextView store_address;
@@ -75,7 +106,20 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
             store_type = itemView.findViewById(R.id.store_type);
             map_marker =itemView.findViewById(R.id.map_marker);
 
+          /*  itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v){
+
+
+
+
+
+                }
+            });*/
         }
+
+
 
     }
 

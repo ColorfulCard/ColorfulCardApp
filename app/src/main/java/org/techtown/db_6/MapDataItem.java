@@ -4,7 +4,7 @@ import android.widget.Button;
 
 public class MapDataItem {
 
-    private String store_name;
+    /*private String store_name;
     private String store_address;
     private String store_type;
     private int viewType;
@@ -20,8 +20,18 @@ public class MapDataItem {
     public String getStore_name(){return store_name;}
     public String getStore_address(){return store_address;}
     public String getStore_type(){return store_type;}
-
     public int getViewType() {
         return viewType;
+    }*/
+
+    private MemberStore store;
+    private int viewType;
+
+    public MapDataItem(MemberStore store, int viewType){
+        this.store=store;
+        this.viewType=viewType;
     }
+
+    public MemberStore getStore(){return store;}
+    public int getViewType(){return  viewType;}
 }
