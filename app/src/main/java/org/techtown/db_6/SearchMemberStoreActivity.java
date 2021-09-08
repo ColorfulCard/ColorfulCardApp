@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -42,7 +43,6 @@ public class SearchMemberStoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_memberstore);
-
         handler = new MainHandler();
 
         searchbar=findViewById(R.id.searchbar);
@@ -70,6 +70,9 @@ public class SearchMemberStoreActivity extends AppCompatActivity {
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
 
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
+
+
+
 
 
     }
@@ -133,26 +136,37 @@ public class SearchMemberStoreActivity extends AppCompatActivity {
                 case MSG_SUCCESS_SEARCH:
                     //메인스레드 작업, 리사이클러뷰 데이터 전달,부르기
                     initializeData();
+
+                    //SearchResultListAdapter adapter = new SearchResultListAdapter(dataList);
+
+
+
                     recyclerView.setAdapter(new SearchResultListAdapter(dataList)); // Adapter 등록
                     break;
+
 
                 case MSG_SEARCH_NO_WORD:
                     //검색결과 없음 뷰에 검색결과없음 정보 띄우기
                     break;
 
             }
-
         }
+
     }
+
 
     private void initializeData() {
 
         dataList = new ArrayList<>();
         int i=0;
-        for( MemberStore store : results ){
+       /* for( MemberStore store : results ){
             Log.d("tag",i+"번째 검색결과 가맹점"); //확인용
             dataList.add(new MapDataItem(store.getStore_name(),store.getStore_address(),store.getStore_type(),Code.ViewType.searchResult));
             i++;
+        }*/
+
+        for(MemberStore store: results){
+            dataList.add(new MapDataItem(store, Code.ViewType.searchResult));
         }
     }
 }

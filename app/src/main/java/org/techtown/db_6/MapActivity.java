@@ -45,6 +45,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ArrayList<MemberStore> sideMealMemberStore;
     ArrayList<MemberStore> eduMemberStore;
 
+
+
     private GoogleMap googleMap;
     View card_view;
     Button btn1,btn2,btn3;
@@ -65,6 +67,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mealMemberStore=intent.getParcelableArrayListExtra("mealMemberStores"); //인텐트로 arraylist를 받아올 때 사용함
         sideMealMemberStore=intent.getParcelableArrayListExtra("sideMealMemberStores");
         eduMemberStore=intent.getParcelableArrayListExtra("eduMemberStores");
+
+
+        if(savedInstanceState!=null) {
+
+            Log.d("tag", "들어옴 안들어옴?");
+            String name = getIntent().getStringExtra("id");
+            Log.d("tag", name);
+            return;
+        }
 
         for(MemberStore store : sideMealMemberStore)  //확인용
         {
