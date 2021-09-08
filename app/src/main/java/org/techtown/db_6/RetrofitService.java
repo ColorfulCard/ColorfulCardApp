@@ -4,9 +4,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -48,4 +50,10 @@ public interface RetrofitService {
     Call<List<MemberStore>> getStorebyName (@Path("store_name") String store_name);
 
 
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "/card/delete", hasBody = true)
+    Call<Integer> deleteUserCard(@Field("cardNum") String cardNum,
+                                  @Field("id") String id,
+                                  @Field("cardName") String cardName,
+                                  @Field("cardType") String cardType);
 }

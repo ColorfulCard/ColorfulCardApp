@@ -46,15 +46,14 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="129dp"
-        android:layout_height="84dp"
+        android:layout_width="130dp"
+        android:layout_height="85dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/addbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -64,7 +63,7 @@
         android:layout_marginTop="250dp"
         app:layout_constraintEnd_toEndOf="@+id/recyclerview"
         app:layout_constraintStart_toStartOf="@+id/recyclerview"
-        app:layout_constraintTop_toTopOf="@+id/recyclerview" />/ app:srcCompat="@drawable/plus" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

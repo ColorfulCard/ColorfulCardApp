@@ -24,8 +24,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
-    private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
+    private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
     final int MSG_SUCCESS_BALCHECK = 1;
     final int MSG_SUCCESS_GETSTORE = 2;
