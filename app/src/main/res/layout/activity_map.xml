@@ -14,24 +14,21 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity" />
 
-    <SearchView
+    <ImageView
+
         android:id="@+id/sv_location"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginRight="53dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_round"
-        android:elevation="5dp"
-        android:iconifiedByDefault="false"
-        android:saveEnabled="true" />
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/searchview"
+         />
+
 
     <RadioGroup
         android:id="@+id/radioGroup"
