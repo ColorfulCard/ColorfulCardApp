@@ -8,6 +8,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -48,9 +49,20 @@ public interface RetrofitService {
     @GET("storeName/{store_name}") //이름으로 검색해서 가져오는 것
     Call<List<MemberStore>> getStorebyName (@Path("store_name") String store_name);
 
-    @DELETE("card/{cardNum}")
-    Call<UserCard> deleteUserCard(
-            @Path("cardNum") String cardNum
-    );
+  //  @FormUrlEncoded
+   // @DELETE("card/{cardNum}")
 
+ /*   @HTTP(method = "DELETE", path = "/card/{cardNum}", hasBody = true)
+    Call<UserCard> deleteUserCard(
+            @Path("cardNum") String cardNum,
+            @Field("id") String id,
+            @Field("cardName") String cardName,
+            @Field("cardType") String cardType
+    );*/
+
+
+    @HTTP(method = "DELETE", path = "card/{cardNum}", hasBody = true)
+    Call<UserCard> deleteUserCard(@Path("cardNum") String postfix,   @Field("id") String id,
+                                  @Field("cardName") String cardName,
+                                  @Field("cardType") String cardType);
 }

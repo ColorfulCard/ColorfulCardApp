@@ -1,7 +1,9 @@
 package org.techtown.db_6;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Intent intent;
-    private ArrayList<CardDataItem> myDataList = null;
+    private ArrayList<CardDataItem> cardDataList = null;
 
     CardListAdapter(ArrayList<CardDataItem> dataList)
     {
-        myDataList = dataList;
+        cardDataList = dataList;
     }
 
 
@@ -33,22 +41,20 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if(viewType== Code.ViewType.mealCard){
             view = inflater.inflate(R.layout.meal_card, parent, false);
-            return new MealCardViewHolder(view);
+            return new CardViewHolder(view);
         }
         else  if(viewType == Code.ViewType.sideMealCard)
         {
             view = inflater.inflate(R.layout.sidemeal_card, parent, false);
-            return new SideMealViewHolder(view);
+            return new CardViewHolder(view);
         }
         else if(viewType== Code.ViewType.eduCard)
         {
             view = inflater.inflate(R.layout.educationcard, parent, false);
-            return new SideMealViewHolder(view);
+            return new CardViewHolder(view);
         }
-        else
-        {
-            view = inflater.inflate(R.layout.plus, parent, false);
-            return new PLUSViewHolder(view);
+        else{
+            return null;
         }
 
 
@@ -57,14 +63,75 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
     {
-        if(viewHolder instanceof MealCardViewHolder)
-        {
-            ((MealCardViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
-            ((MealCardViewHolder) viewHolder).content.setText(myDataList.get(position).getBalance());
-            ((MealCardViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
+        if(viewHolder instanceof CardViewHolder){
+
+            CardDataItem card =cardDataList.get(position);
+
+            ((CardViewHolder) viewHolder).name.setText(card.getCardName());
+            ((CardViewHolder) viewHolder).content.setText(card.getBalance());
+            ((CardViewHolder) viewHolder).minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setMessage("카드를 삭제하시겠습니까?");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+
+                            RetrofitService service1 = retrofit.create(RetrofitService.class);
+
+
+                            Call<UserCard> call = service1.deleteUserCard(card.getCardNum(), card.getUserID(), card.getCardName(), card.getCardType());
+
+                            call.enqueue(new Callback<UserCard>() {
+
+                                @Override
+                                public void onResponse(Call<UserCard> call, Response<UserCard> response) {
+                                    if (response.equals(null) )
+                                        Log.d("tag","결과옴");
+
+                                    if (response.isSuccessful()) {
+                                        //메인스레드 작업가능
+                                        Log.d("tag", "회원삭제성공\n");
+                                        notifyItemRemoved(position);
+                                        cardDataList.remove(position);
+                                        notifyItemRangeChanged(position, cardDataList.size());
+                                    }
+                                    else
+                                    {
+                                        Log.d("tag", "회원삭제성공\n");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<UserCard> call, Throwable t) {
+                                    Log.d("tag", "서버 delete동작 후 반환이 void라서 발생한 오류" + t.getMessage());
+                                }
+                            });
+
+                        }
+                    });
+                    builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+
+                    builder.show();
+                }
+            });
+
+            ((CardViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-                    String[] balances = myDataList.get(position).getBalances();
+                    String[] balances = cardDataList.get(position).getBalances();
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     AlertDialog dialog = builder.setMessage(
@@ -80,60 +147,6 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
 
             });
-        }
-        else if(viewHolder instanceof SideMealViewHolder)
-        {
-            ((SideMealViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
-            ((SideMealViewHolder) viewHolder).balance.setText(myDataList.get(position).getBalance());
-            ((SideMealViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    String[] balances = myDataList.get(position).getBalances();
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    AlertDialog dialog = builder.setMessage(
-                            "이월 잔여금액: "+balances[0] +"원"
-                            +"\n당월 충전금액: "+ balances[1] +"원"
-                            +"\n당월 사용금액: "+ balances[2] +"원"
-                            +"\n당월 잔여금액: "+ balances[3] +"원"
-                            +"\n금일 한도금액: "+ balances[4] +"원"
-                            +"\n금일 사용금액: "+ balances[5] +"원"
-                            +"\n금일 잔여금액: "+ balances[6]).setPositiveButton("확인", null).create();
-                    dialog.show();
-
-                }
-
-            });
-        }
-        else if(viewHolder instanceof EduCardViewHolder){
-
-            ((EduCardViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
-            ((EduCardViewHolder) viewHolder).content.setText(myDataList.get(position).getBalance());
-            ((EduCardViewHolder) viewHolder).button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    String[] balances = myDataList.get(position).getBalances();
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    AlertDialog dialog = builder.setMessage(
-                            "이월 잔여금액: "+balances[0] +"원"
-                                    +"\n당월 충전금액: "+ balances[1] +"원"
-                                    +"\n당월 사용금액: "+ balances[2] +"원"
-                                    +"\n당월 잔여금액: "+ balances[3] +"원"
-                                    +"\n금일 한도금액: "+ balances[4] +"원"
-                                    +"\n금일 사용금액: "+ balances[5] +"원"
-                                    +"\n금일 잔여금액: "+ balances[6]).setPositiveButton("확인", null).create();
-                    dialog.show();
-
-                }
-
-            });
-
-        }
-        else if(viewHolder instanceof PLUSViewHolder)
-        {
-            ((PLUSViewHolder) viewHolder).name.setText(myDataList.get(position).getName());
-           // ((PLUSViewHolder) viewHolder).balance.setText(myDataList.get(position).getBalance());
         }
 
     }
@@ -142,81 +155,30 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemCount()
     {
-        return myDataList.size();
+        return cardDataList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return myDataList.get(position).getViewType();
+        return cardDataList.get(position).getViewType();
     }
 
-
-    public class SideMealViewHolder extends RecyclerView.ViewHolder{
-        TextView balance;
-        TextView name;
-        ImageView image;
-        Button button;
-
-        SideMealViewHolder(View itemView)
-        {
-            super(itemView);
-
-            balance = itemView.findViewById(R.id.content);
-            name = itemView.findViewById(R.id.tv);
-            image = itemView.findViewById(R.id.imageView);
-            button = itemView.findViewById(R.id.button);
-
-        }
-
-    }
-
-    public class PLUSViewHolder extends RecyclerView.ViewHolder{
-        TextView balance;
-        TextView name;
-        ImageView image;
-        Button button;
-
-        PLUSViewHolder(View itemView)
-        {
-            super(itemView);
-            balance = itemView.findViewById(R.id.content);
-            name = itemView.findViewById(R.id.tv);
-            image = itemView.findViewById(R.id.imageView);
-            button = itemView.findViewById(R.id.button);
-        }
-    }
-
-    public class MealCardViewHolder extends RecyclerView.ViewHolder{
+    public class CardViewHolder extends RecyclerView.ViewHolder{
         TextView content;
         TextView name;
         ImageView image;
         Button button;
-        TextView tv;
-        MealCardViewHolder(View itemView)
+        ImageView minus;
+
+        CardViewHolder(View itemView)
         {
             super(itemView);
             content = itemView.findViewById(R.id.content);
             name = itemView.findViewById(R.id.tv);
             image = itemView.findViewById(R.id.imageView);
             button = itemView.findViewById(R.id.button);
+            minus=itemView.findViewById(R.id.minus);
         }
     }
-
-    public class EduCardViewHolder extends RecyclerView.ViewHolder{
-        TextView content;
-        TextView name;
-        ImageView image;
-        Button button;
-        TextView tv;
-        EduCardViewHolder(View itemView)
-        {
-            super(itemView);
-            content = itemView.findViewById(R.id.content);
-            name = itemView.findViewById(R.id.tv);
-            image = itemView.findViewById(R.id.imageView);
-            button = itemView.findViewById(R.id.button);
-        }
-    }
-
 
 }
