@@ -2,36 +2,31 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity" />
 
-    <SearchView
+    <ImageView
+
         android:id="@+id/sv_location"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:layout_height="45dp"
         android:layout_alignParentEnd="true"
-
         android:layout_alignParentRight="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_round"
-        android:elevation="5dp"
-        android:iconifiedByDefault="false" />
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/searchview"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <RadioGroup
         android:id="@+id/radioGroup"

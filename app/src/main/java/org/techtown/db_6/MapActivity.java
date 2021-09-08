@@ -11,12 +11,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     View card_view;
     Button btn1,btn2,btn3;
     ImageButton call;
+    ImageView searchimage;
     ArrayList<Marker> mealMarker = new ArrayList<Marker>();
     ArrayList<Marker> sideMealMarker = new ArrayList<Marker>();
     ArrayList<Marker> eduMarker = new ArrayList<Marker>();
@@ -70,11 +74,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
         card_view=findViewById(R.id.card_view);
         btn1= (Button) findViewById(R.id.btn1);  //급식버튼
         btn2 = (Button) findViewById(R.id.btn2);  //부식버튼
         btn3 = (Button) findViewById(R.id.btn3);  //급식버튼
+        searchimage = (ImageView) findViewById(R.id.sv_location);
         call=(ImageButton)findViewById(R.id.call);
+
+        searchimage.getBackground().setAlpha(140);
+
+        searchimage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SearchMemberStoreActivity.class);
+                startActivity(i);
+            }
+
+
+        });
+
 
         btn1.setOnClickListener(new View.OnClickListener() {  //급식클릭시
             @Override
@@ -133,7 +152,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
                 else{
-                     for(Marker marker : mealMarker) {
+                    for(Marker marker : mealMarker) {
                         marker.setVisible(true);
                     }
                     for(Marker marker : eduMarker){
@@ -321,9 +340,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     startActivity(intent);
                 }
             });
-        //    System.out.println("/////////"+ marker.isVisible());
-        //    marker.setVisible(false);
-        //    System.out.println("/////////"+ marker.isVisible());
 
             return false;
         }
