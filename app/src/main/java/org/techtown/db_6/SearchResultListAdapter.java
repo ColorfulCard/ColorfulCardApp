@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -26,6 +27,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
 {
 
     private ArrayList<MapDataItem> mapDataList =null;
+    public MemberStore choiceStore=null;
     SearchResultListAdapter(ArrayList<MapDataItem> dataList)
     {
         mapDataList = dataList;
@@ -60,20 +62,17 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((SearchResultViewHolder) holder).store_address.setText(store.getStore_address());
             ((SearchResultViewHolder) holder).store_type.setText(store.getStore_type());
 
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent;
-                    intent = new Intent(v.getContext(),MapActivity.class);
-                    Log.d("tag",store.getStore_name());
-                    Log.d("tag",store.getStore_address());
-                    Log.d("tag",store.getStore_type());
-                    Log.d("tag",store.getLatitude().toString());
-                    Log.d("tag",store.getLongitude().toString());
 
-                    intent.putExtra("name","가나다");
-                    intent.putExtra("id","1");
+                    choiceStore = new MemberStore(store.getStore_num(),store.getStore_name(),store.getStore_type(),store.getStore_address(), BigDecimal.valueOf(store.getLatitude()),BigDecimal.valueOf(store.getLongitude()));
+                    Intent intent = new Intent(v.getContext(),Map2Activity.class);
+
+                    intent.putExtra("choiceStore",choiceStore);
                     v.getContext().startActivity(intent);
+
                 }
             });
         }
