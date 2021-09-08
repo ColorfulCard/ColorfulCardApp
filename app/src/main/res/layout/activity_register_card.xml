@@ -71,7 +71,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="4dp"
         android:text="카드 번호"
@@ -174,8 +175,8 @@
         android:id="@+id/radioGroup"
         android:layout_width="332dp"
         android:layout_height="37dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,8 +187,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="급식카드"
-            android:textSize="19dp"
             android:textColor="#0A0703"
+            android:textSize="19dp"
             android:theme="@style/CustomRadioButton" />
 
         <RadioButton
@@ -195,8 +196,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="부식카드"
-            android:textSize="19dp"
             android:textColor="#0A0703"
+            android:textSize="19dp"
             android:theme="@style/CustomRadioButton" />
 
         <RadioButton
@@ -204,8 +205,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="교육카드"
-            android:textSize="19dp"
             android:textColor="#0A0703"
+            android:textSize="19dp"
             android:theme="@style/CustomRadioButton" />
 
     </RadioGroup>
@@ -214,8 +215,8 @@
         android:id="@+id/vaildCheckBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginLeft="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="36dp"
         android:backgroundTint="#D6B2EC"
