@@ -49,20 +49,11 @@ public interface RetrofitService {
     @GET("storeName/{store_name}") //이름으로 검색해서 가져오는 것
     Call<List<MemberStore>> getStorebyName (@Path("store_name") String store_name);
 
-  //  @FormUrlEncoded
-   // @DELETE("card/{cardNum}")
 
- /*   @HTTP(method = "DELETE", path = "/card/{cardNum}", hasBody = true)
-    Call<UserCard> deleteUserCard(
-            @Path("cardNum") String cardNum,
-            @Field("id") String id,
-            @Field("cardName") String cardName,
-            @Field("cardType") String cardType
-    );*/
-
-
-    @HTTP(method = "DELETE", path = "card/{cardNum}", hasBody = true)
-    Call<UserCard> deleteUserCard(@Path("cardNum") String postfix,   @Field("id") String id,
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "/card/delete", hasBody = true)
+    Call<Integer> deleteUserCard(@Field("cardNum") String cardNum,
+                                  @Field("id") String id,
                                   @Field("cardName") String cardName,
                                   @Field("cardType") String cardType);
 }

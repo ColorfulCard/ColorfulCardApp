@@ -12,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 public class AgreeActivity extends AppCompatActivity {
+
+    private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
     private Button startbutton1;
 
     @Override
@@ -99,6 +101,10 @@ public class AgreeActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onBackPressed(){
+        backKeyHandler.onBackPressed();
     }
 
 

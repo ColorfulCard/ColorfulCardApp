@@ -86,32 +86,32 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                             RetrofitService service1 = retrofit.create(RetrofitService.class);
 
+                            Call<Integer> call = service1.deleteUserCard(card.getCardNum(), card.getUserID(), card.getCardName(), card.getCardType());
 
-                            Call<UserCard> call = service1.deleteUserCard(card.getCardNum(), card.getUserID(), card.getCardName(), card.getCardType());
-
-                            call.enqueue(new Callback<UserCard>() {
+                            call.enqueue(new Callback<Integer>() {
 
                                 @Override
-                                public void onResponse(Call<UserCard> call, Response<UserCard> response) {
-                                    if (response.equals(null) )
-                                        Log.d("tag","결과옴");
+                                public void onResponse(Call<Integer> call, Response<Integer> response) {
 
                                     if (response.isSuccessful()) {
-                                        //메인스레드 작업가능
+
                                         Log.d("tag", "회원삭제성공\n");
                                         notifyItemRemoved(position);
                                         cardDataList.remove(position);
                                         notifyItemRangeChanged(position, cardDataList.size());
+                                        //등록된 카드만 삭제하니 데이터 불일치로 삭제실패 (반환0) 인 문제는 발생하지 않음
                                     }
                                     else
                                     {
-                                        Log.d("tag", "회원삭제성공\n");
+                                        Log.d("tag", "회원삭제실패\n");
                                     }
                                 }
 
                                 @Override
-                                public void onFailure(Call<UserCard> call, Throwable t) {
-                                    Log.d("tag", "서버 delete동작 후 반환이 void라서 발생한 오류" + t.getMessage());
+                                public void onFailure(Call<Integer> call, Throwable t) {
+                                   // Log.d("tag", "서버 delete동작 후 반환이 int 라서 발생한 오류" + t.getMessage());
+                                    Log.d("tag", " 네트워크 문제로 회원등록 실패" + t.getMessage());
+
                                 }
                             });
 

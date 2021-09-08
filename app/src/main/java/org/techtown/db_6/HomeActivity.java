@@ -36,6 +36,8 @@ public class HomeActivity extends AppCompatActivity {
     MainHandler handler; //별것도아닌게 그지같은 스레드자식들
     List<ArrayList<MemberStore>> memberStores = new ArrayList<ArrayList<MemberStore>>(3);
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -129,6 +131,8 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+
     class BalanceCheckThread extends Thread{
 
         @Override
@@ -164,7 +168,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
     }
+
 
 
 
