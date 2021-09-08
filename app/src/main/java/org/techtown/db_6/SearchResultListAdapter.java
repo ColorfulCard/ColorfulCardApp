@@ -105,17 +105,6 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
             store_type = itemView.findViewById(R.id.store_type);
             map_marker =itemView.findViewById(R.id.map_marker);
 
-          /*  itemView.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v){
-
-
-
-
-
-                }
-            });*/
         }
 
 
