@@ -41,8 +41,10 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap googleMap;
     View card_view;
     ImageButton call;
-
+    TextView choiceStoreName;
     MemberStore choiceStore;
+    ImageView sv_location2;
+
 
 
 
@@ -60,12 +62,22 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
         //지도객체와 onMapReadyCallback객체를 연결함
 
 
+        choiceStoreName=findViewById(R.id.choiceStoreName);
+        choiceStoreName.setText(choiceStore.getStore_name());
+        sv_location2=findViewById(R.id.sv_location2);
+        sv_location2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        sv_location2.getBackground().setAlpha(160);
+
         card_view=findViewById(R.id.card_view);
         card_view.setVisibility(View.VISIBLE);
         TextView name = (TextView)findViewById(R.id.st_name);
         TextView num =(TextView)findViewById(R.id.st_num);
         TextView address=(TextView)findViewById(R.id.st_address);
-
 
         name.setText(choiceStore.getStore_name());
         num.setText(choiceStore.getStore_num());
@@ -75,7 +87,6 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
         st_num=st_num.replace("-","");
         String tell;
         tell="tel:"+st_num;
-
 
         call=(ImageButton) findViewById(R.id.call);
 
