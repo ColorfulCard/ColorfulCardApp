@@ -8,65 +8,14 @@
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
+        android:id="@+id/map2"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" />
-
-    <ImageView
-
-        android:id="@+id/sv_location"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="45dp"
-        android:background="@drawable/searchview"
          />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn1"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
-            android:layout_marginLeft="10dp"
-            android:backgroundTint="#2980B9"
-            android:text="급식"
-            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn2"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
-            android:backgroundTint="#16A085"
-            android:text="부식"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btn3"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
-            android:layout_marginLeft="20dp"
-            android:backgroundTint="#FFDB58"
-            android:text="교육"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-    </RadioGroup>
 
     <LinearLayout
         android:id="@+id/card_view"
