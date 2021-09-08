@@ -15,10 +15,9 @@ public class BackKeyHandler {
 
     public void onBackPressed(){
         if(System.currentTimeMillis()>backKeyPressedTime+2000){
-<<<<<<< HEAD
-=======
+
             backKeyPressedTime = System.currentTimeMillis();
->>>>>>> origin/master
+
             showGuide();
             return;
         }
@@ -37,8 +36,8 @@ public class BackKeyHandler {
         toast=Toast.makeText(activity,msg,Toast.LENGTH_SHORT);
         toast.show();
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> origin/master
+
+
+
