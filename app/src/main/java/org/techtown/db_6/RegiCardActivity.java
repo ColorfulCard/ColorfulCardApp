@@ -165,12 +165,12 @@ public class RegiCardActivity extends AppCompatActivity {
 
     }
 
-    class BalanceCheckThread extends Thread{
+    class BalanceCheckThread extends Thread{ //조회가 되면 인증된 카드로 취급함
 
         @Override
         public void run()
         {
-            Message message=handler.obtainMessage(); //메인스레드 핸들러의 메시지 객체 가져오기
+            Message message=handler.obtainMessage();
 
             try {
                 BalanceCheck checker = new BalanceCheck(cardNo1.getText().toString(),cardNo2.getText().toString(),cardNo3.getText().toString(),cardNo4.getText().toString());
@@ -192,10 +192,10 @@ public class RegiCardActivity extends AppCompatActivity {
     class MainHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
-            switch (message.what) {
+            switch (message.what)
+            {
                 case MSG_SUCCESS_VAILCHECK:
                     vaildCheckResult.setText("컬러풀카드 인증되었습니다");
-                    //vaildCheckResult.setTextColor(000000);
                     cardNo1.setEnabled(false); //카드번호값 고정
                     cardNo2.setEnabled(false);
                     cardNo3.setEnabled(false);
@@ -205,6 +205,7 @@ public class RegiCardActivity extends AppCompatActivity {
                 case MSG_FAIL:
                     vaildCheckResult.setText("컬러풀카드 인증에 실패하였습니다");
                     vaildCheckResult.setTextColor(0xAAef484a);
+                    break;
             }
         }
     }

@@ -24,8 +24,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
-    private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
+    private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
     final int MSG_SUCCESS_BALCHECK = 1;
     final int MSG_SUCCESS_GETSTORE = 2;
@@ -35,6 +35,8 @@ public class HomeActivity extends AppCompatActivity {
     User user; //사용자 클래스
     MainHandler handler; //별것도아닌게 그지같은 스레드자식들
     List<ArrayList<MemberStore>> memberStores = new ArrayList<ArrayList<MemberStore>>(3);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +131,8 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+
     class BalanceCheckThread extends Thread{
 
         @Override
@@ -164,7 +168,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
     }
+
 
 
 

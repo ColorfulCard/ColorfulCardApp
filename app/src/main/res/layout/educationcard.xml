@@ -6,15 +6,17 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/minus3"
-        android:layout_width="48dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/minus"
+        android:layout_width="35dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@drawable/minus" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/minusimage" />
 
     <TextView
         android:id="@+id/tv"
@@ -30,7 +32,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="220dp"
+        android:layout_width="190dp"
         android:layout_height="111dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"

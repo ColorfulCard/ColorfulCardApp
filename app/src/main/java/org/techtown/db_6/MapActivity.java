@@ -17,7 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.SearchView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +33,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -43,10 +42,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ArrayList<MemberStore> sideMealMemberStore;
     ArrayList<MemberStore> eduMemberStore;
 
+
+
     private GoogleMap googleMap;
     View card_view;
     Button btn1,btn2,btn3;
-    ImageButton call,searchimage;
+    ImageButton call;
+    ImageView searchimage;
     ArrayList<Marker> mealMarker = new ArrayList<Marker>();
     ArrayList<Marker> sideMealMarker = new ArrayList<Marker>();
     ArrayList<Marker> eduMarker = new ArrayList<Marker>();
@@ -63,6 +65,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         sideMealMemberStore=intent.getParcelableArrayListExtra("sideMealMemberStores");
         eduMemberStore=intent.getParcelableArrayListExtra("eduMemberStores");
 
+
+        if(savedInstanceState!=null) {
+
+            Log.d("tag", "들어옴 안들어옴?");
+            String name = getIntent().getStringExtra("id");
+            Log.d("tag", name);
+            return;
+        }
+
         for(MemberStore store : sideMealMemberStore)  //확인용
         {
             System.out.println("부식: " + store.getStore_type());
@@ -76,14 +87,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btn1= (Button) findViewById(R.id.btn1);  //급식버튼
         btn2 = (Button) findViewById(R.id.btn2);  //부식버튼
         btn3 = (Button) findViewById(R.id.btn3);  //급식버튼
-        searchimage = (ImageButton) findViewById(R.id.sv_location);
+        searchimage = (ImageView) findViewById(R.id.sv_location);
         call=(ImageButton)findViewById(R.id.call);
 
+        searchimage.getBackground().setAlpha(140);
 
         searchimage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SearchMemberStoreActivity.class);
+                Intent i = new Intent(getApplicationContext(), SearchStoreActivity.class);
                 startActivity(i);
             }
 
@@ -108,8 +120,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(false);
                     }
                     btn1.setBackgroundColor(Color.parseColor("#133A55"));   //눌렀을 떄 색깔
-                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
-                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
                 else //false면 전체 다 보여줌
                 {
@@ -120,8 +130,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(true);
                     }
                     btn1.setBackgroundColor(Color.parseColor("#2980B9"));  //풀었을 때 색깔
-                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
-                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
             }
         });
@@ -142,22 +150,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for(Marker marker : eduMarker){
                         marker.setVisible(false);
                     }
+
                     //눌렀을 때 색깔 위에랑 같은 코드
-                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
-                    btn2.setBackgroundColor(Color.parseColor("#0B4D40"));
-                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
                 else{
-                     for(Marker marker : mealMarker) {
+                    for(Marker marker : mealMarker) {
                         marker.setVisible(true);
                     }
                     for(Marker marker : eduMarker){
                         marker.setVisible(true);
                     }
                     //풀었을 때 색깔 위에랑 같은 코드
-                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
-                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
-                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
             }
 
@@ -178,10 +181,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : sideMealMarker) {
                         marker.setVisible(false);
                     }
-                    //btn3눌렀을때
-                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
-                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
-                    btn3.setBackgroundColor(Color.parseColor("#D9A800"));
                 }else{
                     for (Marker marker : mealMarker) {
                         marker.setVisible(true);
@@ -189,11 +188,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : sideMealMarker) {
                         marker.setVisible(true);
                     }
-                    //btn3해제
-                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));
-                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
-                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
-
                 }
             }
         });
@@ -336,9 +330,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     startActivity(intent);
                 }
             });
-        //    System.out.println("/////////"+ marker.isVisible());
-        //    marker.setVisible(false);
-        //    System.out.println("/////////"+ marker.isVisible());
 
             return false;
         }
