@@ -12,13 +12,14 @@ public class MemberStore implements Parcelable {
 
     private static final long serialVersionUID = 2L;
 
-    public MemberStore(String store_num, String store_name, String store_type, BigDecimal latitude, BigDecimal longitude) {
+    public MemberStore(String store_num, String store_name, String store_type, String store_address, BigDecimal latitude, BigDecimal longitude) {
 
         this.store_num = store_num;
         this.store_name = store_name;
         this.store_type = store_type;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.store_address=store_address;
     }
 
     @SerializedName("store_num")
