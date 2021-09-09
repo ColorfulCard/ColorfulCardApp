@@ -43,7 +43,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ArrayList<MemberStore> eduMemberStore;
 
 
-
     private GoogleMap googleMap;
     View card_view;
     Button btn1,btn2,btn3;
@@ -123,13 +122,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
                 else //false면 전체 다 보여줌
                 {
-                    for (Marker marker : sideMealMarker) {
-                        marker.setVisible(true);
+                    if(btn2Flag==false && btn3Flag==false) {
+
+                        for (Marker marker : sideMealMarker) {
+                            marker.setVisible(true);
+                        }
+                        for (Marker marker : eduMarker) {
+                            marker.setVisible(true);
+                        }
+                        for (Marker marker : mealMarker) {
+                            marker.setVisible(true);
+                        }
                     }
-                    for (Marker marker : eduMarker) {
-                        marker.setVisible(true);
-                    }
-                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));  //풀었을 때 색깔
+                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));  //풀었을 때 버튼색깔
                 }
             }
         });
@@ -151,16 +156,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(false);
                     }
 
-                    //눌렀을 때 색깔 위에랑 같은 코드
+                    btn2.setBackgroundColor(Color.parseColor("#0B4D40"));
                 }
                 else{
-                    for(Marker marker : mealMarker) {
-                        marker.setVisible(true);
+                    if(btn1Flag==false && btn3Flag==false) {
+
+                        for(Marker marker : sideMealMarker) {
+                            marker.setVisible(true);
+                        }
+                        for (Marker marker : mealMarker) {
+                            marker.setVisible(true);
+                        }
+                        for (Marker marker : eduMarker) {
+                            marker.setVisible(true);
+                        }
                     }
-                    for(Marker marker : eduMarker){
-                        marker.setVisible(true);
-                    }
-                    //풀었을 때 색깔 위에랑 같은 코드
+                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
+
                 }
             }
 
@@ -181,14 +193,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : sideMealMarker) {
                         marker.setVisible(false);
                     }
+
+                    btn3.setBackgroundColor(Color.parseColor("#D9A800"));
+
                 }else{
-                    for (Marker marker : mealMarker) {
-                        marker.setVisible(true);
+
+                    if(btn1Flag==false&& btn2Flag==false) {
+                        for (Marker marker : mealMarker) {
+                            marker.setVisible(true);
+                        }
+                        for (Marker marker : sideMealMarker) {
+                            marker.setVisible(true);
+                        }
                     }
-                    for (Marker marker : sideMealMarker) {
-                        marker.setVisible(true);
-                    }
+
+                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
+
             }
         });
 
@@ -209,7 +230,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // 35.8691036023011, 128.59554606027856 중앙로 대백앞
         LatLng latLng = new LatLng(35.8691036023011, 128.59554606027856);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         //지도는 카메라가 아래를 내려다보는 듯한 내용이 모델링됨
 
         for (MemberStore store : mealMemberStore) {
@@ -228,7 +249,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
                     .title(store.getStore_name())
-                    .icon(BitmapDescriptorFactory.defaultMarker(145));
+                    .icon(BitmapDescriptorFactory.defaultMarker(90));
 
             Marker marker =googleMap.addMarker(markerOptions);
             marker.setTag(store);
