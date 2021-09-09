@@ -54,10 +54,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof SearchResultViewHolder)
         {
-           // ((SearchResultViewHolder) holder).store_name.setText(mapDataList.get(position).getStore_name());
-           // ((SearchResultViewHolder) holder).store_address.setText(mapDataList.get(position).getStore_address());
-            //((SearchResultViewHolder) holder).store_type.setText(mapDataList.get(position).getStore_type());
-            MemberStore store= mapDataList.get(position).getStore();
+             MemberStore store= mapDataList.get(position).getStore();
             ((SearchResultViewHolder) holder).store_name.setText(store.getStore_name());
             ((SearchResultViewHolder) holder).store_address.setText(store.getStore_address());
             ((SearchResultViewHolder) holder).store_type.setText(store.getStore_type());
@@ -106,8 +103,6 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
             map_marker =itemView.findViewById(R.id.map_marker);
 
         }
-
-
 
     }
 

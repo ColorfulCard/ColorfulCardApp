@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -22,7 +23,7 @@ public class JoinActivity extends AppCompatActivity {
 
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name;
     private Button button3 ,button7 ;
-    private AlertDialog dialog;
+    private TextView overlap_result;
     private boolean validate = false , checkPW = false;
 
     @Override
@@ -38,6 +39,7 @@ public class JoinActivity extends AppCompatActivity {
         edit_name = findViewById(R.id.edit_name);
         button3 = (Button) findViewById(R.id.button3);
         button7 = (Button) findViewById(R.id.button7);
+        overlap_result=findViewById(R.id.overlap_result);
 
         button7.setOnClickListener(new View.OnClickListener() {  //ID중복검사 버튼
 
@@ -50,9 +52,7 @@ public class JoinActivity extends AppCompatActivity {
                 }
 
                 if (id.equals("")) { //아이디 입력안했을 때
-                    AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
-                    dialog = builder.setMessage("아이디를 입력하세요.").setPositiveButton("확인", null).create();
-                    dialog.show();
+                    Toast.makeText(getApplicationContext(), "아이디를 입력하세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -71,12 +71,8 @@ public class JoinActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
 
-                            UserProfile result = response.body();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
-                            dialog = builder.setMessage("이미 존재하는 아이디입니다").setPositiveButton("확인", null).create();
-                            dialog.show();
-                            System.out.println("중복ID:" + result.getId());
-
+                            overlap_result.setTextColor(0xAAef484a);
+                            overlap_result.setText("이미 가입된 아이디입니다");
 
                         } else {
                             Log.d("tag", "response 실패");
@@ -88,9 +84,8 @@ public class JoinActivity extends AppCompatActivity {
                         Log.d("tag", "테이블에 존재하지 않는 ID라 등록가능" + t.getMessage());
                         if(t.getMessage().equals("End of input at line 1 column 1 path $"))
                         {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
-                            dialog = builder.setMessage("사용할 수 있는 아이디입니다.").setPositiveButton("확인", null).create();
-                            dialog.show();
+                            overlap_result.setTextColor(0xFF000000);
+                            overlap_result.setText("사용가능한 아이디입니다");
                             edit_id.setEnabled(false); //아이디값 고정
                             validate = true; //검증 완료
                         }
@@ -111,14 +106,14 @@ public class JoinActivity extends AppCompatActivity {
                 String name = edit_name.getText().toString();
 
                 if(id.equals("") || pwd.equals("") || pwd2.equals("") || name.equals("")) {
-                    Toast.makeText(getApplicationContext(), "모두 기입하였는지 한번 더 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "모두 입력하였는지 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else if(validate == false){
-                    Toast.makeText(getApplicationContext(), "ID중복확인을 진행해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "아이디 중복확인을 진행해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else if (pwd.equals(pwd2) == false) {
 
-                    Toast.makeText(getApplicationContext(), "비밀번호가 다릅니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -139,21 +134,21 @@ public class JoinActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 //메인스레드 작업가능
                                 Log.d("tag", "회원등록성공\n");
-                                Toast.makeText(getApplicationContext(), "회원등록에 성공하였습니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(JoinActivity.this,LoginActivity.class);
                                 startActivity(intent);
 
                             }
                             else
                             {
-                                Toast.makeText(getApplicationContext(), "회원등록에 실패하였습니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<UserProfile> call, Throwable t) {
                             Log.d("tag", "네트워크 문제로 회원등록 실패" + t.getMessage());
-                            Toast.makeText(getApplicationContext(), "회원등록에 실패하였습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "회원가입 실패, 네트워크를 확인하세요", Toast.LENGTH_SHORT).show();
                         }
                     });
 
