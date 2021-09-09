@@ -42,7 +42,9 @@ public class RegiCardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         intent = getIntent();
+
         user = (User)intent.getSerializableExtra("user");
 
         super.onCreate(savedInstanceState);

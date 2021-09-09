@@ -112,8 +112,12 @@ public class HomeActivity extends AppCompatActivity {
                  //   finish();
                 }
                 else {
-                    BalanceCheckThread thread = new BalanceCheckThread();  //카드정보 크롤링해오는 스레드 실행
-                    thread.start();
+                    //BalanceCheckThread thread = new BalanceCheckThread();  //카드정보 크롤링해오는 스레드 실행
+                    //thread.start();
+
+                    Intent intent = new Intent(HomeActivity.this, LoadingActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
 
                 }
             }
@@ -132,8 +136,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
-    class BalanceCheckThread extends Thread{
+ /*   class BalanceCheckThread extends Thread{
 
         @Override
         public void run()
@@ -169,7 +172,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
 
 
@@ -237,11 +240,11 @@ public class HomeActivity extends AppCompatActivity {
         public void handleMessage(Message message){
             switch(message.what)
             {
-                case MSG_SUCCESS_BALCHECK:
+               /* case MSG_SUCCESS_BALCHECK:
                     Intent intent = new Intent(HomeActivity.this, UserCardListActivity.class);
                     intent.putExtra("user",user);
                     startActivity(intent);
-                    break;
+                    break;*/
                 case MSG_SUCCESS_GETSTORE:
                     Intent intent2 = new Intent(HomeActivity.this,MapActivity.class);
 
