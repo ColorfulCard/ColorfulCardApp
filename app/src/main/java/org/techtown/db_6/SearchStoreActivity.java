@@ -133,9 +133,9 @@ public class SearchStoreActivity extends AppCompatActivity {
             switch (message.what) {
                 case MSG_SUCCESS_SEARCH:
                     //메인스레드 작업, 리사이클러뷰 데이터 전달,부르기
-                    if(!no_result.getText().equals("")){
+                    if(no_result.getText().length()>0){
                         //이전 검색결과 없음 기록이 남아있다면
-                        no_result.setText("");
+                        no_result.setText(null);
                     }
                     initializeData();
                     recyclerView.setVisibility(View.VISIBLE);
@@ -144,9 +144,7 @@ public class SearchStoreActivity extends AppCompatActivity {
 
                 case MSG_SEARCH_NO_WORD:
                     //검색결과 없음 뷰에 검색결과없음 정보 띄우기
-                    if(!recyclerView.getAdapter().getClass().equals(null)){
-                        recyclerView.setVisibility(View.GONE);
-                    }
+                    recyclerView.setVisibility(View.GONE);
                     no_result.setText( "' "+(String)message.obj+" '에 관한 검색결과 없음");
                     break;
 
