@@ -197,6 +197,7 @@ public class RegiCardActivity extends AppCompatActivity {
             switch (message.what)
             {
                 case MSG_SUCCESS_VAILCHECK:
+                    vaildCheckResult.setTextColor(0xFF000000);
                     vaildCheckResult.setText("컬러풀카드 인증되었습니다");
                     cardNo1.setEnabled(false); //카드번호값 고정
                     cardNo2.setEnabled(false);
