@@ -48,8 +48,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 String id = edit_id.getText().toString();
                 String pwd = edit_pwd.getText().toString();
-                if(id.equals("") || pwd.equals("")) {
-                    Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 모두 기입하세요", Toast.LENGTH_SHORT).show();
+                if(id.equals("")) {
+                    Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else if(pwd.equals("")){
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -68,9 +71,9 @@ public class LoginActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 UserProfile result = response.body();
                                 if (result.getPwd().equals(pwd) == false)
-                                    Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "아이디 또는 비밀번호가 잘못 입력되었습니다", Toast.LENGTH_SHORT).show();
                                 else {
-                                    //Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다", Toast.LENGTH_SHORT).show();
+
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
                                     User user = new User(result.getId(),result.getName()); //서버에서 물어다온 user id 로 생성함
                                     intent.putExtra("user",user);
@@ -89,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onFailure(Call<UserProfile> call, Throwable t) {
                             Log.d("tag", "실패2" + t.getMessage());
                             if(t.getMessage().equals("End of input at line 1 column 1 path $")) {
-                                Toast.makeText(getApplicationContext(), "가입된 ID가 아닙니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "입력한 정보에 해당하는 계정을 찾을 수 없습니다", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

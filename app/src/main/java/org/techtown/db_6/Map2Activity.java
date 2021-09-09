@@ -38,15 +38,13 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Map2Activity extends AppCompatActivity implements OnMapReadyCallback {
+
     private GoogleMap googleMap;
     View card_view;
     ImageButton call;
     TextView choiceStoreName;
     MemberStore choiceStore;
     ImageView sv_location2;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,29 +54,26 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map2);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map2);
-        //지도 객체 추출
-        mapFragment.getMapAsync(this);
-        //지도객체와 onMapReadyCallback객체를 연결함
-
 
         choiceStoreName=findViewById(R.id.choiceStoreName);
         choiceStoreName.setText(choiceStore.getStore_name());
+
         sv_location2=findViewById(R.id.sv_location2);
+        sv_location2.getBackground().setAlpha(160);
         sv_location2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        sv_location2.getBackground().setAlpha(160);
+
 
         card_view=findViewById(R.id.card_view);
         card_view.setVisibility(View.VISIBLE);
+
         TextView name = (TextView)findViewById(R.id.st_name);
         TextView num =(TextView)findViewById(R.id.st_num);
         TextView address=(TextView)findViewById(R.id.st_address);
-
         name.setText(choiceStore.getStore_name());
         num.setText(choiceStore.getStore_num());
         address.setText(choiceStore.getStore_address());
@@ -89,7 +84,6 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
         tell="tel:"+st_num;
 
         call=(ImageButton) findViewById(R.id.call);
-
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +91,10 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         });
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map2);
+        mapFragment.getMapAsync(this);
+
 
 
     }
@@ -108,10 +106,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
 
         int hue;
 
-        //map이 준비되면 호출되는 함수
         this.googleMap = googleMap;
-
-
 
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(17));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(choiceStore.getLatitude(),choiceStore.getLongitude())));
@@ -141,9 +136,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
 
         Marker marker =googleMap.addMarker(markerOptions);
 
-
         marker.showInfoWindow();
-
 
     }
 

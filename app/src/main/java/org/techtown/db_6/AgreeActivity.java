@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 public class AgreeActivity extends AppCompatActivity {
 
-    private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
     private Button startbutton1;
 
     @Override
@@ -90,22 +89,19 @@ public class AgreeActivity extends AppCompatActivity {
                 if(checkBox.isChecked()&&checkBox2.isChecked()&&checkBox3.isChecked()&&checkBox4.isChecked()){
                     Intent i = new Intent(getApplicationContext(), JoinActivity.class);
                     startActivity(i);
+                    finish();
                 }
                 else if(checkBox2.isChecked()&&checkBox3.isChecked()){
                     Intent i = new Intent(getApplicationContext(), JoinActivity.class);
                     startActivity(i);
+                    finish();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"필수약관동의에 체크해주세요",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"필수 이용약관을 모두 동의해주세요",Toast.LENGTH_LONG).show();
                 }
 
             }
         });
     }
-    @Override
-    public void onBackPressed(){
-        backKeyHandler.onBackPressed();
-    }
-
 
 }
