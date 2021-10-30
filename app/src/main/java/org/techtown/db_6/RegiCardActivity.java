@@ -138,7 +138,7 @@ public class RegiCardActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<UserCard> call, Response<UserCard> response) {
                             if (response.isSuccessful()) {
-                                Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
+                                Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
                                 user.clearCardBalances();
                                 intent.putExtra("user",user);
                                 startActivity(intent);

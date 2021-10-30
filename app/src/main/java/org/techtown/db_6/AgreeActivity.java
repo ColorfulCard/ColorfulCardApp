@@ -14,16 +14,20 @@ import android.widget.Toast;
 public class AgreeActivity extends AppCompatActivity {
 
     private Button startbutton1;
+    private CheckBox checkBox;
+    private CheckBox checkBox2;
+    private CheckBox checkBox3;
+    private CheckBox checkBox4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agree);
 
-        CheckBox checkBox=findViewById(R.id.checkBox2);
-        CheckBox checkBox2=findViewById(R.id.checkBox3);
-        CheckBox checkBox3=findViewById(R.id.checkBox4);
-        CheckBox checkBox4=findViewById(R.id.checkBox5);
+        checkBox=findViewById(R.id.checkBox2);
+        checkBox2=findViewById(R.id.checkBox3);
+        checkBox3=findViewById(R.id.checkBox4);
+        checkBox4=findViewById(R.id.checkBox5);
         startbutton1 = (Button) findViewById(R.id.startbutton1);
 
 
