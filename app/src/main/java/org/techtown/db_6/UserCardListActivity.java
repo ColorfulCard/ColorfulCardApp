@@ -20,7 +20,6 @@ public class UserCardListActivity extends AppCompatActivity {
     User user; //사용자 클래스
 
     private ArrayList<DataItem.CardDataItem> dataList;
-    private Button button;
 
 
     @Override
@@ -78,15 +77,15 @@ public class UserCardListActivity extends AppCompatActivity {
             Log.d("tag",i+"번째 카드");
             if(card.getCardType().equals("0"))  //급식카드
             {
-                dataList.add(new DataItem.CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.mealCard, user.getCardBalances().get(i) , card.getCardNum() , card.getCardType() ,user.getId()));
+                dataList.add(new DataItem.CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3],  Code.ViewType.mealCard, user.getCardBalances().get(i) , card.getCardNum() , card.getCardType() ,user.getId()));
 
             }else if(card.getCardType().equals("1")) //부식카드
             {
-                dataList.add(new DataItem.CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.sideMealCard, user.getCardBalances().get(i), card.getCardNum() ,card.getCardType() ,user.getId()));
+                dataList.add(new DataItem.CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3],  Code.ViewType.sideMealCard, user.getCardBalances().get(i), card.getCardNum() ,card.getCardType() ,user.getId()));
             }
             else //교육카드
             {
-                dataList.add(new DataItem.CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3], button, Code.ViewType.eduCard, user.getCardBalances().get(i) , card.getCardNum() ,card.getCardType(), user.getId()));
+                dataList.add(new DataItem.CardDataItem(card.getCardName(), user.getCardBalances().get(i)[3],  Code.ViewType.eduCard, user.getCardBalances().get(i) , card.getCardNum() ,card.getCardType(), user.getId()));
             }
             i++;
         }
