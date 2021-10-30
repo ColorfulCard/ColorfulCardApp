@@ -22,8 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class JoinActivity extends AppCompatActivity {
 
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name;
-    private Button button3 ,button7 ;
-    private TextView overlap_result;
+    private Button button_Join ,button_CheckID ;
+    private TextView checkIDResult;
     private boolean validate = false , checkPW = false;
 
     @Override
@@ -37,11 +37,11 @@ public class JoinActivity extends AppCompatActivity {
         edit_pwd = findViewById(R.id.edit_pwd);
         edit_pwd2 = findViewById(R.id.edit_pwd2);
         edit_name = findViewById(R.id.edit_name);
-        button3 = (Button) findViewById(R.id.button3);
-        button7 = (Button) findViewById(R.id.button7);
-        overlap_result=findViewById(R.id.overlap_result);
+        button_Join = (Button) findViewById(R.id.button3);
+        button_CheckID = (Button) findViewById(R.id.button7);
+        checkIDResult=findViewById(R.id.overlap_result);
 
-        button7.setOnClickListener(new View.OnClickListener() {  //ID중복검사 버튼
+        button_CheckID.setOnClickListener(new View.OnClickListener() {  //ID중복검사 버튼
 
             @Override
             public void onClick(View view) {
@@ -71,8 +71,8 @@ public class JoinActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
 
-                            overlap_result.setTextColor(0xAAef484a);
-                            overlap_result.setText("이미 가입된 아이디입니다");
+                            checkIDResult.setTextColor(0xAAef484a);
+                            checkIDResult.setText("이미 가입된 아이디입니다");
 
                         } else {
                             Log.d("tag", "response 실패");
@@ -84,8 +84,8 @@ public class JoinActivity extends AppCompatActivity {
                         Log.d("tag", "테이블에 존재하지 않는 ID라 등록가능" + t.getMessage());
                         if(t.getMessage().equals("End of input at line 1 column 1 path $"))
                         {
-                            overlap_result.setTextColor(0xFF000000);
-                            overlap_result.setText("사용가능한 아이디입니다");
+                            checkIDResult.setTextColor(0xFF000000);
+                            checkIDResult.setText("사용가능한 아이디입니다");
                             edit_id.setEnabled(false); //아이디값 고정
                             validate = true; //검증 완료
                         }
@@ -95,8 +95,8 @@ public class JoinActivity extends AppCompatActivity {
                 });
             }
         });
-        
-        button3.setOnClickListener(new View.OnClickListener() {  //회원가입버튼
+
+        button_Join.setOnClickListener(new View.OnClickListener() {  //회원가입버튼
             @Override
             public void onClick(View v) {
 

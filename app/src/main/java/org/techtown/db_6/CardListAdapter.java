@@ -24,9 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Intent intent;
-    private ArrayList<CardDataItem> cardDataList = null;
+    private ArrayList<DataItem.CardDataItem> cardDataList = null;
 
-    CardListAdapter(ArrayList<CardDataItem> dataList)
+    CardListAdapter(ArrayList<DataItem.CardDataItem> dataList)
     {
         cardDataList = dataList;
     }
@@ -65,7 +65,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     {
         if(viewHolder instanceof CardViewHolder){
 
-            CardDataItem card =cardDataList.get(position);
+            DataItem.CardDataItem card =cardDataList.get(position);
 
             ((CardViewHolder) viewHolder).name.setText(card.getCardName());
             ((CardViewHolder) viewHolder).content.setText(card.getBalance());

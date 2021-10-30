@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 
 public class MemberStore implements Parcelable {
 
-    private static final long serialVersionUID = 2L;
-
     public MemberStore(String store_num, String store_name, String store_type, String store_address, BigDecimal latitude, BigDecimal longitude) {
 
         this.store_num = store_num;

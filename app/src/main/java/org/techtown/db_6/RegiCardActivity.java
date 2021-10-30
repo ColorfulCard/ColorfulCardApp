@@ -28,8 +28,7 @@ public class RegiCardActivity extends AppCompatActivity {
     Intent intent;
     User user;
 
-    final int MSG_SUCCESS_VAILCHECK = 1;
-    final int MSG_FAIL=0;
+
     MainHandler handler;
 
     private EditText et_cardName, cardNo1, cardNo2, cardNo3, cardNo4;
@@ -178,10 +177,10 @@ public class RegiCardActivity extends AppCompatActivity {
                 BalanceCheck checker = new BalanceCheck(cardNo1.getText().toString(),cardNo2.getText().toString(),cardNo3.getText().toString(),cardNo4.getText().toString());
 
                 if (checker.tryBalanceCheck(2).equals("success")) {
-                    message.what = MSG_SUCCESS_VAILCHECK;
+                    message.what = Code.RegisterCard.MSG_SUCCESS_VAILCHECK;
                     handler.sendMessage(message); //메인스레드 핸들러로 메시지 보내기
                 } else { //실패할 경우
-                    message.what = MSG_FAIL;
+                    message.what = Code.RegisterCard.MSG_FAIL;
                     handler.sendMessage(message);
                 }
             }
@@ -196,7 +195,7 @@ public class RegiCardActivity extends AppCompatActivity {
         public void handleMessage(Message message) {
             switch (message.what)
             {
-                case MSG_SUCCESS_VAILCHECK:
+                case Code.RegisterCard.MSG_SUCCESS_VAILCHECK:
                     vaildCheckResult.setTextColor(0xFF000000);
                     vaildCheckResult.setText("컬러풀카드 인증되었습니다");
                     cardNo1.setEnabled(false); //카드번호값 고정
@@ -205,7 +204,7 @@ public class RegiCardActivity extends AppCompatActivity {
                     cardNo4.setEnabled(false);
                     validate = true; //검증 완료
                     break;
-                case MSG_FAIL:
+                case Code.RegisterCard.MSG_FAIL:
                     vaildCheckResult.setText("컬러풀카드 인증에 실패하였습니다");
                     vaildCheckResult.setTextColor(0xAAef484a);
                     break;

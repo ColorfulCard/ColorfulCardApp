@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edit_id,edit_pwd;
-    private Button button3,joinbutton;
+    private Button button_login,joinbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
         edit_id = findViewById(R.id.edit_id);
         edit_pwd = findViewById(R.id.edit_pwd);
-        button3 = (Button) findViewById(R.id.button3);
+        button_login = (Button) findViewById(R.id.button3);
         joinbutton = (Button) findViewById(R.id.joinbutton1);
 
         joinbutton.setOnClickListener(new View.OnClickListener(){
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        button3.setOnClickListener(new View.OnClickListener() {
+        button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

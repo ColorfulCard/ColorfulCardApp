@@ -27,13 +27,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
-    final int MSG_SUCCESS_BALCHECK = 1;
-    final int MSG_SUCCESS_GETSTORE = 2;
-    final int MSG_FAIL=0;
-
     Intent intent;
     User user; //사용자 클래스
-    MainHandler handler; //별것도아닌게 그지같은 스레드자식들
+    MainHandler handler;
     List<ArrayList<MemberStore>> memberStores = new ArrayList<ArrayList<MemberStore>>(3);
 
 
@@ -105,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getApplicationContext(), "로딩중", Toast.LENGTH_SHORT).show();
                 if(user.getCards().isEmpty()) {
                     Intent intent = new Intent(HomeActivity.this, UserCardListActivity.class);
                     intent.putExtra("user", user);
@@ -225,7 +222,7 @@ public class HomeActivity extends AppCompatActivity {
             while(true){  //정보 다 받아올때까지 기다리기 뇌피셜 야매코드인데 걱정된다.
                 if(memberStores.size()>2)
                 {
-                    message.what = MSG_SUCCESS_GETSTORE; //메시지 아이디 설정
+                    message.what = Code.HomeActivity.MSG_SUCCESS_GETSTORE; //메시지 아이디 설정
                     handler.sendMessage(message); //메인스레드 핸들러로 메시지 보내기
                     break;
                 }
@@ -233,6 +230,8 @@ public class HomeActivity extends AppCompatActivity {
                     ;
             }
         }
+        
+        
     }
     //핸들러 안에서 전달받은 메시지에 따라 화면전환 or 다이얼로그 띄우기 처리함
     class MainHandler extends Handler{
@@ -245,7 +244,7 @@ public class HomeActivity extends AppCompatActivity {
                     intent.putExtra("user",user);
                     startActivity(intent);
                     break;*/
-                case MSG_SUCCESS_GETSTORE:
+                case Code.HomeActivity.MSG_SUCCESS_GETSTORE:
                     Intent intent2 = new Intent(HomeActivity.this,MapActivity.class);
 
                     for(int i=0;i<3;i++){  //빨리들어오는 순대로 리스트에 추가되기 때문에,,, 순서에 따른 타입 체크카 필요함.
@@ -262,7 +261,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     startActivity(intent2);
                     break;
-                case MSG_FAIL:
+                case Code.HomeActivity.MSG_FAIL:
                     AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
                     AlertDialog dialog = builder.setMessage("네트워크가 원활하지 않습니다. 네트워크 상태를 확인하십시오").setPositiveButton("확인", null).create();
                     dialog.show();

@@ -26,9 +26,9 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 {
 
-    private ArrayList<MapDataItem> mapDataList =null;
+    private ArrayList<DataItem.MapDataItem> mapDataList =null;
     public MemberStore choiceStore=null;
-    SearchResultListAdapter(ArrayList<MapDataItem> dataList)
+    SearchResultListAdapter(ArrayList<DataItem.MapDataItem> dataList)
     {
         mapDataList = dataList;
     }
