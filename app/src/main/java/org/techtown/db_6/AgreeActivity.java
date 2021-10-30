@@ -17,7 +17,7 @@ public class AgreeActivity extends AppCompatActivity {
     private CheckBox checkBox;
     private CheckBox checkBox2;
     private CheckBox checkBox3;
-    private CheckBox checkBox4;
+    private CheckBox checkBox4; //커밋기기
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
