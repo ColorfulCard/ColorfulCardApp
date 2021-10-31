@@ -56,14 +56,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-
-                    RetrofitService service1 = retrofit.create(RetrofitService.class);
-                    Call<UserProfile> call = service1.getUserProfile(id);
+                    Server server = new Server();
+                    RetrofitService service= server.getRetrofitService();
+                    Call<UserProfile> call = service.getUserProfile(id);
                     call.enqueue(new Callback<UserProfile>() {
 
                         @Override
@@ -74,9 +69,9 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "아이디 또는 비밀번호가 잘못 입력되었습니다", Toast.LENGTH_SHORT).show();
                                 else {
 
-                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class); //일단은 로그인 성공하면 메인 화면으로 이동
                                     User user = new User(result.getId(),result.getName()); //서버에서 물어다온 user id 로 생성함
-                                    intent.putExtra("user",user);
+                                    intent.putExtra("user",user); //이동하는 액티비티로 값넘김
                                     startActivity(intent);
                                     finish();
                                 }
@@ -98,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                     });
                 }
             }
-            });
-        }
+        });
+    }
 
 
     @Override
@@ -118,4 +113,4 @@ public class LoginActivity extends AppCompatActivity {
         builder.setNegativeButton("취소",null);
         builder.show();
     }
-    }
+}

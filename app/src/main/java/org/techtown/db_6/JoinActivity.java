@@ -24,7 +24,7 @@ public class JoinActivity extends AppCompatActivity {
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name;
     private Button button_Join ,button_CheckID ;
     private TextView checkIDResult;
-    private boolean validate = false , checkPW = false;
+    private boolean validate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
