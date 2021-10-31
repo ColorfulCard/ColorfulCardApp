@@ -1,32 +1,33 @@
 package org.techtown.db_6;
 
-public class Code {
+public class StateMsgSet {
 
-    public class RegisterCard {
+    public class RegisterCardMsg {
         public static final int MSG_FAIL=0;
         public static final int MSG_SUCCESS_VAILCHECK = 1;
 
 
     }
 
-    public class HomeActivity {
-      public static final int MSG_SUCCESS_BALCHECK = 1;
-      public static final int MSG_SUCCESS_GETSTORE = 2;
-      public static final int MSG_FAIL=0;
-    }
-
-    public class LoadingActivity{
-       public static final int MSG_SUCCESS_BALCHECK = 1;
-       public static final int MSG_FAIL=0;
-
+    public class HomeMsg {
+        public static final int MSG_FAIL=0;
+        public static final int MSG_SUCCESS_BALCHECK = 1;
+        public static final int MSG_SUCCESS_GETSTORE = 2;
 
     }
 
-    public class SearchStoreActivity{
+    public class LoadingMsg {
+        public static final int MSG_FAIL=0;
+        public static final int MSG_SUCCESS_BALCHECK = 1;
 
+
+
+    }
+    public class SearchStoreMsg {
+        public static final int MSG_FAIL=0;
         public static final int MSG_SUCCESS_SEARCH =1;
         public static final int MSG_SEARCH_NO_WORD=2;
-        public static final int MSG_FAIL=0;
+
 
     }
 

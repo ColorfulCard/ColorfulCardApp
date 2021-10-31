@@ -5,7 +5,7 @@ import android.widget.Button;
 
 public class DataItem {
 
-    public static class CardDataItem {
+    public static class CardData {
 
         private String balance;
         private String cardName;
@@ -15,7 +15,7 @@ public class DataItem {
         private String cardType;
         private String userID;
 
-        public CardDataItem(String cardName, String balance, int viewType, String[] balances, String cardNum, String cardType, String userID) {
+        public CardData(String cardName, String balance, int viewType, String[] balances, String cardNum, String cardType, String userID) {
             this.cardName = cardName;
             this.balance = balance;
             this.viewType = viewType;
@@ -54,12 +54,12 @@ public class DataItem {
         }
     }
 
-    public static class MapDataItem {
+    public static class MapData {
 
         private MemberStore store;
         private int viewType;
 
-        public MapDataItem(MemberStore store, int viewType){
+        public MapData(MemberStore store, int viewType){
             this.store=store;
             this.viewType=viewType;
         }

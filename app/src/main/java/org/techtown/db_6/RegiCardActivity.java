@@ -20,8 +20,6 @@ import java.io.IOException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegiCardActivity extends AppCompatActivity {
 
@@ -33,7 +31,7 @@ public class RegiCardActivity extends AppCompatActivity {
 
     private EditText et_cardName, cardNo1, cardNo2, cardNo3, cardNo4;
     private RadioButton chMeal,chBusic,chEdu;
-    private Button button, vaildCheckBT;
+    private Button RegisterBt, vaildCheckBT;
     private TextView vaildCheckResult;
     private AlertDialog dialog;
     private boolean validate = false;
@@ -59,7 +57,7 @@ public class RegiCardActivity extends AppCompatActivity {
         chBusic = findViewById(R.id.chBusic);
         chEdu = findViewById(R.id.chEdu);
 
-        button = findViewById(R.id.button);
+        RegisterBt = findViewById(R.id.button);
         vaildCheckBT = findViewById(R.id.vaildCheckBT);
         vaildCheckResult= findViewById(R.id.vaildCheckResult);
 
@@ -89,7 +87,7 @@ public class RegiCardActivity extends AppCompatActivity {
         });
 
         //등록하기 버튼 클릭
-        button.setOnClickListener(new View.OnClickListener() {
+        RegisterBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -140,7 +138,7 @@ public class RegiCardActivity extends AppCompatActivity {
                                 finish();
 
                             } else {
-                                Log.d("tag", "get 한 후 반환해올때 getByNum한 카드가 하나가 아니여서 발생하는 오류 동작에는 문제 없음");
+                                Log.d("tag", "get 한 후 반환해올 때 getByNum한 카드가 하나가 아니여서 발생하는 오류 동작에는 문제 없음");
                                 Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
                                 user.clearCardBalances();
                                 intent.putExtra("user",user);
@@ -172,10 +170,10 @@ public class RegiCardActivity extends AppCompatActivity {
                 BalanceCheck checker = new BalanceCheck(cardNo1.getText().toString(),cardNo2.getText().toString(),cardNo3.getText().toString(),cardNo4.getText().toString());
 
                 if (checker.tryBalanceCheck(2).equals("success")) {
-                    message.what = Code.RegisterCard.MSG_SUCCESS_VAILCHECK;
+                    message.what = StateMsgSet.RegisterCardMsg.MSG_SUCCESS_VAILCHECK;
                     handler.sendMessage(message); //메인스레드 핸들러로 메시지 보내기
                 } else { //실패할 경우
-                    message.what = Code.RegisterCard.MSG_FAIL;
+                    message.what = StateMsgSet.RegisterCardMsg.MSG_FAIL;
                     handler.sendMessage(message);
                 }
             }
@@ -190,7 +188,7 @@ public class RegiCardActivity extends AppCompatActivity {
         public void handleMessage(Message message) {
             switch (message.what)
             {
-                case Code.RegisterCard.MSG_SUCCESS_VAILCHECK:
+                case StateMsgSet.RegisterCardMsg.MSG_SUCCESS_VAILCHECK:
                     vaildCheckResult.setTextColor(0xFF000000);
                     vaildCheckResult.setText("컬러풀카드 인증되었습니다");
                     cardNo1.setEnabled(false); //카드번호값 고정
@@ -199,7 +197,7 @@ public class RegiCardActivity extends AppCompatActivity {
                     cardNo4.setEnabled(false);
                     validate = true; //검증 완료
                     break;
-                case Code.RegisterCard.MSG_FAIL:
+                case StateMsgSet.RegisterCardMsg.MSG_FAIL:
                     vaildCheckResult.setText("컬러풀카드 인증에 실패하였습니다");
                     vaildCheckResult.setTextColor(0xAAef484a);
                     break;

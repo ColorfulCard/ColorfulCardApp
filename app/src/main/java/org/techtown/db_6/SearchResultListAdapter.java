@@ -3,22 +3,16 @@ package org.techtown.db_6;
 import android.content.Context;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -26,9 +20,9 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 {
 
-    private ArrayList<DataItem.MapDataItem> mapDataList =null;
+    private ArrayList<DataItem.MapData> mapDataList =null;
     public MemberStore choiceStore=null;
-    SearchResultListAdapter(ArrayList<DataItem.MapDataItem> dataList)
+    SearchResultListAdapter(ArrayList<DataItem.MapData> dataList)
     {
         mapDataList = dataList;
     }
@@ -40,7 +34,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(viewType==Code.ViewType.searchResult){
+        if(viewType== StateMsgSet.ViewType.searchResult){
             view = inflater.inflate(R.layout.search_result, parent, false);
             return new SearchResultViewHolder(view);
         }

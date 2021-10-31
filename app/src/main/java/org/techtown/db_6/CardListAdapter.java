@@ -2,7 +2,6 @@ package org.techtown.db_6;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +18,11 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    Intent intent;
-    private ArrayList<DataItem.CardDataItem> cardDataList = null;
+    private ArrayList<DataItem.CardData> cardDataList = null;
 
-    CardListAdapter(ArrayList<DataItem.CardDataItem> dataList)
+    CardListAdapter(ArrayList<DataItem.CardData> dataList)
     {
         cardDataList = dataList;
     }
@@ -39,16 +35,16 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(viewType== Code.ViewType.mealCard){
+        if(viewType== StateMsgSet.ViewType.mealCard){
             view = inflater.inflate(R.layout.meal_card, parent, false);
             return new CardViewHolder(view);
         }
-        else  if(viewType == Code.ViewType.sideMealCard)
+        else  if(viewType == StateMsgSet.ViewType.sideMealCard)
         {
             view = inflater.inflate(R.layout.sidemeal_card, parent, false);
             return new CardViewHolder(view);
         }
-        else if(viewType== Code.ViewType.eduCard)
+        else if(viewType== StateMsgSet.ViewType.eduCard)
         {
             view = inflater.inflate(R.layout.educationcard, parent, false);
             return new CardViewHolder(view);
@@ -65,7 +61,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     {
         if(viewHolder instanceof CardViewHolder){
 
-            DataItem.CardDataItem card =cardDataList.get(position);
+            DataItem.CardData card =cardDataList.get(position);
 
             ((CardViewHolder) viewHolder).name.setText(card.getCardName());
             ((CardViewHolder) viewHolder).content.setText(card.getBalance());
