@@ -2,7 +2,6 @@ package org.techtown.db_6;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
     Intent intent;
-    User user; //사용자 클래스
+    UserCard user; //사용자 클래스
     MainHandler handler;
     List<ArrayList<MemberStore>> memberStores = new ArrayList<ArrayList<MemberStore>>(3);
 
@@ -38,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         intent = getIntent();
-        user = (User) intent.getSerializableExtra("user");
+        user = (UserCard) intent.getSerializableExtra("user");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -56,11 +54,11 @@ public class HomeActivity extends AppCompatActivity {
 
 
         RetrofitService service1 = retrofit.create(RetrofitService.class);
-        Call<List<UserCard>> call = service1.getUserCardList(user.getId());
-        call.enqueue(new Callback<List<UserCard>>() {
+        Call<List<Card>> call = service1.getUserCardList(user.getId());
+        call.enqueue(new Callback<List<Card>>() {
 
             @Override
-            public void onResponse(Call<List<UserCard>> call, Response<List<UserCard>> response) {
+            public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
 
                 if (response.isSuccessful()) {
 
@@ -68,11 +66,11 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d("tag",response.body().toString());
                     else{
                      //   Toast.makeText(getApplicationContext(), "등록 카드정보 불러오기 성공", Toast.LENGTH_SHORT).show();
-                        List<UserCard> result = response.body();
+                        List<Card> result = response.body();
                         user.setCard(result);
 
                         int i=0;
-                        for(UserCard card: user.getCards())
+                        for(Card card: user.getCards())
                         {
                             Log.d("tag","사용자카드"+i+"번째"+card+"\n");
                             i++;
@@ -87,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<UserCard>> call, Throwable t) {
+            public void onFailure(Call<List<Card>> call, Throwable t) {
                 Log.d("tag", "실패2" + t.getMessage());
             }
 
@@ -142,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
 
             try {
 
-                for(UserCard card : user.getCards()) {
+                for(Card card : user.getCards()) {
 
                     String cardNum = card.getCardNum();
                     BalanceCheck checker = new BalanceCheck(cardNum.substring(0, 4), cardNum.substring(4, 8), cardNum.substring(8, 12), cardNum.substring(12));

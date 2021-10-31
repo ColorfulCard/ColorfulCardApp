@@ -3,16 +3,12 @@ package org.techtown.db_6;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface RetrofitService {
 
@@ -32,11 +28,11 @@ public interface RetrofitService {
     Call<UserProfile> getUserProfile(@Path("id") String id);
 
     @GET("cardID/{id}")
-    Call<List<UserCard>> getUserCardList(@Path("id") String id);
+    Call<List<Card>> getUserCardList(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("card/{cardNum}")
-    Call<UserCard> postUserCard(
+    Call<Card> postUserCard(
             @Path("cardNum") String cardNum,
             @Field("id") String id,
             @Field("cardName") String cardName,

@@ -1,67 +1,68 @@
 package org.techtown.db_6;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-//카드 서버에 post&get 할때 사용되는 클래스
 public class UserCard implements Serializable {
 
-    private static final long serialVersionUID = 2L;
-
-    @SerializedName("id")
+    private static final long serialVersionUID = 1L;
     private String id;
+    private String name;
+    private List<Card> cards = new ArrayList<>();
+    private ArrayList<String[]> allBalances = new ArrayList<>();
 
-    @SerializedName("cardName")
-    private String cardName;
-    // @SerializedName으로 일치시켜 주지않을 경우엔 클래스 변수명이 일치해야함
-
-    @SerializedName("cardNum")
-    private String cardNum;
-
-    @SerializedName("cardType")
-    private String cardType;
-
-    public UserCard(String id, String cardName, String cardNum, String cardType) {
-        this.id=id;
-        this.cardName=cardName;
-        this.cardNum=cardNum;
-        this.cardType=cardType;
+    UserCard(String id, String name){
+        this.id = id;
+        this.name = name;
+    }
+//
+    public String getId(){
+        return this.id;
+    }
+    public String getName(){
+        return this.name;
     }
 
-    public String getId() {
-        return id;
+    public void setCard(List<Card> cards)
+    {
+     /*   if(cards.contains(card)==true) //카드 포함하고있으면 추가안함
+            return;
+        cards.add(new Card(card.getId(),card.getCardName(), card.getCardNum(), card.isMealCard()));*/
+        this.cards=cards;
+
+    }
+    public List<Card> getCards()
+    {
+        return this.cards;
     }
 
-    public String getCardName() {
-        return cardName;
-    }
-    public String getCardNum() {
-        return cardNum;
-    }
-    public String getCardType(){
-        return cardType;
-    }
-
-    @Override
-    public String toString() {
-        return "PostResult{" +
-                "cardNum=" + cardNum +
-                ", id=" + id +
-                ", cardName='" +cardName + '\'' +
-                ", cardType='" + cardType + '\'' +
-                '}';
-    }
-   //안먹혀서 안씀
-    @Override
-    public boolean equals(Object object) {
-        UserCard card = (UserCard) object;
-        // num만 같으면 true를 리턴.
-        if (card.cardNum == this.cardNum) {
-            return true;
+    public void setCardBalances(String balances[])
+    {
+        String elements[]= new String[balances.length];
+        for(int i=0;i< balances.length;i++)
+        {
+            elements[i]= new String(balances[i]);
         }
-        return false;
+         allBalances.add(balances);
+    }
+    public void clearCardBalances()
+    {
+        allBalances.clear();
+    }
+    public ArrayList<String[]> getCardBalances()
+    {
+        return allBalances;
     }
 
+    /*
+       * [0] 이월 잔여금액	14,920 원
+         [1] 당월 충전금액	0 원
+         [2] 당월 사용금액	7,700 원
+         [3] 당월 잔여금액	7,220 원
+         [4] 금일 한도금액	0 원
+         [5] 금일 사용금액	0 원
+         [6] 금일 잔여금액	0 원
+       * */
 
 }
