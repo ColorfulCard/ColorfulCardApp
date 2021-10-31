@@ -81,12 +81,8 @@ public class SearchStoreActivity extends AppCompatActivity {
 
             Message message=handler.obtainMessage();
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            RetrofitService service1 = retrofit.create(RetrofitService.class);
+            Server server = new Server();
+            RetrofitService service1 = server.getRetrofitService();
             Call<List<MemberStore>> call = service1.getStorebyName(searchWord);
             call.enqueue(new Callback<List<MemberStore>>() {
 

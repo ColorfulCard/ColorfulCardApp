@@ -79,13 +79,8 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Retrofit retrofit = new Retrofit.Builder()
-                                    .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
-                                    .addConverterFactory(GsonConverterFactory.create())
-                                    .build();
-
-                            RetrofitService service1 = retrofit.create(RetrofitService.class);
-
+                            Server server = new Server();
+                            RetrofitService service1 = server.getRetrofitService();
                             Call<Integer> call = service1.deleteUserCard(card.getCardNum(), card.getUserID(), card.getCardName(), card.getCardType());
 
                             call.enqueue(new Callback<Integer>() {

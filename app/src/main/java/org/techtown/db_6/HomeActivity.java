@@ -47,13 +47,8 @@ public class HomeActivity extends AppCompatActivity {
 
         nameView.setText(user.getName()+"님, 환영합니다");
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-
-        RetrofitService service1 = retrofit.create(RetrofitService.class);
+        Server server = new Server();
+        RetrofitService service1 = server.getRetrofitService();
         Call<List<Card>> call = service1.getUserCardList(user.getId());
         call.enqueue(new Callback<List<Card>>() {
 
@@ -180,13 +175,8 @@ public class HomeActivity extends AppCompatActivity {
             Message message = handler.obtainMessage(); //메인스레드 핸들러의 메시지 객체 가져오기
 
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            RetrofitService service = retrofit.create(RetrofitService.class);
-
+            Server server = new Server();
+            RetrofitService service = server.getRetrofitService();
             for (int i = 0; i < 3; i++) {
 
                 Call<List<MemberStore>> call = service.getStorebyType(type[i]);

@@ -56,12 +56,8 @@ public class JoinActivity extends AppCompatActivity {
                     return;
                 }
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                RetrofitService service1 = retrofit.create(RetrofitService.class);
+                Server server = new Server();
+                RetrofitService service1 = server.getRetrofitService();
                 Call<UserProfile> call = service1.getUserProfile(id);
 
                 call.enqueue(new Callback<UserProfile>() {
@@ -117,12 +113,8 @@ public class JoinActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://sw-env.eba-weppawy7.ap-northeast-2.elasticbeanstalk.com/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    RetrofitService service1 = retrofit.create(RetrofitService.class);
+                    Server server = new Server();
+                    RetrofitService service1 = server.getRetrofitService();
                     //인터페이스 객체구현
                     Call<UserProfile> call = service1.postUserProfile(id, pwd, name);
                     //사용할 메소드 선언
