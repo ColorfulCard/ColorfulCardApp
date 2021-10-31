@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 public class UserCardListActivity extends AppCompatActivity {
 
     Intent intent;
-    User user; //사용자 클래스
+    UserCard user; //사용자 클래스
 
     private ArrayList<DataItem.CardDataItem> dataList;
 
@@ -26,7 +25,7 @@ public class UserCardListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         intent = getIntent();
-        user = (User) intent.getSerializableExtra("user");
+        user = (UserCard) intent.getSerializableExtra("user");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_card_list);
@@ -72,7 +71,7 @@ public class UserCardListActivity extends AppCompatActivity {
 
         int i=0;
 
-        for( UserCard card : user.getCards() ){
+        for( Card card : user.getCards() ){
 
             Log.d("tag",i+"번째 카드");
             if(card.getCardType().equals("0"))  //급식카드

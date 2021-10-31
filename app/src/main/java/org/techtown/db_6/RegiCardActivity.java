@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegiCardActivity extends AppCompatActivity {
 
     Intent intent;
-    User user;
+    UserCard user;
 
 
     MainHandler handler;
@@ -44,7 +44,7 @@ public class RegiCardActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        user = (User)intent.getSerializableExtra("user");
+        user = (UserCard)intent.getSerializableExtra("user");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_card);
@@ -132,11 +132,11 @@ public class RegiCardActivity extends AppCompatActivity {
 
 
                     RetrofitService service1 = retrofit.create(RetrofitService.class);
-                    Call<UserCard> call = service1.postUserCard(cardNo.toString(),user.getId(),cardName,cardType);
-                    call.enqueue(new Callback<UserCard>() {
+                    Call<Card> call = service1.postUserCard(cardNo.toString(),user.getId(),cardName,cardType);
+                    call.enqueue(new Callback<Card>() {
 
                         @Override
-                        public void onResponse(Call<UserCard> call, Response<UserCard> response) {
+                        public void onResponse(Call<Card> call, Response<Card> response) {
                             if (response.isSuccessful()) {
                                 Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
                                 user.clearCardBalances();
@@ -156,7 +156,7 @@ public class RegiCardActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<UserCard> call, Throwable t) {
+                        public void onFailure(Call<Card> call, Throwable t) {
                             Log.d("tag", "실패2" + t.getMessage());
                         }
                     });

@@ -20,7 +20,7 @@ public class LoadingActivity extends AppCompatActivity {
     BalanceCheckThread thread;
     MainHandler handler;
     Intent intent;
-    User user; //사용자 클래스
+    UserCard user; //사용자 클래스
     TextView loading;
 
 
@@ -30,7 +30,7 @@ public class LoadingActivity extends AppCompatActivity {
     protected  void onCreate(Bundle savedInstanceState) {
 
         intent = getIntent();
-        user = (User) intent.getSerializableExtra("user");
+        user = (UserCard) intent.getSerializableExtra("user");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
@@ -55,7 +55,7 @@ public class LoadingActivity extends AppCompatActivity {
 
             try {
 
-                for(UserCard card : user.getCards()) {
+                for(Card card : user.getCards()) {
 
                     String cardNum = card.getCardNum();
                     BalanceCheck checker = new BalanceCheck(cardNum.substring(0, 4), cardNum.substring(4, 8), cardNum.substring(8, 12), cardNum.substring(12));

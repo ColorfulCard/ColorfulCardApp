@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                                 else {
 
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class); //일단은 로그인 성공하면 해당 id가 가진 카드리스트 보여주는 화면으로 이동
-                                    User user = new User(result.getId(),result.getName()); //서버에서 물어다온 user id 로 생성함
+                                    UserCard user = new UserCard(result.getId(),result.getName()); //서버에서 물어다온 user id 로 생성함
                                     intent.putExtra("user",user);
                                     startActivity(intent);
                                     finish();
