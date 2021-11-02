@@ -130,7 +130,7 @@ public class SearchStoreActivity extends AppCompatActivity {
                     }
                     initializeData();
                     recyclerView.setVisibility(View.VISIBLE);
-                    recyclerView.setAdapter(new SearchResultListAdapter(dataList)); // Adapter 등록
+                    recyclerView.setAdapter(new SearchStoreListAdapter(dataList)); // Adapter 등록
                     break;
 
                 case StateMsgSet.SearchStoreMsg.MSG_SEARCH_NO_WORD:

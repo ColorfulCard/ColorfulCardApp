@@ -6,7 +6,6 @@ import android.widget.Button;
 public class DataItem {
 
     public static class CardData {
-        //이거 되나>>>
 
         private String balance;
         private String cardName;

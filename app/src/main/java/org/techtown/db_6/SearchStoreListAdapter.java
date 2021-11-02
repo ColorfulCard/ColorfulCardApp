@@ -16,13 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class SearchStoreListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 {
 
     private ArrayList<DataItem.MapData> mapDataList =null;
     public MemberStore choiceStore=null;
-    SearchResultListAdapter(ArrayList<DataItem.MapData> dataList)
+    SearchStoreListAdapter(ArrayList<DataItem.MapData> dataList)
     {
         mapDataList = dataList;
     }

@@ -51,9 +51,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ArrayList<Marker> mealMarker = new ArrayList<Marker>();
     ArrayList<Marker> sideMealMarker = new ArrayList<Marker>();
     ArrayList<Marker> eduMarker = new ArrayList<Marker>();
-    Boolean btn1Flag =false;
-    Boolean btn2Flag =false;
-    Boolean btn3Flag =false;
+    Boolean mealBtnFlag =false;
+    Boolean sideBtnFlag =false;
+    Boolean eduBtnFlag =false;
 
 
     @Override
@@ -106,8 +106,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
 
-                btn1Flag=!btn1Flag;
-                if(btn1Flag) //true면 급식만 보여줌
+                mealBtnFlag =!mealBtnFlag;
+                if(mealBtnFlag) //true면 급식만 보여줌
                 {
                     for (Marker marker : mealMarker) {
                         marker.setVisible(true);
@@ -122,7 +122,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
                 else //false면 전체 다 보여줌
                 {
-                    if(btn2Flag==false && btn3Flag==false) {
+                    if(sideBtnFlag ==false && eduBtnFlag ==false) {
 
                         for (Marker marker : sideMealMarker) {
                             marker.setVisible(true);
@@ -143,8 +143,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btn2.setOnClickListener(new View.OnClickListener() { //부식클릭시
             @Override
             public void onClick(View v) {
-                btn2Flag=!btn2Flag;
-                if(btn2Flag)
+                sideBtnFlag =!sideBtnFlag;
+                if(sideBtnFlag)
                 {
                     for(Marker marker : sideMealMarker) {
                         marker.setVisible(true);
@@ -159,7 +159,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     btn2.setBackgroundColor(Color.parseColor("#0B4D40"));
                 }
                 else{
-                    if(btn1Flag==false && btn3Flag==false) {
+                    if(mealBtnFlag ==false && eduBtnFlag ==false) {
 
                         for(Marker marker : sideMealMarker) {
                             marker.setVisible(true);
@@ -182,8 +182,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
 
-                btn3Flag = !btn3Flag;
-                if (btn3Flag) {
+                eduBtnFlag = !eduBtnFlag;
+                if (eduBtnFlag) {
                     for (Marker marker : eduMarker) {
                         marker.setVisible(true);
                     }
@@ -198,7 +198,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 }else{
 
-                    if(btn1Flag==false&& btn2Flag==false) {
+                    if(mealBtnFlag ==false&& sideBtnFlag ==false) {
                         for (Marker marker : mealMarker) {
                             marker.setVisible(true);
                         }
