@@ -52,7 +52,7 @@ public class Card implements Serializable {
                 ", cardType='" + cardType + '\'' +
                 '}';
     }
-   //안먹혀서 안씀
+
     @Override
     public boolean equals(Object object) {
         Card card = (Card) object;

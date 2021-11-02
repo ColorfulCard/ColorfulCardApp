@@ -6,7 +6,6 @@ import android.widget.Button;
 public class DataItem {
 
     public static class CardData {
-        //이거 되나>>>
 
         private String balance;
         private String cardName;
@@ -16,7 +15,7 @@ public class DataItem {
         private String cardType;
         private String userID;
 
-        public CardData(String cardName, String balance, int viewType, String[] balances, String cardNum, String cardType, String userID) {
+        protected CardData(String cardName, String balance, int viewType, String[] balances, String cardNum, String cardType, String userID) {
             this.cardName = cardName;
             this.balance = balance;
             this.viewType = viewType;

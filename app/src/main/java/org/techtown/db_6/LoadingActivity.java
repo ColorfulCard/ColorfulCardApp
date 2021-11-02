@@ -17,11 +17,11 @@ import java.io.IOException;
 
 public class LoadingActivity extends AppCompatActivity {
 
-    BalanceCheckThread thread;
-    MainHandler handler;
-    Intent intent;
-    UserCard user; //사용자 클래스
-    TextView loading;
+    private Intent intent;
+    private UserCard user; //사용자 클래스
+    private BalanceCheckThread thread;
+    private MainHandler handler;
+    private TextView loading;
 
 
 

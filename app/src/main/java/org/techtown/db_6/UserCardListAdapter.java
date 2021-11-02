@@ -19,10 +19,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class UserCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private ArrayList<DataItem.CardData> cardDataList = null;
 
-    CardListAdapter(ArrayList<DataItem.CardData> dataList)
+    protected UserCardListAdapter(ArrayList<DataItem.CardData> dataList)
     {
         cardDataList = dataList;
     }
@@ -154,18 +154,19 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return cardDataList.get(position).getViewType();
     }
 
-    public class CardViewHolder extends RecyclerView.ViewHolder{
-        TextView content;
-        TextView name;
-        ImageView image;
-        Button button;
-        ImageView minus;
 
-        CardViewHolder(View itemView)
+    public class CardViewHolder extends RecyclerView.ViewHolder{
+        private TextView name;
+        private TextView content;
+        private ImageView image;
+        private Button button;
+        private ImageView minus;
+
+       private CardViewHolder(View itemView)
         {
             super(itemView);
-            content = itemView.findViewById(R.id.content);
             name = itemView.findViewById(R.id.tv);
+            content = itemView.findViewById(R.id.content);
             image = itemView.findViewById(R.id.imageView);
             button = itemView.findViewById(R.id.button);
             minus=itemView.findViewById(R.id.minus);

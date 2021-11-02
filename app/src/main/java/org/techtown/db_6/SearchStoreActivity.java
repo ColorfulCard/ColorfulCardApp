@@ -91,14 +91,14 @@ public class SearchStoreActivity extends AppCompatActivity {
                         if(results.isEmpty())
                         {
                             Log.d("tag", "검색 결과 아무것도 없음");
-                            message.what= StateMsgSet.SearchStoreMsg.MSG_SEARCH_NO_WORD;
+                            message.what= StateMsgSet.SearchMsg.MSG_SEARCH_NO_WORD;
                             message.obj=searchWord;
                             handler.sendMessage(message);
                         }
                         else //검색결과 있음
                         {
                             System.out.println(results.toString());//확인용 프린트
-                            message.what= StateMsgSet.SearchStoreMsg.MSG_SUCCESS_SEARCH;
+                            message.what= StateMsgSet.SearchMsg.MSG_SUCCESS_SEARCH;
                             handler.sendMessage(message);
                         }
                     }else{
@@ -109,7 +109,7 @@ public class SearchStoreActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<List<MemberStore>> call, Throwable t) {
                     Log.d("tag", "검색정보 가져오기 실패2" + t.getMessage());
-                    message.what= StateMsgSet.SearchStoreMsg.MSG_FAIL;
+                    message.what= StateMsgSet.SearchMsg.MSG_FAIL;
                     handler.sendMessage(message);
                 }
             });
@@ -122,7 +122,7 @@ public class SearchStoreActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message message) {
             switch (message.what) {
-                case StateMsgSet.SearchStoreMsg.MSG_SUCCESS_SEARCH:
+                case StateMsgSet.SearchMsg.MSG_SUCCESS_SEARCH:
                     //메인스레드 작업, 리사이클러뷰 데이터 전달,부르기
                     if(no_result.getText().length()>0){
                         //이전 검색결과 없음 기록이 남아있다면
@@ -130,16 +130,16 @@ public class SearchStoreActivity extends AppCompatActivity {
                     }
                     initializeData();
                     recyclerView.setVisibility(View.VISIBLE);
-                    recyclerView.setAdapter(new SearchResultListAdapter(dataList)); // Adapter 등록
+                    recyclerView.setAdapter(new SearchStoreListAdapter(dataList)); // Adapter 등록
                     break;
 
-                case StateMsgSet.SearchStoreMsg.MSG_SEARCH_NO_WORD:
+                case StateMsgSet.SearchMsg.MSG_SEARCH_NO_WORD:
                     //검색결과 없음 뷰에 검색결과없음 정보 띄우기
                     recyclerView.setVisibility(View.GONE);
                     no_result.setText( "' "+(String)message.obj+" '에 관한 검색결과 없음");
                     break;
 
-                case StateMsgSet.SearchStoreMsg.MSG_FAIL:
+                case StateMsgSet.SearchMsg.MSG_FAIL:
                     Toast.makeText(getApplicationContext(), "네트워크 상태를 확인해주세요", Toast.LENGTH_SHORT).show();
                     break;
 

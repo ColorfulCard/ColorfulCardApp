@@ -23,11 +23,11 @@ import retrofit2.Response;
 
 public class RegiCardActivity extends AppCompatActivity {
 
-    Intent intent;
-    UserCard user;
+    private Intent intent;
+    private UserCard user;
 
 
-    MainHandler handler;
+    private MainHandler handler;
 
     private EditText et_cardName, cardNo1, cardNo2, cardNo3, cardNo4;
     private RadioButton chMeal,chBusic,chEdu;
@@ -123,6 +123,7 @@ public class RegiCardActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    //여기도 함수로 빼놓자...!
                     Server server = new Server();
                     RetrofitService service1 = server.getRetrofitService();
                     Call<Card> call = service1.postUserCard(cardNo.toString(),user.getId(),cardName,cardType);

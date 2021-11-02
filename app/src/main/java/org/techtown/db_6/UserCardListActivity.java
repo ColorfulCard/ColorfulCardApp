@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 public class UserCardListActivity extends AppCompatActivity {
 
-    Intent intent;
-    UserCard user; //사용자 클래스
-
+    private Intent intent;
+    private UserCard user; //사용자 클래스
     private ArrayList<DataItem.CardData> dataList;
-
+    private ImageButton imageButton;
+    private TextView noRegiCardText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,11 @@ public class UserCardListActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_card_list);
-        ImageButton imageButton = findViewById(R.id.imageButton);
-        TextView textView3= findViewById(R.id.textView3);
+        imageButton = findViewById(R.id.imageButton);
+        noRegiCardText = findViewById(R.id.textView3);
 
         if(user.getCards().isEmpty())
-            textView3.setText("등록된 카드가 없습니다");
+            noRegiCardText.setText("등록된 카드가 없습니다");
         else{
             this.initializeData();
 
@@ -45,7 +45,7 @@ public class UserCardListActivity extends AppCompatActivity {
                     = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
 
             recyclerView.setLayoutManager(manager); // LayoutManager 등록
-            recyclerView.setAdapter(new CardListAdapter(dataList)); // Adapter 등록
+            recyclerView.setAdapter(new UserCardListAdapter(dataList)); // Adapter 등록
 
         }
 
@@ -70,15 +70,17 @@ public class UserCardListActivity extends AppCompatActivity {
         ArrayList<String[]> allBalances = user.getCardBalances();
 
         int i=0;
+        String meal="0";
+        String sideMeal="1";
 
         for( Card card : user.getCards() ){
 
             Log.d("tag",i+"번째 카드");
-            if(card.getCardType().equals("0"))  //급식카드
+            if(card.getCardType().equals(meal))  //급식카드
             {
                 dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateMsgSet.ViewType.mealCard, user.getCardBalances().get(i) , card.getCardNum() , card.getCardType() ,user.getId()));
 
-            }else if(card.getCardType().equals("1")) //부식카드
+            }else if(card.getCardType().equals(sideMeal)) //부식카드
             {
                 dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateMsgSet.ViewType.sideMealCard, user.getCardBalances().get(i), card.getCardNum() ,card.getCardType() ,user.getId()));
             }

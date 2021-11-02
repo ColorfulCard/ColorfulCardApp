@@ -10,16 +10,11 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +26,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class Map2Activity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -109,7 +99,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
         this.googleMap = googleMap;
 
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(17));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(choiceStore.getLatitude(),choiceStore.getLongitude())));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(choiceStore.getLatitude(),choiceStore.getStore_Longitude())));
 
         //지도는 카메라가 아래를 내려다보는 듯한 내용이 모델링됨
 
@@ -130,7 +120,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
 
         MarkerOptions markerOptions = new MarkerOptions();
         //마커에 대한 정보를 갖고 있는 객체
-        markerOptions.position(new LatLng(choiceStore.getLatitude(), choiceStore.getLongitude()))
+        markerOptions.position(new LatLng(choiceStore.getLatitude(), choiceStore.getStore_Longitude()))
                 .title(choiceStore.getStore_name())
                 .icon(BitmapDescriptorFactory.defaultMarker(hue));
 

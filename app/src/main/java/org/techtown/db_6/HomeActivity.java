@@ -23,11 +23,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
-    Intent intent;
-    UserCard user; //사용자 클래스
-    MainHandler handler;
-    List<ArrayList<MemberStore>> memberStores = new ArrayList<ArrayList<MemberStore>>(3);
-
+   private Intent intent;
+   private UserCard user; //사용자 클래스
+   private MainHandler handler;
+   private List<ArrayList<MemberStore>> memberStores = new ArrayList<ArrayList<MemberStore>>(3);
+   private TextView WelcomeNameView;
+   private Button RegiCardBt;
+   private Button SearchStoreBt;
 
 
     @Override
@@ -39,11 +41,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        TextView nameView= findViewById(R.id.nameView);
-        Button button3 = findViewById(R.id.button3); //등록된 카드 버튼
-        Button button4 = findViewById(R.id.button4); //가맹점 찾기 버튼
+        TextView WelcomeNameView= findViewById(R.id.nameView);
+        Button RegiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
+        Button SearchStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
 
-        nameView.setText(user.getName()+"님, 환영합니다");
+        WelcomeNameView.setText(user.getName()+"님, 환영합니다");
 
         Server server = new Server();
         RetrofitService service1 = server.getRetrofitService();
@@ -88,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
         handler = new MainHandler();
 
         //"등록된 카드" 버튼을 눌렀을 때
-        button3.setOnClickListener(new View.OnClickListener(){
+        RegiCardBt.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
@@ -113,7 +115,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         //가맹점 찾기 버튼을 누를 때
-        button4.setOnClickListener(new View.OnClickListener() {
+        SearchStoreBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GetMemberStoreThread thread = new GetMemberStoreThread();

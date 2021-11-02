@@ -16,7 +16,8 @@ public class IntroActivity extends AppCompatActivity {
         //핸들러 선언
          Handler handler = new Handler();
 
-        handler.postDelayed(new Runnable(){ //1.5초 후 실행됨
+
+         handler.postDelayed(new Runnable(){ //1.5초 후 실행됨
             @Override
             public void run() {
                 //시간 지난 후 실행할 동작 코딩

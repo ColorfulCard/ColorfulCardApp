@@ -75,7 +75,7 @@ public class MemberStore implements Parcelable {
         return latitude.doubleValue();
     }
 
-    public Double getLongitude(){
+    public Double getStore_Longitude(){
         return longitude.doubleValue();
     }
 

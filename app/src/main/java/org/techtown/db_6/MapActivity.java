@@ -236,7 +236,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         for (MemberStore store : mealMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
             //마커에 대한 정보를 갖고 있는 객체
-            markerOptions.position(new LatLng(store.getLatitude(), store.getLongitude()))
+            markerOptions.position(new LatLng(store.getLatitude(), store.getStore_Longitude()))
                     .title(store.getStore_name())
                     .icon(BitmapDescriptorFactory.defaultMarker(210));
 
@@ -247,7 +247,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         for(MemberStore store: sideMealMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
+            markerOptions.position(new LatLng(store.getLatitude(),store.getStore_Longitude()))
                     .title(store.getStore_name())
                     .icon(BitmapDescriptorFactory.defaultMarker(90));
 
@@ -258,7 +258,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         for(MemberStore store: eduMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(store.getLatitude(),store.getLongitude()))
+            markerOptions.position(new LatLng(store.getLatitude(),store.getStore_Longitude()))
                     .title(store.getStore_name())
                     .icon(BitmapDescriptorFactory.defaultMarker(55));
 

@@ -16,13 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class SearchStoreListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 {
 
     private ArrayList<DataItem.MapData> mapDataList =null;
     public MemberStore choiceStore=null;
-    SearchResultListAdapter(ArrayList<DataItem.MapData> dataList)
+    SearchStoreListAdapter(ArrayList<DataItem.MapData> dataList)
     {
         mapDataList = dataList;
     }
@@ -36,7 +36,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         if(viewType== StateMsgSet.ViewType.searchResult){
             view = inflater.inflate(R.layout.search_result, parent, false);
-            return new SearchResultViewHolder(view);
+            return new SearchStoreViewHolder(view);
         }
         else {
             return  null;
@@ -46,19 +46,19 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof SearchResultViewHolder)
+        if(holder instanceof SearchStoreViewHolder)
         {
              MemberStore store= mapDataList.get(position).getStore();
-            ((SearchResultViewHolder) holder).store_name.setText(store.getStore_name());
-            ((SearchResultViewHolder) holder).store_address.setText(store.getStore_address());
-            ((SearchResultViewHolder) holder).store_type.setText(store.getStore_type());
+            ((SearchStoreViewHolder) holder).store_name.setText(store.getStore_name());
+            ((SearchStoreViewHolder) holder).store_address.setText(store.getStore_address());
+            ((SearchStoreViewHolder) holder).store_type.setText(store.getStore_type());
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    choiceStore = new MemberStore(store.getStore_num(),store.getStore_name(),store.getStore_type(),store.getStore_address(), BigDecimal.valueOf(store.getLatitude()),BigDecimal.valueOf(store.getLongitude()));
+                    choiceStore = new MemberStore(store.getStore_num(),store.getStore_name(),store.getStore_type(),store.getStore_address(), BigDecimal.valueOf(store.getLatitude()),BigDecimal.valueOf(store.getStore_Longitude()));
                     Intent intent = new Intent(v.getContext(),Map2Activity.class);
 
                     intent.putExtra("choiceStore",choiceStore);
@@ -80,14 +80,14 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<RecyclerView.V
         return mapDataList.get(position).getViewType();
     }
 
-    public class SearchResultViewHolder extends RecyclerView.ViewHolder {
+    public class SearchStoreViewHolder extends RecyclerView.ViewHolder {
 
         TextView store_name;
         TextView store_address;
         TextView store_type;
         ImageView map_marker;
 
-        SearchResultViewHolder(View itemView)
+        SearchStoreViewHolder(View itemView)
         {
             super(itemView);
 

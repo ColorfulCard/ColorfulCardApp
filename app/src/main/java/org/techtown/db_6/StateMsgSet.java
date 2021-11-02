@@ -23,7 +23,7 @@ public class StateMsgSet {
 
 
     }
-    public class SearchStoreMsg {
+    public class SearchMsg {
         public static final int MSG_FAIL=0;
         public static final int MSG_SUCCESS_SEARCH =1;
         public static final int MSG_SEARCH_NO_WORD=2;

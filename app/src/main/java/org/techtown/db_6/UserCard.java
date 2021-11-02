@@ -12,11 +12,11 @@ public class UserCard implements Serializable {
     private List<Card> cards = new ArrayList<>();
     private ArrayList<String[]> allBalances = new ArrayList<>();
 
-    UserCard(String id, String name){
+    protected UserCard(String id, String name){
         this.id = id;
         this.name = name;
     }
-//
+
     public String getId(){
         return this.id;
     }
