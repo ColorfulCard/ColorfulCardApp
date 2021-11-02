@@ -45,7 +45,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private GoogleMap googleMap;
     View card_view;
-    Button btn1,btn2,btn3;
+    Button mealBtn, sideBtn, eduBtn;
     ImageButton call;
     ImageView searchimage;
     ArrayList<Marker> mealMarker = new ArrayList<Marker>();
@@ -83,9 +83,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
 
         card_view=findViewById(R.id.card_view);
-        btn1= (Button) findViewById(R.id.btn1);  //급식버튼
-        btn2 = (Button) findViewById(R.id.btn2);  //부식버튼
-        btn3 = (Button) findViewById(R.id.btn3);  //급식버튼
+        mealBtn = (Button) findViewById(R.id.btn1);  //급식버튼
+        sideBtn = (Button) findViewById(R.id.btn2);  //부식버튼
+        eduBtn = (Button) findViewById(R.id.btn3);  //급식버튼
         searchimage = (ImageView) findViewById(R.id.sv_location);
         call=(ImageButton)findViewById(R.id.call);
 
@@ -102,7 +102,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
 
 
-        btn1.setOnClickListener(new View.OnClickListener() {  //급식클릭시
+        mealBtn.setOnClickListener(new View.OnClickListener() {  //급식클릭시
             @Override
             public void onClick(View v) {
 
@@ -118,7 +118,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : eduMarker) {
                         marker.setVisible(false);
                     }
-                    btn1.setBackgroundColor(Color.parseColor("#133A55"));   //눌렀을 떄 색깔
+                    mealBtn.setBackgroundColor(Color.parseColor("#133A55"));   //눌렀을 떄 색깔
                 }
                 else //false면 전체 다 보여줌
                 {
@@ -134,13 +134,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             marker.setVisible(true);
                         }
                     }
-                    btn1.setBackgroundColor(Color.parseColor("#2980B9"));  //풀었을 때 버튼색깔
+                    mealBtn.setBackgroundColor(Color.parseColor("#2980B9"));  //풀었을 때 버튼색깔
                 }
             }
         });
 
 
-        btn2.setOnClickListener(new View.OnClickListener() { //부식클릭시
+        sideBtn.setOnClickListener(new View.OnClickListener() { //부식클릭시
             @Override
             public void onClick(View v) {
                 sideBtnFlag =!sideBtnFlag;
@@ -156,7 +156,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(false);
                     }
 
-                    btn2.setBackgroundColor(Color.parseColor("#0B4D40"));
+                    sideBtn.setBackgroundColor(Color.parseColor("#0B4D40"));
                 }
                 else{
                     if(mealBtnFlag ==false && eduBtnFlag ==false) {
@@ -171,14 +171,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             marker.setVisible(true);
                         }
                     }
-                    btn2.setBackgroundColor(Color.parseColor("#16A085"));
+                    sideBtn.setBackgroundColor(Color.parseColor("#16A085"));
 
                 }
             }
 
         });
 
-        btn3.setOnClickListener(new View.OnClickListener() { //교육클릭시
+        eduBtn.setOnClickListener(new View.OnClickListener() { //교육클릭시
             @Override
             public void onClick(View v) {
 
@@ -194,7 +194,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(false);
                     }
 
-                    btn3.setBackgroundColor(Color.parseColor("#D9A800"));
+                    eduBtn.setBackgroundColor(Color.parseColor("#D9A800"));
 
                 }else{
 
@@ -207,7 +207,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         }
                     }
 
-                    btn3.setBackgroundColor(Color.parseColor("#FFDB58"));
+                    eduBtn.setBackgroundColor(Color.parseColor("#FFDB58"));
                 }
 
             }
