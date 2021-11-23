@@ -41,9 +41,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        TextView WelcomeNameView= findViewById(R.id.nameView);
-        Button RegiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
-        Button SearchStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
+         WelcomeNameView= findViewById(R.id.nameView);
+         RegiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
+         SearchStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
 
         WelcomeNameView.setText(user.getName()+"님, 환영합니다");
 

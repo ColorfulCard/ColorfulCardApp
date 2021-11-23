@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +28,7 @@ public class JoinActivity extends AppCompatActivity {
 
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name, edit_email, edit_num;
     private Button button_Join ,button_CheckID ,button_send;
-    private TextView checkIDResult,emailText;
+    private TextView checkIDResult,emailText,CheckPwEN;
     private boolean validate = false;
 
     @Override
@@ -41,8 +46,10 @@ public class JoinActivity extends AppCompatActivity {
         button_Join = (Button) findViewById(R.id.button3);
         button_CheckID = (Button) findViewById(R.id.button7);
         button_send=findViewById(R.id.btn_email);
+        CheckPwEN = findViewById(R.id.CheckPwEN);
         checkIDResult=findViewById(R.id.overlap_result);
         emailText=findViewById(R.id.text_email);
+
 
         button_send.setOnClickListener(new View.OnClickListener() {  //인증번호 전송 버튼 클릭시
             @Override
@@ -126,6 +133,40 @@ public class JoinActivity extends AppCompatActivity {
                 });
             }
         });
+
+        edit_pwd.addTextChangedListener(new TextWatcher() { //비밀번호에 리스너를 달아서
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() >= 6) {
+                    Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{6,}.$");
+                    Matcher m = p.matcher(s.toString());
+
+                    if (!m.matches()) {
+                        CheckPwEN.setText("사용할 수 없는 비밀번호입니다.");
+                    } else {
+                        CheckPwEN.setText("사용할 수 있는 비밀번호입니다.");
+                    }
+
+                }else{
+
+                    CheckPwEN.setText("6글자 이상 입력해주세요.");
+                }
+            }
+        });
+
+
+
+
 
         button_Join.setOnClickListener(new View.OnClickListener() {  //회원가입버튼
             @Override

@@ -9,7 +9,9 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="479dp"
-        android:layout_height="75dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="164dp"
+        app:layout_constraintBottom_toTopOf="@+id/CheckPwEN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +37,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -110,7 +113,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="30dp"
         android:hint="이름"
 
         app:layout_constraintHorizontal_bias="0.0"
@@ -173,11 +175,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="230dp"
         android:layout_marginLeft="230dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:backgroundTint="@color/light_yellow"
         android:text="중복 검사"
         android:textColor="@color/black"
-        android:backgroundTint="@color/light_yellow"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -220,8 +222,8 @@
         android:layout_height="wrap_content"
         android:text="인증번호 전송"
         android:textColor="#4E4E4E"
-        app:backgroundTint="#FFDB58"
         android:textStyle="bold"
+        app:backgroundTint="#FFDB58"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 
@@ -236,5 +238,21 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+
+    <TextView
+        android:id="@+id/CheckPwEN"
+        android:layout_width="178dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginEnd="106dp"
+        android:layout_marginRight="106dp"
+        android:layout_marginBottom="459dp"
+        android:text="비밀번호를 입력해주세요"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
