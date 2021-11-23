@@ -23,8 +23,7 @@ public class JoinActivity extends AppCompatActivity {
 
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name, edit_email, edit_num;
     private Button button_Join ,button_CheckID ,button_send;
-    private TextView checkIDResult;
-    private TextView EmailText;
+    private TextView checkIDResult,emailText;
     private boolean validate = false;
 
     @Override
@@ -38,9 +37,44 @@ public class JoinActivity extends AppCompatActivity {
         edit_pwd = findViewById(R.id.edit_pwd);
         edit_pwd2 = findViewById(R.id.edit_pwd2);
         edit_name = findViewById(R.id.edit_name);
+        edit_email = findViewById(R.id.edit_email);
         button_Join = (Button) findViewById(R.id.button3);
         button_CheckID = (Button) findViewById(R.id.button7);
+        button_send=findViewById(R.id.btn_email);
         checkIDResult=findViewById(R.id.overlap_result);
+        emailText=findViewById(R.id.text_email);
+
+        button_send.setOnClickListener(new View.OnClickListener() {  //인증번호 전송 버튼 클릭시
+            @Override
+            public void onClick(View v) {
+                String email = edit_email.getText().toString();
+                if(email.equals("")) { //사용자가 입력하지 않았을 시
+                  emailText.setText("이메일을 입력하십시오");
+                  return;
+                }
+                //이메일 형식에 맞는지 검사 부분
+                // @랑 @뒤에 . 하나라도 있는지 보면될듯,, com형식으로 안끝나는 이메일들도 있어가지구 예: 저희학교메일 @ynu.ac.kr
+                Server server = new Server();
+                RetrofitService service2 = server.getRetrofitService();
+                Call<UserProfile> call = service2.getUserProfilebyEmail(email);
+                call.enqueue(new Callback<UserProfile>() {
+                    @Override
+                    public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                        emailText.setTextColor(0xAAef484a);
+                        emailText.setText("이미 가입된 이메일입니다");
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserProfile> call, Throwable t) {
+
+                        emailText.setTextColor(0xFF000000);
+                        emailText.setText("인증번호를 전송합니다.");
+                        edit_email.setEnabled(false); //이메일값 고정
+                    }
+                });
+            }
+        });
+
 
         button_CheckID.setOnClickListener(new View.OnClickListener() {  //ID중복검사 버튼
 

@@ -27,8 +27,12 @@ public interface RetrofitService {
     @GET("user/{id}")
     Call<UserProfile> getUserProfile(@Path("id") String id);
 
+    @GET("userEmail/{email}")
+    Call<UserProfile> getUserProfilebyEmail(@Path("email") String email);
+
     @GET("cardID/{id}")
     Call<List<Card>> getUserCardList(@Path("id") String id);
+
 
     @FormUrlEncoded
     @POST("card/{cardNum}")
@@ -52,4 +56,9 @@ public interface RetrofitService {
                                   @Field("id") String id,
                                   @Field("cardName") String cardName,
                                   @Field("cardType") String cardType);
+
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "/user/delete", hasBody = true)
+    Call<Integer> deleteUser (@Field("id") String id);
+
 }
