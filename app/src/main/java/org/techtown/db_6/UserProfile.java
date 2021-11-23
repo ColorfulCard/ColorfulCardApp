@@ -20,7 +20,10 @@ public class UserProfile {
     @SerializedName("name")
     private String name;
 
-    public UserProfile(String id, String pwd, String name) {
+    @SerializedName("email")
+    private String email;
+
+    public UserProfile(String id, String pwd, String name, String email) {
     }
 
     public String getPwd() {
@@ -32,6 +35,7 @@ public class UserProfile {
     public String getName() {
         return name;
     }
+    public String getEmail() {return email;}
 
 }
 
