@@ -1,6 +1,5 @@
 package org.techtown.db_6;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,16 +19,14 @@ import java.util.regex.Pattern;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class JoinActivity extends AppCompatActivity {
 
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name, edit_email, edit_num;
     private Button button_Join ,button_CheckID ,button_send;
-    private TextView checkIDResult,emailText,CheckPwEN;
-    private boolean validate = false;
+    private TextView checkIDPW,emailText;
+    private boolean validate = false, validate_CheckPwEN=false ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +43,7 @@ public class JoinActivity extends AppCompatActivity {
         button_Join = (Button) findViewById(R.id.button3);
         button_CheckID = (Button) findViewById(R.id.button7);
         button_send=findViewById(R.id.btn_email);
-        CheckPwEN = findViewById(R.id.CheckPwEN);
-        checkIDResult=findViewById(R.id.overlap_result);
+        checkIDPW =findViewById(R.id.checkIDPW);
         emailText=findViewById(R.id.text_email);
 
 
@@ -109,8 +105,8 @@ public class JoinActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
 
-                            checkIDResult.setTextColor(0xAAef484a);
-                            checkIDResult.setText("이미 가입된 아이디입니다");
+                            checkIDPW.setTextColor(0xAAef484a);
+                            checkIDPW.setText("이미 가입된 아이디입니다");
 
                         } else {
                             Log.d("tag", "response 실패");
@@ -122,8 +118,8 @@ public class JoinActivity extends AppCompatActivity {
                         Log.d("tag", "테이블에 존재하지 않는 ID라 등록가능" + t.getMessage());
                         if(t.getMessage().equals("End of input at line 1 column 1 path $"))
                         {
-                            checkIDResult.setTextColor(0xFF000000);
-                            checkIDResult.setText("사용가능한 아이디입니다");
+                            checkIDPW.setTextColor(0xFF000000);
+                            checkIDPW.setText("사용가능한 아이디입니다");
                             edit_id.setEnabled(false); //아이디값 고정
                             validate = true; //검증 완료
                         }
@@ -152,14 +148,17 @@ public class JoinActivity extends AppCompatActivity {
                     Matcher m = p.matcher(s.toString());
 
                     if (!m.matches()) {
-                        CheckPwEN.setText("사용할 수 없는 비밀번호입니다.");
+                        checkIDPW.setText("사용할 수 없는 비밀번호입니다.");
+                        validate_CheckPwEN= false;
                     } else {
-                        CheckPwEN.setText("사용할 수 있는 비밀번호입니다.");
+                        checkIDPW.setText("사용할 수 있는 비밀번호입니다.");
+                        validate_CheckPwEN= true;
                     }
 
                 }else{
 
-                    CheckPwEN.setText("6글자 이상 입력해주세요.");
+                    checkIDPW.setText("6글자 이상 입력해주세요.");
+                    validate_CheckPwEN= false;
                 }
             }
         });
@@ -182,12 +181,15 @@ public class JoinActivity extends AppCompatActivity {
                 }
                 else if(validate == false){
                     Toast.makeText(getApplicationContext(), "아이디 중복확인을 진행해주세요", Toast.LENGTH_SHORT).show();
-                }
-                else if (pwd.equals(pwd2) == false) {
+
+                }else if(validate_CheckPwEN == false){
+
+                    Toast.makeText(getApplicationContext(), "유효한 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+
+                } else if (pwd.equals(pwd2) == false) {
 
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
-                }
-                else
+                }else
                 {
                     Server server = new Server();
                     RetrofitService service1 = server.getRetrofitService();
