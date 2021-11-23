@@ -24,9 +24,9 @@ public class GmailSender extends javax.mail.Authenticator{
     private Session session;
     private String emailCode;
 
-    public GmailSender(String user, String password) {
-        this.user = user;
-        this.password = password;
+    public GmailSender() {
+        this.user = "yeon0038@gmail.com";
+        this.password = "yeon21912091";
         emailCode = createEmailCode();
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");

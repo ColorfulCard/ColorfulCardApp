@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="479dp"
-        android:layout_height="75dp"
+        android:layout_width="411dp"
+        android:layout_height="76dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="175dp"
         android:layout_marginLeft="175dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="175dp"
         android:layout_marginRight="175dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:text="회원가입"
         android:textColor="@color/black"
         android:textSize="50sp"
@@ -41,8 +41,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="아이디"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintHorizontal_bias="0.0"
@@ -53,7 +53,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_id"
             android:layout_width="match_parent"
-            android:layout_height="54dp" />
+            android:layout_height="50dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,9 +61,9 @@
         android:id="@+id/textInputLayout2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="58dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="54dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
 
         android:hint="비밀번호"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
@@ -84,9 +84,9 @@
         android:id="@+id/textInputLayout3"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="58dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="54dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
 
         android:hint="비밀번호 확인"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
@@ -108,8 +108,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
         android:hint="이름"
 
@@ -121,7 +121,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_name"
             android:layout_width="match_parent"
-            android:layout_height="54dp" />
+            android:layout_height="50dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,8 +130,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="이메일"
 
         app:layout_constraintHorizontal_bias="0.0"
@@ -142,7 +142,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="50dp"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,8 +151,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:hint="인증번호"
 
         app:layout_constraintHorizontal_bias="0.0"
@@ -163,7 +163,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_certify"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="50dp"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,35 +171,33 @@
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="230dp"
-        android:layout_marginLeft="230dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:backgroundTint="@color/light_yellow"
         android:text="중복 검사"
         android:textColor="@color/black"
-        android:backgroundTint="@color/light_yellow"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="280dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="10dp"
         android:text="가입하기"
         android:textColor="#4E4E4E"
         android:textSize="20sp"
         android:textStyle="bold"
         app:backgroundTint="#FFDB58"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="32dp" />
 
     <TextView
         android:id="@+id/overlap_result"
@@ -221,7 +219,6 @@
         android:text="인증번호 전송"
         android:textColor="#4E4E4E"
         app:backgroundTint="#FFDB58"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 

@@ -21,7 +21,8 @@ public interface RetrofitService {
     Call<UserProfile> postUserProfile(
             @Path("id") String id,
             @Field("pwd") String pwd,
-            @Field("name") String name
+            @Field("name") String name,
+            @Field("email") String email
     );
 
     @GET("user/{id}")
