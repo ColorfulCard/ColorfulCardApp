@@ -210,7 +210,7 @@ public class HomeActivity extends AppCompatActivity {
             while(true){  //정보 다 받아올때까지 기다리기 뇌피셜 야매코드인데 걱정된다.
                 if(memberStores.size()>2)
                 {
-                    message.what = StateMsgSet.HomeMsg.MSG_SUCCESS_GETSTORE; //메시지 아이디 설정
+                    message.what = StateSet.HomeMsg.MSG_SUCCESS_GETSTORE; //메시지 아이디 설정
                     handler.sendMessage(message); //메인스레드 핸들러로 메시지 보내기
                     break;
                 }
@@ -232,7 +232,7 @@ public class HomeActivity extends AppCompatActivity {
                     intent.putExtra("user",user);
                     startActivity(intent);
                     break;*/
-                case StateMsgSet.HomeMsg.MSG_SUCCESS_GETSTORE:
+                case StateSet.HomeMsg.MSG_SUCCESS_GETSTORE:
                     Intent intent2 = new Intent(HomeActivity.this,MapActivity.class);
 
                     for(int i=0;i<3;i++){  //빨리들어오는 순대로 리스트에 추가되기 때문에,,, 순서에 따른 타입 체크카 필요함.
@@ -249,7 +249,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     startActivity(intent2);
                     break;
-                case StateMsgSet.HomeMsg.MSG_FAIL:
+                case StateSet.HomeMsg.MSG_FAIL:
                     AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
                     AlertDialog dialog = builder.setMessage("네트워크가 원활하지 않습니다. 네트워크 상태를 확인하십시오").setPositiveButton("확인", null).create();
                     dialog.show();

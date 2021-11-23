@@ -35,16 +35,16 @@ public class UserCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(viewType== StateMsgSet.ViewType.mealCard){
+        if(viewType== StateSet.ViewType.mealCard){
             view = inflater.inflate(R.layout.meal_card, parent, false);
             return new CardViewHolder(view);
         }
-        else  if(viewType == StateMsgSet.ViewType.sideMealCard)
+        else  if(viewType == StateSet.ViewType.sideMealCard)
         {
             view = inflater.inflate(R.layout.sidemeal_card, parent, false);
             return new CardViewHolder(view);
         }
-        else if(viewType== StateMsgSet.ViewType.eduCard)
+        else if(viewType== StateSet.ViewType.eduCard)
         {
             view = inflater.inflate(R.layout.educationcard, parent, false);
             return new CardViewHolder(view);

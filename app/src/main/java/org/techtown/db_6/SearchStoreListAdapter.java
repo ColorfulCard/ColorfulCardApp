@@ -34,7 +34,7 @@ public class SearchStoreListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(viewType== StateMsgSet.ViewType.searchResult){
+        if(viewType== StateSet.ViewType.searchResult){
             view = inflater.inflate(R.layout.search_result, parent, false);
             return new SearchStoreViewHolder(view);
         }

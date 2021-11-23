@@ -21,9 +21,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class JoinActivity extends AppCompatActivity {
 
-    private EditText edit_id ,edit_pwd,edit_pwd2,edit_name;
-    private Button button_Join ,button_CheckID ;
+    private EditText edit_id ,edit_pwd,edit_pwd2,edit_name, edit_email, edit_num;
+    private Button button_Join ,button_CheckID ,button_send;
     private TextView checkIDResult;
+    private TextView EmailText;
     private boolean validate = false;
 
     @Override

@@ -78,15 +78,15 @@ public class UserCardListActivity extends AppCompatActivity {
             Log.d("tag",i+"번째 카드");
             if(card.getCardType().equals(meal))  //급식카드
             {
-                dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateMsgSet.ViewType.mealCard, user.getCardBalances().get(i) , card.getCardNum() , card.getCardType() ,user.getId()));
+                dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateSet.ViewType.mealCard, user.getCardBalances().get(i) , card.getCardNum() , card.getCardType() ,user.getId()));
 
             }else if(card.getCardType().equals(sideMeal)) //부식카드
             {
-                dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateMsgSet.ViewType.sideMealCard, user.getCardBalances().get(i), card.getCardNum() ,card.getCardType() ,user.getId()));
+                dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateSet.ViewType.sideMealCard, user.getCardBalances().get(i), card.getCardNum() ,card.getCardType() ,user.getId()));
             }
             else //교육카드
             {
-                dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateMsgSet.ViewType.eduCard, user.getCardBalances().get(i) , card.getCardNum() ,card.getCardType(), user.getId()));
+                dataList.add(new DataItem.CardData(card.getCardName(), user.getCardBalances().get(i)[3],  StateSet.ViewType.eduCard, user.getCardBalances().get(i) , card.getCardNum() ,card.getCardType(), user.getId()));
             }
             i++;
         }

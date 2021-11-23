@@ -62,10 +62,10 @@ public class GmailSender extends javax.mail.Authenticator{
     public synchronized void sendMail(String subject, String body, String recipients) throws Exception {
 
         MimeMessage message = new MimeMessage(session);
-        Log.d("tag","메세지 생성");
+
         DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
         //본문 내용을 byte단위로 쪼개어 전달
-        Log.d("tag","데이터핸들러 설정");
+
         message.setSender(new InternetAddress(user));//본인 이메일 설정
         Log.d("tag","발신인 설정");
         message.setSubject(subject);//해당 이메일의 본문 설정
@@ -75,7 +75,7 @@ public class GmailSender extends javax.mail.Authenticator{
             message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(recipients));
         else message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
         Transport.send(message);
-        Log.d("tag","sendMessage");
+        Log.d("tag","메세지발송됨");
     }
 
     public class ByteArrayDataSource implements DataSource {
@@ -88,11 +88,23 @@ public class GmailSender extends javax.mail.Authenticator{
             this.type = type;
 
         }
-        public void setType(String type) { this.type = type; }
-        public String getContentType() { if (type == null) return "application/octet-stream"; else return type; }
-        public InputStream getInputStream() throws IOException { return new ByteArrayInputStream(data); }
-        public String getName() { return "ByteArrayDataSource"; }
-        public OutputStream getOutputStream() throws IOException { throw new IOException("Not Supported"); }
+        public void setType(String type) {
+            this.type = type;
+        }
+        public String getContentType() {
+            if (type == null)
+                return "application/octet-stream";
+            else return type;
+        }
+        public InputStream getInputStream() throws IOException {
+            return new ByteArrayInputStream(data);
+        }
+        public String getName() {
+            return "ByteArrayDataSource";
+        }
+        public OutputStream getOutputStream() throws IOException {
+            throw new IOException("Not Supported");
+        }
 
     }
 

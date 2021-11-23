@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="175dp"
         android:layout_marginLeft="175dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="175dp"
         android:layout_marginRight="175dp"
         android:layout_marginBottom="10dp"
@@ -65,7 +65,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
 
-        android:hint="비밀번호"
+        android:hint="비밀번호(영문자,숫자 혼합하여 6글자 이상)"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -140,12 +140,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_email"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:inputType="textEmailAddress" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -168,6 +162,12 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:inputType="number" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,7 +193,7 @@
         android:layout_width="280dp"
         android:layout_height="64dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="36dp"
         android:text="가입하기"
         android:textColor="#4E4E4E"
@@ -203,7 +203,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <TextView
         android:id="@+id/overlap_result"

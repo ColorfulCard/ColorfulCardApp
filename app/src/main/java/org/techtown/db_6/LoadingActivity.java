@@ -70,12 +70,12 @@ public class LoadingActivity extends AppCompatActivity {
                     }
                 }
             } catch (IOException e) {
-                message.what = StateMsgSet.LoadingMsg.MSG_FAIL; //메시지 아이디 설정
+                message.what = StateSet.LoadingMsg.MSG_FAIL; //메시지 아이디 설정
                 handler.sendMessage(message); //메인스레드 핸들러로 메시지 보내기
                 e.printStackTrace();
             }
 
-            message.what = StateMsgSet.LoadingMsg.MSG_SUCCESS_BALCHECK; //메시지 아이디 설정. 반복문 다 돌면서 fail 한 번도 안났으니 성공함
+            message.what = StateSet.LoadingMsg.MSG_SUCCESS_BALCHECK; //메시지 아이디 설정. 반복문 다 돌면서 fail 한 번도 안났으니 성공함
             handler.sendMessage(message); //메인스레드 핸들러로 메시지 보내기
         }
 
@@ -86,13 +86,13 @@ public class LoadingActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message message) {
             switch (message.what) {
-                case StateMsgSet.LoadingMsg.MSG_SUCCESS_BALCHECK:
+                case StateSet.LoadingMsg.MSG_SUCCESS_BALCHECK:
                     Intent intent = new Intent(LoadingActivity.this, UserCardListActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
                     finish();
                     break;
-                case StateMsgSet.LoadingMsg.MSG_FAIL:
+                case StateSet.LoadingMsg.MSG_FAIL:
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoadingActivity.this);
                     AlertDialog dialog = builder.setMessage("네트워크가 원활하지 않습니다. 네트워크 상태를 확인하십시오").setPositiveButton("확인", null).create();
                     dialog.show();
