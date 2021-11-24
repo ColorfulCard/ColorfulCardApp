@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.MessagingException;
 import javax.mail.SendFailedException;
@@ -27,12 +31,13 @@ public class JoinActivity extends AppCompatActivity {
 
     private EditText edit_id ,edit_pwd,edit_pwd2,edit_name, edit_email, edit_num;
     private Button button_Join ,button_CheckID ,button_send;
-    private TextView checkIDResult,emailText;
-    private boolean validateID = false;
-    private boolean validateEmail= false;
+    private TextView checkIDPW,emailText;
+    private boolean validateID = false;     //아이디 중복검사했는지
+    private boolean validateEmail= false;   //이메일 중복검사했는지
+    private boolean validatePW =false ;     //비밀번호 형식통과했는지    
 
     private MainHandler handler;
-    private int sysNumber;
+    private int sysNumber;                  //랜덤한 인증번호 6자리
 
 
     @Override
@@ -53,7 +58,7 @@ public class JoinActivity extends AppCompatActivity {
         button_Join = (Button) findViewById(R.id.button3);
         button_CheckID = (Button) findViewById(R.id.button7);
         button_send=findViewById(R.id.btn_email);
-        checkIDResult=findViewById(R.id.overlap_result);
+        checkIDPW =findViewById(R.id.checkIDPW);
         emailText=findViewById(R.id.text_email);
 
         button_send.setOnClickListener(new View.OnClickListener() {  //인증번호 전송 버튼 클릭시
@@ -66,6 +71,8 @@ public class JoinActivity extends AppCompatActivity {
                     return; //검증 완료
                 }
                 if(email.equals("")) { //사용자가 입력하지 않았을 시
+
+                  Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_SHORT).show();
                   emailText.setText("이메일을 입력하십시오");
                   return;
                 }
@@ -86,12 +93,12 @@ public class JoinActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<UserProfile> call, Throwable t) {
 
-                        emailText.setTextColor(0xFF000000);
+                        emailText.setTextColor(0xFF6E6E6E);
                         emailText.setText("인증번호를 전송합니다.");
                         edit_email.setEnabled(false); //이메일값 고정
                         validateEmail = true; //검증 완료
 
-                        Random random= new Random();
+                        Random random= new Random(); //인증번호 발생시키는 부분
                         int range= (int)Math.pow(10,6);
                         int trim=(int)Math.pow(10,5);
                         sysNumber= random.nextInt(range)+trim;
@@ -107,6 +114,45 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
+
+        edit_pwd.addTextChangedListener(new TextWatcher() { //비밀번호에 리스너를 달아서
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() >= 6) {
+                    Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{6,}.$");
+                    Matcher m = p.matcher(s.toString());
+
+                    if (!m.matches()) {
+                        checkIDPW.setTextColor(0xAAef484a);
+                        checkIDPW.setText("영문자,숫자,특수문자 조합");
+                        validatePW = false;
+                    }
+                    else
+                    {
+                        checkIDPW.setTextColor(0xFF6E6E6E);
+                        checkIDPW.setText("사용 가능한 비밀번호입니다.");
+                        validatePW = true;
+                    }
+
+                }
+                else    //6글자 미만
+                {
+                    checkIDPW.setTextColor(0xAAef484a);
+                    checkIDPW.setText("영문자,숫자,특수문자 조합 6자리 이상");
+                    validatePW = false;
+                }
+            }
+        });
 
         button_CheckID.setOnClickListener(new View.OnClickListener() {  //ID중복검사 버튼
 
@@ -134,8 +180,8 @@ public class JoinActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
 
-                            checkIDResult.setTextColor(0xAAef484a);
-                            checkIDResult.setText("이미 가입된 아이디입니다");
+                            checkIDPW.setTextColor(0xAAef484a);
+                            checkIDPW.setText("이미 가입된 아이디입니다");
 
                         } else {
                             Log.d("tag", "response 실패");
@@ -147,8 +193,9 @@ public class JoinActivity extends AppCompatActivity {
                         Log.d("tag", "테이블에 존재하지 않는 ID라 등록가능" + t.getMessage());
                         if(t.getMessage().equals("End of input at line 1 column 1 path $"))
                         {
-                            checkIDResult.setTextColor(0xFF000000);
-                            checkIDResult.setText("사용가능한 아이디입니다");
+
+                            checkIDPW.setTextColor(0xFF6E6E6E);
+                            checkIDPW.setText("사용가능한 아이디입니다");
                             edit_id.setEnabled(false); //아이디값 고정
                             validateID = true; //검증 완료
                         }
@@ -170,8 +217,6 @@ public class JoinActivity extends AppCompatActivity {
                 String email= edit_email.getText().toString();
                 String userNumber= edit_num.getText().toString();
                 Log.d("tag","번호받음"+ userNumber);
-               // int userNumber= Integer.parseInt(edit_num.getText().toString());
-
 
                 if(id.equals("") || pwd.equals("") || pwd2.equals("") || name.equals("")) {
                     Toast.makeText(getApplicationContext(), "모두 입력하였는지 확인해주세요", Toast.LENGTH_SHORT).show();
@@ -179,21 +224,21 @@ public class JoinActivity extends AppCompatActivity {
                 else if(validateID == false){
                     Toast.makeText(getApplicationContext(), "아이디 중복확인을 진행해주세요", Toast.LENGTH_SHORT).show();
                 }
-                else if (pwd.equals(pwd2) == false) {
-
-                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
+                else if(validatePW == false){
+                    Toast.makeText(getApplicationContext(), "유효한 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else if(validateEmail == false){
                     Toast.makeText(getApplicationContext(), "이메일 인증번호 전송을 진행해주세요", Toast.LENGTH_SHORT).show();
+                } 
+                else if (pwd.equals(pwd2) == false) {
+                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                 }
                 else if( !userNumber.equals(String.valueOf(sysNumber))){
                     Toast.makeText(getApplicationContext(), "인증번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
-
                 }
                 else
                 {
-                    Log.d("tag","회원가입시도함");
-                    Server server = new Server();
+                     Server server = new Server();
                     RetrofitService service1 = server.getRetrofitService();
                     //인터페이스 객체구현
                     Call<UserProfile> call = service1.postUserProfile(id, pwd, name, email);
@@ -271,8 +316,8 @@ public class JoinActivity extends AppCompatActivity {
             {
 
                 case StateSet.MailMsg.MSG_SUCCESS:
-                    emailText.setText("인증번호를 보냈습니다");
-                    Toast.makeText(getApplicationContext(), "이메일을 성공적으로 보냈습니다.", Toast.LENGTH_SHORT).show();
+                    emailText.setText("인증번호 전송완료");
+                    Toast.makeText(getApplicationContext(), "해당 메일에서 인증번호를 확인하십시오", Toast.LENGTH_SHORT).show();
                     break;
                 case StateSet.MailMsg.MSG_FAIL:
                     emailText.setText("이메일 형식이 잘못되었습니다");
