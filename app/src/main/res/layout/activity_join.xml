@@ -53,7 +53,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_id"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="52dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +84,7 @@
         android:id="@+id/textInputLayout3"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="54dp"
+        android:layout_height="52dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
 
@@ -142,7 +142,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="52dp"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,8 +163,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_certify"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="number" />
+            android:layout_height="52dp"
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
