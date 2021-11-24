@@ -27,12 +27,14 @@
         <activity android:name=".IntroActivity"></activity>
 
         <activity android:name=".AgreeActivity" />
-        <activity android:name=".JoinActivity" />
+        <activity android:name=".JoinActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".FindingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".LoginActivity"/>
