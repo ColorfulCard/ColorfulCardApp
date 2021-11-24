@@ -180,11 +180,9 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="280dp"
+        android:layout_width="303dp"
         android:layout_height="62dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="6dp"
         android:layout_marginBottom="10dp"
         android:text="가입하기"
         android:textColor="#4E4E4E"
@@ -192,12 +190,9 @@
         android:textStyle="bold"
         app:backgroundTint="#FFDB58"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="32dp" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <TextView
         android:id="@+id/checkIDPW"
