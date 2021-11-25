@@ -24,6 +24,15 @@ public class UserCard implements Serializable {
         return this.name;
     }
 
+    public void deleteCard(String cardNum){
+
+        int i;
+        for(i=0;i<cards.size();i++)
+        {
+            if(cards.get(i).getCardNum().equals(cardNum)) {break; }
+        }
+        cards.remove(i);
+    }
     public void setCard(List<Card> cards)
     {
      /*   if(cards.contains(card)==true) //카드 포함하고있으면 추가안함

@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     private BackKeyHandler backKeyHandler= new BackKeyHandler(this);
 
    private Intent intent;
-   private UserCard user; //사용자 클래스
+   public static UserCard user; //사용자 클래스
    private MainHandler handler;
    private List<ArrayList<MemberStore>> memberStores = new ArrayList<ArrayList<MemberStore>>(3);
    private TextView WelcomeNameView;

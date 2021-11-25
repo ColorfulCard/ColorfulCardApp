@@ -83,50 +83,71 @@
   <Button
       android:id="@+id/joinbutton1"
       style="?android:attr/borderlessButtonStyle"
-      android:layout_width="107dp"
-      android:layout_height="49dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginEnd="80dp"
-      android:layout_marginRight="80dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="-10dp"
+      android:layout_marginLeft="-10dp"
+      android:layout_marginTop="-11dp"
       android:text="@string/underlined_text"
       android:textColor="#000000"
       android:textSize="18sp"
       android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/button3"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/textView2"
-      app:layout_constraintTop_toBottomOf="@+id/view" />
+      app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+  <Button
+      android:id="@+id/WithdrawButton"
+      style="?android:attr/borderlessButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="회원탈퇴"
+      android:textColor="@color/dark_gray"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toBottomOf="@+id/findingIdPwButton"
+      app:layout_constraintStart_toEndOf="@+id/findingIdPwButton"
+      app:layout_constraintTop_toTopOf="@+id/findingIdPwButton" />
+
+
+  <Button
+      android:id="@+id/findingIdPwButton"
+      style="?android:attr/borderlessButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="-5dp"
+      android:text="아이디,비밀번호 찾기"
+      android:textColor="#000000"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="@+id/textView2"
+      app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
   <Button
       android:id="@+id/button3"
-      android:layout_width="280dp"
-      android:layout_height="64dp"
-      android:layout_marginStart="36dp"
-      android:layout_marginTop="58dp"
-      android:layout_marginEnd="36dp"
-      android:layout_marginBottom="101dp"
+      android:layout_width="324dp"
+      android:layout_height="67dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginBottom="100dp"
       android:text="로그인"
       android:textColor="#4E4E4E"
-      android:textSize="20sp"
+      android:textSize="23sp"
       android:textStyle="bold"
       app:backgroundTint="#FFDB58"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/joinbutton1" />
+      app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+      app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+      app:layout_constraintTop_toBottomOf="@+id/findingIdPwButton" />
 
   <TextView
       android:id="@+id/textView2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="100dp"
-      android:layout_marginLeft="100dp"
-      android:layout_marginTop="24dp"
-      android:layout_marginBottom="70dp"
+      android:layout_marginStart="60dp"
+      android:layout_marginLeft="60dp"
+      android:layout_marginTop="10dp"
       android:text="아직 회원이 아니신가요?"
-      android:textSize="16sp"
-      app:layout_constraintBottom_toTopOf="@+id/button3"
-      app:layout_constraintEnd_toStartOf="@+id/joinbutton1"
+      android:textColor="#635858"
+      android:textSize="20sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -143,5 +164,24 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+  <View
+      android:id="@+id/lineVertical"
+      android:layout_width="2dp"
+      android:layout_height="25dp"
+      android:background="@color/ddark_gray"
+      app:layout_constraintBottom_toBottomOf="@+id/findingIdPwButton"
+      app:layout_constraintEnd_toStartOf="@+id/WithdrawButton"
+      app:layout_constraintStart_toEndOf="@+id/findingIdPwButton"
+      app:layout_constraintTop_toTopOf="@+id/findingIdPwButton" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline7"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_begin="40dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -29,13 +29,13 @@ import retrofit2.Response;
 
 public class JoinActivity extends AppCompatActivity {
 
-    private EditText edit_id ,edit_pwd,edit_pwd2,edit_name, edit_email, edit_num;
-    private Button button_Join ,button_CheckID ,button_send;
-    private TextView checkIDPW,emailText;
+    private EditText edit_id, edit_pwd, edit_pwd2, edit_name, edit_email, edit_num;
+    private Button button_Join, button_CheckID, button_send;
+    private TextView checkIDPW, emailText;
     private boolean validateID = false;     //아이디 중복검사했는지
-    private boolean validateEmail= false;   //이메일 중복검사했는지
-    private boolean validatePW =false ;     //비밀번호 형식통과했는지    
-    private boolean validateEmailFormat= false; //이메일 형식통과했는지
+    private boolean validatePW = false;     //비밀번호 형식통과했는지
+    private boolean validateEmailFormat = false; //이메일 형식통과했는지
+    private boolean validateEmail = false;   //이메일 중복검사했는지
 
     private MainHandler handler;
     private int sysNumber;                  //랜덤한 인증번호 6자리
@@ -63,8 +63,6 @@ public class JoinActivity extends AppCompatActivity {
         emailText = findViewById(R.id.text_email);
 
 
-
-
         //이메일 형식에 맞는지 검사 부분
         // @랑 @뒤에 . 하나라도 있는지 보면될듯,, com형식으로 안끝나는 이메일들도 있어가지구 예: 저희학교메일 @ynu.ac.kr
         edit_email.addTextChangedListener(new TextWatcher() { //비밀번호에 리스너를 달아서
@@ -81,40 +79,49 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 Pattern p = Pattern.compile("^[0-9a-zA-Z._%+-]+@[0-9a-zA-Z.-]+\\.[a-zA-Z]{2,6}$");
-               // Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{6,}.$");
+                // Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{6,}.$");
                 Matcher m = p.matcher(s.toString());
-                Log.d("tag",s.toString());
+                Log.d("tag", s.toString());
 
                 if (!m.matches()) {
-                    Log.d("tag","정규식 성립안됨");
+                    Log.d("tag", "정규식 성립안됨");
                     emailText.setTextColor(0xAAef484a);
                     emailText.setText("이메일형식이 잘못되었습니다.");
                     validateEmailFormat = false;
-                }else{
-                    Log.d("tag","정규식 성립됨");
+                } else {
+                    Log.d("tag", "정규식 성립됨");
                     emailText.setText("");
+                    validateEmailFormat = true;
 
                 }
             }
         });
 
         button_send.setOnClickListener(new View.OnClickListener() {  //인증번호 전송 버튼 클릭시
-            @Override
-            public void onClick(View v) {
+                                           @Override
+                                           public void onClick(View v) {
 
-                String email = edit_email.getText().toString();
-                if (validateEmail) {
-                    return; //검증 완료
-                }
-                if (email.equals("")) { //사용자가 입력하지 않았을 시
-                    emailText.setTextColor(0xFF6E6E6E);
-                    Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_SHORT).show();
-                    emailText.setText("이메일을 입력하십시오");
-                    return;
-                }
+                                               String email = edit_email.getText().toString();
+                                               if (validateEmail) {
+                                                   return; //검증 완료
+                                               }
 
-                checkEmail(email);
+                                               if (email.equals("")) { //사용자가 입력하지 않았을 시
+                                                   emailText.setTextColor(0xFF6E6E6E);
+                                                   Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_SHORT).show();
+                                                   emailText.setText("이메일을 입력하십시오");
+                                                   return;
+                                               }
 
+                                               if (validateEmailFormat == false) {
+
+                                                   Toast.makeText(getApplicationContext(), "이메일형식이 잘못되었습니다.", Toast.LENGTH_SHORT).show();
+
+                                               }
+
+                                               checkEmail(email);
+                                           }
+                                       });
 
                 edit_pwd.addTextChangedListener(new TextWatcher() { //비밀번호에 리스너를 달아서
                     @Override
@@ -196,76 +203,86 @@ public class JoinActivity extends AppCompatActivity {
                         } else if (!userNumber.equals(String.valueOf(sysNumber))) {
                             Toast.makeText(getApplicationContext(), "인증번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                         } else {
-                            Server server = new Server();
-                            RetrofitService service1 = server.getRetrofitService();
-                            //인터페이스 객체구현
-                            Call<UserProfile> call = service1.postUserProfile(id, pwd, name, email);
-                            //사용할 메소드 선언
-                            call.enqueue(new Callback<UserProfile>() {
-
-                                @Override
-                                public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-
-                                    if (response.isSuccessful()) {
-                                        //메인스레드 작업가능
-                                        Log.d("tag", "회원등록성공\n");
-                                        Toast.makeText(getApplicationContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
-                                        startActivity(intent);
-                                        finish();
-
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<UserProfile> call, Throwable t) {
-                                    Log.d("tag", "네트워크 문제로 회원등록 실패" + t.getMessage());
-                                    Toast.makeText(getApplicationContext(), "회원가입 실패, 네트워크를 확인하세요", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            joinApplication(id, pwd, name, email);
 
                         }
                     }
                 });
             }
 
-            void checkEmail(String email) {
-                Server server = new Server();
-                RetrofitService service2 = server.getRetrofitService();
-                Call<UserProfile> call = service2.getUserProfilebyEmail(email);
-                call.enqueue(new Callback<UserProfile>() {
-                    @Override
-                    public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                        emailText.setTextColor(0xAAef484a);
-                        emailText.setText("이미 가입된 이메일입니다");
-                    }
+    private void joinApplication(String id, String pwd, String name, String email) {
 
-                    @Override
-                    public void onFailure(Call<UserProfile> call, Throwable t) {
+        Server server = new Server();
+        RetrofitService service1 = server.getRetrofitService();
+        //인터페이스 객체구현
+        Call<UserProfile> call = service1.postUserProfile(id, pwd, name, email);
+        //사용할 메소드 선언
+        call.enqueue(new Callback<UserProfile>() {
 
-                        emailText.setTextColor(0xFF6E6E6E);
-                        emailText.setText("인증번호를 전송합니다.");
-                        edit_email.setEnabled(false); //이메일값 고정
-                        validateEmail = true; //검증 완료
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
 
-                        Random random = new Random(); //인증번호 발생시키는 부분
-                        int range = (int) Math.pow(10, 6);
-                        int trim = (int) Math.pow(10, 5);
-                        sysNumber = random.nextInt(range) + trim;
-                        if (sysNumber > range) {
-                            sysNumber = sysNumber - trim;
-                        }
-                        Log.d("tag", sysNumber + "");
+                if (response.isSuccessful()) {
+                    //메인스레드 작업가능
+                    Log.d("tag", "회원등록성공\n");
+                    Toast.makeText(getApplicationContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
 
-                        SendNumberByMailThread thread = new SendNumberByMailThread(email, String.valueOf(sysNumber));
-                        thread.start();
-                    }
-                });
+                } else {
+                    Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
+                }
             }
 
-            void checkId(String id) {
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+                Log.d("tag", "네트워크 문제로 회원등록 실패" + t.getMessage());
+                Toast.makeText(getApplicationContext(), "회원가입 실패, 네트워크를 확인하세요", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+    }
+
+    private void checkEmail(String email) {
+            Server server = new Server();
+            RetrofitService service2 = server.getRetrofitService();
+            Call<UserProfile> call = service2.getUserProfilebyEmail(email);
+            call.enqueue(new Callback<UserProfile>() {
+                @Override
+                public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                    emailText.setTextColor(0xAAef484a);
+                    emailText.setText("이미 가입된 이메일입니다");
+                }
+
+                @Override
+                public void onFailure(Call<UserProfile> call, Throwable t) {
+
+                    emailText.setTextColor(0xFF6E6E6E);
+                    emailText.setText("인증번호를 전송합니다.");
+                    edit_email.setEnabled(false); //이메일값 고정
+                    validateEmail = true; //검증 완료
+
+                    Random random = new Random(); //인증번호 발생시키는 부분
+                    int range = (int) Math.pow(10, 6);
+                    int trim = (int) Math.pow(10, 5);
+                    sysNumber = random.nextInt(range) + trim;
+                    if (sysNumber > range) {
+                        sysNumber = sysNumber - trim;
+                    }
+                    Log.d("tag", sysNumber + "");
+
+                    SendNumberByMailThread thread = new SendNumberByMailThread(email, String.valueOf(sysNumber));
+                    thread.start();
+                }
+            });
+        }
+
+    void checkId(String id) {
                 Server server = new Server();
                 RetrofitService service1 = server.getRetrofitService();
                 Call<UserProfile> call = service1.getUserProfile(id);
@@ -300,8 +317,7 @@ public class JoinActivity extends AppCompatActivity {
 
                 });
             }
-        });
-    }
+
 
 
 

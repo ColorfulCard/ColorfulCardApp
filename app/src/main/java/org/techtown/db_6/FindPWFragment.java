@@ -76,42 +76,44 @@ public class FindPWFragment extends Fragment {
                     checkResult.setText("이름과 아이디,이메일을 모두 입력하십시오.");
                     return;
                 }
-
-                Server server = new Server();
-                RetrofitService service1 = server.getRetrofitService();
-                Call<UserProfile> call = service1.getUserProfile(id);
-
-                call.enqueue(new Callback<UserProfile>() {
-                    @Override
-                    public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                        UserProfile result = response.body();
-
-                        if (result.getName().equals(name) && result.getEmail().equals(email)) {
-
-                            checkResult.setTextColor(0xFF6E6E6E);
-                            checkResult.setText("가입하신 이메일주소로 아이디를 전송합니다.");
-                            SendPWbyMailThread thread= new SendPWbyMailThread(email,result.getPwd(),name);
-                            thread.start();
-
-                        } else {
-                            checkResult.setTextColor(0xAAef484a);
-                            checkResult.setText("해당 아이디로 가입된 회원과 이름\n혹은 이메일이 일치하지 않습니다.");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<UserProfile> call, Throwable t) {
-
-                        checkResult.setTextColor(0xAAef484a);
-                        checkResult.setText("해당 아이디로 가입된 회원이 없습니다.\n아이디를 다시 확인하십시오.");
-
-                    }
-                });
+                checkJoinUser(id,name,email);
             }
         });
         return view;
     }
 
+    void checkJoinUser(String id, String name, String email) {
+        Server server = new Server();
+        RetrofitService service1 = server.getRetrofitService();
+        Call<UserProfile> call = service1.getUserProfile(id);
+
+        call.enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                UserProfile result = response.body();
+
+                if (result.getName().equals(name) && result.getEmail().equals(email)) {
+
+                    checkResult.setTextColor(0xFF6E6E6E);
+                    checkResult.setText("가입하신 이메일주소로 아이디를 전송합니다.");
+                    SendPWbyMailThread thread = new SendPWbyMailThread(email, result.getPwd(), name);
+                    thread.start();
+
+                } else {
+                    checkResult.setTextColor(0xAAef484a);
+                    checkResult.setText("해당 아이디로 가입된 회원과 이름\n혹은 이메일이 일치하지 않습니다.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+
+                checkResult.setTextColor(0xAAef484a);
+                checkResult.setText("해당 아이디로 가입된 회원이 없습니다.\n아이디를 다시 확인하십시오.");
+
+            }
+        });
+    }
 
     class SendPWbyMailThread extends Thread {
 

@@ -25,15 +25,16 @@
 
 
         <activity android:name=".IntroActivity"></activity>
+
         <activity android:name=".AgreeActivity" />
         <activity android:name=".JoinActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-        <activity android:name=".FindingActivity"/>
-        <activity android:name=".WithDrawalActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".FindingActivity">
+
         </activity>
 
         <activity android:name=".LoginActivity"/>

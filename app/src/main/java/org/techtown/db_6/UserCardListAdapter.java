@@ -74,38 +74,7 @@ public class UserCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-                            Server server = new Server();
-                            RetrofitService service1 = server.getRetrofitService();
-                            Call<Integer> call = service1.deleteUserCard(card.getCardNum(), card.getUserID(), card.getCardName(), card.getCardType());
-
-                            call.enqueue(new Callback<Integer>() {
-
-                                @Override
-                                public void onResponse(Call<Integer> call, Response<Integer> response) {
-
-                                    if (response.isSuccessful()) {
-
-                                        Log.d("tag", "회원삭제성공\n");
-                                        notifyItemRemoved(position);
-                                        cardDataList.remove(position);
-                                        notifyItemRangeChanged(position, cardDataList.size());
-                                        //등록된 카드만 삭제하니 데이터 불일치로 삭제실패 (반환0) 인 문제는 발생하지 않음
-                                    }
-                                    else
-                                    {
-                                        Log.d("tag", "회원삭제실패\n");
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<Integer> call, Throwable t) {
-                                   // Log.d("tag", "서버 delete동작 후 반환이 int 라서 발생한 오류" + t.getMessage());
-                                    Log.d("tag", " 네트워크 문제로 회원등록 실패" + t.getMessage());
-
-                                }
-                            });
-
+                            deleteCardOnUser(position, card);
                         }
                     });
                     builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -142,6 +111,38 @@ public class UserCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
+
+    void deleteCardOnUser(int position, DataItem.CardData card) {
+        Server server = new Server();
+        RetrofitService service1 = server.getRetrofitService();
+        Call<Integer> call = service1.deleteUserCard(card.getCardNum(), card.getUserID(), card.getCardName(), card.getCardType());
+
+        call.enqueue(new Callback<Integer>() {
+
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+
+                if (response.isSuccessful()) {
+
+                    HomeActivity.user.deleteCard(card.getCardNum());
+                    Log.d("tag", "회원삭제성공\n");
+                    notifyItemRemoved(position);
+                    cardDataList.remove(position);
+                    notifyItemRangeChanged(position, cardDataList.size());
+                    //등록된 카드만 삭제하니 데이터 불일치로 삭제실패 (반환0) 인 문제는 발생하지 않음
+                } else {
+                    Log.d("tag", "회원삭제실패\n");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                // Log.d("tag", "서버 delete동작 후 반환이 int 라서 발생한 오류" + t.getMessage());
+                Log.d("tag", " 네트워크 문제로 회원등록 실패" + t.getMessage());
+
+            }
+        });
+    }
 
     @Override
     public int getItemCount()

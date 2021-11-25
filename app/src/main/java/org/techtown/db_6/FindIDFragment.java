@@ -71,34 +71,7 @@ public class FindIDFragment extends Fragment {
                     checkResult.setText("이름과 아이디를 모두 입력하십시오.");
                     return;
                 }
-                Server server = new Server();
-                RetrofitService service1 = server.getRetrofitService();
-                Call<UserProfile> call = service1.getUserProfilebyEmail(email);
-                call.enqueue(new Callback<UserProfile>() {
-                    @Override
-                    public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                        UserProfile result = response.body();
-
-                        if (result.getName().equals(name)) {
-
-                            checkResult.setTextColor(0xFF6E6E6E);
-                            checkResult.setText("가입하신 이메일주소로 아이디를 전송합니다.");
-                            SendIDbyMailThread thread = new SendIDbyMailThread(email, result.getId(), name);
-                            thread.start();
-
-                        } else {
-                            checkResult.setTextColor(0xAAef484a);
-                            checkResult.setText("해당 이메일로 가입한 회원과 이름이\n일치하지 않습니다.");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<UserProfile> call, Throwable t) {
-
-                        checkResult.setTextColor(0xAAef484a);
-                        checkResult.setText("해당 이메일로 가입된 회원이 없습니다.\n이메일을 다시 확인하십시오.");
-                    }
-                });
+              checkJoinUser(name,email);
 
             }
         });
@@ -106,6 +79,37 @@ public class FindIDFragment extends Fragment {
 
         return view;
 
+    }
+
+    private void checkJoinUser(String name, String email) {
+        Server server = new Server();
+        RetrofitService service1 = server.getRetrofitService();
+        Call<UserProfile> call = service1.getUserProfilebyEmail(email);
+        call.enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                UserProfile result = response.body();
+
+                if (result.getName().equals(name)) {
+
+                    checkResult.setTextColor(0xFF6E6E6E);
+                    checkResult.setText("가입하신 이메일주소로 아이디를 전송합니다.");
+                    SendIDbyMailThread thread = new SendIDbyMailThread(email, result.getId(), name);
+                    thread.start();
+
+                } else {
+                    checkResult.setTextColor(0xAAef484a);
+                    checkResult.setText("해당 이메일로 가입한 회원과 이름이\n일치하지 않습니다.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+
+                checkResult.setTextColor(0xAAef484a);
+                checkResult.setText("해당 이메일로 가입된 회원이 없습니다.\n이메일을 다시 확인하십시오.");
+            }
+        });
     }
 
     class SendIDbyMailThread extends Thread {
