@@ -80,7 +80,7 @@ public class RegiCardActivity extends AppCompatActivity {
                     return;
                 }
 
-                BalanceCheckThread thread= new BalanceCheckThread();
+                CertifyCheckCardThread thread= new CertifyCheckCardThread();
                 thread.start();
 
             }
@@ -123,44 +123,53 @@ public class RegiCardActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    //여기도 함수로 빼놓자...!
-                    Server server = new Server();
-                    RetrofitService service1 = server.getRetrofitService();
-                    Call<Card> call = service1.postUserCard(cardNo.toString(),user.getId(),cardName,cardType);
-                    call.enqueue(new Callback<Card>() {
 
-                        @Override
-                        public void onResponse(Call<Card> call, Response<Card> response) {
-                            if (response.isSuccessful()) {
-                                Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
-                                user.clearCardBalances();
-                                intent.putExtra("user",user);
-                                startActivity(intent);
-                                finish();
+                   InsertUserCard(cardNo, cardName, cardType);
 
-                            } else {
-                                Log.d("tag", "get 한 후 반환해올 때 getByNum한 카드가 하나가 아니여서 발생하는 오류 동작에는 문제 없음");
-                                Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
-                                user.clearCardBalances();
-                                intent.putExtra("user",user);
-                                startActivity(intent);
-                                finish();
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<Card> call, Throwable t) {
-                            Log.d("tag", "실패2" + t.getMessage());
-                        }
-                    });
                 }
             }
         });
 
     }
 
-    class BalanceCheckThread extends Thread{ //조회가 되면 인증된 카드로 취급함
+    void InsertUserCard(StringBuilder cardNo, String cardName, String cardType){
+
+
+        Server server = new Server();
+        RetrofitService service1 = server.getRetrofitService();
+        Call<Card> call = service1.postUserCard(cardNo.toString(),user.getId(),cardName,cardType);
+        call.enqueue(new Callback<Card>() {
+
+            @Override
+            public void onResponse(Call<Card> call, Response<Card> response) {
+                if (response.isSuccessful()) {
+                    Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
+                    user.clearCardBalances();
+                    intent.putExtra("user",user);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    Log.d("tag", "get 한 후 반환해올 때 getByNum한 카드가 하나가 아니여서 발생하는 오류 동작에는 문제 없음");
+                    Intent intent = new Intent(RegiCardActivity.this, HomeActivity.class);
+                    user.clearCardBalances();
+                    intent.putExtra("user",user);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Card> call, Throwable t) {
+                Log.d("tag", "실패2" + t.getMessage());
+            }
+        });
+
+    }
+
+
+    class CertifyCheckCardThread extends Thread{ //조회가 되면 인증된 카드로 취급함
 
         @Override
         public void run()

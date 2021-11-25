@@ -94,7 +94,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), "로딩중", Toast.LENGTH_SHORT).show();
                 if(user.getCards().isEmpty()) {
                     Intent intent = new Intent(HomeActivity.this, UserCardListActivity.class);
                     intent.putExtra("user", user);

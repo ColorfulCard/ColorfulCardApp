@@ -69,12 +69,11 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
-
         WithdrawBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent i = new Intent(getApplicationContext(), .class);
-               // startActivity(i);
+                Intent i = new Intent(getApplicationContext(), WithDrawalActivity.class);
+                startActivity(i);
 
             }
 

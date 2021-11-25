@@ -18,8 +18,6 @@ public class WithDrawalActivity extends AppCompatActivity {
 
     private EditText edit_id, edit_pw, edit_name;
     private Button btn_withdraw;
-    private Boolean checkJoinUser;
-    private Boolean deleteUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
