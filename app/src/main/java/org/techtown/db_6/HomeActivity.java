@@ -209,9 +209,9 @@ public class HomeActivity extends AppCompatActivity {
                                     break;
                                 }
                             }
-                            continue;
                         }
-                        //즐겨찾기 된 가맹점들은 급식,부식,교육 스토어리스트에 포함안됨.
+
+                        //즐겨찾기 된 가맹점들은 급식,부식,교육 스토어리스트에 포함됨.
                         String stype = store.getStype();
                         if (stype.equals("급식")) {
                             mealMemberStore.add(store);
