@@ -19,7 +19,7 @@ public class MemberStore implements Parcelable {
     }
 
     @SerializedName("sid")
-    private Long sid;
+    private int sid;
 
     @SerializedName("snum")
     private String snum;
@@ -41,7 +41,7 @@ public class MemberStore implements Parcelable {
 
 
     protected MemberStore(Parcel in) {
-        sid= in.readLong();
+        sid= in.readInt();
         snum = in.readString();
         sname = in.readString();
         stype = in.readString();
@@ -84,7 +84,7 @@ public class MemberStore implements Parcelable {
 
     public String getSaddress(){return saddress;}
 
-    public Long getSid() {
+    public int getSid() {
         return sid;
     }
 
@@ -108,7 +108,7 @@ public class MemberStore implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(sid.longValue());
+        dest.writeInt(sid);
         dest.writeString(snum);
         dest.writeString(sname);
         dest.writeString(stype);
