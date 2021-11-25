@@ -71,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             Log.d("tag", "들어옴 안들어옴?");
             String name = getIntent().getStringExtra("id");
-            Log.d("tag", name);
+            Log.d("tag", name+"");
             return;
         }
 
@@ -235,11 +235,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         //지도는 카메라가 아래를 내려다보는 듯한 내용이 모델링됨
 
-
         //마커이미지 결정
-    //    BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.yellowmarker);
-    //    Bitmap b=bitmapdraw.getBitmap();
-     //   Bitmap MealMarker = Bitmap.createScaledBitmap(b, 200, 200, false);
+            BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.bluemarker);
+            Bitmap b=bitmapdraw.getBitmap();
+           Bitmap MealMarker = Bitmap.createScaledBitmap(b, 100, 100, false);
+
+
 
 
         for (MemberStore store : mealMemberStore) {
@@ -248,12 +249,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             //마커에 대한 정보를 갖고 있는 객체
             markerOptions.position(new LatLng(store.getLatitude(), store.getSlongitude()))
                     .title(store.getSname())
-                    .icon(BitmapDescriptorFactory.defaultMarker(210));
+                    .icon(BitmapDescriptorFactory.fromBitmap(MealMarker));
 
-
-//                    .icon(BitmapDescriptorFactory.fromBitmap(MealMarker));
-
-
+            //
 
 
             Marker marker =googleMap.addMarker(markerOptions);
