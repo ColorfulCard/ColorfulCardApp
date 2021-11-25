@@ -15,7 +15,7 @@ public class StateSet {
 
     public class HomeMsg {
         public static final int MSG_FAIL=0;
-        public static final int MSG_SUCCESS_BALCHECK = 1;
+        public static final int MSG_SUCCESS_GETFAVORSTORE = 1;
         public static final int MSG_SUCCESS_GETSTORE = 2;
 
     }

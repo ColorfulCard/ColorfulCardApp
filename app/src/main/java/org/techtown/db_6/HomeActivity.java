@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +25,15 @@ public class HomeActivity extends AppCompatActivity {
     public static UserCard user; //사용자 클래스
     private MainHandler handler;
     private List<MemberStore> allStores= new ArrayList<>();
+    private List<Integer> userFavorStoreID = new ArrayList<>();
     private ArrayList<MemberStore> mealMemberStore = new ArrayList<>();
     private ArrayList<MemberStore> sideMealMemberStore = new ArrayList<>();
     private ArrayList<MemberStore> eduMemberStore = new ArrayList<>();
+    private ArrayList<MemberStore> favorMemberStore = new ArrayList<>();
+
     private TextView WelcomeNameView;
-    private Button RegiCardBt;
-    private Button SearchStoreBt;
+    private Button regiCardBt;      //카드등록 버튼
+    private Button findStoreBt;  //가맹점 조회버튼
 
 
     @Override
@@ -44,8 +46,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         WelcomeNameView= findViewById(R.id.nameView);
-        RegiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
-        SearchStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
+        regiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
+        findStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
 
         WelcomeNameView.setText(user.getName()+"님, 환영합니다");
 
@@ -80,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         handler = new MainHandler();
 
         //"등록된 카드" 버튼을 눌렀을 때
-        RegiCardBt.setOnClickListener(new View.OnClickListener(){
+        regiCardBt.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
@@ -99,12 +101,13 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         //가맹점 찾기 버튼을 누를 때
-        SearchStoreBt.setOnClickListener(new View.OnClickListener() {
+        findStoreBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                GetMemberStoreThread thread = new GetMemberStoreThread();
-                thread.start();
+                GetFavoriteStoreThread thread= new GetFavoriteStoreThread();
+                thread.start();     //즐겨찾기 목록 다 get하고 나면 가맹점 목록 다 들고온다.
+
             }
         });
 
@@ -115,6 +118,28 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public void run() {
 
+            Message message = handler.obtainMessage();
+
+            Server server = new Server();
+            RetrofitService service1 = server.getRetrofitService();
+            Call<List<Integer>> call= service1.getFavoriteStore(user.getId());
+
+            call.enqueue(new Callback<List<Integer>>() {
+                @Override
+                public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {
+                    if (response.isSuccessful()) {
+
+                        userFavorStoreID = response.body();
+                        Log.d("tag", "첫번째 즐찾가맹점id"+userFavorStoreID.get(0));
+                        message.what = StateSet.HomeMsg.MSG_SUCCESS_GETFAVORSTORE;
+                        handler.sendMessage(message);
+                    }
+                }
+                @Override
+                public void onFailure(Call<List<Integer>> call, Throwable t) {
+                    message.what = StateSet.HomeMsg.MSG_FAIL;
+                }
+            });
 
 
         }
@@ -138,18 +163,19 @@ public class HomeActivity extends AppCompatActivity {
 
                         allStores = response.body();
 
-                        Log.d("tag","메세지보냄");
                         message.what = StateSet.HomeMsg.MSG_SUCCESS_GETSTORE; //메시지 아이디 설정
                         handler.sendMessage(message); //메인스레드 핸들러로 메시지 보내기
 
                     }else{
                         Log.d("tag", "가맹점GET실패");
+                        message.what = StateSet.HomeMsg.MSG_FAIL;
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<MemberStore>> call, Throwable t) {
                     Log.d("tag", "가맹점GET실패2");
+                    message.what = StateSet.HomeMsg.MSG_FAIL;
 
                 }
             });
@@ -163,14 +189,30 @@ public class HomeActivity extends AppCompatActivity {
         public void handleMessage(Message message){
             switch(message.what)
             {
+                case StateSet.HomeMsg.MSG_SUCCESS_GETFAVORSTORE:
+                    GetMemberStoreThread thread = new GetMemberStoreThread();
+                    thread.start();
+                    break;
+
                 case StateSet.HomeMsg.MSG_SUCCESS_GETSTORE:
-                    Intent intent2 = new Intent(HomeActivity.this,MapActivity.class);
 
                     for (MemberStore store : allStores) {
 
-                        String stype = store.getStype();
-                        //     Long sid=  store.getSid();   여기서 즐겨찾기 목록 아이들도 넣어주기
+                        if(!userFavorStoreID.isEmpty()){
+                            //사용자가 등록한 즐겨찾기 가맹점이 있는 경우
+                            int sid=  store.getSid();
 
+                            for( int userFavorSID: userFavorStoreID) {
+                                if(sid==userFavorSID){
+                                    favorMemberStore.add(store);
+                                    Log.d("tag",sid+"");
+                                    break;
+                                }
+                            }
+                            continue;
+                        }
+                        //즐겨찾기 된 가맹점들은 급식,부식,교육 스토어리스트에 포함안됨.
+                        String stype = store.getStype();
                         if (stype.equals("급식")) {
                             mealMemberStore.add(store);
                         } else if (stype.equals("교육")) {
@@ -180,9 +222,11 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     }
 
+                    Intent intent2 = new Intent(HomeActivity.this,MapActivity.class);
                     intent2.putParcelableArrayListExtra("eduMemberStores", eduMemberStore);
                     intent2.putParcelableArrayListExtra("sideMealMemberStores", sideMealMemberStore);
                     intent2.putParcelableArrayListExtra("mealMemberStores", mealMemberStore);
+                    intent2.putParcelableArrayListExtra("favorMemberStores",favorMemberStore);
                     startActivity(intent2);
                     break;
 
