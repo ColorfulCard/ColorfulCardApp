@@ -205,7 +205,7 @@ public class HomeActivity extends AppCompatActivity {
                             for( int userFavorSID: userFavorStoreID) {
                                 if(sid==userFavorSID){
                                     favorMemberStore.add(store);
-                                    Log.d("tag",sid+"");
+                                  //  Log.d("tag",sid+"");
                                     break;
                                 }
                             }
