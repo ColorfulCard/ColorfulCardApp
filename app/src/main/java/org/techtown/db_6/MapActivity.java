@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,7 +49,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap googleMap;
     View card_view;
     Button mealBtn, sideBtn, eduBtn, favorBtn;
-    ImageButton call;
+    ImageButton call, emptyStar, fullStar;
     ImageView searchimage;
     ArrayList<Marker> mealMarker = new ArrayList<Marker>();
     ArrayList<Marker> sideMealMarker = new ArrayList<Marker>();
@@ -86,6 +87,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         searchimage = (ImageView) findViewById(R.id.sv_location);
         call=(ImageButton)findViewById(R.id.call);
+        emptyStar=(ImageButton)findViewById(R.id.emptyStar);
+        fullStar=(ImageButton)findViewById(R.id.fullStar);
 
         searchimage.getBackground().setAlpha(140);
 
@@ -459,6 +462,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     startActivity(intent);
                 }
             });
+
+            //빈 별을 눌렀다 -> 즐겨찾기를 등록할거다
+            emptyStar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //emptyStar-> gone , fullStar-> visible
+                    //favorMemberStore에 해당 즐찾 추가하기
+                    //해당 마커 즐찾마커로 변경하기
+                    //DB에 즐겨찾기 등록
+
+                }
+            });
+
+            // 꽉찬 별을 눌렀다 -> 즐겨찾기를 해제할거다
+            fullStar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //fullStar-> gone  , emptyStar-> visible
+                    //favorMemberStore에 해당 즐찾 없애기
+                    //해당 마커 기존에 유형에 따른 마커로 변경하기
+                    //DB에 즐겨찾기 해제
+
+                }
+            });
+
+
 
             return false;
         }
