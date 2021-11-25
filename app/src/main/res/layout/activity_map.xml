@@ -63,8 +63,19 @@
             android:layout_marginLeft="20dp"
             android:backgroundTint="#FFDB58"
             android:text="교육"
-            android:textColor="#000000"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/favorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="65dp"
+            android:backgroundTint="#ff4040"
+            android:text="즐겨찾기"
+            android:textStyle="bold" />
+
 
     </RadioGroup>
 

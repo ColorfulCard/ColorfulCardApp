@@ -10,7 +10,9 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -233,12 +235,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         //지도는 카메라가 아래를 내려다보는 듯한 내용이 모델링됨
 
+
+        //마커이미지 결정
+    //    BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.yellowmarker);
+    //    Bitmap b=bitmapdraw.getBitmap();
+     //   Bitmap MealMarker = Bitmap.createScaledBitmap(b, 200, 200, false);
+
+
         for (MemberStore store : mealMemberStore) {
+
             MarkerOptions markerOptions = new MarkerOptions();
             //마커에 대한 정보를 갖고 있는 객체
             markerOptions.position(new LatLng(store.getLatitude(), store.getSlongitude()))
                     .title(store.getSname())
                     .icon(BitmapDescriptorFactory.defaultMarker(210));
+
+
+//                    .icon(BitmapDescriptorFactory.fromBitmap(MealMarker));
+
+
+
 
             Marker marker =googleMap.addMarker(markerOptions);
             marker.setTag(store);

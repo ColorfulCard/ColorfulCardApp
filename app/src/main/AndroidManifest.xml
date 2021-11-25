@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.techtown.db_6">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -16,42 +17,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Db6"
         android:usesCleartextTraffic="true">
+        <activity android:name=".PostingActivity"></activity>
+
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false"/>
+            android:required="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDGJZuJ7IXdJzfyQOIgUOmSU7JiUtOmH-A" />
 
-
-        <activity android:name=".IntroActivity"></activity>
-
+        <activity android:name=".IntroActivity" />
         <activity android:name=".AgreeActivity" />
-        <activity android:name=".JoinActivity" >
-
-        </activity>
-        <activity android:name=".FindingActivity">
-
-        </activity>
-
+        <activity android:name=".JoinActivity"></activity>
+        <activity android:name=".FindingActivity"></activity>
         <activity android:name=".LoginActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".HomeActivity" />
-
         <activity android:name=".RegiCardActivity" />
-        <activity android:name=".LoadingActivity"/>
+        <activity android:name=".LoadingActivity" />
         <activity android:name=".UserCardListActivity" />
-
-        <activity android:name=".SearchStoreActivity"/>
-        <activity android:name=".MapActivity"> </activity>
-        <activity android:name=".Map2Activity"> </activity>
-
+        <activity android:name=".SearchStoreActivity" />
+        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".Map2Activity"></activity>
     </application>
 
 </manifest>
