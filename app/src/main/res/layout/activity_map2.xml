@@ -90,12 +90,15 @@
 
                     <ImageButton
                         android:id="@+id/imageButton3"
-                        android:layout_width="96dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="-25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="100dp"
                         android:background="@color/white"
+                        android:padding="0dp"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/favorstar" />
+                        app:srcCompat="@drawable/notfavorstar" />
 
                     <ImageButton
                         android:id="@+id/call"
