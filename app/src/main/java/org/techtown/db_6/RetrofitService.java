@@ -44,12 +44,14 @@ public interface RetrofitService {
             @Field("cardType") String cardType
     );
 
-    @GET("storeType/{store_type}")
-    Call<List<MemberStore>> getStorebyType (@Path("store_type") String store_type);
+    @GET("storeType/{stype}")
+    Call<List<MemberStore>> getStorebyType (@Path("stype") String stype);
 
-    @GET("storeName/{store_name}") //이름으로 검색해서 가져오는 것
-    Call<List<MemberStore>> getStorebyName (@Path("store_name") String store_name);
+    @GET("storeName/{sname}") //이름으로 검색해서 가져오는 것
+    Call<List<MemberStore>> getStorebyName (@Path("sname") String sname);
 
+    @GET("storeAll")
+    Call<List<MemberStore>> getAllStore();
 
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "/card/delete", hasBody = true)

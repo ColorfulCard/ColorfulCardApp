@@ -17,11 +17,11 @@
 
   <ImageView
       android:id="@+id/imageView4"
-      android:layout_width="188dp"
-      android:layout_height="52dp"
+      android:layout_width="195dp"
+      android:layout_height="64dp"
       android:layout_marginStart="111dp"
       android:layout_marginLeft="111dp"
-      android:layout_marginTop="80dp"
+      android:layout_marginTop="60dp"
       android:layout_marginEnd="112dp"
       android:layout_marginRight="112dp"
       android:layout_marginBottom="32dp"
@@ -59,7 +59,7 @@
       android:id="@+id/textInputLayout2"
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
       android:layout_width="0dp"
-      android:layout_height="61dp"
+      android:layout_height="wrap_content"
       android:layout_marginLeft="40dp"
       android:layout_marginRight="40dp"
       android:layout_marginBottom="20dp"
@@ -75,7 +75,7 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_pwd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:inputType="textPassword" />
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,12 +85,12 @@
       style="?android:attr/borderlessButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="-10dp"
-      android:layout_marginLeft="-10dp"
-      android:layout_marginTop="-11dp"
+      android:layout_marginStart="-5dp"
+      android:layout_marginLeft="-5dp"
+      android:layout_marginTop="-13dp"
       android:text="@string/underlined_text"
       android:textColor="#000000"
-      android:textSize="18sp"
+      android:textSize="16sp"
       android:textStyle="bold"
       app:layout_constraintStart_toEndOf="@+id/textView2"
       app:layout_constraintTop_toTopOf="@+id/textView2" />
@@ -102,9 +102,10 @@
       android:layout_height="wrap_content"
       android:text="회원탈퇴"
       android:textColor="@color/dark_gray"
-      android:textSize="18sp"
+      android:textSize="16sp"
       android:textStyle="bold"
       app:layout_constraintBottom_toBottomOf="@+id/findingIdPwButton"
+      app:layout_constraintEnd_toEndOf="@+id/joinbutton1"
       app:layout_constraintStart_toEndOf="@+id/findingIdPwButton"
       app:layout_constraintTop_toTopOf="@+id/findingIdPwButton" />
 
@@ -114,17 +115,19 @@
       style="?android:attr/borderlessButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginStart="-15dp"
+      android:layout_marginLeft="-15dp"
       android:layout_marginTop="-5dp"
       android:text="아이디,비밀번호 찾기"
       android:textColor="#000000"
-      android:textSize="18sp"
+      android:textSize="16sp"
       android:textStyle="bold"
       app:layout_constraintStart_toStartOf="@+id/textView2"
       app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
   <Button
       android:id="@+id/button3"
-      android:layout_width="324dp"
+      android:layout_width="310dp"
       android:layout_height="67dp"
       android:layout_marginTop="10dp"
       android:layout_marginBottom="100dp"
@@ -142,12 +145,15 @@
       android:id="@+id/textView2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="60dp"
-      android:layout_marginLeft="60dp"
-      android:layout_marginTop="10dp"
+      android:layout_marginStart="70dp"
+      android:layout_marginLeft="70dp"
+      android:layout_marginTop="15dp"
+      android:layout_marginEnd="150dp"
+      android:layout_marginRight="150dp"
       android:text="아직 회원이 아니신가요?"
       android:textColor="#635858"
-      android:textSize="20sp"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -168,7 +174,7 @@
   <View
       android:id="@+id/lineVertical"
       android:layout_width="2dp"
-      android:layout_height="25dp"
+      android:layout_height="16dp"
       android:background="@color/ddark_gray"
       app:layout_constraintBottom_toBottomOf="@+id/findingIdPwButton"
       app:layout_constraintEnd_toStartOf="@+id/WithdrawButton"

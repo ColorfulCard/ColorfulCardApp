@@ -49,16 +49,16 @@ public class SearchStoreListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if(holder instanceof SearchStoreViewHolder)
         {
              MemberStore store= mapDataList.get(position).getStore();
-            ((SearchStoreViewHolder) holder).store_name.setText(store.getStore_name());
-            ((SearchStoreViewHolder) holder).store_address.setText(store.getStore_address());
-            ((SearchStoreViewHolder) holder).store_type.setText(store.getStore_type());
+            ((SearchStoreViewHolder) holder).store_name.setText(store.getSname());
+            ((SearchStoreViewHolder) holder).store_address.setText(store.getSaddress());
+            ((SearchStoreViewHolder) holder).store_type.setText(store.getStype());
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    choiceStore = new MemberStore(store.getStore_num(),store.getStore_name(),store.getStore_type(),store.getStore_address(), BigDecimal.valueOf(store.getLatitude()),BigDecimal.valueOf(store.getStore_Longitude()));
+                    choiceStore = new MemberStore(store.getSnum(),store.getSname(),store.getStype(),store.getSaddress(), BigDecimal.valueOf(store.getLatitude()),BigDecimal.valueOf(store.getSlongitude()));
                     Intent intent = new Intent(v.getContext(),Map2Activity.class);
 
                     intent.putExtra("choiceStore",choiceStore);

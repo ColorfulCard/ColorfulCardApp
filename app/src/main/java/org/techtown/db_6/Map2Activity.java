@@ -46,7 +46,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         choiceStoreName=findViewById(R.id.choiceStoreName);
-        choiceStoreName.setText(choiceStore.getStore_name());
+        choiceStoreName.setText(choiceStore.getSname());
 
         sv_location2=findViewById(R.id.sv_location2);
         sv_location2.getBackground().setAlpha(160);
@@ -64,11 +64,11 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
         TextView name = (TextView)findViewById(R.id.st_name);
         TextView num =(TextView)findViewById(R.id.st_num);
         TextView address=(TextView)findViewById(R.id.st_address);
-        name.setText(choiceStore.getStore_name());
-        num.setText(choiceStore.getStore_num());
-        address.setText(choiceStore.getStore_address());
+        name.setText(choiceStore.getSname());
+        num.setText(choiceStore.getSnum());
+        address.setText(choiceStore.getSaddress());
 
-        String st_num=choiceStore.getStore_num().toString();
+        String st_num=choiceStore.getSnum().toString();
         st_num=st_num.replace("-","");
         String tell;
         tell="tel:"+st_num;
@@ -99,7 +99,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
         this.googleMap = googleMap;
 
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(17));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(choiceStore.getLatitude(),choiceStore.getStore_Longitude())));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(choiceStore.getLatitude(),choiceStore.getSlongitude())));
 
         //지도는 카메라가 아래를 내려다보는 듯한 내용이 모델링됨
 
@@ -109,10 +109,10 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
             checkLocationPermissionWithRationale();
         }
 
-        if(choiceStore.getStore_type().equals("급식"))
+        if(choiceStore.getStype().equals("급식"))
 
             hue=210;
-        else if(choiceStore.getStore_type().equals("부식"))
+        else if(choiceStore.getStype().equals("부식"))
             hue=145;
         else
             hue=55;
@@ -120,8 +120,8 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
 
         MarkerOptions markerOptions = new MarkerOptions();
         //마커에 대한 정보를 갖고 있는 객체
-        markerOptions.position(new LatLng(choiceStore.getLatitude(), choiceStore.getStore_Longitude()))
-                .title(choiceStore.getStore_name())
+        markerOptions.position(new LatLng(choiceStore.getLatitude(), choiceStore.getSlongitude()))
+                .title(choiceStore.getSname())
                 .icon(BitmapDescriptorFactory.defaultMarker(hue));
 
         Marker marker =googleMap.addMarker(markerOptions);

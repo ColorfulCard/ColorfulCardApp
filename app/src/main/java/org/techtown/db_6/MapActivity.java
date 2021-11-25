@@ -75,8 +75,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         for(MemberStore store : sideMealMemberStore)  //확인용
         {
-            System.out.println("부식: " + store.getStore_type());
-            System.out.println("부식: " + store.getStore_address());
+            System.out.println("부식: " + store.getStype());
+            System.out.println("부식: " + store.getSaddress());
         }
 
         super.onCreate(savedInstanceState);
@@ -236,8 +236,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         for (MemberStore store : mealMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
             //마커에 대한 정보를 갖고 있는 객체
-            markerOptions.position(new LatLng(store.getLatitude(), store.getStore_Longitude()))
-                    .title(store.getStore_name())
+            markerOptions.position(new LatLng(store.getLatitude(), store.getSlongitude()))
+                    .title(store.getSname())
                     .icon(BitmapDescriptorFactory.defaultMarker(210));
 
             Marker marker =googleMap.addMarker(markerOptions);
@@ -247,8 +247,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         for(MemberStore store: sideMealMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(store.getLatitude(),store.getStore_Longitude()))
-                    .title(store.getStore_name())
+            markerOptions.position(new LatLng(store.getLatitude(),store.getSlongitude()))
+                    .title(store.getSname())
                     .icon(BitmapDescriptorFactory.defaultMarker(90));
 
             Marker marker =googleMap.addMarker(markerOptions);
@@ -258,8 +258,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         for(MemberStore store: eduMemberStore) {
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(store.getLatitude(),store.getStore_Longitude()))
-                    .title(store.getStore_name())
+            markerOptions.position(new LatLng(store.getLatitude(),store.getSlongitude()))
+                    .title(store.getSname())
                     .icon(BitmapDescriptorFactory.defaultMarker(55));
 
             Marker marker =googleMap.addMarker(markerOptions);
@@ -335,11 +335,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             TextView address=(TextView)findViewById(R.id.st_address);
 
             MemberStore store = (MemberStore) marker.getTag();
-            name.setText(store.getStore_name());
-            num.setText(store.getStore_num());
-            address.setText(store.getStore_address());
+            name.setText(store.getSname());
+            num.setText(store.getSnum());
+            address.setText(store.getSaddress());
 
-            String st_num=store.getStore_num().toString();
+            String st_num=store.getSnum().toString();
             st_num=st_num.replace("-","");
             String tell;
             tell="tel:"+st_num;

@@ -236,7 +236,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(HomeActivity.this,MapActivity.class);
 
                     for(int i=0;i<3;i++){  //빨리들어오는 순대로 리스트에 추가되기 때문에,,, 순서에 따른 타입 체크카 필요함.
-                       String type = memberStores.get(i).get(0).getStore_type();
+                       String type = memberStores.get(i).get(0).getStype();
                        if(type.equals("교육")){
                            intent2.putParcelableArrayListExtra("eduMemberStores", memberStores.get(i));
                        }
