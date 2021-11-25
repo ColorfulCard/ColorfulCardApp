@@ -237,9 +237,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         //마커이미지 결정
-    //    BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.yellowmarker);
-    //    Bitmap b=bitmapdraw.getBitmap();
-     //   Bitmap MealMarker = Bitmap.createScaledBitmap(b, 200, 200, false);
+        BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.yellowmarker2);
+        Bitmap b=bitmapdraw.getBitmap();
+        Bitmap MealMarker = Bitmap.createScaledBitmap(b, 200, 200, false);
 
 
         for (MemberStore store : mealMemberStore) {
@@ -248,10 +248,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             //마커에 대한 정보를 갖고 있는 객체
             markerOptions.position(new LatLng(store.getLatitude(), store.getSlongitude()))
                     .title(store.getSname())
-                    .icon(BitmapDescriptorFactory.defaultMarker(210));
+                    .icon(BitmapDescriptorFactory.fromBitmap(MealMarker));
 
 
-//                    .icon(BitmapDescriptorFactory.fromBitmap(MealMarker));
+
 
 
 
