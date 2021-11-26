@@ -130,7 +130,6 @@ public class HomeActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
 
                         userFavorStoreID = response.body();
-                        Log.d("tag", "첫번째 즐찾가맹점id"+userFavorStoreID.get(0));
                         message.what = StateSet.HomeMsg.MSG_SUCCESS_GETFAVORSTORE;
                         handler.sendMessage(message);
                     }

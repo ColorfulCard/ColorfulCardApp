@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:visibility="visible"
     tools:context=".PostingActivity">
 
@@ -30,15 +30,15 @@
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.443"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.516" />
 
     <ImageButton
-        android:id="@+id/searchImage"
+        android:id="@+id/imageButton2"
         android:layout_width="40dp"
-        android:layout_height="27dp"
+        android:layout_height="35dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:background="@color/light_yellow"
@@ -49,40 +49,20 @@
         app:layout_constraintTop_toTopOf="@+id/addCardTitle" />
 
     <Spinner
-        android:id="@+id/orderby"
+        android:id="@+id/SortingSpinner"
         android:layout_width="65dp"
-        android:layout_height="32dp"
-        android:layout_gravity="center"
-        android:background="@drawable/spinnerborder"
-        android:textAlignment="center"
-        android:textColor="@color/dark_gray"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-10dp"
+        android:layout_marginLeft="-10dp"
+        android:background="@"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/searchImage"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/searchImage"
-        app:layout_constraintTop_toTopOf="@+id/searchImage" />
-
-    <ImageButton
-        android:id="@+id/writting"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="500dp"
-        android:background="#FFFFFF"
-        android:scaleType="centerInside"
-        android:src="@drawable/writeicon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderby" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="409dp"
-        android:layout_height="537dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="61dp" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
