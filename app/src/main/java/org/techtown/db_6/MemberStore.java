@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 
 public class MemberStore implements Parcelable {
 
-    public MemberStore(String snum, String store_name, String stype, String saddress, BigDecimal latitude, BigDecimal longitude) {
+    public MemberStore(int sid, String snum, String store_name, String stype, String saddress, BigDecimal latitude, BigDecimal longitude) {
 
+        this.sid= sid;
         this.snum = snum;
         this.sname = store_name;
         this.stype = stype;

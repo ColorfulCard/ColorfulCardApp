@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="-10dp"
         android:layout_marginLeft="-10dp"
-        android:background="@"
+        android:background="@color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"

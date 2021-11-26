@@ -20,7 +20,7 @@ public class SearchStoreListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 {
 
-    private ArrayList<DataItem.MapData> mapDataList =null;
+    static public ArrayList<DataItem.MapData> mapDataList =null;
     public MemberStore choiceStore=null;
     SearchStoreListAdapter(ArrayList<DataItem.MapData> dataList)
     {
@@ -58,7 +58,7 @@ public class SearchStoreListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public void onClick(View v) {
 
-                    choiceStore = new MemberStore(store.getSnum(),store.getSname(),store.getStype(),store.getSaddress(), BigDecimal.valueOf(store.getLatitude()),BigDecimal.valueOf(store.getSlongitude()));
+                    choiceStore = new MemberStore(store.getSid(),store.getSnum(),store.getSname(),store.getStype(),store.getSaddress(), BigDecimal.valueOf(store.getLatitude()),BigDecimal.valueOf(store.getSlongitude()));
                     Intent intent = new Intent(v.getContext(),Map2Activity.class);
 
                     intent.putExtra("choiceStore",choiceStore);
