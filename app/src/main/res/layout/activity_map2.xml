@@ -43,7 +43,7 @@
         android:textColor="@color/black"
         android:textSize="16sp" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/card_view"
         android:layout_width="400dp"
         android:layout_height="115dp"
@@ -53,15 +53,18 @@
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
         android:layout_marginBottom="78dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
             app:cardBackgroundColor="#ffffff"
             app:cardCornerRadius="20dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -71,11 +74,9 @@
                 android:orientation="vertical">
 
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -83,52 +84,60 @@
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="8dp"
                         android:gravity="center|left"
                         android:text="이름"
                         android:textColor="#000000"
                         android:textSize="9pt"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
                         android:id="@+id/emptyStar"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="9dp"
+                        android:layout_marginTop="6dp"
                         android:background="@color/white"
                         android:padding="0dp"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/notfavorstar"
-                        android:visibility="visible"/>
+                        android:visibility="visible"
+                        app:layout_constraintStart_toEndOf="@+id/st_name"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/favorstar" />
 
                     <ImageButton
                         android:id="@+id/fullStar"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="9dp"
+                        android:layout_marginTop="6dp"
                         android:background="@color/white"
                         android:padding="0dp"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/favorstar"
-                        android:visibility="gone"/>
-
+                        android:visibility="gone"
+                        app:layout_constraintStart_toEndOf="@+id/st_name"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/favorstar" />
 
                     <ImageButton
                         android:id="@+id/call"
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginLeft="200dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
                         android:padding="0dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/phonecall" />
+                        android:src="@drawable/phonecall"
+                        app:layout_constraintBottom_toBottomOf="@+id/emptyStar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/emptyStar" />
 
-
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -183,7 +192,7 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>
