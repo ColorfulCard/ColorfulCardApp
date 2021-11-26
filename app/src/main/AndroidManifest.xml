@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Db6"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".WritingPosting"></activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -27,26 +27,19 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDGJZuJ7IXdJzfyQOIgUOmSU7JiUtOmH-A" />
 
-
         <activity android:name=".IntroActivity" />
         <activity android:name=".AgreeActivity" />
-        <activity android:name=".JoinActivity"/>
-        <activity android:name=".FindingActivity"/>
-        <activity android:name=".WithDrawalActivity"/>
-        <activity android:name=".LoginActivity">
-        </activity>
-
+        <activity android:name=".JoinActivity" />
+        <activity android:name=".FindingActivity" />
+        <activity android:name=".WithDrawalActivity" />
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".HomeActivity" />
-
         <activity android:name=".RegiCardActivity" />
         <activity android:name=".LoadingActivity" />
         <activity android:name=".UserCardListActivity" />
-
         <activity android:name=".SearchStoreActivity" />
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".Map2Activity"></activity>
-
-
+        <activity android:name=".MapActivity" />
+        <activity android:name=".Map2Activity" />
         <activity android:name=".PostingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,7 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
