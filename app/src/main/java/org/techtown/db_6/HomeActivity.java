@@ -227,6 +227,7 @@ public class HomeActivity extends AppCompatActivity {
                     intent2.putParcelableArrayListExtra("sideMealMemberStores", sideMealMemberStore);
                     intent2.putParcelableArrayListExtra("mealMemberStores", mealMemberStore);
                     intent2.putParcelableArrayListExtra("favorMemberStores",favorMemberStore);
+                    intent2.putExtra("userID", user.getId());
                     startActivity(intent2);
                     break;
 

@@ -16,6 +16,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,8 +45,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     ArrayList<MemberStore> mealMemberStore;
     ArrayList<MemberStore> sideMealMemberStore;
     ArrayList<MemberStore> eduMemberStore;
-    ArrayList<MemberStore> favorMemberStore;
-
+    static ArrayList<MemberStore> favorMemberStore;
+    String userID;
     private GoogleMap googleMap;
     View card_view;
     Button mealBtn, sideBtn, eduBtn, favorBtn;
@@ -68,7 +69,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         sideMealMemberStore=intent.getParcelableArrayListExtra("sideMealMemberStores");
         eduMemberStore=intent.getParcelableArrayListExtra("eduMemberStores");
         favorMemberStore=intent.getParcelableArrayListExtra("favorMemberStores");
-
+        userID= intent.getStringExtra("userID");
 
         for(MemberStore store : sideMealMemberStore)  //확인용
         {
@@ -113,6 +114,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 mealBtnFlag =!mealBtnFlag;
                 if(mealBtnFlag) //true면 급식만 보여줌
                 {
+                    if(sideBtnFlag==true){      //만약 다른버튼이 눌러져있는 상태라면 안눌린 상태로 다 바꿔준다. 급식만 눌러진 상태로 만들기 위함
+                        sideBtnFlag=false;
+                        sideBtn.setBackgroundColor(Color.parseColor("#16A085"));
+                    }
+                    if(eduBtnFlag==true){
+                        eduBtnFlag=false;
+                        eduBtn.setBackgroundColor(Color.parseColor("#FFDB58"));
+                    }
+                    if(favorBtnFlag==true){
+                        favorBtnFlag=false;
+                        favorBtn.setBackgroundColor(Color.parseColor("#ff4040"));
+                    }
+
                     for (Marker marker : mealMarker) {
                         marker.setVisible(true);
                     }
@@ -127,6 +141,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         MemberStore store= (MemberStore) marker.getTag();
                         if(store.getStype().equals("급식")){
                             marker.setVisible(true);
+                        }else{
+                            marker.setVisible(false);
                         }
                     }
                     mealBtn.setBackgroundColor(Color.parseColor("#133A55"));   //눌렀을 떄 색깔
@@ -157,9 +173,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         sideBtn.setOnClickListener(new View.OnClickListener() { //부식클릭시
             @Override
             public void onClick(View v) {
+
                 sideBtnFlag =!sideBtnFlag;
                 if(sideBtnFlag)
                 {
+                    if(mealBtnFlag==true){
+                        mealBtnFlag=false;
+                        mealBtn.setBackgroundColor(Color.parseColor("#2980B9"));
+                    }
+                    if(eduBtnFlag==true){
+                        eduBtnFlag=false;
+                        eduBtn.setBackgroundColor(Color.parseColor("#FFDB58"));
+                    }
+                    if(favorBtnFlag==true){
+                        favorBtnFlag=false;
+                        favorBtn.setBackgroundColor(Color.parseColor("#ff4040"));
+                    }
+
                     for(Marker marker : sideMealMarker) {
                         marker.setVisible(true);
                     }
@@ -172,8 +202,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : favorMarker) {
                         //부식 유형인 즐겨찾기 마커를 보여준다.
                         MemberStore store= (MemberStore) marker.getTag();
+                        Log.d("tag",store.getStype()+"");
                         if(store.getStype().equals("부식")){
                             marker.setVisible(true);
+                        }else{
+                            marker.setVisible(false);
                         }
                     }
                     sideBtn.setBackgroundColor(Color.parseColor("#0B4D40"));
@@ -207,6 +240,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 eduBtnFlag = !eduBtnFlag;
                 if (eduBtnFlag) {
+
+                    if(sideBtnFlag==true){      //만약 다른버튼이 눌러져있는 상태라면 안눌린 상태로 다 바꿔준다. 급식만 눌러진 상태로 만들기 위함
+                        sideBtnFlag=false;
+                        sideBtn.setBackgroundColor(Color.parseColor("#16A085"));
+                    }
+                    if(mealBtnFlag==true){
+                        mealBtnFlag=false;
+                        mealBtn.setBackgroundColor(Color.parseColor("#2980B9"));
+                    }
+                    if(favorBtnFlag==true){
+                        favorBtnFlag=false;
+                        favorBtn.setBackgroundColor(Color.parseColor("#ff4040"));
+                    }
+
                     for (Marker marker : eduMarker) {
                         marker.setVisible(true);
                     }
@@ -221,6 +268,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         MemberStore store= (MemberStore) marker.getTag();
                         if(store.getStype().equals("교육")){
                             marker.setVisible(true);
+                        }else{
+                            marker.setVisible(false);
                         }
                     }
                     eduBtn.setBackgroundColor(Color.parseColor("#D9A800"));
@@ -237,6 +286,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         for (Marker marker : favorMarker) {
                             marker.setVisible(true);
                         }
+
+                        for (Marker marker : eduMarker) {
+                            marker.setVisible(true);
+                        }
                     }
 
                     eduBtn.setBackgroundColor(Color.parseColor("#FFDB58"));
@@ -245,12 +298,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-        eduBtn.setOnClickListener(new View.OnClickListener() {
+        favorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 favorBtnFlag = !favorBtnFlag;
                 if (favorBtnFlag) {   //즐겨찾기만 보여준다
+
+                    if(sideBtnFlag==true){      //만약 다른버튼이 눌러져있는 상태라면 안눌린 상태로 다 바꿔준다. 즐겨찾기만 눌러진 상태로 만들기 위함
+                        sideBtnFlag=false;
+                        sideBtn.setBackgroundColor(Color.parseColor("#16A085"));
+                    }
+                    if(mealBtnFlag==true){
+                        mealBtnFlag=false;
+                        mealBtn.setBackgroundColor(Color.parseColor("#2980B9"));
+                    }
+                    if(eduBtnFlag==true){
+                        eduBtnFlag=false;
+                        eduBtn.setBackgroundColor(Color.parseColor("#FFDB58"));
+                    }
 
                     for (Marker marker : eduMarker) {
                         marker.setVisible(false);
@@ -469,9 +535,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 public void onClick(View v) {
 
                     //emptyStar-> gone , fullStar-> visible
+                    emptyStar.setVisibility(View.GONE);
+                    fullStar.setVisibility(View.VISIBLE);
+
                     //favorMemberStore에 해당 즐찾 추가하기
+                    favorMemberStore.add(store);
+
                     //해당 마커 즐찾마커로 변경하기
+                    //마커이미지 결정
+                    BitmapDrawable bitmapDraw4=(BitmapDrawable)getResources().getDrawable(R.drawable.favormarker);
+                    Bitmap b4=bitmapDraw4.getBitmap();
+                    Bitmap favorCustomMarker = Bitmap.createScaledBitmap(b4, 60, 60, false);
+                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(favorCustomMarker));
                     //DB에 즐겨찾기 등록
+
+                    Server server = new Server();
+                    RetrofitService service= server.getRetrofitService();
+                  //  Call<Integer> call=  service.postFavoriteStore("userID",store.getSid());
+
 
                 }
             });
