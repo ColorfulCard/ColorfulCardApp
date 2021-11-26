@@ -82,7 +82,7 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "/favorStore/delete", hasBody = true)
-    Call<Integer> deleteUserCard(@Field("uid") String uid,
+    Call<Integer> deleteFavoriteStore(@Field("uid") String uid,
                                  @Field("sid") int sid);
 
 

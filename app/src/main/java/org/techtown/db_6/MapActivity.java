@@ -16,7 +16,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +36,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -71,6 +74,30 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         favorMemberStore=intent.getParcelableArrayListExtra("favorMemberStores");
         userID= intent.getStringExtra("userID");
 
+       for( int i=0;i<favorMemberStore.size();i++) {
+
+           int favorSid= favorMemberStore.get(i).getSid();
+
+           for( int j=0;j<mealMemberStore.size();j++){
+              if( mealMemberStore.get(j).getSid()==favorSid){
+                  mealMemberStore.remove(j);
+                  Log.d("tag",favorSid+"급식 정보에서 삭제함");
+                  break;
+              }
+           }
+           for( int j=0;j<sideMealMemberStore.size();j++){
+               if( sideMealMemberStore.get(j).getSid()==favorSid){
+                   sideMealMemberStore.remove(j);
+                   break;
+               }
+           }
+           for( int j=0;j<eduMemberStore.size();j++){
+               if( eduMemberStore.get(j).getSid()==favorSid){
+                   eduMemberStore.remove(j);
+                   break;
+               }
+           }
+       }
         for(MemberStore store : sideMealMemberStore)  //확인용
         {
             System.out.println("부식: " + store.getStype());
@@ -137,9 +164,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         marker.setVisible(false);
                     }
                     for (Marker marker : favorMarker) {
+
                         //급식 유형인 즐겨찾기 마커를 보여준다.
                         MemberStore store= (MemberStore) marker.getTag();
                         if(store.getStype().equals("급식")){
+                            Log.d("tag",store.getSname()+"  "+store.getSid());
                             marker.setVisible(true);
                         }else{
                             marker.setVisible(false);
@@ -202,7 +231,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for (Marker marker : favorMarker) {
                         //부식 유형인 즐겨찾기 마커를 보여준다.
                         MemberStore store= (MemberStore) marker.getTag();
-                        Log.d("tag",store.getStype()+"");
+                      //  Log.d("tag",store.getStype()+"");
                         if(store.getStype().equals("부식")){
                             marker.setVisible(true);
                         }else{
@@ -512,6 +541,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             TextView address=(TextView)findViewById(R.id.st_address);
 
             MemberStore store = (MemberStore) marker.getTag();
+
+            if(favorMemberStore.contains(store)){    //즐겨찾기에 등록된 가맹점이라면
+                BitmapDrawable bitmapDraw4=(BitmapDrawable)getResources().getDrawable(R.drawable.favormarker);
+                Bitmap b4=bitmapDraw4.getBitmap();
+                Bitmap favorCustomMarker = Bitmap.createScaledBitmap(b4, 60, 60, false);
+                marker.setIcon(BitmapDescriptorFactory.fromBitmap(favorCustomMarker));
+
+                Log.d("tag","즐찾에 포함된 급식카드"+store.getSname());
+                emptyStar.setVisibility(View.GONE);
+                fullStar.setVisibility(View.VISIBLE);
+            }else{
+                emptyStar.setVisibility(View.VISIBLE);
+                fullStar.setVisibility(View.GONE);
+            }
+            //기본값이 빈별이 보이는 것임
+
             name.setText(store.getSname());
             num.setText(store.getSnum());
             address.setText(store.getSaddress());
@@ -551,7 +596,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     Server server = new Server();
                     RetrofitService service= server.getRetrofitService();
-                  //  Call<Integer> call=  service.postFavoriteStore("userID",store.getSid());
+                    Call<Integer> call=  service.postFavoriteStore(userID,store.getSid());
+
+                    call.enqueue(new Callback<Integer>() {
+                        @Override
+                        public void onResponse(Call<Integer> call, Response<Integer> response) {
+
+                            if(response.isSuccessful()){
+                                Log.d("tag",response.body()+"개 즐찾 추가후");
+                                if(response.body().intValue()==1){
+                                    Toast.makeText(getApplicationContext(), "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Integer> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
 
                 }
@@ -563,9 +626,49 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 public void onClick(View v) {
 
                     //fullStar-> gone  , emptyStar-> visible
+                    fullStar.setVisibility(View.GONE);
+                    emptyStar.setVisibility(View.VISIBLE);
+
                     //favorMemberStore에 해당 즐찾 없애기
+                    favorMemberStore.remove(store);
+
                     //해당 마커 기존에 유형에 따른 마커로 변경하기
+                    //마커이미지 결정
+                    String stype= store.getStype();
+                    BitmapDrawable bitmapDraw;
+
+                    if(stype.equals("급식")){
+                        bitmapDraw=(BitmapDrawable)getResources().getDrawable(R.drawable.bluemarker);
+
+                    }else if(stype.equals("교육")){
+                        bitmapDraw=(BitmapDrawable)getResources().getDrawable(R.drawable.yellowmarker);
+
+                    }else{
+                        bitmapDraw=(BitmapDrawable)getResources().getDrawable(R.drawable.greenmarker);
+                    }
+                    Bitmap b4=bitmapDraw.getBitmap();
+                    Bitmap customMarker = Bitmap.createScaledBitmap(b4, 60, 60, false);
+                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(customMarker));
+
                     //DB에 즐겨찾기 해제
+                    Server server = new Server();
+                    RetrofitService service= server.getRetrofitService();
+                    Call<Integer> call= service.deleteFavoriteStore(userID,store.getSid());
+                    call.enqueue(new Callback<Integer>() {
+                        @Override
+                        public void onResponse(Call<Integer> call, Response<Integer> response) {
+                            if(response.isSuccessful()){
+                                if(response.body().intValue()==1){
+                                    Toast.makeText(getApplicationContext(), "즐겨찾기가 해제되었습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Integer> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 }
             });
