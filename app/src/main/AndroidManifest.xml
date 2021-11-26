@@ -27,18 +27,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDGJZuJ7IXdJzfyQOIgUOmSU7JiUtOmH-A" />
 
-        //기능 순대로 넣은거에요 끝에서부터 추가해요
+
         <activity android:name=".IntroActivity" />
         <activity android:name=".AgreeActivity" />
         <activity android:name=".JoinActivity"/>
         <activity android:name=".FindingActivity"/>
         <activity android:name=".WithDrawalActivity"/>
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".HomeActivity" />
@@ -52,7 +47,13 @@
         <activity android:name=".Map2Activity"></activity>
 
 
-        <activity android:name=".PostingActivity"></activity>
+        <activity android:name=".PostingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 
