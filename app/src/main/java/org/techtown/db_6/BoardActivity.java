@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
-public class BordActivity extends AppCompatActivity {
+public class BoardActivity extends AppCompatActivity {
     String[] item;
     private Spinner Sortingspinner;
     private ImageButton WritingBtn;
@@ -33,7 +33,7 @@ public class BordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(BordActivity.this, WritingPosting.class);
+                Intent intent = new Intent(BoardActivity.this, WritePostingActivity.class);
                 startActivity(intent);
 
             }

@@ -5,7 +5,6 @@
         android:icon="@drawable/heart"
         android:enabled="true"
         android:title="공감하기"
-
         />
     <item
         android:id="@+id/comment"
