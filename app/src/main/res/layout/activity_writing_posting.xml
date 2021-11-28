@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +51,12 @@
 
     <Button
         android:id="@+id/postingListBt"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="100dp"
@@ -72,14 +72,16 @@
 
     <Button
         android:id="@+id/completeBt"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginRight="150dp"
         android:layout_marginBottom="100dp"
         android:background="@color/light_yellow"
         android:text="글목록"
@@ -99,16 +101,23 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="게시글 작성"
         android:textColor="#4E4E4E"
         android:textSize="30dp"
         android:textStyle="bold"
         android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="180dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

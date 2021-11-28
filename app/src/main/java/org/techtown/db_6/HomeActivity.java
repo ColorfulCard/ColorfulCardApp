@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView WelcomeNameView;
     private Button regiCardBt;      //카드등록 버튼
     private Button findStoreBt;  //가맹점 조회버튼
+    private Button BorderBt;   //소통게시판버튼
 
 
     @Override
@@ -48,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         WelcomeNameView= findViewById(R.id.nameView);
         regiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
         findStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
+        BorderBt = findViewById(R.id.button5); //소통게시판 버튼
 
         WelcomeNameView.setText(user.getName()+"님, 환영합니다");
 
