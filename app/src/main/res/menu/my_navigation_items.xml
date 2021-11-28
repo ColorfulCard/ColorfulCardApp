@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/heart"
+        android:icon="@drawable/heart"
+        android:enabled="true"
+        android:title="공감하기"
+
+        />
+    <item
+        android:id="@+id/comment"
+        android:icon="@drawable/comment"
+        android:enabled="true"
+        android:checked="true"
+        android:title="댓글달기" />
+</menu>
