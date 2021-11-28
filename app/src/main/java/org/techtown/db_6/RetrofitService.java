@@ -9,6 +9,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface RetrofitService {
@@ -86,5 +87,73 @@ public interface RetrofitService {
                                  @Field("sid") int sid);
 
 
+    //-------------------------------Posting------------------------------//
 
+    @GET("posting/{offset}")
+    Call<List<Posting>> getBoardPosting(@Path("offset") int offset, @Field("field") String field);
+
+    @GET("postingContent/{pcontent}")
+    Call<List<Posting>> getPostingbyContent(@Path("pcontent")String pcontent);
+
+    @FormUrlEncoded
+    @POST("posting/{pid}")
+    Call<List<Posting>> getPostingbyContent(@Path("pid") String pid, @Field("pcontent") String pcontent);
+
+    @PUT("posting/ccnt/{pno}")
+    Call<Integer> putCommentCnt(@Path("pno")int pno,@Field("sign") String sign);  //sign에 plus or minus
+
+    @PUT("posting/hcnt/{pno}")
+    Call<Integer> putHeartCnt(@Path("pno")int pno,@Field("sign")String sign);   //sign에 plus or minus                                                                                    )
+
+    @PUT("posting/vcnt/{pno}")
+    Call<Integer> putViewsCnt(@Path("pno")int pno);
+
+    @FormUrlEncoded
+    @DELETE("posting/delete")
+    Call<Integer> deleteBoardPosting(@Field("pno")int pno);
+
+
+    //-------------------------------Comment------------------------------//
+
+    @GET("comment/{pno}")
+    Call<List<Comment>> getComment(@Path("pno")int pno);
+
+    @FormUrlEncoded
+    @POST("comment/{pno}")
+    Call<Integer> postComment(@Path("pno")int pno, @Field("cno")int cno, @Field("cid")String cid, @Field("cment")String cment);
+
+    @PUT("comment/{pno}")
+    Call<Integer> putCcommentCnt(@Path("pno")int pno, @Field("cno")int cno, @Field("sign") String sign); //sign==plus or minus
+
+    @FormUrlEncoded
+    @DELETE("comment/delete")
+    Call<Integer> deleteComment(@Field("pno")int pno,@Field("cno")int cno);
+
+
+    //-------------------------------Ccomment------------------------------//
+
+    @GET("ccomment/{pno}")
+    Call<List<Ccomment>> getCcomment(@Path("pno")int pno,@Field("cno")int cno);
+
+    @FormUrlEncoded
+    @POST("ccomment/{pno}")
+    Call<Integer> postCcomment(@Path("pno")int pno, @Field("cno")int cno, @Field("ccno")int ccno, @Field("ccid")String ccid, @Field("ccment")String ccment);
+
+    @FormUrlEncoded
+    @DELETE("ccomment/delete")
+    Call<Integer> deleteCcomment(@Field("pno")int pno, @Field("cno")int cno, @Field("ccno") int ccno);
+
+
+    //-------------------------------HeartPress------------------------------//
+
+    @GET("heartPress/{hid}")
+    Call<List<Integer>> getHeartPress(@Path("hid")String hid);
+
+    @FormUrlEncoded
+    @POST("heartPress/{pno}")
+    Call<Integer> postHeartPress(@Path("pno")int pno, @Field("hid")String hid);
+
+    @FormUrlEncoded
+    @DELETE("heartPress/delete")
+    Call<Integer> deleteHeartPress(@Field("pno")int pno, @Field("hid") String hid);
 }

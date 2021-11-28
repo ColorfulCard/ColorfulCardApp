@@ -18,8 +18,8 @@ public class PostingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
 
-        WritingBtn = (ImageButton) findViewById(R.id.writting);
-        Sortingspinner = (Spinner)findViewById(R.id.orderby);
+       // WritingBtn = (ImageButton) findViewById(R.id.writting);
+       // Sortingspinner = (Spinner)findViewById(R.id.orderby);
 
         item = new String[]{"최신순","조회수","공감수"};
 
