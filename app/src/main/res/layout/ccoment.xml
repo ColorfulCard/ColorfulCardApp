@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/pid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/pcontent"
         android:layout_width="196dp"
         android:layout_height="17dp"
         android:layout_marginStart="35dp"
@@ -30,10 +30,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv" />
+        app:layout_constraintTop_toBottomOf="@id/pid" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/pdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="208dp"
@@ -43,7 +43,7 @@
         android:layout_marginRight="14dp"
         android:text="10/26 21:48"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv"
+        app:layout_constraintStart_toEndOf="@+id/pid"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -63,7 +63,7 @@
         android:layout_height="20dp"
         android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/content"
+        app:layout_constraintEnd_toStartOf="@+id/pcontent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow" />

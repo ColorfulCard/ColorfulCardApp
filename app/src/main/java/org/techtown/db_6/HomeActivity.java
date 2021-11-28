@@ -118,6 +118,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(HomeActivity.this, BoardActivity.class);
+                intent.putExtra("userID",user.getId());
                 startActivity(intent);
 
             }

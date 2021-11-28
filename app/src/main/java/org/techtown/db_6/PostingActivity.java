@@ -44,7 +44,7 @@ public class PostingActivity extends AppCompatActivity {
 
                 case R.id.comment:
                     Toast.makeText(getApplicationContext(), "댓글달기 버튼 누룸", Toast.LENGTH_SHORT).show();
-
+                    break;
             }// switch()..
             return true;
         }
@@ -53,5 +53,3 @@ public class PostingActivity extends AppCompatActivity {
 
 }// MainActivity class..
 
-    }
-}

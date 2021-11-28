@@ -17,8 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Db6"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PostingActivity"></activity>
-        <activity android:name=".SearchBoardActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -47,8 +45,11 @@
         <activity android:name=".SearchStoreActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".Map2Activity" />
-        <activity android:name=".BoardActivity" />
+
+
+        <activity android:name=".BoardActivity"></activity>
         <activity android:name=".WritePostingActivity" />
+        <activity android:name=".PostingActivity" ></activity>
     </application>
 
 </manifest>

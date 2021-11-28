@@ -51,8 +51,22 @@ public class Posting  implements Serializable {
         return pid;
     }
 
-    public Timestamp getPdate() {
-        return pdate;
+    public String getPdate() {
+
+        StringBuilder stringBuilder= new StringBuilder();
+        String pdate=this.pdate.toString();
+
+        //2021-11-28 12:05
+        //21/11/28 17:32
+        stringBuilder.append(pdate.substring(2,4));
+        stringBuilder.append("/");
+        stringBuilder.append(pdate.substring(5,7));
+        stringBuilder.append("/");
+        stringBuilder.append(pdate.substring(8,10));
+        stringBuilder.append(" ");
+        stringBuilder.append(pdate.substring(11,16));
+
+        return stringBuilder.toString();
     }
 
     public String getPcontent() {

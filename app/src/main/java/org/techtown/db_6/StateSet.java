@@ -31,11 +31,27 @@ public class StateSet {
         public static final int MSG_SEARCH_NO_WORD=2;
     }
 
+    public class PostingMsg{
+
+        public static final int MSG_FAIL=0;
+        public static final int MSG_SUCCESS_GET_FIRST=1;
+        public static final int MSG_SUCCESS_GETPOSTINGS=2;
+        public static final int MSG_NO_POSTINGS =3;
+        public static final int MSG_ALREADY_GET_ALLPOSTINGS=4;
+        public static final int MSG_SUCCESS_GETCMENTS=5;
+        public static final int MSG_SUCCESS_GETCCMENTS=6;
+        public static final int MSG_SUCCESS_HEARTPRESS=7;
+        public static final int MSG_SUCCESS_INSERTPOSTING=8;
+    }
     public class ViewType{
         public static final int sideMealCard = 0;
         public static final int mealCard = 1;
         public static final int eduCard =2;
         public static final int searchResult=3;
+        public static final int posting=4;
+        public static final int comment=5;
+        public static final int ccomment=6;
+        public static final int loading=7;
     }
 
 
