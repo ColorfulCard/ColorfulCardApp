@@ -136,7 +136,7 @@ public class BoardActivity extends AppCompatActivity {
         @Override
         public void run() {
             super.run();
-
+            Log.d("tag","스레드실행");
             Message message= handler.obtainMessage();
 
             Server server= new Server();

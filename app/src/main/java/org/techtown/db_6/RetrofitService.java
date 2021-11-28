@@ -97,7 +97,7 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("posting/{pid}")
-    Call<List<Posting>> getPostingbyContent(@Path("pid") String pid, @Field("pcontent") String pcontent);
+    Call<Integer> postBoardPosting(@Path("pid") String pid, @Field("pcontent") String pcontent);
 
     @PUT("posting/ccnt/{pno}")
     Call<Integer> putCommentCnt(@Path("pno")int pno,@Field("sign") String sign);  //sign에 plus or minus

@@ -48,7 +48,7 @@
 
 
         <activity android:name=".BoardActivity"></activity>
-        <activity android:name=".WritePostingActivity" />
+        <activity android:name=".WritePostingActivity"/>
         <activity android:name=".PostingActivity" ></activity>
     </application>
 

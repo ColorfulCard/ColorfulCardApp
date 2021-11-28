@@ -1,7 +1,9 @@
 package org.techtown.db_6;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class WritePostingActivity extends AppCompatActivity {
 
     Button completeBt;
@@ -19,12 +25,15 @@ public class WritePostingActivity extends AppCompatActivity {
     EditText inputContent;
     TextView NotifyWordCnt;
     boolean checkPostingContent= false;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write_posting);
 
+        userID=getIntent().getStringExtra("userID");
+
+        setContentView(R.layout.activity_write_posting);
         completeBt = (Button)findViewById(R.id.completeBt) ;
         postingListBt = (Button)findViewById(R.id.postingListBt);
         inputContent = findViewById(R.id.inputContent);
@@ -63,8 +72,14 @@ public class WritePostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(WritePostingActivity.this, BoardActivity.class);
-                startActivity(intent);
+                if(checkPostingContent) {
+                    //사용자가 글을 작성한 경우
+                    insertPostingToBoard();
+                 }else{
+
+                    Toast.makeText(getApplicationContext(), "내용을 작성해주세요.", Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });
@@ -74,32 +89,60 @@ public class WritePostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("글목록");
+                builder.setMessage("게시글 작성을 취소하시겠습니까?");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(WritePostingActivity.this, BoardActivity.class);
+                        intent.putExtra("userID",userID);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("취소",null);
+                builder.show();
 
-                if(checkPostingContent) {
-                    //사용자가 글을 작성한 경우
-                    Intent intent = new Intent(WritePostingActivity.this, BoardActivity.class);
-                    startActivity(intent);
-                }else{
 
-                    Toast.makeText(getApplicationContext(), "내용을 작성해주세요.", Toast.LENGTH_SHORT).show();
 
-                }
             }
         });
 
+    }
 
+    private void insertPostingToBoard(){
 
+        Server server= new Server();
+        RetrofitService service= server.getRetrofitService();
+        Call<Integer> call= service.postBoardPosting(userID,inputContent.getText().toString());
 
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.isSuccessful()){
+                    Integer result= response.body();
 
+                    if(result.intValue()==1){
 
+                        Intent intent = new Intent(WritePostingActivity.this, BoardActivity.class);
+                        intent.putExtra("userID",userID);
+                        startActivity(intent);
 
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "게시글 작성이 취소되었습니다. 다시 시도하십시오.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
 
-
-
-
-
-
+            }
+        });
 
     }
 }
