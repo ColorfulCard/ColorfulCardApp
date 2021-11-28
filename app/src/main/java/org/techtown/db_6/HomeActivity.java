@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView WelcomeNameView;
     private Button regiCardBt;      //카드등록 버튼
     private Button findStoreBt;  //가맹점 조회버튼
-    private Button BorderBt;   //소통게시판버튼
+    private Button BoardBt;   //소통게시판버튼
 
 
     @Override
@@ -46,12 +46,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        WelcomeNameView= findViewById(R.id.nameView);
+        WelcomeNameView = findViewById(R.id.nameView);
         regiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
         findStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
-        BorderBt = findViewById(R.id.button5); //소통게시판 버튼
+        BoardBt = findViewById(R.id.button5); //소통게시판 버튼
 
-        WelcomeNameView.setText(user.getName()+"님, 환영합니다");
+        WelcomeNameView.setText(user.getName() + "님, 환영합니다");
 
         Server server = new Server();
         RetrofitService service1 = server.getRetrofitService();
@@ -63,9 +63,9 @@ public class HomeActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
 
-                    if(response.body().isEmpty()) //등록된 카드 없는 상태
-                        Log.d("tag",response.body().toString());
-                    else{
+                    if (response.body().isEmpty()) //등록된 카드 없는 상태
+                        Log.d("tag", response.body().toString());
+                    else {
                         List<Card> result = response.body();
                         user.setCard(result);
                     }
@@ -84,16 +84,15 @@ public class HomeActivity extends AppCompatActivity {
         handler = new MainHandler();
 
         //"등록된 카드" 버튼을 눌렀을 때
-        regiCardBt.setOnClickListener(new View.OnClickListener(){
+        regiCardBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(user.getCards().isEmpty()) {
+                if (user.getCards().isEmpty()) {
                     Intent intent = new Intent(HomeActivity.this, UserCardListActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Intent intent = new Intent(HomeActivity.this, LoadingActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
@@ -107,8 +106,19 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                GetFavoriteStoreThread thread= new GetFavoriteStoreThread();
+                GetFavoriteStoreThread thread = new GetFavoriteStoreThread();
                 thread.start();     //즐겨찾기 목록 다 get하고 나면 가맹점 목록 다 들고온다.
+
+            }
+        });
+
+
+        BoardBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(HomeActivity.this, BordActivity.class);
+                startActivity(intent);
 
             }
         });

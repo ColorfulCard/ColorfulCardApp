@@ -16,10 +16,11 @@ public class BordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bord);
+        setContentView(R.layout.activity_board);
 
-       // WritingBtn = (ImageButton) findViewById(R.id.writting);
-       // Sortingspinner = (Spinner)findViewById(R.id.orderby);
+
+        WritingBtn = (ImageButton) findViewById(R.id.writting);
+        Sortingspinner = (Spinner)findViewById(R.id.orderby);
 
         item = new String[]{"최신순","조회수","공감수"};
 
