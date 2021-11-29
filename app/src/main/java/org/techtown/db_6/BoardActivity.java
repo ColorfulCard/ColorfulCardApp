@@ -34,7 +34,7 @@ public class BoardActivity extends AppCompatActivity {
     private String[] item={"최신순","조회수","공감수"};
     private ImageButton WritingBtn;
     private TextView no_result;
-    static public String userID;
+    public static String userID;
     private Intent intent;
     private ImageView searchImage;
 
@@ -167,18 +167,18 @@ public class BoardActivity extends AppCompatActivity {
                         if( response.body().isEmpty()){
 
                             if(offset==0) {    //아예 작성된 글이 없는 경우
-                                message.what = StateSet.PostingMsg.MSG_NO_POSTINGS;
+                                message.what = StateSet.BoardMsg.MSG_NO_POSTINGS;
 
                             }
                             else {  //스크롤해서 DB의 모든 게시글을 다 들고온 경우
-                                message.what= StateSet.PostingMsg.MSG_ALREADY_GET_ALLPOSTINGS;
+                                message.what= StateSet.BoardMsg.MSG_ALREADY_GET_ALLPOSTINGS;
 
                             }
                         }
                         else if(offset==0) {
                             //처음 들고왔을 때
                             postings = (ArrayList<Posting>) response.body();
-                            message.what = StateSet.PostingMsg.MSG_SUCCESS_GET_FIRST;
+                            message.what = StateSet.BoardMsg.MSG_SUCCESS_GET_FIRST;
 
                         }
                         else
@@ -189,7 +189,7 @@ public class BoardActivity extends AppCompatActivity {
                                 postings.add(posting);
                                 Log.d("tag",posting.getPno()+"");
                             }
-                            message.what=StateSet.PostingMsg.MSG_SUCCESS_GETPOSTINGS;
+                            message.what= StateSet.BoardMsg.MSG_SUCCESS_GETPOSTINGS;
 
                         }
 
@@ -200,7 +200,7 @@ public class BoardActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<List<Posting>> call, Throwable t) {
-                    message.what= StateSet.PostingMsg.MSG_FAIL;
+                    message.what= StateSet.BoardMsg.MSG_FAIL;
                     handler.sendMessage(message);
                 }
             });
@@ -215,7 +215,7 @@ public class BoardActivity extends AppCompatActivity {
             super.handleMessage(msg);
 
             switch(msg.what){
-                case StateSet.PostingMsg.MSG_SUCCESS_GET_FIRST:
+                case StateSet.BoardMsg.MSG_SUCCESS_GET_FIRST:
                     if(no_result.getVisibility()==View.VISIBLE){
                         no_result.setVisibility(View.GONE);
                     }
@@ -226,20 +226,20 @@ public class BoardActivity extends AppCompatActivity {
                     initScrollListner();
                     break;
 
-                case StateSet.PostingMsg.MSG_SUCCESS_GETPOSTINGS:
+                case StateSet.BoardMsg.MSG_SUCCESS_GETPOSTINGS:
                     adapter.notifyDataSetChanged();
                     isLoading = false;
                     break;
 
-                case StateSet.PostingMsg.MSG_ALREADY_GET_ALLPOSTINGS:
+                case StateSet.BoardMsg.MSG_ALREADY_GET_ALLPOSTINGS:
                     Toast.makeText(getApplicationContext(),"모든 게시글을 불러왔습니다.",Toast.LENGTH_LONG).show();
                     break;
 
-                case StateSet.PostingMsg.MSG_NO_POSTINGS:
+                case StateSet.BoardMsg.MSG_NO_POSTINGS:
                     no_result.setVisibility(View.VISIBLE);
                     break;
 
-                case StateSet.PostingMsg.MSG_FAIL:
+                case StateSet.BoardMsg.MSG_FAIL:
                     Toast.makeText(getApplicationContext(), "네트워크 상태를 확인해주세요", Toast.LENGTH_SHORT).show();
                     break;
 

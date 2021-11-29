@@ -55,8 +55,23 @@ public class Comment implements Serializable {
         return cment;
     }
 
-    public Timestamp getCdate() {
-        return cdate;
+    public String getCdate() {
+
+        StringBuilder stringBuilder= new StringBuilder();
+        String cdate=this.cdate.toString();
+
+        //2021-11-28 12:05
+        //21/11/28 17:32
+        stringBuilder.append(cdate.substring(2,4));
+        stringBuilder.append("/");
+        stringBuilder.append(cdate.substring(5,7));
+        stringBuilder.append("/");
+        stringBuilder.append(cdate.substring(8,10));
+        stringBuilder.append(" ");
+        stringBuilder.append(cdate.substring(11,16));
+
+        return stringBuilder.toString();
+
     }
 
     public int getCccnt() {

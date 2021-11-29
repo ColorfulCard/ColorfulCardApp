@@ -31,7 +31,7 @@ public class StateSet {
         public static final int MSG_SEARCH_NO_WORD=2;
     }
 
-    public class PostingMsg{
+    public class BoardMsg {
 
         public static final int MSG_FAIL=0;
         public static final int MSG_SUCCESS_GET_FIRST=1;
