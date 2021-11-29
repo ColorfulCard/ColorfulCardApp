@@ -43,7 +43,7 @@
         <activity android:name=".Map2Activity" />
 
 
-        <activity android:name=".BoardActivity" >
+        <activity android:name=".BoardActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

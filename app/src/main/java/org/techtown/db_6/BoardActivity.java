@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class BoardActivity extends AppCompatActivity {
     private TextView no_result;
     static public String userID;
     private Intent intent;
-
+    private ImageView searchImage;
 
     private int offset=0;
     private MainHandler handler;
@@ -51,6 +52,7 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
+        searchImage= findViewById(R.id.searchImage);
         intent = getIntent();
         userID=intent.getStringExtra("userID");
         handler = new MainHandler();
@@ -76,6 +78,17 @@ public class BoardActivity extends AppCompatActivity {
         sortingSpinner.setAdapter(adapter);
 
 
+        searchImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(BoardActivity.this, SearchBoardActivity.class);
+                intent.putExtra("userID",userID);
+                startActivity(intent);
+
+            }
+        });
+
         WritingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +99,7 @@ public class BoardActivity extends AppCompatActivity {
 
             }
         });
+
 
 
         sortingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

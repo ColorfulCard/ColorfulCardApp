@@ -689,27 +689,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     //DB에 즐겨찾기 등록
 
-                    Server server = new Server();
-                    RetrofitService service= server.getRetrofitService();
-                    Call<Integer> call=  service.postFavoriteStore(userID,store.getSid());
+                    int sid = store.getSid();
+                    registerFavoriteStore(userID, sid);
 
-                    call.enqueue(new Callback<Integer>() {
-                        @Override
-                        public void onResponse(Call<Integer> call, Response<Integer> response) {
 
-                            if(response.isSuccessful()){
-                                Log.d("tag",response.body()+"개 즐찾 추가후");
-                                if(response.body().intValue()==1){
-                                    Toast.makeText(getApplicationContext(), "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Integer> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
-                        }
-                    });
 
 
                 }
@@ -828,30 +811,61 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     }
 
                     //DB에 즐겨찾기 해제
-                    Server server = new Server();
-                    RetrofitService service= server.getRetrofitService();
-                    Call<Integer> call= service.deleteFavoriteStore(userID,store.getSid());
-                    call.enqueue(new Callback<Integer>() {
-                        @Override
-                        public void onResponse(Call<Integer> call, Response<Integer> response) {
-                            if(response.isSuccessful()){
-                                if(response.body().intValue()==1){
-                                    Toast.makeText(getApplicationContext(), "즐겨찾기가 해제되었습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Integer> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                    int sid = store.getSid();
+                  releaseFavoriteStore(userID, sid);
                 }
             });
             return false;
         }
     };
 
+
+    void registerFavoriteStore(String userId, int sid){
+        Server server = new Server();
+        RetrofitService service= server.getRetrofitService();
+        Call<Integer> call=  service.postFavoriteStore(userID,sid);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+
+                if(response.isSuccessful()){
+                    Log.d("tag",response.body()+"개 즐찾 추가후");
+                    if(response.body().intValue()==1){
+                        Toast.makeText(getApplicationContext(), "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    void releaseFavoriteStore(String userID, int sid){
+        Server server = new Server();
+        RetrofitService service= server.getRetrofitService();
+        Call<Integer> call= service.deleteFavoriteStore(userID,sid);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.isSuccessful()){
+                    if(response.body().intValue()==1){
+                        Toast.makeText(getApplicationContext(), "즐겨찾기가 해제되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
 
 }
