@@ -1,10 +1,14 @@
 package org.techtown.db_6;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +42,7 @@ public class PostingActivity extends AppCompatActivity {
     private MainHandler handler;
     private ArrayList<DataItem.CommentData> dataList = new ArrayList<>();;
     private RecyclerView recyclerView;
+    private boolean isHeartPosting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,16 @@ public class PostingActivity extends AppCompatActivity {
 
         recyclerView= findViewById(R.id.recyclerView4);
 
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(this, R.drawable.line_divider2));
+
+        LinearLayoutManager manager
+                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+
+        recyclerView.setLayoutManager(manager); // LayoutManager 등록
+
+
+
         pid.setText(posting.getPid());
         pcontent.setText(posting.getPcontent());
         pdate.setText(posting.getPdate());
@@ -66,19 +81,46 @@ public class PostingActivity extends AppCompatActivity {
         ccnt.setText(String.valueOf(posting.getCcnt()));
         vcnt.setText(String.valueOf(posting.getVcnt()));
 
+
+        handler = new MainHandler();
+
+
         if(posting.getPid().equals(userID)){
+
+
+            deleteBt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PostingActivity.this);
+                    builder.setMessage("작성하신 글을 삭제하시겠습니까?");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            DeletePostingThread  thread = new DeletePostingThread(posting.getPno());
+                            thread.start();
+                        }
+                    });
+                    builder.setNegativeButton("취소",null);
+                    builder.show();
+                }
+            });
 
             deleteBt.setVisibility(View.VISIBLE);
             //본인 글이면 삭제하기 버튼 나타남
         }
 
-        handler = new MainHandler();
 
         //들어올 때 해당포스팅에 달린 댓글 대댓글있으면 들고와야한다.
         if(posting.getCcnt()>0){
-            GetCmentsThread getCmentThread= new GetCmentsThread(posting.getPno());
-            getCmentThread.start();
+            GetCmentsThread getCmentsThread= new GetCmentsThread(posting.getPno());
+            getCmentsThread.start();
         }
+
+        //들어올 때 해당포스팅이 사용자가 공감한 글인지 아닌지를 체크해야한다.
+        CheckHeartPostingThread checkHeartThread = new CheckHeartPostingThread(userID,posting.getPno());
+        checkHeartThread.start();
 
 
     }// onCreate()..
@@ -153,27 +195,111 @@ public class PostingActivity extends AppCompatActivity {
         });
     }
 
-    class CheckHeartThread extends Thread{
+    class CheckHeartPostingThread extends Thread{
+
+        private String userID;
+        private int pno;
+
+        public CheckHeartPostingThread(String userID, int pno){
+
+            this.userID=userID;
+            this.pno=pno;
+        }
 
         @Override
         public void run() {
             super.run();
+
+            Message message= handler.obtainMessage();
+
+            Server server = new Server();
+            RetrofitService service= server.getRetrofitService();
+            Call<List<Integer>> call = service.getHeartPress(userID);
+
+            call.enqueue(new Callback<List<Integer>>() {
+                @Override
+                public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {
+
+                    if(response.isSuccessful()){
+                        List<Integer> heartPostings= response.body();
+
+                        if(heartPostings.isEmpty()){
+                                return;
+                        }
+                        for(Integer results: heartPostings){
+                            if(results.equals(pno)){
+
+                                message.what= StateSet.BoardMsg.MSG_SUCCESS_HEARTPRESS;
+                                handler.sendMessage(message);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Integer>> call, Throwable t) {
+                    message.what= StateSet.BoardMsg.MSG_FAIL;
+                    handler.sendMessage(message);
+
+                }
+            });
         }
     }
 
     class InsertCmentThread extends Thread{
 
+
         @Override
         public void run() {
             super.run();
         }
     }
 
-    class DeletePostingOfBoard extends Thread{
+    class DeletePostingThread extends Thread{
+
+        int pno;
+        public DeletePostingThread(int pno){
+            this.pno=pno;
+        }
 
         @Override
         public void run() {
             super.run();
+
+            Message message = handler.obtainMessage();
+
+            Server server= new Server();
+            RetrofitService service= server.getRetrofitService();
+            Call<Integer> call= service.deleteBoardPosting(pno);
+            call.enqueue(new Callback<Integer>() {
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+
+                    if(response.isSuccessful()){
+                        Integer result= response.body();
+
+                        if(result.intValue()==1){
+
+                            message.what= StateSet.BoardMsg.MSG_SUCCESS_DEL_POSTING;
+                            handler.sendMessage(message);
+
+                        }else{
+                            message.what= StateSet.BoardMsg.MSG_FAIL;
+                            handler.sendMessage(message);
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+                    message.what= StateSet.BoardMsg.MSG_FAIL;
+                    handler.sendMessage(message);
+
+                }
+            });
+
         }
     }
 
@@ -188,6 +314,10 @@ public class PostingActivity extends AppCompatActivity {
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
+
+
+        private Boolean isHeartPress=false;
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch(menuItem.getItemId())
@@ -195,19 +325,39 @@ public class PostingActivity extends AppCompatActivity {
 
                 case R.id.heart:
                     //공감하기 누른 경우
+                    isHeartPress =!isHeartPress;
+
                     Toast.makeText(getApplicationContext(), "공감하기 버튼 누룸", Toast.LENGTH_SHORT).show();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        navigationView.setItemTextColor(getResources().getColorStateList(R.color.colorheart, null));
-                        navigationView.setItemIconTintList(getResources().getColorStateList(R.color.colorheart, null));
+
+                        if(isHeartPress==true) {
+                            navigationView.setItemTextColor(getResources().getColorStateList(R.color.colorheart, null));
+                            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.colorheart, null));
+                        }
+                        else
+                        {
+                            navigationView.setItemTextColor(getResources().getColorStateList(R.color.ddark_gray, null));
+                            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.ddark_gray, null));
+                        }
                     }
                     break;
 
 
                 case R.id.comment:
                     Toast.makeText(getApplicationContext(), "댓글달기 버튼 누룸", Toast.LENGTH_SHORT).show();
+
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        navigationView.setItemTextColor(getResources().getColorStateList(R.color.colorcomment, null));
-                        navigationView.setItemIconTintList(getResources().getColorStateList(R.color.colorcomment, null));
+
+                        if(isHeartPress==true){
+                            navigationView.setItemTextColor(getResources().getColorStateList(R.color.colorheart, null));
+                            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.colorheart, null));
+
+                        }
+                        else{
+                            navigationView.setItemTextColor(getResources().getColorStateList(R.color.ddark_gray, null));
+                            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.ddark_gray, null));
+                        }
+                        //키보드 올려주기기
                     }
                     break;
 
@@ -220,7 +370,7 @@ public class PostingActivity extends AppCompatActivity {
     class MainHandler extends Handler{
 
         @Override
-        public void handleMessage(@NonNull Message msg) {
+       public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
 
             switch(msg.what){
@@ -249,6 +399,20 @@ public class PostingActivity extends AppCompatActivity {
 
                     recyclerView.setAdapter(new CmentListAdapter(dataList));
                     break;
+
+                case StateSet.BoardMsg.MSG_SUCCESS_DEL_POSTING:
+
+                    Toast.makeText(getApplicationContext(),"게시글이 삭제되었습니다.",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(PostingActivity.this,BoardActivity.class);
+                    intent.putExtra("userID",userID);
+                    startActivity(intent);
+                    finish();
+
+                    break;
+                case StateSet.BoardMsg.MSG_SUCCESS_HEARTPRESS:
+
+                    isHeartPosting = true;
+                    //공감된 글이다.. 네비게이션 바 색깔 눌러진 상태로 변경하기!
 
                 case StateSet.BoardMsg.MSG_FAIL:
                     Toast.makeText(getApplicationContext(),"네트워크를 확인하세요.",Toast.LENGTH_SHORT).show();

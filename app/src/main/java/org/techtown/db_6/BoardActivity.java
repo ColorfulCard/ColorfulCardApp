@@ -52,7 +52,7 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
-        searchImage= findViewById(R.id.searchImage);
+
         intent = getIntent();
         userID=intent.getStringExtra("userID");
         handler = new MainHandler();
@@ -77,7 +77,7 @@ public class BoardActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         sortingSpinner.setAdapter(adapter);
 
-
+        searchImage= findViewById(R.id.searchImage);
         searchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
