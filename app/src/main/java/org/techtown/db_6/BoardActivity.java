@@ -33,7 +33,7 @@ public class BoardActivity extends AppCompatActivity {
     private String[] item={"최신순","조회수","공감수"};
     private ImageButton WritingBtn;
     private TextView no_result;
-    private String userID;
+    static public String userID;
     private Intent intent;
 
 

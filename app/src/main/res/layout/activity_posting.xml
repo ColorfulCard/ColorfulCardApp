@@ -58,8 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:maxWidth="250dp"
-        android:maxHeight="400dp"
-        android:maxLength="80"
         android:text="제목"
         android:textColor="#292929"
         android:textSize="15sp"
