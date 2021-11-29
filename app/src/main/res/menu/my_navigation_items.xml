@@ -5,11 +5,13 @@
         android:icon="@drawable/heart"
         android:enabled="true"
         android:title="공감하기"
+        android:iconTint="@color/white"
         />
     <item
         android:id="@+id/comment"
         android:icon="@drawable/comment"
         android:enabled="true"
         android:checked="true"
-        android:title="댓글달기" />
+        android:title="댓글달기"
+        />
 </menu>
