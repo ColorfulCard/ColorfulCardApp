@@ -131,11 +131,11 @@
 
                     <ImageButton
                         android:id="@+id/emptyStar"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="16dp"
                         android:background="@color/white"
                         android:padding="0dp"
                         android:scaleType="centerInside"
@@ -146,11 +146,11 @@
 
                     <ImageButton
                         android:id="@+id/fullStar"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="16dp"
                         android:background="@color/white"
                         android:padding="0dp"
                         android:scaleType="centerInside"
