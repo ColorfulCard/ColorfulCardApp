@@ -28,13 +28,13 @@
 
         <activity android:name=".IntroActivity" />
         <activity android:name=".AgreeActivity" />
-        <activity android:name=".JoinActivity" />
+        <activity android:name=".JoinActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".FindingActivity" />
         <activity android:name=".WithDrawalActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
