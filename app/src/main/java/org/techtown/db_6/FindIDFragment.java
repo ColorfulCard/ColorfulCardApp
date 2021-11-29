@@ -128,20 +128,19 @@ public class FindIDFragment extends Fragment {
             try {
                 GmailSender gMailSender = new GmailSender();
                 Log.d("tag", "sender Make");
-                gMailSender.sendMail("[컬러풀 카드앱] 아이디 안내",
-                        content, receptEmail);
+         //       gMailSender.sendMail("[컬러풀 카드앱] 아이디 안내",content, receptEmail);
 
                 message.what = StateSet.MailMsg.MSG_SUCCESS;
                 handler.sendMessage(message);
 
-            } catch (SendFailedException e) {
+            } /*catch (SendFailedException e) {
 
-                message.what = StateSet.MailMsg.MSG_FAIL;
-                handler.sendMessage(message);
+               // message.what = StateSet.MailMsg.MSG_FAIL;
+              //  handler.sendMessage(message);
 
-            } catch (MessagingException e) {
+            } //catch (MessagingException e) {
 
-            } catch (Exception e) {
+            }*/ catch (Exception e) {
                 e.printStackTrace();
             }
         }
