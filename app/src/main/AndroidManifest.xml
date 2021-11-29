@@ -32,11 +32,7 @@
         <activity android:name=".FindingActivity" />
         <activity android:name=".WithDrawalActivity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".RegiCardActivity" />
@@ -47,8 +43,18 @@
         <activity android:name=".Map2Activity" />
 
 
-        <activity android:name=".BoardActivity" />
-        <activity android:name=".PostingActivity"/>
+        <activity android:name=".BoardActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
+        <activity android:name=".PostingActivity">
+
+        </activity>
+
         <activity android:name=".WritePostingActivity" />
         <activity android:name=".SearchBoardActivity" />
 
