@@ -45,7 +45,7 @@
         android:layout_marginRight="70dp"
         android:background="@color/light_yellow"
         android:scaleType="centerInside"
-        android:src="@drawable/whitesearchicon"
+        android:src="@drawable/whitesearchicon2"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addCardTitle"
@@ -54,15 +54,13 @@
 
     <Spinner
         android:id="@+id/orderby"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_width="284dp"
+        android:layout_height="93dp"
         android:background="@color/white"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/searchImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/searchImage"
-        app:layout_constraintTop_toTopOf="@+id/searchImage" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <androidx.recyclerview.widget.RecyclerView
 
@@ -80,22 +78,26 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.0" />
 
+
+
     <ImageButton
         android:id="@+id/writting"
-        android:layout_width="92dp"
-        android:layout_height="75dp"
+        android:layout_width="75dp"
+        android:layout_height="60dp"
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
         android:layout_marginTop="550dp"
-        android:background="@color/white"
+        android:background="@drawable/round_button"
         android:scaleType="centerInside"
         android:src="@drawable/writeicon"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.676"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.726" />
+
 
     <TextView
         android:id="@+id/no_result"
