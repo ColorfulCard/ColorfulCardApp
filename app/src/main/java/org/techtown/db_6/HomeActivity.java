@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,9 +33,9 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<MemberStore> favorMemberStore = new ArrayList<>();
 
     private TextView WelcomeNameView;
-    private Button regiCardBt;      //카드등록 버튼
-    private Button findStoreBt;  //가맹점 조회버튼
-    private Button BoardBt;   //소통게시판버튼
+    private ImageButton regiCardBt;      //카드등록 버튼
+    private ImageButton findStoreBt;  //가맹점 조회버튼
+    private ImageButton BoardBt;   //소통게시판버튼
 
 
     @Override

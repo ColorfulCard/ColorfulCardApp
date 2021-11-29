@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Message message=handler.obtainMessage(); //메인스레드 핸들러의 메시지 객체 가져오기
             try{
-                GmailSender gMailSender = new GmailSender();
+                NaverMailSender gMailSender = new NaverMailSender();
                 Log.d("tag","sender Make");
                 gMailSender.sendMail("제목입니다", "내용입니다", "podojom@naver.com");
 

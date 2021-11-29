@@ -31,6 +31,7 @@ public class FindIDFragment extends Fragment {
     private Button btn_send, btn_login;
     private TextView checkResult;
     private MainHandler handler;
+    private NaverMailSender mailSender;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -119,33 +120,35 @@ public class FindIDFragment extends Fragment {
 
         public SendIDbyMailThread(String email, String id, String name) {
             this.receptEmail = email;
-            this.content = name + "님, 안녕하세요.\n회원님의 가입된 컬러풀 카드앱의 아이디는 아래와 같습니다.\n\n아이디: " + id;
+            this.content = name + "님, 안녕하세요.<br>회원님의 가입된 컬러풀 카드앱의 아이디는 아래와 같습니다.<br><br>아이디: " + id+"<br>";
         }
 
         @Override
         public void run() {
+
             Message message = handler.obtainMessage(); //메인스레드 핸들러의 메시지 객체 가져오기
+
             try {
-                GmailSender gMailSender = new GmailSender();
+
+                mailSender = new NaverMailSender();
                 Log.d("tag", "sender Make");
-         //       gMailSender.sendMail("[컬러풀 카드앱] 아이디 안내",content, receptEmail);
+                mailSender.sendMail("[컬러풀 카드앱] 아이디 안내", content, receptEmail);
 
                 message.what = StateSet.MailMsg.MSG_SUCCESS;
                 handler.sendMessage(message);
 
-            } /*catch (SendFailedException e) {
+            } catch (SendFailedException e) {
 
-               // message.what = StateSet.MailMsg.MSG_FAIL;
-              //  handler.sendMessage(message);
+                message.what = StateSet.MailMsg.MSG_FAIL;
+                handler.sendMessage(message);
 
-            } //catch (MessagingException e) {
+            } catch (MessagingException e) {
 
-            }*/ catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-
 
     class MainHandler extends Handler {
         @Override

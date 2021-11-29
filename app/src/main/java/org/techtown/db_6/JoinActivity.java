@@ -177,7 +177,7 @@ public class JoinActivity extends AppCompatActivity {
                 }
 
                 //DB에  가입된 아이디인지 체크하는 함수
-                 checkId(id);
+                checkId(id);
             }
         });
 
@@ -323,8 +323,9 @@ public class JoinActivity extends AppCompatActivity {
         String content;
 
         public SendNumberByMailThread(String email,String number){
+
             this.receptEmail=email;
-            this.content="안녕하세요, 대구시 컬러풀 카드앱입니다. \n아래의 인증번호 6자리를 인증번호 입력창에 입력 후 회원가입을 진행해주세요. \n\n인증번호:"+number;
+            this.content="안녕하세요, 대구시 컬러풀 카드앱입니다.<br>아래의 인증번호 6자리를 인증번호 입력창에 입력 후 회원가입을 진행해주세요.<br><br>인증번호: "+number+"<br>";
         }
 
         @Override
@@ -332,9 +333,9 @@ public class JoinActivity extends AppCompatActivity {
         {
             Message message=handler.obtainMessage(); //메인스레드 핸들러의 메시지 객체 가져오기
             try{
-                GmailSender gMailSender = new GmailSender();
+                NaverMailSender mailSender = new NaverMailSender();
                 Log.d("tag","sender Make");
-                gMailSender.sendMail("[컬러풀 카드앱] 어플리케이션 회원가입 인증번호",
+                mailSender.sendMail("[컬러풀 카드앱] 애플리케이션 회원가입 인증번호",
                         content, receptEmail);
 
                 message.what= StateSet.MailMsg.MSG_SUCCESS;
