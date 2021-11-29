@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/minusimage" />
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/pid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -58,11 +58,11 @@
         app:backgroundTint="#D6B2EC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/pcontent"
         app:layout_constraintVertical_bias="0.2" />
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/pcontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -70,6 +70,6 @@
         android:text="TextView"
         android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@id/imageView"
-        app:layout_constraintTop_toBottomOf="@id/tv" />
+        app:layout_constraintTop_toBottomOf="@id/pid" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

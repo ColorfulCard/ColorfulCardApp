@@ -1,14 +1,10 @@
 package org.techtown.db_6;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,7 +15,6 @@ public class PostingActivity extends AppCompatActivity {
 
     BottomNavigationView navigationView;
     Context mContext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +27,6 @@ public class PostingActivity extends AppCompatActivity {
     }// onCreate()..
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
-        @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch(menuItem.getItemId())
@@ -41,18 +35,16 @@ public class PostingActivity extends AppCompatActivity {
                 case R.id.heart:
                     //공감하기 누른 경우
                     Toast.makeText(getApplicationContext(), "공감하기 버튼 누룸", Toast.LENGTH_SHORT).show();
-                        navigationView.setItemTextColor(getResources().getColorStateList(R.color.colorheart, null));
-                        navigationView.setItemIconTintList(getResources().getColorStateList(R.color.colorheart, null));
-
+                   //navigationView.item
+                     //      navigationView.getItemIconTintList() = ContextCompat.getColorStateList(mContext, R.color.colorheart);
+                    //navigationView.itemTextColor = ContextCompat.getColorStateList(this, R.color.color_bnv2)
 
 
                     break;
+
                 case R.id.comment:
                     Toast.makeText(getApplicationContext(), "댓글달기 버튼 누룸", Toast.LENGTH_SHORT).show();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        navigationView.setItemTextColor(getResources().getColorStateList(R.color.colorcomment, null));
-                        navigationView.setItemIconTintList(getResources().getColorStateList(R.color.colorcomment, null));
-                    }
+
             }// switch()..
             return true;
         }
@@ -60,3 +52,6 @@ public class PostingActivity extends AppCompatActivity {
 
 
 }// MainActivity class..
+
+    }
+}

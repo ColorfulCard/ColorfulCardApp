@@ -68,5 +68,17 @@ public class DataItem {
         public int getViewType(){return  viewType;}
     }
 
+    public class PostingData{
 
+        private Posting posting;
+        private int viewType;
+
+        public PostingData(Posting posting, int viewType){
+            this.posting=posting;
+            this.viewType=viewType;
+        }
+
+        public Posting getPosting() {return posting;}
+        public int getViewType(){return viewType;}
+    }
 }

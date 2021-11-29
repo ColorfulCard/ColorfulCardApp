@@ -89,15 +89,15 @@ public interface RetrofitService {
 
     //-------------------------------Posting------------------------------//
 
-    @GET("posting/{offset}")
-    Call<List<Posting>> getBoardPosting(@Path("offset") int offset, @Field("field") String field);
+    @GET("posting/{offset}/{attribute}")
+    Call<List<Posting>> getBoardPosting(@Path("offset") int offset, @Path("attribute") String attribute);
 
     @GET("postingContent/{pcontent}")
     Call<List<Posting>> getPostingbyContent(@Path("pcontent")String pcontent);
 
     @FormUrlEncoded
     @POST("posting/{pid}")
-    Call<List<Posting>> getPostingbyContent(@Path("pid") String pid, @Field("pcontent") String pcontent);
+    Call<Integer> postBoardPosting(@Path("pid") String pid, @Field("pcontent") String pcontent);
 
     @PUT("posting/ccnt/{pno}")
     Call<Integer> putCommentCnt(@Path("pno")int pno,@Field("sign") String sign);  //sign에 plus or minus
@@ -132,8 +132,8 @@ public interface RetrofitService {
 
     //-------------------------------Ccomment------------------------------//
 
-    @GET("ccomment/{pno}")
-    Call<List<Ccomment>> getCcomment(@Path("pno")int pno,@Field("cno")int cno);
+    @GET("ccomment/{pno}/{cno}")
+    Call<List<Ccomment>> getCcomment(@Path("pno")int pno,@Path("cno")int cno);
 
     @FormUrlEncoded
     @POST("ccomment/{pno}")

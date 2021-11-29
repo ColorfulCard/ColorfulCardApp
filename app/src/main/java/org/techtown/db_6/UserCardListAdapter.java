@@ -166,8 +166,8 @@ public class UserCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
        private CardViewHolder(View itemView)
         {
             super(itemView);
-            name = itemView.findViewById(R.id.tv);
-            content = itemView.findViewById(R.id.content);
+            name = itemView.findViewById(R.id.pid);
+            content = itemView.findViewById(R.id.pcontent);
             image = itemView.findViewById(R.id.imageView);
             button = itemView.findViewById(R.id.button);
             minus=itemView.findViewById(R.id.minus);
