@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private ArrayList<Posting> postingDataList= null;
+    public Posting choicePosting=null;
 
     public PostingListAdapter(ArrayList<Posting> dataList){
         this.postingDataList=dataList;
@@ -64,6 +65,10 @@ public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public void onClick(View v) {
                     Log.d("tag","클릭된pno:"+posting.getPno());
+                    choicePosting= posting;
+                    Intent intent = new Intent(v.getContext(),PostingActivity.class);
+                    intent.putExtra("choicePosting",choicePosting);
+                    v.getContext().startActivity(intent);
                 }
             });
         }

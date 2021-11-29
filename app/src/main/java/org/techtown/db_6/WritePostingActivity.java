@@ -89,22 +89,7 @@ public class WritePostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                builder.setTitle("글목록");
-                builder.setMessage("게시글 작성을 취소하시겠습니까?");
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(WritePostingActivity.this, BoardActivity.class);
-                        intent.putExtra("userID",userID);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                builder.setNegativeButton("취소",null);
-                builder.show();
-
-
+               finish();
 
             }
         });
