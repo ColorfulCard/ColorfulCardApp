@@ -150,6 +150,7 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<List<Integer>> call, Throwable t) {
                     message.what = StateSet.HomeMsg.MSG_FAIL;
+                    handler.sendMessage(message);
                 }
             });
 

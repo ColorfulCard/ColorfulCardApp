@@ -28,27 +28,21 @@ public class DataItem {
         public String getBalance() {
             return balance;
         }
-
         public String getCardName() {
             return cardName;
         }
-
         public int getViewType() {
             return viewType;
         }
-
         public String[] getBalances() {
             return balances;
         }
-
         public String getCardNum() {
             return cardNum;
         }
-
         public String getCardType() {
             return cardType;
         }
-
         public String getUserID() {
             return userID;
         }
@@ -68,17 +62,27 @@ public class DataItem {
         public int getViewType(){return  viewType;}
     }
 
-    public class PostingData{
 
-        private Posting posting;
+    public static class CommentData{
+
+        private Comment comment;
+        private Ccomment ccomment;
         private int viewType;
 
-        public PostingData(Posting posting, int viewType){
-            this.posting=posting;
+        public CommentData(Comment comment, int viewType){
+
+            this.comment=comment;
             this.viewType=viewType;
         }
 
-        public Posting getPosting() {return posting;}
+        public CommentData(Ccomment ccomment, int viewType){
+
+            this.ccomment=ccomment;
+            this.viewType=viewType;
+        }
+
+        public Comment getComment() {return comment;}
+        public Ccomment getCcomment() {return ccomment;}
         public int getViewType(){return viewType;}
     }
 }

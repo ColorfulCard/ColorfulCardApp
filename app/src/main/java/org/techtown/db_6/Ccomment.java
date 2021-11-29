@@ -60,8 +60,22 @@ public class Ccomment implements Serializable {
         return ccment;
     }
 
-    public Timestamp getCcdate() {
-        return ccdate;
+    public String getCcdate() {
+        StringBuilder stringBuilder= new StringBuilder();
+        String ccdate=this.ccdate.toString();
+
+        //2021-11-28 12:05
+        //21/11/28 17:32
+        stringBuilder.append(ccdate.substring(2,4));
+        stringBuilder.append("/");
+        stringBuilder.append(ccdate.substring(5,7));
+        stringBuilder.append("/");
+        stringBuilder.append(ccdate.substring(8,10));
+        stringBuilder.append(" ");
+        stringBuilder.append(ccdate.substring(11,16));
+
+        return stringBuilder.toString();
+
     }
 
 }
