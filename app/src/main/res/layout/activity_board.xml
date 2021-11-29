@@ -54,13 +54,15 @@
 
     <Spinner
         android:id="@+id/orderby"
-        android:layout_width="284dp"
-        android:layout_height="93dp"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintBottom_toBottomOf="@+id/searchImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/searchImage"
+        app:layout_constraintTop_toTopOf="@+id/searchImage" />
+
 
     <androidx.recyclerview.widget.RecyclerView
 
@@ -77,8 +79,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.0" />
-
-
 
     <ImageButton
         android:id="@+id/writting"
@@ -97,7 +97,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.726" />
-
 
     <TextView
         android:id="@+id/no_result"
