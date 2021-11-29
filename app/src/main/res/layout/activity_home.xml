@@ -7,35 +7,38 @@
     tools:context=".HomeActivity">
 
 
-    <Button
+    <ImageButton
         android:id="@+id/button3"
-        android:layout_width="110dp"
-        android:layout_height="80dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button_background"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="등록된 카드"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:backgroundTint="#5CC4DD"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        android:scaleType="centerInside"
+        android:src="@drawable/cardimage2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameView" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button4"
-        android:layout_width="110dp"
-        android:layout_height="80dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_background2"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="가맹점 찾기"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:backgroundTint="#FF9758"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/button3" />
+        android:scaleType="centerInside"
+        android:src="@drawable/mapimage2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -53,55 +56,41 @@
         app:srcCompat="@drawable/homeimage" />
 
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="77dp"
-
-        android:layout_height="77dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameView"
-        app:srcCompat="@drawable/cardimage" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="-100dp"
-        android:layout_marginLeft="-100dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toStartOf="@+id/imageView14"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
-        app:srcCompat="@drawable/mapimage" />
-
-    <Button
+    <ImageButton
         android:id="@+id/button5"
-        android:layout_width="107dp"
-        android:layout_height="80dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/button_background"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="소통게시판"
+        android:scaleType="centerInside"
+        android:src="@drawable/borderimage2"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:backgroundTint="#2ECC71"
-        app:layout_constraintEnd_toEndOf="@+id/imageView14"
-        app:layout_constraintStart_toStartOf="@+id/imageView14"
-        app:layout_constraintTop_toTopOf="@+id/button4" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="73dp"
-        android:layout_height="67dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:srcCompat="@drawable/borderimage" />
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+    <ImageButton
+        android:id="@+id/button6"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/button_background2"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/heart2"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameView" />
 
     <TextView
         android:id="@+id/nameView"
