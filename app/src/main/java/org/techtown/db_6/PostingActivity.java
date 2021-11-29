@@ -52,6 +52,3 @@ public class PostingActivity extends AppCompatActivity {
 
 
 }// MainActivity class..
-
-    }
-}
