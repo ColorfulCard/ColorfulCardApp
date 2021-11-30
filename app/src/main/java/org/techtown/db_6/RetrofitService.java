@@ -99,9 +99,11 @@ public interface RetrofitService {
     @POST("posting/{pid}")
     Call<Integer> postBoardPosting(@Path("pid") String pid, @Field("pcontent") String pcontent);
 
+    @FormUrlEncoded
     @PUT("posting/ccnt/{pno}")
     Call<Integer> putCommentCnt(@Path("pno")int pno,@Field("sign") String sign);  //sign에 plus or minus
 
+    @FormUrlEncoded
     @PUT("posting/hcnt/{pno}")
     Call<Integer> putHeartCnt(@Path("pno")int pno,@Field("sign")String sign);   //sign에 plus or minus                                                                                    )
 
@@ -109,7 +111,7 @@ public interface RetrofitService {
     Call<Integer> putViewsCnt(@Path("pno")int pno);
 
     @FormUrlEncoded
-    @DELETE("posting/delete")
+    @HTTP(method = "DELETE", path = "/posting/delete", hasBody = true)
     Call<Integer> deleteBoardPosting(@Field("pno")int pno);
 
 
@@ -120,13 +122,14 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("comment/{pno}")
-    Call<Integer> postComment(@Path("pno")int pno, @Field("cno")int cno, @Field("cid")String cid, @Field("cment")String cment);
+    Call<Comment> postComment(@Path("pno")int pno, @Field("cno")int cno, @Field("cid")String cid, @Field("cment")String cment);
 
+    @FormUrlEncoded
     @PUT("comment/{pno}")
     Call<Integer> putCcommentCnt(@Path("pno")int pno, @Field("cno")int cno, @Field("sign") String sign); //sign==plus or minus
 
     @FormUrlEncoded
-    @DELETE("comment/delete")
+    @HTTP(method = "DELETE",path="/comment/delete",hasBody = true)
     Call<Integer> deleteComment(@Field("pno")int pno,@Field("cno")int cno);
 
 
@@ -137,10 +140,10 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("ccomment/{pno}")
-    Call<Integer> postCcomment(@Path("pno")int pno, @Field("cno")int cno, @Field("ccno")int ccno, @Field("ccid")String ccid, @Field("ccment")String ccment);
+    Call<Ccomment> postCcomment(@Path("pno")int pno, @Field("cno")int cno, @Field("ccno")int ccno, @Field("ccid")String ccid, @Field("ccment")String ccment);
 
     @FormUrlEncoded
-    @DELETE("ccomment/delete")
+    @HTTP(method = "DELETE",path="/ccomment/delete",hasBody = true)
     Call<Integer> deleteCcomment(@Field("pno")int pno, @Field("cno")int cno, @Field("ccno") int ccno);
 
 
@@ -154,6 +157,6 @@ public interface RetrofitService {
     Call<Integer> postHeartPress(@Path("pno")int pno, @Field("hid")String hid);
 
     @FormUrlEncoded
-    @DELETE("heartPress/delete")
+    @HTTP(method = "DELETE",path="/heartPress/delete",hasBody = true)
     Call<Integer> deleteHeartPress(@Field("pno")int pno, @Field("hid") String hid);
 }

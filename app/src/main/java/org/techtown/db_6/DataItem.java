@@ -73,12 +73,16 @@ public class DataItem {
 
             this.comment=comment;
             this.viewType=viewType;
+
+            this.ccomment=null;
         }
 
         public CommentData(Ccomment ccomment, int viewType){
 
             this.ccomment=ccomment;
             this.viewType=viewType;
+
+            this.comment=null;
         }
 
         public Comment getComment() {return comment;}

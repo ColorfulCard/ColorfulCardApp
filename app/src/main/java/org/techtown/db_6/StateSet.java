@@ -38,10 +38,11 @@ public class StateSet {
         public static final int MSG_SUCCESS_GETPOSTINGS=2;
         public static final int MSG_NO_POSTINGS =3;
         public static final int MSG_ALREADY_GET_ALLPOSTINGS=4;
-        public static final int MSG_SUCCESS_GETCMENTS=5;
-        public static final int MSG_SUCCESS_DEL_POSTING=6;
-        public static final int MSG_SUCCESS_HEARTPRESS=7;
-        public static final int MSG_SUCCESS_INSERTPOSTING=8;
+        public static final int MSG_SUCCESS_GET_CMENTS =5;
+        public static final int MSG_SUCCESS_GET_CCMENTS=6;
+        public static final int MSG_SUCCESS_DEL_POSTING=7;
+        public static final int MSG_SUCCESS_HEARTPRESS=8;
+        public static final int MSG_SUCCESS_INSERT_CMENT =9;
     }
     public class ViewType{
         public static final int sideMealCard = 0;

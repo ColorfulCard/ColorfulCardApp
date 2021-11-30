@@ -85,26 +85,12 @@ public class Posting  implements Serializable {
         return vcnt;
     }
 
-    public void addCcnt(String sign) {
-
-        if(sign.equals("+")){
-            this.ccnt++;
-        }
-        else
-        {
-            this.ccnt--;
-        }
+    public void addCcnt(int i) {
+        this.ccnt=ccnt+i;
     }
 
-    public void addHcnt(String sign) {
-
-        if(sign.equals("+")){
-            this.hcnt++;
-        }
-        else
-        {
-            this.hcnt--;
-        }
+    public void addHcnt(int i) {
+        this.hcnt= hcnt+i;
 
     }
     //이거 굳이 안필요할거같음 뭔가

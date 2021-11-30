@@ -55,6 +55,7 @@ public class BoardActivity extends AppCompatActivity {
 
         intent = getIntent();
         userID=intent.getStringExtra("userID");
+
         handler = new MainHandler();
 
 

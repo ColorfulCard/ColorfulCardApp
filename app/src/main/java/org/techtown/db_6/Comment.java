@@ -25,7 +25,7 @@ public class Comment implements Serializable {
     @SerializedName("cdate")
     private Timestamp cdate;
 
-    @SerializedName("ccnt")
+    @SerializedName("cccnt")
     private int cccnt;
 
     public Comment(int pno, int cno ,String cid, String cment, Timestamp cdate, int cccnt) {
@@ -76,6 +76,10 @@ public class Comment implements Serializable {
 
     public int getCccnt() {
         return cccnt;
+    }
+
+    public void addCccnt(int i) {
+        cccnt= cccnt+ (i);
     }
 
 }
