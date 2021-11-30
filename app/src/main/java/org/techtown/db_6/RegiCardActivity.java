@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,11 +32,14 @@ public class RegiCardActivity extends AppCompatActivity {
     private MainHandler handler;
 
     private EditText et_cardName, cardNo1, cardNo2, cardNo3, cardNo4;
+    private TextView NotifyWordCnt;
     private RadioButton chMeal,chBusic,chEdu;
     private Button RegisterBt, vaildCheckBT;
     private TextView vaildCheckResult;
     private AlertDialog dialog;
     private boolean validate = false;
+    private boolean checkCardTitle= false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +65,36 @@ public class RegiCardActivity extends AppCompatActivity {
         RegisterBt = findViewById(R.id.button);
         vaildCheckBT = findViewById(R.id.vaildCheckBT);
         vaildCheckResult= findViewById(R.id.vaildCheckResult);
+        NotifyWordCnt = findViewById(R.id.NotifyWordCnt);
 
         handler = new MainHandler();
+
+        et_cardName.addTextChangedListener(new TextWatcher() {
+            //사용자가 글 쓸때마다 몇글자 적었는지 알려줌
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //사용자가 글을 썼다면
+                if (s.toString().length() > 0) {
+                    NotifyWordCnt.setText("("+s.toString().length() + "/20)");
+                    checkCardTitle = true;
+                } else {//아니라면
+                    NotifyWordCnt.setText("(0/20)");
+                    checkCardTitle = false;
+                }
+            }
+        });
+
 
         //카드인증 버튼클릭
         vaildCheckBT.setOnClickListener(new View.OnClickListener() {
