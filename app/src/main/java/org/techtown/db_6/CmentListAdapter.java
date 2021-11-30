@@ -20,9 +20,12 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private ArrayList<DataItem.CommentData> cmentDataList=null;
     private Posting posting= PostingActivity.posting;
-    public CmentListAdapter(ArrayList<DataItem.CommentData> cmentDataList){
+    private String userID;
+    public CmentListAdapter(ArrayList<DataItem.CommentData> cmentDataList, String userID){
         this.cmentDataList= cmentDataList;
-        Log.d("tag","userID"+PostingActivity.userID);
+        this.userID=userID;
+
+        Log.d("tag","userID"+userID);
     }
 
     @Override
@@ -51,6 +54,10 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Comment comment= cmentDataList.get(position).getComment();
 
             ((CmentViewHolder)holder).cid.setText(comment.getCid());
+            if(posting.getPid().equals(comment.getCid()))
+            {
+                ((CmentViewHolder)holder).cid.setTextColor(0xFFF56E4A);
+            }
             ((CmentViewHolder)holder).cment.setText(comment.getCment());
             ((CmentViewHolder)holder).cdate.setText(comment.getCdate());
 
@@ -61,7 +68,7 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     Log.d("tag",comment.getCno()+"댓글클릭됨");
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     String[] list;
-                    if(comment.getCid().equals(PostingActivity.userID)){
+                    if(comment.getCid().equals(userID)){
                         list= new String[]{"대댓글 달기","삭제하기"};
 
                     }else {
@@ -105,7 +112,7 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public boolean onLongClick(View v) {
                     Log.d("tag",ccomment.getCno()+"-"+ccomment.getCcno()+"대댓글클릭됨");
 
-                    if(ccomment.getCcid().equals(PostingActivity.userID)){
+                    if(ccomment.getCcid().equals(userID)){
 
 
                         String list[]={"삭제하기"};
@@ -186,9 +193,7 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         cmentDataList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, cmentDataList.size());
-
+        notifyDataSetChanged();
 
         Server server = new Server();
         RetrofitService service = server.getRetrofitService();

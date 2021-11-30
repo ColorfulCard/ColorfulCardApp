@@ -34,7 +34,7 @@ public class BoardActivity extends AppCompatActivity {
     private String[] item={"최신순","조회수","공감수"};
     private ImageButton WritingBtn;
     private TextView no_result;
-    public static String userID;
+    public  String userID;
     private Intent intent;
     private ImageView searchImage;
 
@@ -102,7 +102,6 @@ public class BoardActivity extends AppCompatActivity {
         });
 
 
-
         sortingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -131,8 +130,6 @@ public class BoardActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
     }
@@ -222,7 +219,7 @@ public class BoardActivity extends AppCompatActivity {
                     }
                     //처음 뷰로 보여주는거, 스크롤 초기화
                     recyclerView.setVisibility(View.VISIBLE);
-                    adapter = new PostingListAdapter(postings);
+                    adapter = new PostingListAdapter(postings, userID);
                     recyclerView.setAdapter(adapter);
                     initScrollListner();
                     break;
@@ -291,7 +288,7 @@ public class BoardActivity extends AppCompatActivity {
                 thread.start();
 
             }
-        },1000);
+        },900);
 
     }
 

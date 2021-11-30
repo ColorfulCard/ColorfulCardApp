@@ -16,29 +16,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/titleimage" />
 
-    <Button
+    <ImageButton
         android:id="@+id/deleteBt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="삭제하기"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#00ff0000"
+        android:scaleType="fitXY"
+        android:src="@drawable/trash"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:menu="@menu/my_navigation_items" />
-
-    <TextView
+     <TextView
         android:id="@+id/pid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,10 +147,93 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/light_gray"
-        app:layout_constraintBottom_toTopOf="@+id/navigationView"
+        app:layout_constraintBottom_toTopOf="@+id/button11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:background="#00ff0000"
+        android:drawableLeft="@drawable/heartsize"
+        android:text="공감하기"
+        android:textColor="@color/dark_gray"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:background="#00ff0000"
+        android:drawableLeft="@drawable/pinkheartsize"
+        android:text="공감하기"
+        android:textColor="@color/dark_gray"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#00ff0000"
+        android:drawableLeft="@drawable/commentsize"
+        android:text="댓글달기"
+        android:textColor="@color/dark_gray"
+        android:textColorHint="@color/dark_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/button9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button9" />
+
+    <EditText
+        android:id="@+id/input1"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/square_text"
+        android:maxLength="300"
+        android:hint="댓글을 입력하세요."
+        android:paddingLeft="10dp"
+        android:textSize="17dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:background="#00ff0000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input1"
+        app:srcCompat="@drawable/sendbtsize" />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView4"

@@ -21,9 +21,11 @@ public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private ArrayList<Posting> postingDataList= null;
     public Posting choicePosting=null;
+    public String userID;
 
-    public PostingListAdapter(ArrayList<Posting> dataList){
+    public PostingListAdapter(ArrayList<Posting> dataList, String userID){
         this.postingDataList=dataList;
+        this.userID=userID;
     }
 
     @Override
@@ -68,6 +70,7 @@ public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     choicePosting= posting;
                     Intent intent = new Intent(v.getContext(),PostingActivity.class);
                     intent.putExtra("choicePosting",choicePosting);
+                    intent.putExtra("userID",userID);
                     v.getContext().startActivity(intent);
                 }
             });
