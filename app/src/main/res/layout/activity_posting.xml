@@ -80,28 +80,24 @@
         android:id="@+id/ccnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-2dp"
-        android:layout_marginLeft="-2dp"
         android:text="100"
         android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="28dp"
-        android:layout_height="15dp"
+        android:layout_width="25dp"
+        android:layout_height="17dp"
         app:layout_constraintStart_toEndOf="@+id/hcnt"
         app:layout_constraintTop_toTopOf="@+id/imageView13"
         app:srcCompat="@drawable/comment" />
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="25dp"
-        android:layout_height="15dp"
+        android:layout_width="28dp"
+        android:layout_height="18dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/hcnt"
         app:layout_constraintStart_toStartOf="@+id/pcontent"
@@ -147,7 +143,6 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="@color/light_gray"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +169,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="550dp"
-        android:background="#FFFFFF"
+        android:background="#00ff0000"
         android:drawableLeft="@drawable/heartsize"
         android:text="공감하기"
         android:textColor="@color/dark_gray"
@@ -194,14 +189,14 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="550dp"
-        android:background="#FFFFFF"
+        android:background="#00ff0000"
         android:drawableLeft="@drawable/pinkheartsize"
         android:text="공감하기"
         android:textColor="@color/dark_gray"
         android:textColorHint="@color/dark_gray"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -213,7 +208,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:background="#FFFFFF"
+        android:background="#00ff0000"
         android:drawableLeft="@drawable/commentsize"
         android:text="댓글달기"
         android:textColor="@color/dark_gray"
@@ -223,27 +218,31 @@
         android:visibility="visible"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/button9"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
-        android:layout_width="413dp"
-        android:layout_height="475dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toTopOf="@+id/button9" />
 
     <EditText
         android:id="@+id/input1"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="16dp"
-        android:text="댓글을 입력하세요."
-        android:textSize="13dp"
-        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/square_text"
+        android:maxLength="300"
+        android:hint="댓글을 입력하세요."
+        android:paddingLeft="10dp"
+        android:textSize="17dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button9" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:background="#00ff0000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input1"
+        app:srcCompat="@drawable/sendbtsize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

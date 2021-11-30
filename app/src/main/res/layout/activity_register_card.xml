@@ -37,32 +37,25 @@
 
     <EditText
         android:id="@+id/et_cardName"
-        android:layout_width="300dp"
+        android:layout_width="322dp"
         android:layout_height="45dp"
         android:layout_marginTop="84dp"
         android:hint="카드이름을 입력하세요"
-        android:paddingLeft="13dp"
+        android:maxLength="20"
         android:theme="@style/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/tv_cardName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="303dp"
-        android:layout_marginRight="303dp"
         android:text="카드명"
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/et_cardName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/et_cardName"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -72,17 +65,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="4dp"
         android:text="카드 번호"
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/tv_cardName"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -90,15 +79,9 @@
         android:id="@+id/linearLayout2"
         android:layout_width="322dp"
         android:layout_height="51dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.565"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/vaildCheckBT"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <EditText
@@ -107,11 +90,11 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="****"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:paddingLeft="20dp"
-            android:theme="@style/editText"
-            android:hint="****"/>
+            android:theme="@style/editText" />
 
         <EditText
             android:id="@+id/cardNo2"
@@ -119,11 +102,11 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="****"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:paddingLeft="20dp"
-            android:theme="@style/editText"
-            android:hint="****"/>
+            android:theme="@style/editText" />
 
         <EditText
             android:id="@+id/cardNo3"
@@ -131,11 +114,11 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="****"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:paddingLeft="20dp"
-            android:theme="@style/editText"
-            android:hint="****"/>
+            android:theme="@style/editText" />
 
         <EditText
             android:id="@+id/cardNo4"
@@ -143,23 +126,19 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="****"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:paddingLeft="20dp"
-            android:theme="@style/editText"
-            android:hint="****"/>
+            android:theme="@style/editText" />
 
 
     </LinearLayout>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="320dp"
+        android:layout_width="322dp"
         android:layout_height="64dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
         android:backgroundTint="@color/light_yellow"
         android:text="등록하기"
         android:textColor="#4E4E4E"
@@ -167,26 +146,25 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         app:layout_constraintVertical_bias="0.469" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="332dp"
+        android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="@+id/vaildCheckBT"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <RadioButton
             android:id="@+id/chMeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="급식카드"
             android:textColor="#0A0703"
             android:textSize="19dp"
@@ -196,6 +174,8 @@
             android:id="@+id/chBusic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+
             android:text="부식카드"
             android:textColor="#0A0703"
             android:textSize="19dp"
@@ -205,6 +185,7 @@
             android:id="@+id/chEdu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="교육카드"
             android:textColor="#0A0703"
             android:textSize="19dp"
@@ -216,8 +197,6 @@
         android:id="@+id/vaildCheckBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="36dp"
         android:backgroundTint="#D6B2EC"
@@ -225,7 +204,7 @@
         android:textColor="#0A0703"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
@@ -240,4 +219,15 @@
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintStart_toEndOf="@+id/vaildCheckBT"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <TextView
+        android:id="@+id/NotifyWordCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="(0/20)"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_cardName"
+        app:layout_constraintStart_toEndOf="@+id/tv_cardName"
+        app:layout_constraintTop_toTopOf="@+id/tv_cardName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

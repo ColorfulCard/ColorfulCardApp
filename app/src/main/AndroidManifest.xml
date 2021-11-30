@@ -28,8 +28,7 @@
 
         <activity android:name=".IntroActivity" />
         <activity android:name=".AgreeActivity" />
-        <activity android:name=".JoinActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".JoinActivity" />
         <activity android:name=".FindingActivity" />
         <activity android:name=".WithDrawalActivity" />
         <activity android:name=".LoginActivity">
@@ -52,7 +51,7 @@
         </activity>
 
         <activity android:name=".PostingActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustResize">
         </activity>
 
         <activity android:name=".WritePostingActivity" />
