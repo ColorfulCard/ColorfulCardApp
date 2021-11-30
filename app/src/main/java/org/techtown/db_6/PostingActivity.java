@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +13,9 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class PostingActivity extends AppCompatActivity {
     private Button pinkheartBt;
     private Button cmentBt;
     private Boolean Chheart;
+    private EditText input1;
     Posting posting;
     TextView pid,pcontent,pdate,hcnt,ccnt,vcnt;
     Button deleteBt;
@@ -49,6 +53,7 @@ public class PostingActivity extends AppCompatActivity {
         grayheartBt = (Button)findViewById(R.id.button9);
         pinkheartBt = (Button)findViewById(R.id.button11);
         cmentBt = (Button)findViewById(R.id.button10);
+        input1 = (EditText) findViewById(R.id.input1);
         Chheart = false;
         posting= (Posting) getIntent().getSerializableExtra("choicePosting");
 
@@ -68,6 +73,68 @@ public class PostingActivity extends AppCompatActivity {
         hcnt.setText(String.valueOf(posting.getHcnt()));
         ccnt.setText(String.valueOf(posting.getCcnt()));
         vcnt.setText(String.valueOf(posting.getVcnt()));
+
+        grayheartBt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v)
+            {if(!Chheart){
+                Log.d("Log","false");
+                //false인 경우 즉 회색하트 보여주기
+                grayheartBt.setVisibility(View.INVISIBLE);
+                pinkheartBt.setVisibility(View.VISIBLE);
+                Chheart = true;
+
+            }
+            }
+        });
+
+        pinkheartBt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v)
+            {if(Chheart){
+                Log.d("Log","false");
+                //false인 경우 즉 회색하트 보여주기
+                grayheartBt.setVisibility(View.VISIBLE);
+                pinkheartBt.setVisibility(View.INVISIBLE);
+                Chheart = false;
+
+            }
+            }
+        });
+
+
+        final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+
+        cmentBt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v)
+            {
+                        input1.requestFocus();
+                        input1.setVisibility(View.VISIBLE);
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.showSoftInput(input1,0);
+                         grayheartBt.setVisibility(View.INVISIBLE);
+                         pinkheartBt.setVisibility(View.INVISIBLE);
+                         cmentBt.setVisibility(View.INVISIBLE);
+
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if(posting.getPid().equals(userID)){
 
