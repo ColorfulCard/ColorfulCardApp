@@ -28,6 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.util.Log.d;
+
 public class PostingActivity extends AppCompatActivity {
 
     Context mContext;
@@ -63,7 +65,7 @@ public class PostingActivity extends AppCompatActivity {
         userID= getIntent().getStringExtra("userID");
         prevActivity= getIntent().getStringExtra("prevActivity");
 
-        Log.d("tag",userID+"포스팅에서");
+        d("tag",userID+"포스팅에서");
         mContext= this.getApplicationContext();
 
         pid=findViewById(R.id.pid);
@@ -236,6 +238,12 @@ public class PostingActivity extends AppCompatActivity {
             //들어올 때 해당포스팅이 사용자가 공감한 글인지 아닌지를 체크해야한다.
             CheckHeartPostingThread checkHeartThread = new CheckHeartPostingThread(posting.getPno());
             checkHeartThread.start();
+        }else {
+            //바로 리사이클러뷰 띄운다.
+            d("tag","댓글없는 곳에 추가한다");
+            adapter= new CmentListAdapter(dataList,userID);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setVisibility(View.VISIBLE);
         }
 
     }// onCreate()..
@@ -360,7 +368,7 @@ public class PostingActivity extends AppCompatActivity {
                                 //해당글이 공감글임
                                 message.what= StateSet.BoardMsg.MSG_SUCCESS_HEARTPRESS;
                                 handler.sendMessage(message);
-                                Log.d("tag","공감글이다.");
+                                d("tag","공감글이다.");
                                 break;
                             }
                         }
@@ -382,14 +390,15 @@ public class PostingActivity extends AppCompatActivity {
 
         private int pno;
         private String cment;
-        private int cno;
+        private int cno=1;
 
         public InsertCmentThread(int pno, String cment){
 
             this.pno=pno;
             this.cment=cment;
-
+            d("tag",comments.toArray()+"");
             if(comments.isEmpty()){
+                d("tag","empty하다");
                 cno=1;
             }else{
 
@@ -411,25 +420,29 @@ public class PostingActivity extends AppCompatActivity {
 
             Server server = new Server();
             RetrofitService service= server.getRetrofitService();
-            Log.d("tag",pno+" "+cno+" "+ userID+" "+cment+"인서트시도");
+            d("tag",pno+" "+cno+" "+ userID+" "+cment+"인서트시도");
             Call<Comment>call = service.postComment(pno,cno,userID,cment);
 
             call.enqueue(new Callback<Comment>() {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
+
+                   Log.d("tag",response.errorBody()+" ");
+
                     if(response.isSuccessful()){
 
-                        Comment result= response.body();
+                        Comment result= (Comment)response.body();
 
-                        if(!result.equals(null)){
-                            Log.d("tag","인서트성공");
+                            d("tag",result.getCno()+"댓글담");
+                            d("tag","인서트성공");
                             updateCmentCnt(pno,"plus");
+
                             comments.add(result);
                             dataList.add(new DataItem.CommentData(result,StateSet.ViewType.comment));
 
                             message.what= StateSet.BoardMsg.MSG_SUCCESS_INSERT_CMENT;
                             handler.sendMessage(message);
-                        }
+
                     }
                 }
 
@@ -545,7 +558,7 @@ public class PostingActivity extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Log.d("tag","댓글수 1증가됨");
+                d("tag","댓글수 1증가됨");
             }
 
             @Override
@@ -568,7 +581,7 @@ public class PostingActivity extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     //조회수 1증가
-                    Log.d("tag","조회수 1증가됨");
+                    d("tag","조회수 1증가됨");
                 }
             }
 
@@ -592,7 +605,7 @@ public class PostingActivity extends AppCompatActivity {
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if(response.isSuccessful())
                         {
-                            Log.d("tag","hcnt--됨");
+                            d("tag","hcnt--됨");
                         }
                     }
 
@@ -608,7 +621,7 @@ public class PostingActivity extends AppCompatActivity {
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if(response.isSuccessful())
                         {
-                            Log.d("tag","공감하기 해제됨");
+                            d("tag","공감하기 해제됨");
                         }
                     }
 
@@ -629,7 +642,7 @@ public class PostingActivity extends AppCompatActivity {
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if(response.isSuccessful())
                         {
-                            Log.d("tag","hcnt++됨");
+                            d("tag","hcnt++됨");
                         }
                     }
 
@@ -645,7 +658,7 @@ public class PostingActivity extends AppCompatActivity {
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if(response.isSuccessful())
                         {
-                            Log.d("tag","공감하기 등록됨");
+                            d("tag","공감하기 등록됨");
                         }
                     }
 
@@ -687,10 +700,12 @@ public class PostingActivity extends AppCompatActivity {
                         for(Comment cment:comments){
 
                             dataList.add( new DataItem.CommentData(cment,StateSet.ViewType.comment));
-                            Log.d("tag","dataList에 cno:"+cment.getCno()+"추가함");
-                            Log.d("tag",cment.getCccnt()+"=cccnt");
+                            d("tag","dataList에 cno:"+cment.getCno()+"추가함");
+                            d("tag",cment.getCccnt()+"=cccnt");
+
                         }
 
+                        recyclerView= findViewById(R.id.recyclerView4);
                         recyclerView.setVisibility(View.VISIBLE);
                         adapter=new CmentListAdapter(dataList,userID);
                         recyclerView.setAdapter(adapter);
@@ -706,24 +721,24 @@ public class PostingActivity extends AppCompatActivity {
                     for(Comment cment: comments){
 
                         dataList.add( new DataItem.CommentData(cment,StateSet.ViewType.comment));
-                        Log.d("tag","dataList에 cno:"+cment.getCno()+" 추가함 cccnt="+cment.getCccnt());
+                        d("tag","dataList에 cno:"+cment.getCno()+" 추가함 cccnt="+cment.getCccnt());
 
                         for(Ccomment ccment: ccomments)
                         {
                             if(cment.getCno()==ccment.getCno()){
                                 dataList.add(new DataItem.CommentData(ccment,StateSet.ViewType.ccomment));
-                                Log.d("tag", "dataList에 cno:" + ccment.getCno() + "의 ccno:" + ccment.getCcno() + " 추가함");
+                                d("tag", "dataList에 cno:" + ccment.getCno() + "의 ccno:" + ccment.getCcno() + " 추가함");
 
                             }
                         }
                     }
 
-                    Log.d("tag",dataList.size()+"");
+                    d("tag",dataList.size()+"");
                     //나중에 ccnt 수 완벽히 맞춰지면 카운트랑 비교해서 리사이클러뷰 보여주기 지금약간 불안정함 코드가
                     if(dataList.size()==posting.getCcnt())
                     {
                         //처음 뷰로 보여주는거
-                        Log.d("tag","리사이클러뷰보여줌");
+                        d("tag","리사이클러뷰보여줌");
                         recyclerView.setVisibility(View.VISIBLE);
                         adapter = new CmentListAdapter(dataList,userID);
                         recyclerView.setAdapter(adapter);
@@ -744,14 +759,16 @@ public class PostingActivity extends AppCompatActivity {
 
                 case StateSet.BoardMsg.MSG_SUCCESS_INSERT_CMENT:
                     //리사이클러뷰 인서트된 댓글 포함해서 다시 보여주기
-                    adapter.notifyDataSetChanged();
+
                     ccnt.setText(String.valueOf((posting.getCcnt()+1)));
                     posting.addCcnt(+1);
+                    adapter.notifyDataSetChanged();
+
                     break;
 
 
                 case StateSet.BoardMsg.MSG_SUCCESS_HEARTPRESS:
-                    Log.d("tag","공감글인거 확인함");
+                    d("tag","공감글인거 확인함");
                     isHeartPosting = true;
                     isHeartPress=true;
                     //공감된 글이다.. 버튼 눌러진 상태로 변경하기!

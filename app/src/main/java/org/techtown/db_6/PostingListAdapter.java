@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 
 public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -49,7 +51,7 @@ public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             view = inflater.inflate(R.layout.board_loading, parent, false);
             return new LoadingViewHolder(view);
         }
-       // return null;
+        // return null;
     }
 
     @Override
@@ -61,7 +63,32 @@ public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             ((PostingViewHolder)holder).pid.setText(posting.getPid());
             ((PostingViewHolder)holder).pcontent.setText(posting.getPcontent());
-            ((PostingViewHolder)holder).pdate.setText(posting.getPdate());
+
+            String pdate=posting.getPdate();
+            TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+            SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+            String nowTime = sdf.format(System.currentTimeMillis());
+
+            Boolean sameDay=true;
+            for(int i=0;i<11;i++){
+                if(pdate.charAt(i)!=nowTime.charAt(i))
+                {
+                    sameDay=false;
+                }
+            }
+            if(sameDay){
+                //여전히 true 라면 같은 날, 같은 시간대이다.
+                int beforeMinute =  Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(pdate.substring(12));
+                if (beforeMinute==0) {
+                    ((PostingViewHolder)holder).pdate.setText("방금 전");
+                }else {
+                    ((PostingViewHolder)holder).pdate.setText(beforeMinute + "분 전");
+                }
+            }
+            else{
+                ((PostingViewHolder)holder).pdate.setText(pdate);
+            }
+
             ((PostingViewHolder)holder).hcnt.setText(String.valueOf(posting.getHcnt()));
             ((PostingViewHolder)holder).ccnt.setText(String.valueOf(posting.getCcnt()));
             ((PostingViewHolder)holder).vcnt.setText(String.valueOf(posting.getVcnt()));

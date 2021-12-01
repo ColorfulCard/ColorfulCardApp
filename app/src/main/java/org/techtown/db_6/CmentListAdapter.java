@@ -12,7 +12,9 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AlertDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,8 +66,32 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
 
             ((CmentViewHolder)holder).cment.setText(comment.getCment());
-            ((CmentViewHolder)holder).cdate.setText(comment.getCdate());
 
+
+            String cdate=comment.getCdate();
+            TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+            SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+            String nowTime = sdf.format(System.currentTimeMillis());
+
+            Boolean sameDay=true;
+            for(int i=0;i<11;i++){
+                if(cdate.charAt(i)!=nowTime.charAt(i))
+                {
+                    sameDay=false;
+                }
+            }
+            if(sameDay){
+                //여전히 true 라면 같은 날, 같은 시간대이다.
+                int beforeMinute =  Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(cdate.substring(12));
+                if (beforeMinute==0) {
+                    ((CmentViewHolder)holder).cdate.setText("방금 전");
+                }else {
+                    ((CmentViewHolder) holder).cdate.setText(beforeMinute + "분 전");
+                }
+            }
+            else{
+                ((CmentViewHolder)holder).cdate.setText(cdate);
+            }
 
             //댓글 꾹 눌렀을 때 대댓글쓰기 , 본인 글이면 댓글 삭제하기
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -161,10 +187,38 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             });
         }
         else if(holder instanceof  CcmentViewHolder){
+
+
             Ccomment ccomment= cmentDataList.get(position).getCcomment();
             ((CcmentViewHolder)holder).ccid.setText(ccomment.getCcid());
             ((CcmentViewHolder)holder).ccment.setText(ccomment.getCcment());
-            ((CcmentViewHolder)holder).ccdate.setText(ccomment.getCcdate());
+
+
+
+            String ccdate=ccomment.getCcdate();
+            TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+            SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+            String nowTime = sdf.format(System.currentTimeMillis());
+
+            Boolean sameDay=true;
+            for(int i=0;i<11;i++){
+                if(ccdate.charAt(i)!=nowTime.charAt(i))
+                {
+                    sameDay=false;
+                }
+            }
+            if(sameDay){
+                //여전히 true 라면 같은 날, 같은 시간대이다.       --> 몇분전인지 체크해서 출력
+                int beforeMinute =  Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(ccdate.substring(12));
+                if (beforeMinute==0) {
+                    ((CcmentViewHolder)holder).ccdate.setText("방금 전");
+                }else {
+                    ((CcmentViewHolder) holder).ccdate.setText(beforeMinute + "분 전");
+                }
+            }
+            else{
+                ((CcmentViewHolder)holder).ccdate.setText(ccdate);
+            }
 
             //대댓글 꾹 눌렀을 때 본인 글이면 대댓글 삭제하기
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
