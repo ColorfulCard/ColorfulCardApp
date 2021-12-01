@@ -123,9 +123,11 @@ public class PostingActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 if(isHeartPress){
+
                     grayheartBt.setVisibility(View.VISIBLE);
                     pinkheartBt.setVisibility(View.INVISIBLE);
                     isHeartPress = false;
+
                     posting.addHcnt(-1);
                     hcnt.setText(String.valueOf(posting.getHcnt()));
 
