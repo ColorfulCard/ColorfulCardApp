@@ -114,7 +114,7 @@ public class InformActivity extends AppCompatActivity {
                 sideMeal.setVisibility(View.INVISIBLE);
                 edu.setVisibility(View.VISIBLE);
 
-                tv1.setText("");
+                tv1.setText("교육카드 상세설명");
                 tv2.setText("지원금액");
                 tv3.setText("초등생 : 75,000원\n중등생 : 85,000원\n고등생 : 160,000원");
                 tv4.setText("사용방법");
