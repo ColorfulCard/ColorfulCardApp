@@ -1,8 +1,10 @@
 package org.techtown.db_6;
 
+import android.app.Activity;
 import android.content.Context;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +65,7 @@ public class SearchStoreListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                     intent.putExtra("choiceStore",choiceStore);
                     v.getContext().startActivity(intent);
+                    ((Activity)v.getContext()).overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
 
                 }
             });

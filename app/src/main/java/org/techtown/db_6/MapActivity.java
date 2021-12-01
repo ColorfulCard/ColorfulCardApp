@@ -864,8 +864,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
     }
 
 }

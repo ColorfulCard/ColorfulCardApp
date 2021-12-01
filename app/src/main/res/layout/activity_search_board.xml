@@ -56,9 +56,8 @@
         android:layout_marginTop="200dp"
         android:textColor="@color/dark_gray"
         android:textSize="17dp"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerview2"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/recyclerview2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchbar" />
 
     <Button
@@ -72,6 +71,7 @@
         android:paddingRight="8dp"
         android:text="취소"
         android:textSize="15dp"
+        android:textStyle="bold"
         app:backgroundTint="#00ff0000"
         app:layout_constraintBottom_toBottomOf="@+id/searchbar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/searchGlassImage"
         android:layout_width="90dp"
         android:layout_height="80dp"
         android:layout_marginTop="200dp"
@@ -90,14 +90,15 @@
         app:srcCompat="@drawable/searchboard" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/searchMent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="현재 게시판의 글을 검색합니다"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+        app:layout_constraintTop_toBottomOf="@+id/searchGlassImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

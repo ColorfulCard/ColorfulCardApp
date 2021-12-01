@@ -1,4 +1,5 @@
 package org.techtown.db_6;
+import android.app.Activity;
 import android.content.Context;
 
 import android.content.Intent;
@@ -20,12 +21,14 @@ import java.util.ArrayList;
 public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private ArrayList<Posting> postingDataList= null;
-    public Posting choicePosting=null;
-    public String userID;
+    private Posting choicePosting=null;
+    private String userID;
+    private String attachedActivity;
 
-    public PostingListAdapter(ArrayList<Posting> dataList, String userID){
+    public PostingListAdapter(ArrayList<Posting> dataList, String userID, String attachedActivity){
         this.postingDataList=dataList;
         this.userID=userID;
+        this.attachedActivity=attachedActivity;
     }
 
     @Override
@@ -68,10 +71,22 @@ public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 public void onClick(View v) {
                     Log.d("tag","클릭된pno:"+posting.getPno());
                     choicePosting= posting;
+
                     Intent intent = new Intent(v.getContext(),PostingActivity.class);
                     intent.putExtra("choicePosting",choicePosting);
                     intent.putExtra("userID",userID);
+                    intent.putExtra("prevActivity",attachedActivity);
                     v.getContext().startActivity(intent);
+
+                    //  오 ->왼 슬라이딩 하면서 전환됨
+                    ((Activity)v.getContext()).overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
+
+                    /*바로 게시판에서 조회된 포스팅액티비티로 넘어갈경우 이전액티비티는 없애준다.
+                     그때는 포스팅 액티비티에서 이전 화면(게시판)으로 넘어올 때 DB에서도 재조회해서 UI에 보여지는 정보의 싱크를 맞춰주기 위함 */
+                    if(attachedActivity.equals("BoardActivity")) {
+                        Log.d("tag", "지금 게시판액티비티 삭제되나요?");
+                        ((Activity) v.getContext()).finish();
+                    }
                 }
             });
         }

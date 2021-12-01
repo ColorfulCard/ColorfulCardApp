@@ -23,4 +23,14 @@
         <item name="colorAccent">@color/dark_gray</item>
         <item name= "colorControlNormal">@color/light_gray</item>
     </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">20dp</item>
+    </style>
+
+
 </resources>

@@ -24,8 +24,6 @@ public class LoadingActivity extends AppCompatActivity {
     private TextView loading;
 
 
-
-
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
 
@@ -90,6 +88,7 @@ public class LoadingActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoadingActivity.this, UserCardListActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.none,R.anim.none);
                     finish();
                     break;
                 case StateSet.LoadingMsg.MSG_FAIL:

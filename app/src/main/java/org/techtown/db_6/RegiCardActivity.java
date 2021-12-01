@@ -180,6 +180,7 @@ public class RegiCardActivity extends AppCompatActivity {
                     user.clearCardBalances();
                     intent.putExtra("user",user);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
                     finish();
 
                 } else {
@@ -188,6 +189,7 @@ public class RegiCardActivity extends AppCompatActivity {
                     user.clearCardBalances();
                     intent.putExtra("user",user);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
                     finish();
                 }
 
@@ -246,6 +248,13 @@ public class RegiCardActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
     }
 }
 

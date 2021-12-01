@@ -60,10 +60,10 @@
         android:id="@+id/pdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:text="10/26 21:48"
-        android:textSize="13dp"
+        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pid" />
 
@@ -216,6 +216,7 @@
         android:background="@drawable/square_text"
         android:maxLength="300"
         android:hint="댓글을 입력하세요."
+        android:theme="@style/editText"
         android:paddingLeft="10dp"
         android:textSize="17dp"
         android:visibility="gone"
@@ -233,6 +234,15 @@
         app:layout_constraintTop_toTopOf="@+id/input1"
         app:srcCompat="@drawable/sendbtsize" />
 
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:background="#00ff0000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input1"
+        app:srcCompat="@drawable/sendbtsize" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -240,8 +250,10 @@
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:background="#F4F4F4"
         android:visibility="visible"
-        android:background="@color/llgiht_gray"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

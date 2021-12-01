@@ -75,6 +75,7 @@ public class WritePostingActivity extends AppCompatActivity {
                 if(checkPostingContent) {
                     //사용자가 글을 작성한 경우
                     insertPostingToBoard();
+
                  }else{
 
                     Toast.makeText(getApplicationContext(), "내용을 작성해주세요.", Toast.LENGTH_SHORT).show();
@@ -90,7 +91,7 @@ public class WritePostingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                finish();
-
+               overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
             }
         });
 
@@ -109,11 +110,13 @@ public class WritePostingActivity extends AppCompatActivity {
                     Integer result= response.body();
 
                     if(result.intValue()==1){
+                        //작성 성공
 
                         Intent intent = new Intent(WritePostingActivity.this, BoardActivity.class);
                         intent.putExtra("userID",userID);
                         startActivity(intent);
-
+                        finish();
+                        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
                     }
                     else
                     {
@@ -129,5 +132,11 @@ public class WritePostingActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
     }
 }

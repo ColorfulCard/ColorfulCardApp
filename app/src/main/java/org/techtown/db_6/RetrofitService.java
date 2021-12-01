@@ -135,8 +135,8 @@ public interface RetrofitService {
 
     //-------------------------------Ccomment------------------------------//
 
-    @GET("ccomment/{pno}/{cno}")
-    Call<List<Ccomment>> getCcomment(@Path("pno")int pno,@Path("cno")int cno);
+    @GET("ccomment/{pno}")
+    Call<List<Ccomment>> getCcomment(@Path("pno")int pno);
 
     @FormUrlEncoded
     @POST("ccomment/{pno}")

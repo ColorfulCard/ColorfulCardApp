@@ -5,7 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AlertDialog;
 
@@ -51,20 +54,25 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder( RecyclerView.ViewHolder holder, int position) {
 
         if(holder instanceof CmentViewHolder){
+
             Comment comment= cmentDataList.get(position).getComment();
 
             ((CmentViewHolder)holder).cid.setText(comment.getCid());
             if(posting.getPid().equals(comment.getCid()))
             {
-                ((CmentViewHolder)holder).cid.setTextColor(0xFFF56E4A);
+                ((CmentViewHolder)holder).cid.setTextColor(0xFFF9595F);     //글쓴사람 댓글이면 빨간색으로  0xFFF56E4A
             }
+
             ((CmentViewHolder)holder).cment.setText(comment.getCment());
             ((CmentViewHolder)holder).cdate.setText(comment.getCdate());
 
+
             //댓글 꾹 눌렀을 때 대댓글쓰기 , 본인 글이면 댓글 삭제하기
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+
                 @Override
                 public boolean onLongClick(View v) {
+
                     Log.d("tag",comment.getCno()+"댓글클릭됨");
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     String[] list;
@@ -76,6 +84,42 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                     }
 
+                    PostingActivity.sendBt_Ccment.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            String ccment = PostingActivity.input1.getText().toString();
+
+                            if (ccment.equals("")) {
+
+                                Toast.makeText(v.getContext(), "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Log.d("tag",comment.getCno()+"cno에 대댓글 DB에 인서트하기 전");
+                                //인서트하면됨
+
+                                insertCcmentOnCment(comment.getPno(),comment.getCno(),userID, ccment,position);
+
+                                if(PostingActivity.isHeartPosting||PostingActivity.isHeartPress){
+                                    PostingActivity.pinkheartBt.setVisibility(View.VISIBLE);
+                                }
+                                else
+                                {
+                                    PostingActivity. grayheartBt.setVisibility(View.VISIBLE);
+                                }
+
+                                PostingActivity.cmentBt.setVisibility(View.VISIBLE);
+                                PostingActivity.input1.setVisibility(View.GONE);
+                                PostingActivity.input1.setText("");
+                                PostingActivity.sendBt_Ccment.setVisibility(View.GONE);
+                                InputMethodManager imm= (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(PostingActivity.input1.getWindowToken(), 0);
+                            }
+
+                        }
+                    });
+
+
                     builder.setItems(list, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -83,6 +127,22 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                             if(which==0){
                                 //대댓글 달기 클릭시
                                 //입력칸이랑 키보드 올라와야함
+                                PostingActivity.input1.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        PostingActivity.grayheartBt.setVisibility(View.INVISIBLE);
+                                        PostingActivity.pinkheartBt.setVisibility(View.INVISIBLE);
+                                        PostingActivity.cmentBt.setVisibility(View.INVISIBLE);
+                                        PostingActivity.input1.setVisibility(View.VISIBLE);
+                                        PostingActivity.sendBt_Ccment.setVisibility(View.VISIBLE);
+                                        PostingActivity.input1.setFocusableInTouchMode(true);
+                                        PostingActivity.input1.requestFocus();
+                                        InputMethodManager imm= (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        imm.showSoftInput(PostingActivity.input1, 0);
+
+                                    }
+                                });
 
                             }else if(which==1){
                                 //댓글 삭제하기 클릭시
@@ -182,7 +242,7 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (cccnt > 0) {
 
             //댓글의 position 뒤에 대댓글 개수만큼 삭제해준다.
-            for (int i = 1; i <= cccnt; i++) {  //제일 이상적임 안되면 걍 다 검사 ㄱㄱ
+            for (int i = 1; i <= cccnt; i++) {
 
                 Log.d("tag", "대댓글발견"+cmentDataList.get(position+1).getCcomment().getCcno()+"ccno삭제함");
                 //ccnt값도 내려주기
@@ -199,7 +259,9 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         RetrofitService service = server.getRetrofitService();
         Call<Integer> call = service.deleteComment(pno, cno);
 
-        call.enqueue(new Callback<Integer>() {//Comment DB에서 삭제임 (delete on Cascade라 DB의 대댓글에선 작동으로 삭제됨)
+        call.enqueue(new Callback<Integer>() {
+
+            //Comment DB에서 삭제임 (delete on Cascade라 DB의 대댓글에선 작동으로 삭제됨)
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
 
@@ -262,6 +324,8 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     void updateCcmentCnt(int pno,int cno, String sign){
+
+        //대댓글수 증가 감소 DB에 업데이트
 
         Server server= new Server();
         RetrofitService service= server.getRetrofitService();
@@ -355,6 +419,7 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             for (int i = 1; i <= cccnt; i++) {
 
                 Ccomment ccomment = cmentDataList.get(position + i).getCcomment();
+
                 if (ccno < ccomment.getCcno()) {
                     ccno = ccomment.getCcno();
                 }
@@ -367,6 +432,8 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         RetrofitService service= server.getRetrofitService();
 
         Call<Ccomment> call= service.postCcomment(pno,cno,ccno,ccid,ccment);
+        Log.d("tag",pno+" "+cno+" "+ccno+" "+ccid+" "+ccment+"대댓글 인서트하려고함");
+
 
         call.enqueue(new Callback<Ccomment>() {
             @Override
@@ -390,7 +457,6 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     notifyItemRangeChanged(position+1,cmentDataList.size());
 
                 }
-
 
             }
 

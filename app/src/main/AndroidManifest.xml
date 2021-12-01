@@ -34,26 +34,24 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".HomeActivity" />
+        <activity android:name=".InformActivity"></activity>
+
         <activity android:name=".RegiCardActivity" />
         <activity android:name=".LoadingActivity" />
         <activity android:name=".UserCardListActivity" />
         <activity android:name=".SearchStoreActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".Map2Activity" />
-
-
-        <activity android:name=".BoardActivity">
-
-        </activity>
-
-        <activity android:name=".PostingActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-
+        <activity android:name=".BoardActivity"></activity>
+        <activity
+            android:name=".PostingActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".WritePostingActivity" />
         <activity android:name=".SearchBoardActivity" />
 

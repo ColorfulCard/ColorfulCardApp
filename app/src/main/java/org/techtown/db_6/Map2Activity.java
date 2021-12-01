@@ -106,8 +106,13 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
             }
             break;
         }
-
-
+        //즐찾은 가능한데 아직 마커 받아오기 전이라 마커 아이콘 변경이 불가능..할껄? 반복문돌려서 찾으면 가능할지도..
+        emptyStar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"해당 마커 클릭 후 즐겨찾기를 등록해주세요.",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         call=(ImageButton) findViewById(R.id.call);
         call.setOnClickListener(new View.OnClickListener() {
@@ -222,7 +227,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
 
         Marker marker =googleMap.addMarker(markerOptions);
         marker.setTag(choiceStore);
-        //  marker.showInfoWindow();
+        marker.showInfoWindow();
 
         this.googleMap.setOnMarkerClickListener(markerClickListener);
 
@@ -289,9 +294,6 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
             tell="tel:"+st_num;
 
 
-            String stype= store.getStype();
-
-
             for(int i=0;i<favorMemberStore.size();i++) {
 
                 if (favorMemberStore.get(i).getSid() == store.getSid()) {
@@ -333,29 +335,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
                         marker.setIcon(BitmapDescriptorFactory.fromBitmap(favorCustomMarker));
                     }
 
-
-                    //DB에 즐겨찾기 등록
-                    Server server = new Server();
-                    RetrofitService service= server.getRetrofitService();
-                    Call<Integer> call=  service.postFavoriteStore(userID,store.getSid());
-
-                    call.enqueue(new Callback<Integer>() {
-                        @Override
-                        public void onResponse(Call<Integer> call, Response<Integer> response) {
-
-                            if(response.isSuccessful()){
-                                Log.d("tag",response.body()+"개 즐찾 추가후");
-                                if(response.body().intValue()==1){
-                                    Toast.makeText(getApplicationContext(), "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Integer> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    registerFavoriteStore(userID,store.getSid());
 
                 }
             });
@@ -412,24 +392,7 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
                     marker.setIcon(BitmapDescriptorFactory.fromBitmap(customMarker));
 
                     //DB에 즐겨찾기 해제
-                    Server server = new Server();
-                    RetrofitService service= server.getRetrofitService();
-                    Call<Integer> call= service.deleteFavoriteStore(userID,store.getSid());
-                    call.enqueue(new Callback<Integer>() {
-                        @Override
-                        public void onResponse(Call<Integer> call, Response<Integer> response) {
-                            if(response.isSuccessful()){
-                                if(response.body().intValue()==1){
-                                    Toast.makeText(getApplicationContext(), "즐겨찾기가 해제되었습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Integer> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    releaseFavoriteStore(userID,store.getSid());
 
                 }
             });
@@ -439,4 +402,58 @@ public class Map2Activity extends AppCompatActivity implements OnMapReadyCallbac
     };
 
 
+    void registerFavoriteStore(String userId, int sid){
+        Server server = new Server();
+        RetrofitService service= server.getRetrofitService();
+        Call<Integer> call=  service.postFavoriteStore(userID,sid);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+
+                if(response.isSuccessful()){
+                    Log.d("tag",response.body()+"개 즐찾 추가후");
+                    if(response.body().intValue()==1){
+                        Toast.makeText(getApplicationContext(), "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    void releaseFavoriteStore(String userID, int sid){
+        Server server = new Server();
+        RetrofitService service= server.getRetrofitService();
+        Call<Integer> call= service.deleteFavoriteStore(userID,sid);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.isSuccessful()){
+                    if(response.body().intValue()==1){
+                        Toast.makeText(getApplicationContext(), "즐겨찾기가 해제되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+    }
 }

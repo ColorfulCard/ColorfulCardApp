@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.os.Handler;
 import android.widget.TextView;
@@ -23,13 +24,12 @@ public class SearchStoreActivity extends AppCompatActivity {
 
 
     private SearchView searchbar;
-    private TextView no_result;
+    private TextView no_result,searchMent;
     private List<MemberStore> results;
     private ArrayList<DataItem.MapData> dataList;
+    private ImageView searchGalssImage;
     private RecyclerView recyclerView;
     private MainHandler handler;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,11 @@ public class SearchStoreActivity extends AppCompatActivity {
             }
         });
 
+        no_result=findViewById(R.id.no_result);
+        searchMent=findViewById(R.id.searchMent);
+        searchGalssImage= findViewById(R.id.searchGlassImage);
+
+
         recyclerView = findViewById(R.id.recyclerview2);
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(this, R.drawable.line_divider));
@@ -63,7 +68,6 @@ public class SearchStoreActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
 
-        no_result=findViewById(R.id.no_result);
 
     }
 
@@ -128,6 +132,9 @@ public class SearchStoreActivity extends AppCompatActivity {
                         //이전 검색결과 없음 기록이 남아있다면
                         no_result.setText(null);
                     }
+                    searchGalssImage.setVisibility(View.INVISIBLE);
+                    searchMent.setVisibility(View.INVISIBLE);
+
                     initializeData();
                     recyclerView.setVisibility(View.VISIBLE);
                     recyclerView.setAdapter(new SearchStoreListAdapter(dataList)); // Adapter 등록
@@ -136,7 +143,11 @@ public class SearchStoreActivity extends AppCompatActivity {
                 case StateSet.SearchMsg.MSG_SEARCH_NO_WORD:
                     //검색결과 없음 뷰에 검색결과없음 정보 띄우기
                     recyclerView.setVisibility(View.GONE);
-                    no_result.setText( "' "+(String)message.obj+" '에 관한 검색결과 없음");
+                    if(searchGalssImage.getVisibility()==View.VISIBLE){
+                        searchGalssImage.setVisibility(View.INVISIBLE);
+                        searchMent.setVisibility(View.INVISIBLE);
+                    }
+                    no_result.setText( "' "+(String)message.obj+" ' 에 관한 검색결과 없음");
                     break;
 
                 case StateSet.SearchMsg.MSG_FAIL:

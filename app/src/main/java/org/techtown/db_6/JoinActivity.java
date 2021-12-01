@@ -229,6 +229,7 @@ public class JoinActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "회원가입 완료", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
                     finish();
 
                 } else {
@@ -369,5 +370,12 @@ public class JoinActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+    }
+
 }
 

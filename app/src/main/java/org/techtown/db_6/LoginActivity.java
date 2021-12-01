@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), AgreeActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
             }
         });
 
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FindingActivity.class);
                 startActivity(i);
-
+                overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
             }
 
 
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), WithDrawalActivity.class);
                 startActivity(i);
-
+                overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
             }
 
 
@@ -104,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                         UserCard user = new UserCard(result.getId(),result.getName()); //서버에서 물어다온 user id 로 생성함
                         intent.putExtra("user",user);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
                         finish();
                     }
 

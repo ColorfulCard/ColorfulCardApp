@@ -86,7 +86,7 @@ public class BoardActivity extends AppCompatActivity {
                 Intent intent = new Intent(BoardActivity.this, SearchBoardActivity.class);
                 intent.putExtra("userID",userID);
                 startActivity(intent);
-
+                overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
             }
         });
 
@@ -97,6 +97,8 @@ public class BoardActivity extends AppCompatActivity {
                 Intent intent = new Intent(BoardActivity.this, WritePostingActivity.class);
                 intent.putExtra("userID",userID);
                 startActivity(intent);
+                // 이 화면은, 오 ->왼 슬라이딩 하면서 켜집니다.
+                overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
 
             }
         });
@@ -219,7 +221,7 @@ public class BoardActivity extends AppCompatActivity {
                     }
                     //처음 뷰로 보여주는거, 스크롤 초기화
                     recyclerView.setVisibility(View.VISIBLE);
-                    adapter = new PostingListAdapter(postings, userID);
+                    adapter = new PostingListAdapter(postings, userID,"BoardActivity");
                     recyclerView.setAdapter(adapter);
                     initScrollListner();
                     break;
@@ -292,4 +294,10 @@ public class BoardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+    }
 }

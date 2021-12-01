@@ -34,9 +34,7 @@ public class PostingActivity extends AppCompatActivity {
     public static Posting posting;
     private TextView pid,pcontent,pdate;
     public static TextView hcnt,ccnt,vcnt;
-
-    ImageButton deleteBt;
-
+    private ImageButton deleteBt;
 
     private String userID;
     private ArrayList<Comment> comments = new ArrayList<>();
@@ -45,14 +43,17 @@ public class PostingActivity extends AppCompatActivity {
     private ArrayList<DataItem.CommentData> dataList = new ArrayList<>();;
     private RecyclerView recyclerView;
     private CmentListAdapter adapter;
-    private boolean isHeartPosting = false;
-    private boolean isHeartPress=false;
+    public static boolean isHeartPosting = false;
+    public static boolean isHeartPress=false;
 
-    private Button grayheartBt;
-    private Button pinkheartBt;
-    private Button cmentBt;
-    public static ImageButton sendBt;
+    public static Button grayheartBt;
+    public static Button pinkheartBt;
+    public static Button cmentBt;
+    public  ImageButton sendBt;
     public static EditText input1;
+    public static ImageButton sendBt_Ccment;
+
+    private String prevActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class PostingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_posting);
         posting= (Posting) getIntent().getSerializableExtra("choicePosting");
         userID= getIntent().getStringExtra("userID");
+        prevActivity= getIntent().getStringExtra("prevActivity");
 
         Log.d("tag",userID+"포스팅에서");
         mContext= this.getApplicationContext();
@@ -75,6 +77,7 @@ public class PostingActivity extends AppCompatActivity {
         grayheartBt = (Button)findViewById(R.id.button9);
         pinkheartBt = (Button)findViewById(R.id.button11);
         sendBt = (ImageButton)findViewById(R.id.imageButton2);
+        sendBt_Ccment= (ImageButton)findViewById(R.id.imageButton3);
         cmentBt = (Button)findViewById(R.id.button10);
         input1 = (EditText) findViewById(R.id.input1);
 
@@ -131,7 +134,7 @@ public class PostingActivity extends AppCompatActivity {
         });
 
 
-        final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         //댓글달기 클릭시 키보드+입력창 올라옴
         cmentBt.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +194,6 @@ public class PostingActivity extends AppCompatActivity {
         });
 
 
-
         handler = new MainHandler();
 
         if(posting.getPid().equals(userID)){
@@ -228,9 +230,11 @@ public class PostingActivity extends AppCompatActivity {
             getCmentsThread.start();
         }
 
-        //들어올 때 해당포스팅이 사용자가 공감한 글인지 아닌지를 체크해야한다.
-        CheckHeartPostingThread checkHeartThread = new CheckHeartPostingThread(posting.getPno());
-        checkHeartThread.start();
+        if(posting.getHcnt()>0) {
+            //들어올 때 해당포스팅이 사용자가 공감한 글인지 아닌지를 체크해야한다.
+            CheckHeartPostingThread checkHeartThread = new CheckHeartPostingThread(posting.getPno());
+            checkHeartThread.start();
+        }
 
     }// onCreate()..
 
@@ -293,7 +297,7 @@ public class PostingActivity extends AppCompatActivity {
 
             Server server= new Server();
             RetrofitService service= server.getRetrofitService();
-            Call<List<Ccomment>> call= service.getCcomment(pno,cno);
+            Call<List<Ccomment>> call= service.getCcomment(pno);
 
             call.enqueue(new Callback<List<Ccomment>>() {
                 @Override
@@ -302,10 +306,7 @@ public class PostingActivity extends AppCompatActivity {
                     if(response.isSuccessful()){
 
                         List<Ccomment> results= response.body();
-                        ccomments= new ArrayList<>();
-                        for(Ccomment ccment:results){
-                            ccomments.add(ccment);
-                        }
+                        ccomments= (ArrayList<Ccomment>)results;
                         message.what= StateSet.BoardMsg.MSG_SUCCESS_GET_CCMENTS;
                         handler.sendMessage(message);
                     }
@@ -396,7 +397,7 @@ public class PostingActivity extends AppCompatActivity {
                         cno=comment.getCno();
                     }
                 }
-               cno++;
+                cno++;
             }
         }
 
@@ -505,8 +506,32 @@ public class PostingActivity extends AppCompatActivity {
             sendBt.setVisibility(View.GONE);
         }
         else {
-            super.onBackPressed();
+
+            //공감하기,조회수 바뀐정보있으면 업데이트
             updatePostingOfBoard(posting.getPno());
+
+
+            //검색 결과로 들어온 액티비티라면
+            if(prevActivity.equals("SearchBoardActivity")){
+
+                //이전에 불렀던 검색 액티비티가 남아있으며 거기로 넘어간다.
+                super.onBackPressed();
+                finish();
+                overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+
+            }
+            else {
+
+                //게시판 조회에서 바로 들어온 액티비티라면 다시조회에서 boardActivity 띄우기
+                super.onBackPressed();
+
+                Intent intent= new Intent(PostingActivity.this, BoardActivity.class);
+                intent.putExtra("userID",userID);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+                finish();
+            }
+
         }
     }
 
@@ -559,8 +584,8 @@ public class PostingActivity extends AppCompatActivity {
         {
             if(!isHeartPress)    //하트 해제된 상태라면
             {
-                   call2 = service.putHeartCnt(pno,"minus");
-                   call2.enqueue(new Callback<Integer>() {
+                call2 = service.putHeartCnt(pno,"minus");
+                call2.enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
                         if(response.isSuccessful())
@@ -642,12 +667,6 @@ public class PostingActivity extends AppCompatActivity {
             switch(msg.what){
                 case StateSet.BoardMsg.MSG_SUCCESS_GET_CMENTS:
 
-                    for(Comment cment:comments){
-
-                        dataList.add( new DataItem.CommentData(cment,StateSet.ViewType.comment));
-                        Log.d("tag","dataList에 cno:"+cment.getCno()+"추가함");
-                        Log.d("tag",cment.getCccnt()+"=cccnt");
-                    }
                     //일부러 따로해줌
                     Boolean cmentWithCcment=false;
                     for(Comment cment:comments){
@@ -657,9 +676,19 @@ public class PostingActivity extends AppCompatActivity {
                             GetCcmentsThread getCcmentsThread = new GetCcmentsThread(posting.getPno(),cment.getCno());
                             getCcmentsThread.start();
                             cmentWithCcment=true;
+                            break; //하나라도 대댓글 가진 댓글이 있다면 그 포스팅에 달린 모든 대댓글을 전부 다 들고옴
                         }
                     }
-                    if(cmentWithCcment==false){
+
+                    if(cmentWithCcment==false){ //대댓글 하나도 없을 경우 바로 보여줌
+
+                        for(Comment cment:comments){
+
+                            dataList.add( new DataItem.CommentData(cment,StateSet.ViewType.comment));
+                            Log.d("tag","dataList에 cno:"+cment.getCno()+"추가함");
+                            Log.d("tag",cment.getCccnt()+"=cccnt");
+                        }
+
                         recyclerView.setVisibility(View.VISIBLE);
                         adapter=new CmentListAdapter(dataList,userID);
                         recyclerView.setAdapter(adapter);
@@ -670,43 +699,23 @@ public class PostingActivity extends AppCompatActivity {
                 case StateSet.BoardMsg.MSG_SUCCESS_GET_CCMENTS:
 
                     //대댓글 받아오면 dataList를 리사이클러뷰 구성할 수있도록 순서 맞춰줘야함.
-                    //에혀 걍 댓글별로 대댓글 각각 들고오는거말고 포스팅별로 대댓글 전체 다 들고오는게 훨씬 더 편했을 듯.
+                    //에혀 걍 DB에서 댓글별로 대댓글 각각 들고오는거 말고 포스팅별로 대댓글 전체 다 들고오는게 훨씬 더 편했을 듯.  ---->수정함 12/01
 
-                    for (int j = 0; j < dataList.size(); j++) {
+                    for(Comment cment: comments){
 
-                        DataItem.CommentData data = dataList.get(j);
-                        if(data.getViewType()==StateSet.ViewType.comment) {
-                            Log.d("tag",data.getComment().getCno()+"cno 댓글");
-                        }else {
-                            Log.d("tag",data.getCcomment().getCno()+"-"+ data.getCcomment().getCcno()+"cno-ccno 대댓글");
-                        }
+                        dataList.add( new DataItem.CommentData(cment,StateSet.ViewType.comment));
+                        Log.d("tag","dataList에 cno:"+cment.getCno()+" 추가함 cccnt="+cment.getCccnt());
 
-                        if (data.getViewType() == StateSet.ViewType.comment) {
-
-                            if (j != dataList.size() - 1 && dataList.get(j + 1).getViewType() != StateSet.ViewType.ccomment) {
-                                int k = 1;
-                                for (Ccomment ccment : ccomments) {
-                                    if (ccment.getCno() == data.getComment().getCno()) {
-                                        dataList.add(j + k, new DataItem.CommentData(ccment, StateSet.ViewType.ccomment));
-                                        k++;
-                                        Log.d("tag", "dataList의" + j + k + "인덱스에 cno:" + ccment.getCno() + "의 ccno:" + ccment.getCcno() + "추가함");
-                                    }
-                                }
-                            }else {
-
-                                for (Ccomment ccment : ccomments) {
-                                    int k = 1;
-                                    if (ccment.getCno() == data.getComment().getCno()) {
-                                        dataList.add(j + k, new DataItem.CommentData(ccment, StateSet.ViewType.ccomment));
-                                        k++;
-                                        Log.d("tag", "dataList의" + j + k + "인덱스에 cno:" + ccment.getCno() + "의 ccno:" + ccment.getCcno() + "추가함");
-                                    }
-                                }
-
+                        for(Ccomment ccment: ccomments)
+                        {
+                            if(cment.getCno()==ccment.getCno()){
+                                dataList.add(new DataItem.CommentData(ccment,StateSet.ViewType.ccomment));
+                                Log.d("tag", "dataList에 cno:" + ccment.getCno() + "의 ccno:" + ccment.getCcno() + " 추가함");
 
                             }
                         }
                     }
+
                     Log.d("tag",dataList.size()+"");
                     //나중에 ccnt 수 완벽히 맞춰지면 카운트랑 비교해서 리사이클러뷰 보여주기 지금약간 불안정함 코드가
                     if(dataList.size()==posting.getCcnt())
@@ -727,6 +736,7 @@ public class PostingActivity extends AppCompatActivity {
                     Intent intent = new Intent(PostingActivity.this,BoardActivity.class);
                     intent.putExtra("userID",userID);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
                     finish();
                     break;
 
@@ -745,8 +755,6 @@ public class PostingActivity extends AppCompatActivity {
                     //공감된 글이다.. 버튼 눌러진 상태로 변경하기!
                     grayheartBt.setVisibility(View.INVISIBLE);
                     pinkheartBt.setVisibility(View.VISIBLE);
-
-
                     break;
 
                 case StateSet.BoardMsg.MSG_FAIL:

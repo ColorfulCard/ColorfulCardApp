@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InformActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="328dp"
+        android:layout_height="178dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button12"
+        app:srcCompat="@drawable/meal" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="320dp"
+        android:layout_height="177dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button12"
+        app:srcCompat="@drawable/notmeal" />
+
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="325dp"
+        android:layout_height="178dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button12"
+        app:srcCompat="@drawable/educationcard" />
+
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="255dp"
+        android:background="#F4F4F4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textSize="15sp"
+                android:text="1일 충전 금액 : 5,000원\n월/일 사용한도내에서 사용 가능함\n당월 잔액은 이월되며, 연말(12월31일 24시:00분)에 소멸 됨\n매월 1일 새벽 0시부터 0시30분까지\n자동충전 시간이므로 사용이 불가함" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="사용한도액 (1식 사용자 기준)"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="1dp"
+                android:textSize="15dp"
+                android:text="1일 1회 최대 15,000원 사용 가능\n1일 한도내에서 카드 사용 횟수 상관없이 사용이 가능\n토.공 급식대상자는 평일 사용 불가함\n방학 중 급식대상자는 방학기간에만 사용 가능함\n평일 대상자는 토.공.일은 사용 불가함" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="사용한도액 (2식.3식 사용자 기준)"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:textSize="15dp"
+                android:text="1일 1회 최대 15,000원이며, 2회 30,000원\n내에서 사용 횟수 관계 없이 자유롭게 사용 가능함" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textSize="15dp"
+                android:text="사용처"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:textSize="15dp"
+                android:text="지정 음식점,\n편의점(GS25, CU, 세븐일레븐, e-mart24, e-mart푸드코트)" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="편의점 사용방법"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:textSize="15dp"
+                android:text="편의점은 지정된 품목만 구입 가능함 \n(술. 담배.생활용품 등은 구입 불가함)" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="비고"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:text="지정 가맹점 이외에는 사용 불가\n병행 사용불가(급식은 급식가맹점에서만 사용가능)"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:text="급식카드"
+        android:background="#00ff0000"
+        android:backgroundTint="@color/white"
+        android:textColor="#FF9800"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:text="부식카드"
+        android:background="#00ff0000"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/ddark_gray"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/button13"
+        app:layout_constraintStart_toEndOf="@+id/button8"
+        app:layout_constraintTop_toTopOf="@+id/button8" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:text="교육카드"
+        android:background="#00ff0000"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/ddark_gray"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button12" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button8" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

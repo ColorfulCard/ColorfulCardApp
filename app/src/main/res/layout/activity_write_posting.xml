@@ -43,6 +43,7 @@
         android:maxLength="300"
         android:gravity="top"
         android:hint="  내용을 입력해주세요"
+        android:theme="@style/editText"
         android:padding="10dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

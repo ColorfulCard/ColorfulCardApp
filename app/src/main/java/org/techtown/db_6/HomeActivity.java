@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     private ImageButton regiCardBt;      //카드등록 버튼
     private ImageButton findStoreBt;  //가맹점 조회버튼
     private ImageButton BoardBt;   //소통게시판버튼
-
+    private ImageButton HeartBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
         regiCardBt = findViewById(R.id.button3); //등록된 카드 버튼
         findStoreBt = findViewById(R.id.button4); //가맹점 찾기 버튼
         BoardBt = findViewById(R.id.button5); //소통게시판 버튼
+        HeartBt= findViewById(R.id.button6);    //하트 버튼
+
 
         WelcomeNameView.setText(user.getName() + "님, 환영합니다");
 
@@ -93,10 +95,12 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeActivity.this, UserCardListActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
                 } else {
                     Intent intent = new Intent(HomeActivity.this, LoadingActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
                 }
             }
 
@@ -121,7 +125,16 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, BoardActivity.class);
                 intent.putExtra("userID",user.getId());
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
+            }
+        });
 
+        HeartBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(HomeActivity.this, InformActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
             }
         });
 
@@ -243,6 +256,7 @@ public class HomeActivity extends AppCompatActivity {
                     intent2.putParcelableArrayListExtra("favorMemberStores",favorMemberStore);
                     intent2.putExtra("userID", user.getId());
                     startActivity(intent2);
+                    overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
                     break;
 
                 case StateSet.HomeMsg.MSG_FAIL:

@@ -132,32 +132,32 @@
 
                     <ImageButton
                         android:id="@+id/emptyStar"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="16dp"
                         android:background="@color/white"
                         android:padding="0dp"
                         android:scaleType="centerInside"
                         android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="@+id/st_name"
                         app:layout_constraintStart_toEndOf="@+id/st_name"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/st_name"
                         app:srcCompat="@drawable/notfavorstar" />
 
                     <ImageButton
                         android:id="@+id/fullStar"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="16dp"
                         android:background="@color/white"
                         android:padding="0dp"
                         android:scaleType="centerInside"
                         android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@+id/st_name"
                         app:layout_constraintStart_toEndOf="@+id/st_name"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/st_name"
                         app:srcCompat="@drawable/favorstar" />
 
                     <ImageButton

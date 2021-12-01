@@ -93,11 +93,13 @@ public class AgreeActivity extends AppCompatActivity {
                 if(checkBox.isChecked()&&checkBox2.isChecked()&&checkBox3.isChecked()&&checkBox4.isChecked()){
                     Intent i = new Intent(getApplicationContext(), JoinActivity.class);
                     startActivity(i);
+                    overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
                     finish();
                 }
                 else if(checkBox2.isChecked()&&checkBox3.isChecked()){
                     Intent i = new Intent(getApplicationContext(), JoinActivity.class);
                     startActivity(i);
+                    overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
                     finish();
                 }
                 else{
@@ -108,4 +110,9 @@ public class AgreeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+    }
 }

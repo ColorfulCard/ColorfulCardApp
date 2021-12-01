@@ -93,6 +93,7 @@ public class WithDrawalActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), id+"님의 회원탈퇴가 완료되었습니다.", Toast.LENGTH_LONG).show();
                        Intent intent = new Intent(WithDrawalActivity.this, LoginActivity.class);
                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
                        finish();
                     }
                 }
@@ -106,4 +107,9 @@ public class WithDrawalActivity extends AppCompatActivity {
 
         }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+    }
     }
