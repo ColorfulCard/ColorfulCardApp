@@ -58,6 +58,8 @@ public class FindPWFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+                getActivity().finish();
             }
         });
 

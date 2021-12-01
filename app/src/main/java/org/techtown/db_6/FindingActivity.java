@@ -50,4 +50,12 @@ public class FindingActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+
+    }
 }
