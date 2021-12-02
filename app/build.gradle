@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "org.techtown.db_6"
+        applicationId "org.techtown.ColorfulCard"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -20,6 +20,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        applicationVariants.all { variant ->
+
+            variant.outputs.all {
+                outputFileName = "ColorfulCard_${variant.versionName}.apk"
+            }
         }
     }
     compileOptions {

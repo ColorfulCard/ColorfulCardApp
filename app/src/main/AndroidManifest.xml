@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.techtown.db_6">
+    package="org.techtown.ColorfulCard">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,7 +26,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDGJZuJ7IXdJzfyQOIgUOmSU7JiUtOmH-A" />
 
-        <activity android:name=".IntroActivity">
+        <activity android:name="org.techtown.ColorfulCard.IntroActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,27 +35,27 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".AgreeActivity" />
-        <activity android:name=".JoinActivity" />
-        <activity android:name=".FindingActivity" />
-        <activity android:name=".WithDrawalActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name="org.techtown.ColorfulCard.AgreeActivity" />
+        <activity android:name="org.techtown.ColorfulCard.JoinActivity" />
+        <activity android:name="org.techtown.ColorfulCard.FindingActivity" />
+        <activity android:name="org.techtown.ColorfulCard.WithDrawalActivity" />
+        <activity android:name="org.techtown.ColorfulCard.LoginActivity"></activity>
 
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".InformActivity"></activity>
+        <activity android:name="org.techtown.ColorfulCard.HomeActivity" />
+        <activity android:name="org.techtown.ColorfulCard.InformActivity"></activity>
 
-        <activity android:name=".RegiCardActivity" />
-        <activity android:name=".LoadingActivity" />
-        <activity android:name=".UserCardListActivity" />
-        <activity android:name=".SearchStoreActivity" />
-        <activity android:name=".MapActivity" />
-        <activity android:name=".Map2Activity" />
-        <activity android:name=".BoardActivity"></activity>
+        <activity android:name="org.techtown.ColorfulCard.RegiCardActivity" />
+        <activity android:name="org.techtown.ColorfulCard.LoadingActivity" />
+        <activity android:name="org.techtown.ColorfulCard.UserCardListActivity" />
+        <activity android:name="org.techtown.ColorfulCard.SearchStoreActivity" />
+        <activity android:name="org.techtown.ColorfulCard.MapActivity" />
+        <activity android:name="org.techtown.ColorfulCard.Map2Activity" />
+        <activity android:name="org.techtown.ColorfulCard.BoardActivity"></activity>
         <activity
-            android:name=".PostingActivity"
+            android:name="org.techtown.ColorfulCard.PostingActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".WritePostingActivity" />
-        <activity android:name=".SearchBoardActivity" />
+        <activity android:name="org.techtown.ColorfulCard.WritePostingActivity" />
+        <activity android:name="org.techtown.ColorfulCard.SearchBoardActivity" />
 
     </application>
 
