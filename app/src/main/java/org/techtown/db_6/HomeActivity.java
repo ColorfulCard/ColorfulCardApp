@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         findStoreBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(), "가맹점 정보를 불러옵니다...", Toast.LENGTH_LONG).show();
                 GetFavoriteStoreThread thread = new GetFavoriteStoreThread();
                 thread.start();     //즐겨찾기 목록 다 get하고 나면 가맹점 목록 다 들고온다.
 
@@ -257,6 +258,7 @@ public class HomeActivity extends AppCompatActivity {
                     intent2.putExtra("userID", user.getId());
                     startActivity(intent2);
                     overridePendingTransition(R.anim.slide_right_enter,R.anim.slide_right_exit );
+
                     break;
 
                 case StateSet.HomeMsg.MSG_FAIL:
