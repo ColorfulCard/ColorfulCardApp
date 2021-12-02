@@ -74,19 +74,40 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             String nowTime = sdf.format(System.currentTimeMillis());
 
             Boolean sameDay=true;
-            for(int i=0;i<11;i++){
+            for(int i=0;i<10;i++){
                 if(cdate.charAt(i)!=nowTime.charAt(i))
                 {
                     sameDay=false;
                 }
-            }
+            }    //03:01 02:01    03-02= 1    61-08= 53     1시간전 까지만 해준다.
             if(sameDay){
-                //여전히 true 라면 같은 날, 같은 시간대이다.
-                int beforeMinute =  Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(cdate.substring(12));
-                if (beforeMinute==0) {
-                    ((CmentViewHolder)holder).cdate.setText("방금 전");
-                }else {
-                    ((CmentViewHolder) holder).cdate.setText(beforeMinute + "분 전");
+
+                //여전히 true 라면 같은 날
+                // 같은 1시간차이안에 있는지 체크        --> 몇분전인지 체크해서 출력
+                int hourDifference = Integer.parseInt(nowTime.charAt(10) + "") - Integer.parseInt(cdate.charAt(10) + "");
+
+                if(hourDifference ==0){
+                    //같은 시간대라면
+                    int minuteDifference = Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(cdate.substring(12));
+                    if (minuteDifference == 0) {
+                        ((CmentViewHolder) holder).cdate.setText("방금 전");
+                    } else {
+                        ((CmentViewHolder) holder).cdate.setText(minuteDifference + "분 전");
+                    }
+                }
+                else if(hourDifference ==1) {
+
+                    //시간대에는 차이가있지만 1시간보다 더 경과한 시간차가 아닌경우
+                    int nowMinute= Integer.parseInt(nowTime.substring(12))+60;
+                    int minuteDifference=  nowMinute- Integer.parseInt(cdate.substring(12));
+
+                    if(minuteDifference<=60) {  //한시간 이내인데
+                        if (minuteDifference == 60) {
+                            ((CmentViewHolder) holder).cdate.setText("한시간 전");
+                        } else {
+                            ((CmentViewHolder) holder).cdate.setText(minuteDifference + "분 전");
+                        }
+                    }
                 }
             }
             else{
@@ -126,7 +147,7 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                                 insertCcmentOnCment(comment.getPno(),comment.getCno(),userID, ccment,position);
 
-                                if(PostingActivity.isHeartPosting||PostingActivity.isHeartPress){
+                                if(PostingActivity.getHeartPressState()){
                                     PostingActivity.pinkheartBt.setVisibility(View.VISIBLE);
                                 }
                                 else
@@ -135,9 +156,9 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                 }
 
                                 PostingActivity.cmentBt.setVisibility(View.VISIBLE);
-                                PostingActivity.input1.setVisibility(View.GONE);
+                                PostingActivity.input1.setVisibility(View.INVISIBLE);
                                 PostingActivity.input1.setText("");
-                                PostingActivity.sendBt_Ccment.setVisibility(View.GONE);
+                                PostingActivity.sendBt_Ccment.setVisibility(View.INVISIBLE);
                                 InputMethodManager imm= (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(PostingActivity.input1.getWindowToken(), 0);
                             }
@@ -192,8 +213,10 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Ccomment ccomment= cmentDataList.get(position).getCcomment();
             ((CcmentViewHolder)holder).ccid.setText(ccomment.getCcid());
             ((CcmentViewHolder)holder).ccment.setText(ccomment.getCcment());
-
-
+            if(posting.getPid().equals(ccomment.getCcid()))
+            {
+                ((CcmentViewHolder)holder).ccid.setTextColor(0xFFF9595F);     //글쓴사람 대댓글이면 빨간색으로  0xFFF56E4A
+            }
 
             String ccdate=ccomment.getCcdate();
             TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
@@ -201,19 +224,40 @@ public class CmentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             String nowTime = sdf.format(System.currentTimeMillis());
 
             Boolean sameDay=true;
-            for(int i=0;i<11;i++){
+            for(int i=0;i<10;i++){
                 if(ccdate.charAt(i)!=nowTime.charAt(i))
                 {
                     sameDay=false;
                 }
-            }
+            }    //03:01 02:01    03-02= 1    61-08= 53     1시간전 까지만 해준다.
             if(sameDay){
-                //여전히 true 라면 같은 날, 같은 시간대이다.       --> 몇분전인지 체크해서 출력
-                int beforeMinute =  Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(ccdate.substring(12));
-                if (beforeMinute==0) {
-                    ((CcmentViewHolder)holder).ccdate.setText("방금 전");
-                }else {
-                    ((CcmentViewHolder) holder).ccdate.setText(beforeMinute + "분 전");
+
+                //여전히 true 라면 같은 날
+                // 같은 1시간차이안에 있는지 체크        --> 몇분전인지 체크해서 출력
+                int hourDifference = Integer.parseInt(nowTime.charAt(10) + "") - Integer.parseInt(ccdate.charAt(10) + "");
+
+                if(hourDifference ==0){
+                    //같은 시간대라면
+                    int minuteDifference = Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(ccdate.substring(12));
+                    if (minuteDifference == 0) {
+                        ((CcmentViewHolder) holder).ccdate.setText("방금 전");
+                    } else {
+                        ((CcmentViewHolder) holder).ccdate.setText(minuteDifference + "분 전");
+                    }
+                }
+                else if(hourDifference ==1) {
+
+                    //시간대에는 차이가있지만 1시간보다 더 경과한 시간차가 아닌경우
+                    int nowMinute= Integer.parseInt(nowTime.substring(12))+60;
+                    int minuteDifference=  nowMinute- Integer.parseInt(ccdate.substring(12));
+
+                    if(minuteDifference<=60) {  //한시간 이내인데
+                        if (minuteDifference == 60) {
+                            ((CcmentViewHolder) holder).ccdate.setText("한시간 전");
+                        } else {
+                            ((CcmentViewHolder) holder).ccdate.setText(minuteDifference + "분 전");
+                        }
+                    }
                 }
             }
             else{

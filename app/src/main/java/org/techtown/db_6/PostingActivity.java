@@ -45,8 +45,8 @@ public class PostingActivity extends AppCompatActivity {
     private ArrayList<DataItem.CommentData> dataList = new ArrayList<>();;
     private RecyclerView recyclerView;
     private CmentListAdapter adapter;
-    public static boolean isHeartPosting = false;
-    public static boolean isHeartPress=false;
+    public  boolean isHeartPosting = false;
+    public  static boolean isHeartPress=false;
 
     public static Button grayheartBt;
     public static Button pinkheartBt;
@@ -76,17 +76,14 @@ public class PostingActivity extends AppCompatActivity {
         vcnt=findViewById(R.id.vcnt);
         deleteBt= findViewById(R.id.deleteBt);
 
-        grayheartBt = (Button)findViewById(R.id.button9);
-        pinkheartBt = (Button)findViewById(R.id.button11);
+        grayheartBt = (Button)findViewById(R.id.grayHeart_btn);
+        pinkheartBt = (Button)findViewById(R.id.pintHeart_btn);
         sendBt = (ImageButton)findViewById(R.id.imageButton2);
         sendBt_Ccment= (ImageButton)findViewById(R.id.imageButton3);
-        cmentBt = (Button)findViewById(R.id.button10);
+        cmentBt = (Button)findViewById(R.id.comment_btn);
         input1 = (EditText) findViewById(R.id.input1);
 
         recyclerView= findViewById(R.id.recyclerView4);
-
-        //   recyclerView.addItemDecoration(
-        //          new DividerItemDecoration(this, R.drawable.line_divider2));
 
         LinearLayoutManager manager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
@@ -103,37 +100,32 @@ public class PostingActivity extends AppCompatActivity {
 
 
         grayheartBt.setOnClickListener(new View.OnClickListener() {
-
+            //회색버튼 누르면
             @Override
             public void onClick(View v)
             {
-                if(!isHeartPress){
-                    grayheartBt.setVisibility(View.INVISIBLE);
-                    pinkheartBt.setVisibility(View.VISIBLE);
-                    isHeartPress = true;
+                grayheartBt.setVisibility(View.INVISIBLE);
+                pinkheartBt.setVisibility(View.VISIBLE);
 
-                    posting.addHcnt(+1);
-                    hcnt.setText(String.valueOf(posting.getHcnt()));
+                posting.addHcnt(+1);
+                hcnt.setText(String.valueOf(posting.getHcnt()));
 
-                }
+                isHeartPress = true;
             }
         });
 
         pinkheartBt.setOnClickListener(new View.OnClickListener() {
-
+            //핑크버튼 누르면
             @Override
             public void onClick(View v)
             {
-                if(isHeartPress){
+                grayheartBt.setVisibility(View.VISIBLE);
+                pinkheartBt.setVisibility(View.INVISIBLE);
 
-                    grayheartBt.setVisibility(View.VISIBLE);
-                    pinkheartBt.setVisibility(View.INVISIBLE);
-                    isHeartPress = false;
+                posting.addHcnt(-1);
+                hcnt.setText(String.valueOf(posting.getHcnt()));
 
-                    posting.addHcnt(-1);
-                    hcnt.setText(String.valueOf(posting.getHcnt()));
-
-                }
+                isHeartPress = false;
             }
         });
 
@@ -151,7 +143,8 @@ public class PostingActivity extends AppCompatActivity {
 
                         grayheartBt.setVisibility(View.INVISIBLE);
                         pinkheartBt.setVisibility(View.INVISIBLE);
-                        cmentBt.setVisibility(View.INVISIBLE);
+                        cmentBt.setVisibility(View.GONE);
+
                         input1.setVisibility(View.VISIBLE);
                         sendBt.setVisibility(View.VISIBLE);
                         input1.setFocusableInTouchMode(true);
@@ -180,13 +173,14 @@ public class PostingActivity extends AppCompatActivity {
                     InsertCmentThread insertCmentThread= new InsertCmentThread(posting.getPno(), cment);
                     insertCmentThread.start();
 
-                    if(isHeartPosting||isHeartPress){
+                    if(isHeartPress){
                         pinkheartBt.setVisibility(View.VISIBLE);
                     }
                     else
                     {
-                        grayheartBt.setVisibility(View.VISIBLE);
+                        grayheartBt.setVisibility(View.INVISIBLE);
                     }
+
                     cmentBt.setVisibility(View.VISIBLE);
                     input1.setVisibility(View.GONE);
                     input1.setText("");
@@ -233,19 +227,21 @@ public class PostingActivity extends AppCompatActivity {
             GetCmentsThread getCmentsThread= new GetCmentsThread(posting.getPno());
             getCmentsThread.start();
         }
-
-        if(posting.getHcnt()>0) {
-            //들어올 때 해당포스팅이 사용자가 공감한 글인지 아닌지를 체크해야한다.
-            CheckHeartPostingThread checkHeartThread = new CheckHeartPostingThread(posting.getPno());
-            checkHeartThread.start();
-        }else {
+        else
+        {
             //바로 리사이클러뷰 띄운다.
             d("tag","댓글없는 곳에 추가한다");
             adapter= new CmentListAdapter(dataList,userID);
             recyclerView.setAdapter(adapter);
             recyclerView.setVisibility(View.VISIBLE);
+
         }
 
+        if(posting.getHcnt()>0) {
+            //들어올 때 해당포스팅이 사용자가 공감한 글인지 아닌지를 체크해야한다.
+            CheckHeartPostingThread checkHeartThread = new CheckHeartPostingThread(posting.getPno());
+            checkHeartThread.start();
+        }
     }// onCreate()..
 
     class GetCmentsThread extends Thread{
@@ -369,6 +365,7 @@ public class PostingActivity extends AppCompatActivity {
                                 message.what= StateSet.BoardMsg.MSG_SUCCESS_HEARTPRESS;
                                 handler.sendMessage(message);
                                 d("tag","공감글이다.");
+
                                 break;
                             }
                         }
@@ -427,21 +424,21 @@ public class PostingActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
 
-                   Log.d("tag",response.errorBody()+" ");
+                    Log.d("tag",response.errorBody()+" ");
 
                     if(response.isSuccessful()){
 
                         Comment result= (Comment)response.body();
 
-                            d("tag",result.getCno()+"댓글담");
-                            d("tag","인서트성공");
-                            updateCmentCnt(pno,"plus");
+                        d("tag",result.getCno()+"댓글담");
+                        d("tag","인서트성공");
+                        updateCmentCnt(pno,"plus");
 
-                            comments.add(result);
-                            dataList.add(new DataItem.CommentData(result,StateSet.ViewType.comment));
+                        comments.add(result);
+                        dataList.add(new DataItem.CommentData(result,StateSet.ViewType.comment));
 
-                            message.what= StateSet.BoardMsg.MSG_SUCCESS_INSERT_CMENT;
-                            handler.sendMessage(message);
+                        message.what= StateSet.BoardMsg.MSG_SUCCESS_INSERT_CMENT;
+                        handler.sendMessage(message);
 
                     }
                 }
@@ -508,17 +505,19 @@ public class PostingActivity extends AppCompatActivity {
 
         if(input1.getVisibility()==View.VISIBLE){
 
-            if(isHeartPosting||isHeartPress){
+            if(isHeartPress){   //눌러진 상태
                 pinkheartBt.setVisibility(View.VISIBLE);
+                grayheartBt.setVisibility(View.INVISIBLE);
             }
             else
             {
                 grayheartBt.setVisibility(View.VISIBLE);
+                pinkheartBt.setVisibility(View.INVISIBLE);
             }
             cmentBt.setVisibility(View.VISIBLE);
-            input1.setVisibility(View.GONE);
+            input1.setVisibility(View.INVISIBLE);
             input1.setText("");
-            sendBt.setVisibility(View.GONE);
+            sendBt.setVisibility(View.INVISIBLE);
         }
         else {
 
@@ -529,6 +528,7 @@ public class PostingActivity extends AppCompatActivity {
             //검색 결과로 들어온 액티비티라면
             if(prevActivity.equals("SearchBoardActivity")){
 
+                isHeartPress=false;
                 //이전에 불렀던 검색 액티비티가 남아있으며 거기로 넘어간다.
                 super.onBackPressed();
                 finish();
@@ -540,6 +540,7 @@ public class PostingActivity extends AppCompatActivity {
                 //게시판 조회에서 바로 들어온 액티비티라면 다시조회에서 boardActivity 띄우기
                 super.onBackPressed();
 
+                isHeartPress=false;
                 Intent intent= new Intent(PostingActivity.this, BoardActivity.class);
                 intent.putExtra("userID",userID);
                 startActivity(intent);
@@ -782,4 +783,9 @@ public class PostingActivity extends AppCompatActivity {
             }
         }
     }
+
+    static Boolean getHeartPressState(){
+        return isHeartPress;
+    }
 }// MainActivity class..
+

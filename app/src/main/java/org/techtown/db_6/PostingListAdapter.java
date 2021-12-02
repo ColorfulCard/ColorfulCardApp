@@ -70,19 +70,40 @@ public class PostingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             String nowTime = sdf.format(System.currentTimeMillis());
 
             Boolean sameDay=true;
-            for(int i=0;i<11;i++){
+            for(int i=0;i<10;i++){
                 if(pdate.charAt(i)!=nowTime.charAt(i))
                 {
                     sameDay=false;
                 }
-            }
+            }    //03:01 02:01    03-02= 1    61-08= 53     1시간전 까지만 해준다.
             if(sameDay){
-                //여전히 true 라면 같은 날, 같은 시간대이다.
-                int beforeMinute =  Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(pdate.substring(12));
-                if (beforeMinute==0) {
-                    ((PostingViewHolder)holder).pdate.setText("방금 전");
-                }else {
-                    ((PostingViewHolder)holder).pdate.setText(beforeMinute + "분 전");
+
+                //여전히 true 라면 같은 날
+                // 같은 1시간차이안에 있는지 체크        --> 몇분전인지 체크해서 출력
+                int hourDifference = Integer.parseInt(nowTime.charAt(10) + "") - Integer.parseInt(pdate.charAt(10) + "");
+
+                if(hourDifference ==0){
+                    //같은 시간대라면
+                    int minuteDifference = Integer.parseInt(nowTime.substring(12)) - Integer.parseInt(pdate.substring(12));
+                    if (minuteDifference == 0) {
+                        ((PostingViewHolder) holder).pdate.setText("방금 전");
+                    } else {
+                        ((PostingViewHolder) holder).pdate.setText(minuteDifference + "분 전");
+                    }
+                }
+                else if(hourDifference ==1) {
+
+                    //시간대에는 차이가있지만 1시간보다 더 경과한 시간차가 아닌경우
+                    int nowMinute= Integer.parseInt(nowTime.substring(12))+60;
+                    int minuteDifference=  nowMinute- Integer.parseInt(pdate.substring(12));
+
+                    if(minuteDifference<=60) {  //한시간 이내인데
+                        if (minuteDifference == 60) {
+                            ((PostingViewHolder) holder).pdate.setText("한시간 전");
+                        } else {
+                            ((PostingViewHolder) holder).pdate.setText(minuteDifference + "분 전");
+                        }
+                    }
                 }
             }
             else{

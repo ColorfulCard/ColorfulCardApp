@@ -147,15 +147,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/light_gray"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
+        app:layout_constraintBottom_toTopOf="@+id/comment_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button10" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/grayHeart_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -173,7 +172,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/pintHeart_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -185,14 +184,14 @@
         android:textColorHint="@color/dark_gray"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/comment_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
@@ -206,23 +205,43 @@
         android:textStyle="bold"
         android:visibility="visible"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/button9"
+        app:layout_constraintBottom_toBottomOf="@+id/grayHeart_btn"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView4"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:background="#F4F4F4"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button9" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13"
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <EditText
         android:id="@+id/input1"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@drawable/square_text"
-        android:maxLength="300"
         android:hint="댓글을 입력하세요."
-        android:theme="@style/editText"
+        android:maxLength="300"
         android:paddingLeft="10dp"
         android:textSize="17dp"
-        android:visibility="gone"
+        android:theme="@style/editText"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
@@ -244,23 +263,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/input1"
         app:srcCompat="@drawable/sendbtsize" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView4"
-        android:layout_width="409dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
-        android:background="#F4F4F4"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13"
-        app:layout_constraintVertical_bias="0.0" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
