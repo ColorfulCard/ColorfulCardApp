@@ -21,8 +21,8 @@
 - Database : MySQL
 - Server : AWS Elastic Beanstalk , AWS RDS 
 
-### 🧑‍🤝‍🧑 맴버구성
- - 팀장  : 박지연 - 로그인/회원가입, 카드등록, 카드조회, 가명점표시, 소통게시판, 카드정보 제공, UI 제작, REST API 구현, DB설계/구현 
+### 🧑‍🤝‍🧑 맴버 구성
+ - 팀장  : 박지연 - 로그인/회원가입, 카드등록, 카드조회, 가명점표시, 소통게시판, 카드정보 제공, UI 제작, REST API 구현, DB설계/구현
  - 팀원1 : 오은아 - 로그인, 카드조회, UI 제작, REST API, 대회장 발표   
  - 팀원2 : 이경주 - 로고 제작, UI 제작, 가맹점 상세 카드뷰, 데이터 전처리
  - 팀원3 : 나유경 - 아이디어 기획, UI 제작, Google Map API 연결, 데이터 전처리
@@ -76,12 +76,20 @@
 <br>
 
 
-## 🏆수상 실적
+## 🏆 수상 실적
 **2022 지역문제해결 프로젝트 희망이음 경진대회 부문 산업부 장관상(금상)**
 <br>
 [[영남대 학과소식] <span style="font-size:80%">박지연, 오은아, 이경주 학생, ‘2022 지역문제해결 프로젝트’ 금상(산업부장관상) 수상</span>](https://www.yu.ac.kr/cse/community/news.do?mode=view&articleNo=6183021&article.offset=0&articleLimit=10)
 <br>
 [[NewDaily 기사] <span style="font-size:80%">경북테크노파크, ‘희망이음 프로젝트 포상’ 4년 연속 산업부장관상 수상_ 봄봄팀</span>](https://tk.newdaily.co.kr/site/data/html/2023/03/23/2023032300024.html)
+<br>
+<br>
 
+### 🔗 멤버 깃허브
+ - 박지연 - [github/codingGoover](https://github.com/codingGoover)
+ - 오은아 - [github/eunalove](https://github.com/eunalove)
+ - 이경주 - [github/rodwnl](https://github.com/rodwnl)
+ - 나유경 - [github/yoogaeme](https://github.com/yoogaeme)
+ - 전인서 - [github/returnstonesteel](https://github.com/returnstonesteel)
 
 
