@@ -9,7 +9,6 @@
 <br>>> 문제점: 가맹점 확인의 어려움, 잔액 확인의 번거로움, 다자녀 카드등록 어려움 등
 <br>이런 불편함 해소를 위해 대구시 결식아동 맞춤형 ‘대구시 컬러풀카드 앱’을 기획 및 제작 
 <br><u>컬러풀 카드를 소지한 결식아동들의 인권을 보장하고 대구시 결식아동들이 나라에서 지원해주는 복지를 불편함 없이 이용하게 만드는 것</u>
-
 <br>
 
 ## 🕰️ 개발 기간
@@ -37,12 +36,13 @@
     - SMTP 네이버 메일 전송
     - JavaMail API 사용
 - 회원탈퇴
+ 
 #### 카드등록 
 - 공식 카드 유효성 검증 
     - 대구시 컬러풀카드 웹사이트 크롤링
     - jsoup 라이브러리 사용
 - 카드 추가/삭제
-
+  
 #### 카드조회
 - 총 잔액/ 세부 잔액 확인 (웹크롤링)
 
@@ -67,18 +67,17 @@
 - 급식/부식/교육카드 기본 정보 제공
 <br>
 
-
 ## 🎥 시연영상
 
 [[YouTube] <span style="font-size:89%">컬러풀카드앱: 결식아동의 급식카드 사용편의성을 개선하다</span>](https://www.youtube.com/watch?v=qqY8MMLA9m0)
 <br>
-[![주요기능 앱사진](https://velog.velcdn.com/images/goo_ver/post/8aaeeb30-f800-4ec8-86b3-bd71b2d14c72/image.png)](https://www.youtube.com/watch?v=qqY8MMLA9m0)
+![썸네일](https://github.com/ColorfulCard/ColorfulCardApp/assets/88127852/d804a643-8f05-41a5-913a-44ced971ffca)
 <br>
 <br>
 
 
 ## 🏆수상실적
-2022 지역문제해결 프로젝트 희망이음 경진대회 부문 **산업부 장관상(금상)**
+**2022 지역문제해결 프로젝트 희망이음 경진대회 부문 산업부 장관상(금상)**
 <br>
 [[영남대 학과소식] <span style="font-size:80%">박지연, 오은아, 이경주 학생, ‘2022 지역문제해결 프로젝트’ 금상(산업부장관상) 수상</span>](https://www.yu.ac.kr/cse/community/news.do?mode=view&articleNo=6183021&article.offset=0&articleLimit=10)
 <br>
