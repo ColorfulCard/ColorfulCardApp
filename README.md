@@ -14,7 +14,6 @@
 
 ## 🕰️ 개발 기간
 * 2021.08.27 - 2021.12.02
-<br>
 
 ### ⚙️ 개발 환경
 - Language : java
@@ -23,15 +22,12 @@
 - Database : MySQL
 - Server : AWS Elastic Beanstalk , AWS RDS 
 
-<br>
-
 ### 🧑‍🤝‍🧑 맴버구성
  - 팀장  : 박지연 - 로그인/회원가입, 카드등록, 카드조회, 가명점표시, 소통게시판, 카드정보 제공, UI 제작, REST API 구현, DB설계/구현 
  - 팀원1 : 오은아 - 로그인, 카드조회, UI 제작, REST API, 대회장 발표   
  - 팀원2 : 이경주 - 로고 제작, UI 제작, 가맹점 상세 카드뷰, 데이터 전처리
  - 팀원3 : 나유경 - 아이디어 기획, UI 제작, Google Map API 연결, 데이터 전처리
  - 팀원4 : 전인서 - 아이디어 기획, UI 제작, 데이터 전처리, 문서 검토
-
 <br>
 
 ## 📌 주요 기능
@@ -69,14 +65,17 @@
 
 #### 카드 정보 제공 
 - 급식/부식/교육카드 기본 정보 제공
+<br>
 
 
-### 🎥 시연영상
+## 🎥 시연영상
 
 [[YouTube] <span style="font-size:89%">컬러풀카드앱: 결식아동의 급식카드 사용편의성을 개선하다</span>](https://www.youtube.com/watch?v=qqY8MMLA9m0)
 <br>
-<iframe width="600" height="352" src="https://www.youtube.com/embed/qqY8MMLA9m0" title="컬러풀카드앱: 결식아동의 급식카드 사용편의성을 개선하다" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![주요기능 앱사진](https://velog.velcdn.com/images/goo_ver/post/8aaeeb30-f800-4ec8-86b3-bd71b2d14c72/image.png)](https://www.youtube.com/watch?v=qqY8MMLA9m0)
 <br>
+<br>
+
 
 ## 🏆수상실적
 2022 지역문제해결 프로젝트 희망이음 경진대회 부문 **산업부 장관상(금상)**
