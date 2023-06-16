@@ -67,7 +67,7 @@
 - 급식/부식/교육카드 기본 정보 제공
 <br>
 
-## 🎥 시연영상
+## 🎥 시연 영상
 
 [[YouTube] <span style="font-size:89%">컬러풀카드앱: 결식아동의 급식카드 사용편의성을 개선하다</span>](https://www.youtube.com/watch?v=qqY8MMLA9m0)
 <br>
@@ -76,7 +76,7 @@
 <br>
 
 
-## 🏆수상실적
+## 🏆수상 실적
 **2022 지역문제해결 프로젝트 희망이음 경진대회 부문 산업부 장관상(금상)**
 <br>
 [[영남대 학과소식] <span style="font-size:80%">박지연, 오은아, 이경주 학생, ‘2022 지역문제해결 프로젝트’ 금상(산업부장관상) 수상</span>](https://www.yu.ac.kr/cse/community/news.do?mode=view&articleNo=6183021&article.offset=0&articleLimit=10)
