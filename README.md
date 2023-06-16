@@ -70,13 +70,12 @@
 #### 카드 정보 제공 
 - 급식/부식/교육카드 기본 정보 제공
 
-<br>
 
 ### 🎥 시연영상
 
 [[YouTube] <span style="font-size:89%">컬러풀카드앱: 결식아동의 급식카드 사용편의성을 개선하다</span>](https://www.youtube.com/watch?v=qqY8MMLA9m0)
 <br>
-
+<iframe width="600" height="352" src="https://www.youtube.com/embed/qqY8MMLA9m0" title="컬러풀카드앱: 결식아동의 급식카드 사용편의성을 개선하다" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <br>
 
 ## 🏆수상실적
