@@ -71,7 +71,7 @@
 
 [[YouTube] <span style="font-size:89%">컬러풀카드앱: 결식아동의 급식카드 사용편의성을 개선하다</span>](https://www.youtube.com/watch?v=qqY8MMLA9m0)
 <br>
-![썸네일](https://github.com/ColorfulCard/ColorfulCardApp/assets/88127852/d804a643-8f05-41a5-913a-44ced971ffca)
+[![썸네일](https://github.com/ColorfulCard/ColorfulCardApp/assets/88127852/d804a643-8f05-41a5-913a-44ced971ffca)](https://www.youtube.com/watch?v=qqY8MMLA9m0)
 <br>
 <br>
 
