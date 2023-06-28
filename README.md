@@ -24,7 +24,7 @@
 - IDE :  IntelliJ IDEA
 - Framework : Springboot, MyBatis(SQL Mapper)
 - Database : MySQL
-- Server : AWS Elastic Beanstalk , AWS RDS , FCM(Firebase Cloud Messagin 2)
+- Server : AWS Elastic Beanstalk , AWS RDS , FCM(Firebase Cloud Messaging)
 
 ![앱구성도](https://github.com/WokringParents/WorkingParentsApp/blob/master/images/System.png)
 
