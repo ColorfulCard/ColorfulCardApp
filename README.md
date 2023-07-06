@@ -17,6 +17,7 @@
 ### ⚙️ 개발 환경
 - Language : java
 - IDE : Android Studio, Eclipse
+- DB IDE : Dbeaver
 - Framework : Springboot, MyBatis(SQL Mapper)
 - Database : MySQL
 - Server : AWS Elastic Beanstalk , AWS RDS 
