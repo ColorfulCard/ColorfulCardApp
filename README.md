@@ -84,6 +84,7 @@
 [[영남대 학과소식] <span style="font-size:80%">박지연, 오은아, 이경주 학생, ‘2022 지역문제해결 프로젝트’ 금상(산업부장관상) 수상</span>](https://www.yu.ac.kr/cse/community/news.do?mode=view&articleNo=6183021&article.offset=0&articleLimit=10)
 <br>
 [[NewDaily 기사] <span style="font-size:80%">경북테크노파크, ‘희망이음 프로젝트 포상’ 4년 연속 산업부장관상 수상_ 봄봄팀</span>](https://tk.newdaily.co.kr/site/data/html/2023/03/23/2023032300024.html)
+(https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/awards.jpg?raw=true)
 <br>
 <br>
 
