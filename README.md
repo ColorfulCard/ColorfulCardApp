@@ -50,7 +50,7 @@
   - 잔액 추출 java HTML Parser 구현
 
 <details>
- <summary>앱이미지 🔎</summary>
+ <summary>앱화면 🔎</summary>
 
 ![카드등록](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card1.png)
 ![카드조회](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card2.png)
@@ -67,7 +67,7 @@
     - 공공데이터 (가맹점명/전화번호/위도/경도) 활용
     - 공공데이터에 없는 가맹점 정보 데이터 구축
 <details>
- <summary>APP 🔎</summary>
+ <summary>앱화면 🔎</summary>
 
 ![지도1](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/map1.png)
 ![지도2](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/map2.png)
@@ -94,7 +94,7 @@
 #### 카드 정보 제공 
 - 급식/부식/교육카드 기본 정보 제공
 <details>
- <summary>AppImage 🔎</summary>
+ <summary>앱화면 🔎</summary>
 
 ![카드정보](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card3.png)
  
