@@ -50,12 +50,13 @@
   - 잔액 추출 java HTML Parser 구현
 
 <details>
- <summary>이미지 보기🔎</summary>
+ <summary>이미지 🔎</summary>
 
 ![카드등록](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card1.png)
 ![카드조회](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card2.png)
  
 </details>
+<br>
 
 #### 가맹점 표시
 - Google Map API 연동
@@ -66,13 +67,13 @@
     - 공공데이터 (가맹점명/전화번호/위도/경도) 활용
     - 공공데이터에 없는 가맹점 정보 데이터 구축
 <details>
- <summary>이미지 보기🔎</summary>
+ <summary>이미지 🔎</summary>
 
 ![지도1](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/map1.png)
 ![지도2](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/map2.png)
  
 </details>
-
+<br>
 
 #### 소통 게시판 
 - 게시판 글 최신순/조회수/공감수 정렬
@@ -82,18 +83,18 @@
 - 댓글 작성/삭제
 - 대댓글 작성/삭제
 <details>
- <summary>이미지 보기🔎</summary>
+ <summary>이미지 🔎</summary>
 
 ![게시판1](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/board1.png)
 ![게시판2](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/board2.png)
  
 </details>
-
+<br>
 
 #### 카드 정보 제공 
 - 급식/부식/교육카드 기본 정보 제공
 <details>
- <summary>이미지 보기🔎</summary>
+ <summary>이미지 🔎</summary>
 
 ![카드정보](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card3.png)
  
