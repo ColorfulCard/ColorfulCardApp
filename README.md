@@ -40,12 +40,22 @@
  
 #### 카드등록 
 - 공식 카드 유효성 검증 
-    - 대구시 컬러풀카드 웹사이트 크롤링
-    - jsoup 라이브러리 사용
+    - 대구시 컬러풀카드 웹사이트 스크래핑
+    - Jsoup 오픈소스 라이브러리 사용
+    - java HTML Parser 구현
 - 카드 추가/삭제
   
 #### 카드조회
-- 총 잔액/ 세부 잔액 확인 (웹크롤링)
+- 총 잔액/ 세부 잔액 확인
+  - 잔액 추출 java HTML Parser 구현
+
+<details>
+ <summary>이미지 보기🔎</summary>
+
+![카드등록](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card1.png)
+![카드조회](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card2.png)
+ 
+</details>
 
 #### 가맹점 표시
 - Google Map API 연동
@@ -55,6 +65,14 @@
 - 가맹점 세부 정보 조회
     - 공공데이터 (가맹점명/전화번호/위도/경도) 활용
     - 공공데이터에 없는 가맹점 정보 데이터 구축
+<details>
+ <summary>이미지 보기🔎</summary>
+
+![지도1](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/map1.png)
+![지도2](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/map2.png)
+ 
+</details>
+
 
 #### 소통 게시판 
 - 게시판 글 최신순/조회수/공감수 정렬
@@ -63,9 +81,23 @@
 - 게시글 공감/취소
 - 댓글 작성/삭제
 - 대댓글 작성/삭제
+<details>
+ <summary>이미지 보기🔎</summary>
+
+![게시판1](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/board1.png)
+![게시판2](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/board2.png)
+ 
+</details>
+
 
 #### 카드 정보 제공 
 - 급식/부식/교육카드 기본 정보 제공
+<details>
+ <summary>이미지 보기🔎</summary>
+
+![카드정보](https://github.com/ColorfulCard/ColorfulCardApp/blob/master/images/card3.png)
+ 
+</details>
 <br>
 
 ## 🎥 시연 영상
